@@ -379,7 +379,7 @@ pub enum ServiceKind {
 }
 
 // «XSDsimpleType»
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 #[repr(u8)]
 pub enum SubscribableType {
     NoSubscriptionsSupported = 0,

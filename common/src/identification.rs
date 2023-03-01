@@ -20,6 +20,10 @@ use super::primitives::*;
 /// it will be an owned String type.
 use super::types::*;
 
+// @[future] Ethan:
+// Consider switching to [inheritance-rs](https://github.com/danielhenrymantilla/inheritance-rs) instead of rolling our own & maintaining that (It may not support tuple structs?)
+// Plausibility of ditching the ported-OOP with composition into some other design? Will depend on how we make use of polymorphism, likely here to stay.
+
 // Traits
 pub trait Resource {
     fn get_href(&self) -> Option<String> {
@@ -36,17 +40,23 @@ pub trait Link {
     fn get_href(&self) -> String;
 }
 
+// TODO Ethan: Derive macro that uses RespondableData impl as a base
 pub trait Respondable {
     fn get_replyTo(&self) -> Option<String>;
     fn get_responseRequired(&self) -> Option<HexBinary8>;
+    // TODO: Do we need & and &mut versions?
 }
 
+// TODO Ethan: Derive macro that uses SubscribableData impl as a base
 pub trait Subscribable {
-    // todo!("define Subscribable trait functions");
+    fn get_subscribable(&self) -> Option<SubscribableType>;
 }
 
+// TODO Ethan: Derive macro that uses IdentifiedData impl as a base
 pub trait Identified {
-    // todo!("define Identified trait functions");
+    fn get_description(&self) -> Option<String32>;
+    fn get_mrid(&self) -> mRIDType;
+    fn get_version(&self) -> Option<VersionType>;
 }
 
 // Data Containers
@@ -213,9 +223,25 @@ struct RespondableData {
     response_required: HexBinary8,
 }
 
+impl Respondable for RespondableData {
+    fn get_replyTo(&self) -> Option<String> {
+        self.reply_to.clone()
+    }
+
+    fn get_responseRequired(&self) -> Option<HexBinary8> {
+        Some(self.response_required)
+    }
+}
+
 #[derive(Default, Debug, Serialize, Deserialize)]
 struct SubscribableData {
     subscribable: Option<SubscribableType>,
+}
+
+impl Subscribable for SubscribableData {
+    fn get_subscribable(&self) -> Option<SubscribableType> {
+        self.subscribable.clone()
+    }
 }
 
 #[derive(Default, Debug, Serialize)]
@@ -223,6 +249,20 @@ pub struct IdentifiedData {
     description: String32,
     mrid_type: mRIDType,
     version: VersionType,
+}
+
+impl Identified for IdentifiedData {
+    fn get_description(&self) -> Option<String32> {
+        Some(self.description.clone())
+    }
+
+    fn get_mrid(&self) -> mRIDType {
+        self.mrid_type
+    }
+
+    fn get_version(&self) -> Option<VersionType> {
+        Some(self.version)
+    }
 }
 
 pub struct ListLink {

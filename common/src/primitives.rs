@@ -181,7 +181,7 @@ impl fmt::Display for HexBinary160 {
 // Optional Optimisation actually implmenting this requirement of using multi-byte characters is left as a future
 // optimisation
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct String6(ArrayString<6>);
 impl String6 {
     const MAX_LEN: usize = 6;
@@ -254,7 +254,7 @@ impl<'de> Deserialize<'de> for String6 {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct String16(ArrayString<16>);
 impl String16 {
     const MAX_LEN: usize = 16;
@@ -314,7 +314,7 @@ impl<'de> Visitor<'de> for String16Visitor {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct String20(ArrayString<20>);
 impl String20 {
     const MAX_LEN: usize = 20;
@@ -374,7 +374,7 @@ impl<'de> Visitor<'de> for String20Visitor {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct String32(ArrayString<32>);
 impl String32 {
     const MAX_LEN: usize = 32;
@@ -434,7 +434,7 @@ impl<'de> Visitor<'de> for String32Visitor {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct String42(ArrayString<42>);
 impl String42 {
     const MAX_LEN: usize = 42;
@@ -494,7 +494,7 @@ impl<'de> Visitor<'de> for String42Visitor {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct String192(ArrayString<192>);
 impl String192 {
     const MAX_LEN: usize = 192;
