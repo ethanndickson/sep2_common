@@ -53,7 +53,7 @@ pub struct OneHourRangeType(Int16);
 
 impl OneHourRangeType {
     fn new(value: Int16) -> Result<OneHourRangeType, Error> {
-        if value < -3600 || value > 3600 {
+        if !(-3600..=3600).contains(&value) {
             Err(Error::from(ErrorKind::InvalidInput))
         } else {
             Ok(OneHourRangeType(value))
@@ -94,7 +94,7 @@ pub struct SignedPerCent(Int16);
 
 impl SignedPerCent {
     fn new(value: Int16) -> Result<SignedPerCent, Error> {
-        if value < -10000 || value > 10000 {
+        if !(-10000..=10000).contains(&value) {
             Err(Error::from(ErrorKind::InvalidInput))
         } else {
             Ok(SignedPerCent(value))
@@ -134,7 +134,7 @@ pub struct PowerOfTenMultiplierType(Int8);
 
 impl PowerOfTenMultiplierType {
     fn new(value: Int8) -> Result<PowerOfTenMultiplierType, Error> {
-        if value < -9 || value > 9 {
+        if !(-9..=9).contains(&value) {
             Err(Error::from(ErrorKind::InvalidInput))
         } else {
             Ok(PowerOfTenMultiplierType(value))

@@ -70,7 +70,7 @@ impl ResourceObj {
     /// are ignored and href value will be None.
     pub fn new(href: Option<String>) -> ResourceObj {
         if let Some(ref href) = href {
-            if !href.starts_with("/") || href.len() > 255 {
+            if !href.starts_with('/') || href.len() > 255 {
                 return ResourceObj { href: None };
             }
         }
@@ -154,7 +154,7 @@ impl<T: Resource> ListData<T> {
     /// checks for index out of bounds based on `result` number.
     fn pop(&mut self) -> Option<T> {
         let output = self.items.pop();
-        if let Some(_) = output {
+        if output.is_some() {
             self.result -= 1;
         }
         output
@@ -165,7 +165,7 @@ impl<T: Resource> ListData<T> {
     fn pop_and_decrement(&mut self) -> Option<T> {
         // storing in output because I dunno if this fails or not.
         let output = self.items.pop();
-        if let Some(_) = output {
+        if output.is_some() {
             self.result -= 1;
             self.all -= 1;
         }
@@ -213,7 +213,7 @@ pub struct LinkObj {
 
 impl Link for LinkObj {
     fn href(&self) -> String {
-        return self.href.clone();
+        self.href.clone()
     }
 }
 

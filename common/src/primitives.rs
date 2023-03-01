@@ -236,7 +236,7 @@ impl<'de> Visitor<'de> for String6Visitor {
             Err(E::invalid_length(Self::Value::MAX_LEN, &self))
         } else {
             Ok(String6(
-                ArrayString::<{ Self::Value::MAX_LEN }>::from(&v).unwrap(),
+                ArrayString::<{ Self::Value::MAX_LEN }>::from(v).unwrap(),
             ))
         }
     }
