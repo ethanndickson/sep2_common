@@ -183,7 +183,7 @@ impl PrimacyType {
         }
     }
 
-    pub fn get_num_value(&self) -> u8 {
+    pub fn num_value(&self) -> u8 {
         match self {
             PrimacyType::HEMS => 0,
             PrimacyType::CPSP => 1,

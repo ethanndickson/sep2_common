@@ -23,40 +23,40 @@ use super::types::*;
 // @[future] Ethan:
 // Consider switching to [inheritance-rs](https://github.com/danielhenrymantilla/inheritance-rs) instead of rolling our own & maintaining that (It may not support tuple structs?)
 // Plausibility of ditching the ported-OOP with composition into some other design? Will depend on how we make use of polymorphism, likely here to stay.
+// Determine if/how our 'getters' should borrow
 
 // Traits
 pub trait Resource {
-    fn get_href(&self) -> Option<String> {
+    fn href(&self) -> Option<String> {
         None
     }
 }
 
 pub trait List {
     type Inner; // every struct can only implement this trait for 1 type.
-    fn get_values(s: UInt16, a: Option<TimeType>, l: UInt32) -> Vec<Self::Inner>; // need query parameters.
+    fn values(s: UInt16, a: Option<TimeType>, l: UInt32) -> Vec<Self::Inner>; // need query parameters.
 }
 
 pub trait Link {
-    fn get_href(&self) -> String;
+    fn href(&self) -> String;
 }
 
 // TODO Ethan: Derive macro that uses RespondableData impl as a base
 pub trait Respondable {
-    fn get_replyTo(&self) -> Option<String>;
-    fn get_responseRequired(&self) -> Option<HexBinary8>;
-    // TODO: Do we need & and &mut versions?
+    fn replyTo(&self) -> Option<String>;
+    fn responseRequired(&self) -> Option<HexBinary8>;
 }
 
 // TODO Ethan: Derive macro that uses SubscribableData impl as a base
 pub trait Subscribable {
-    fn get_subscribable(&self) -> Option<SubscribableType>;
+    fn subscribable(&self) -> Option<SubscribableType>;
 }
 
 // TODO Ethan: Derive macro that uses IdentifiedData impl as a base
 pub trait Identified {
-    fn get_description(&self) -> Option<String32>;
-    fn get_mrid(&self) -> mRIDType;
-    fn get_version(&self) -> Option<VersionType>;
+    fn description(&self) -> Option<String32>;
+    fn mrid(&self) -> mRIDType;
+    fn version(&self) -> Option<VersionType>;
 }
 
 // Data Containers
@@ -79,7 +79,7 @@ impl ResourceObj {
 }
 
 impl Resource for ResourceObj {
-    fn get_href(&self) -> Option<String> {
+    fn href(&self) -> Option<String> {
         if let Some(output) = &self.href {
             return Some(output.to_owned());
         }
@@ -179,7 +179,7 @@ impl<T: Resource> ListData<T> {
             self.all = self.result
         }
     }
-    fn get_result_value(&self) -> u32 {
+    fn result_value(&self) -> u32 {
         self.result
     }
 }
@@ -200,8 +200,8 @@ impl<T: Resource> ListObj<T> {
 }
 
 impl<T: Resource> Resource for ListObj<T> {
-    fn get_href(&self) -> Option<String> {
-        self.super_class.get_href()
+    fn href(&self) -> Option<String> {
+        self.super_class.href()
     }
 }
 
@@ -212,7 +212,7 @@ pub struct LinkObj {
 }
 
 impl Link for LinkObj {
-    fn get_href(&self) -> String {
+    fn href(&self) -> String {
         return self.href.clone();
     }
 }
@@ -224,11 +224,11 @@ struct RespondableData {
 }
 
 impl Respondable for RespondableData {
-    fn get_replyTo(&self) -> Option<String> {
+    fn replyTo(&self) -> Option<String> {
         self.reply_to.clone()
     }
 
-    fn get_responseRequired(&self) -> Option<HexBinary8> {
+    fn responseRequired(&self) -> Option<HexBinary8> {
         Some(self.response_required)
     }
 }
@@ -239,7 +239,7 @@ struct SubscribableData {
 }
 
 impl Subscribable for SubscribableData {
-    fn get_subscribable(&self) -> Option<SubscribableType> {
+    fn subscribable(&self) -> Option<SubscribableType> {
         self.subscribable.clone()
     }
 }
@@ -252,15 +252,15 @@ pub struct IdentifiedData {
 }
 
 impl Identified for IdentifiedData {
-    fn get_description(&self) -> Option<String32> {
+    fn description(&self) -> Option<String32> {
         Some(self.description.clone())
     }
 
-    fn get_mrid(&self) -> mRIDType {
+    fn mrid(&self) -> mRIDType {
         self.mrid_type
     }
 
-    fn get_version(&self) -> Option<VersionType> {
+    fn version(&self) -> Option<VersionType> {
         Some(self.version)
     }
 }
@@ -271,8 +271,8 @@ pub struct ListLink {
 }
 
 impl Link for ListLink {
-    fn get_href(&self) -> String {
-        self.super_class.get_href()
+    fn href(&self) -> String {
+        self.super_class.href()
     }
 }
 
