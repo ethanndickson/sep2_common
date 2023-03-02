@@ -1,14 +1,13 @@
-use macros::Link;
-use macros::Resource;
+use super::primitives::*;
+use super::types::*;
+use ::inheritance::{inheritable, Inheritance};
 use serde::Deserialize;
 use serde::Serialize;
-
 /*
  * Defines traits and structs described generally in section 8.2
  * and in detail in section B.2.3.2. Specifically, it describes the
  *  Resource trait and traits that extend it (e.g. List, IdentifiedObject)
  */
-use super::primitives::*;
 /// Attribute data
 /// was defined as a struct to allow for storage format flexibility
 /// but that was later decided to be pointless flexibility at the cost
@@ -18,7 +17,6 @@ use super::primitives::*;
 /// address or an absolute reference (in the subs/notf function set)
 /// there is no mention of how it should be implemented, so for the moment
 /// it will be an owned String type.
-use super::types::*;
 
 // @[future] Ethan:
 // Consider switching to [inheritance-rs](https://github.com/danielhenrymantilla/inheritance-rs) instead of rolling our own & maintaining that (It may not support tuple structs?)
@@ -26,33 +24,35 @@ use super::types::*;
 // Determine if/how our 'getters' should borrow
 
 // Traits
+#[inheritable]
 pub trait Resource {
     fn href(&self) -> Option<String> {
         None
     }
 }
-
+// TODO Ethan: We don't need macro inheritance for thhis since we only have List & SubscribableList; worth implementing anyway?
+// inheritance-rs doesn't currently support inheritance of our inner type alias
 pub trait List {
     type Inner; // every struct can only implement this trait for 1 type.
     fn values(s: UInt16, a: Option<TimeType>, l: UInt32) -> Vec<Self::Inner>; // need query parameters.
 }
-
+#[inheritable]
 pub trait Link {
     fn href(&self) -> String;
 }
 
-// TODO Ethan: Derive macro that uses RespondableData impl as a base
+#[inheritable]
 pub trait Respondable {
     fn replyTo(&self) -> Option<String>;
     fn responseRequired(&self) -> Option<HexBinary8>;
 }
 
-// TODO Ethan: Derive macro that uses SubscribableData impl as a base
+#[inheritable]
 pub trait Subscribable {
     fn subscribable(&self) -> Option<SubscribableType>;
 }
 
-// TODO Ethan: Derive macro that uses IdentifiedData impl as a base
+#[inheritable]
 pub trait Identified {
     fn description(&self) -> Option<String32>;
     fn mrid(&self) -> mRIDType;
@@ -184,24 +184,26 @@ impl<T: Resource> ListData<T> {
     }
 }
 
+// TODO Ethan: List inheritance for SubscribableList
+
 #[derive(Default, Debug, Serialize, Deserialize)]
 struct ListObj<T: Resource> {
-    super_class: ResourceObj,
-    list_data: ListData<T>,
+    res: ResourceObj,
+    list: ListData<T>,
 }
 
 impl<T: Resource> ListObj<T> {
     fn new(href: &str) -> ListObj<T> {
         ListObj {
-            super_class: ResourceObj::new(Some(href.to_owned())),
-            list_data: ListData::new(),
+            res: ResourceObj::new(Some(href.to_owned())),
+            list: ListData::new(),
         }
     }
 }
 
 impl<T: Resource> Resource for ListObj<T> {
     fn href(&self) -> Option<String> {
-        self.super_class.href()
+        self.res.href()
     }
 }
 
@@ -218,7 +220,7 @@ impl Link for LinkObj {
 }
 
 #[derive(Default, Debug, Serialize, Deserialize)]
-struct RespondableData {
+pub struct RespondableData {
     reply_to: Option<String>,
     response_required: HexBinary8,
 }
@@ -234,7 +236,7 @@ impl Respondable for RespondableData {
 }
 
 #[derive(Default, Debug, Serialize, Deserialize)]
-struct SubscribableData {
+pub struct SubscribableData {
     subscribable: Option<SubscribableType>,
 }
 
@@ -265,56 +267,70 @@ impl Identified for IdentifiedData {
     }
 }
 
+#[derive(Inheritance)]
 pub struct ListLink {
-    super_class: LinkObj,
+    #[inherits(Link)]
+    link: LinkObj,
     all: Option<UInt32>,
 }
 
-impl Link for ListLink {
-    fn href(&self) -> String {
-        self.super_class.href()
-    }
-}
-
-#[derive(Resource, Default, Debug, Serialize, Deserialize)]
+#[derive(Inheritance, Default, Debug, Serialize, Deserialize)]
 pub struct RespondableResource {
-    super_class: ResourceObj,
-    respondable_data: RespondableData,
+    #[inherits(Resource)]
+    res: ResourceObj,
+    #[inherits(Respondable)]
+    resp: RespondableData,
 }
 
-#[derive(Resource, Default, Debug, Serialize, Deserialize)]
+#[derive(Inheritance, Default, Debug, Serialize, Deserialize)]
 pub struct SubscribableResource {
-    super_class: ResourceObj,
-    subscribable_data: SubscribableData,
+    #[inherits(Resource)]
+    res: ResourceObj,
+    #[inherits(Subscribable)]
+    subs: SubscribableData,
 }
 
-#[derive(Resource, Default, Debug, Serialize)]
+#[derive(Inheritance, Default, Debug, Serialize)]
 pub struct IdentifiedObject {
-    super_class: ResourceObj,
-    identified_data: IdentifiedData,
+    #[inherits(Resource)]
+    res: ResourceObj,
+    #[inherits(Identified)]
+    ident: IdentifiedData,
 }
 
-#[derive(Resource, Default, Debug, Serialize)]
+#[derive(Inheritance, Default, Debug, Serialize)]
 pub struct SubscribableIdentifiedObject {
-    super_class: SubscribableResource,
-    identified_data: IdentifiedData,
+    #[inherits(Resource)]
+    #[inherits(Subscribable)]
+    subs: SubscribableResource,
+    #[inherits(Identified)]
+    ident: IdentifiedData,
 }
 
-#[derive(Resource, Default, Debug, Serialize, Deserialize)]
+// TODO Ethan: This needs to be redesigned to match the spec
+#[derive(Inheritance, Default, Debug, Serialize, Deserialize)]
 pub struct SubscribableList {
-    super_class: SubscribableResource,
-    list_data: ListData<SubscribableResource>,
+    #[inherits(Resource)]
+    subs: SubscribableResource,
+    list_subs: ListData<SubscribableResource>,
 }
 
-#[derive(Resource, Default, Debug, Serialize)]
+#[derive(Inheritance, Default, Debug, Serialize)]
 pub struct RespondableSubscribableIdentifiedObject {
-    super_class: RespondableResource,
-    subscribable_data: SubscribableData,
+    #[inherits(Respondable)]
+    #[inherits(Resource)]
+    resrsrc: RespondableResource,
+    #[inherits(Subscribable)]
+    subs: SubscribableData,
+    #[inherits(Identified)]
     identified_data: IdentifiedData,
 }
 
-#[derive(Resource, Default, Debug, Serialize)]
+#[derive(Inheritance, Default, Debug, Serialize)]
 pub struct RespondableIdentifiedObject {
-    super_class: RespondableResource,
-    identified_data: IdentifiedData,
+    #[inherits(Respondable)]
+    #[inherits(Resource)]
+    resrsrc: RespondableResource,
+    #[inherits(Identified)]
+    ident: IdentifiedData,
 }
