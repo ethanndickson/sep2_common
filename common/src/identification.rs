@@ -307,7 +307,7 @@ pub struct SubscribableIdentifiedObject {
 }
 
 // TODO Ethan: This needs to be redesigned to match the spec
-// This will likely require a specialised implementation of subscribable & resource?
+// This will likely require a specialised implementation of subscribable & resource
 #[derive(Inheritance, Default, Debug, Serialize, Deserialize)]
 pub struct SubscribableList {
     #[inherits(Subscribable)]
