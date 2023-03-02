@@ -19,7 +19,6 @@ use serde::Serialize;
 /// it will be an owned String type.
 
 // @[future] Ethan:
-// Consider switching to [inheritance-rs](https://github.com/danielhenrymantilla/inheritance-rs) instead of rolling our own & maintaining that (It may not support tuple structs?)
 // Plausibility of ditching the ported-OOP with composition into some other design? Will depend on how we make use of polymorphism, likely here to stay.
 // Determine if/how our 'getters' should borrow
 
@@ -277,7 +276,7 @@ pub struct ListLink {
 #[derive(Inheritance, Default, Debug, Serialize, Deserialize)]
 pub struct RespondableResource {
     #[inherits(Resource)]
-    res: ResourceObj,
+    rsrc: ResourceObj,
     #[inherits(Respondable)]
     resp: RespondableData,
 }
@@ -285,7 +284,7 @@ pub struct RespondableResource {
 #[derive(Inheritance, Default, Debug, Serialize, Deserialize)]
 pub struct SubscribableResource {
     #[inherits(Resource)]
-    res: ResourceObj,
+    rsrc: ResourceObj,
     #[inherits(Subscribable)]
     subs: SubscribableData,
 }
@@ -293,7 +292,7 @@ pub struct SubscribableResource {
 #[derive(Inheritance, Default, Debug, Serialize)]
 pub struct IdentifiedObject {
     #[inherits(Resource)]
-    res: ResourceObj,
+    rsrc: ResourceObj,
     #[inherits(Identified)]
     ident: IdentifiedData,
 }
@@ -308,8 +307,10 @@ pub struct SubscribableIdentifiedObject {
 }
 
 // TODO Ethan: This needs to be redesigned to match the spec
+// This will likely require a specialised implementation of subscribable & resource?
 #[derive(Inheritance, Default, Debug, Serialize, Deserialize)]
 pub struct SubscribableList {
+    #[inherits(Subscribable)]
     #[inherits(Resource)]
     subs: SubscribableResource,
     list_subs: ListData<SubscribableResource>,
@@ -319,18 +320,18 @@ pub struct SubscribableList {
 pub struct RespondableSubscribableIdentifiedObject {
     #[inherits(Respondable)]
     #[inherits(Resource)]
-    resrsrc: RespondableResource,
+    resprsrc: RespondableResource,
     #[inherits(Subscribable)]
     subs: SubscribableData,
     #[inherits(Identified)]
-    identified_data: IdentifiedData,
+    ident: IdentifiedData,
 }
 
 #[derive(Inheritance, Default, Debug, Serialize)]
 pub struct RespondableIdentifiedObject {
     #[inherits(Respondable)]
     #[inherits(Resource)]
-    resrsrc: RespondableResource,
+    resprsrc: RespondableResource,
     #[inherits(Identified)]
     ident: IdentifiedData,
 }
