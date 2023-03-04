@@ -149,8 +149,8 @@ impl fmt::Display for HexBinary128 {
 pub struct HexBinary160(BigUint);
 
 impl HexBinary160 {
-    fn new(num: Vec<UInt8>) -> Result<HexBinary160, ErrorKind> {
-        // Error checking
+    pub fn new(num: Vec<UInt8>) -> Result<HexBinary160, ErrorKind> {
+        // TODO Ethan: Improve
         if num.len() > 20 {
             Err(ErrorKind::InvalidInput)
         } else {
@@ -186,14 +186,11 @@ impl fmt::Display for HexBinary160 {
 pub struct String6(ArrayString<6>);
 impl String6 {
     const MAX_LEN: usize = 6;
-    // would like to use generic errors here, but that will be done during the
-    // Great Error Refactor (GER)
-    fn new(input: &str) -> Result<Self, ErrorKind> {
-        if input.len() > Self::MAX_LEN {
-            Err(ErrorKind::InvalidInput)
-        } else {
-            Ok(String6(ArrayString::from(input).unwrap()))
-        }
+
+    pub fn new(input: &str) -> Result<Self, ErrorKind> {
+        Ok(String6(
+            ArrayString::try_from(input).map_err(|_| ErrorKind::InvalidInput)?,
+        ))
     }
 }
 
@@ -261,11 +258,9 @@ impl String16 {
     const MAX_LEN: usize = 16;
 
     fn new(input: &str) -> Result<Self, ErrorKind> {
-        if input.len() > Self::MAX_LEN {
-            Err(ErrorKind::InvalidInput)
-        } else {
-            Ok(String16(ArrayString::from(input).unwrap()))
-        }
+        Ok(String16(
+            ArrayString::try_from(input).map_err(|_| ErrorKind::InvalidInput)?,
+        ))
     }
 }
 
@@ -321,11 +316,9 @@ impl String20 {
     const MAX_LEN: usize = 20;
 
     fn new(input: &str) -> Result<Self, ErrorKind> {
-        if input.len() > Self::MAX_LEN {
-            Err(ErrorKind::InvalidInput)
-        } else {
-            Ok(String20(ArrayString::from(input).unwrap()))
-        }
+        Ok(String20(
+            ArrayString::try_from(input).map_err(|_| ErrorKind::InvalidInput)?,
+        ))
     }
 }
 
@@ -381,11 +374,9 @@ impl String32 {
     const MAX_LEN: usize = 32;
 
     pub fn new(input: &str) -> Result<Self, ErrorKind> {
-        if input.len() > Self::MAX_LEN {
-            Err(ErrorKind::InvalidInput)
-        } else {
-            Ok(String32(ArrayString::from(input).unwrap()))
-        }
+        Ok(String32(
+            ArrayString::try_from(input).map_err(|_| ErrorKind::InvalidInput)?,
+        ))
     }
 }
 
@@ -448,12 +439,10 @@ pub struct String42(ArrayString<42>);
 impl String42 {
     const MAX_LEN: usize = 42;
 
-    fn new(input: &str) -> Result<Self, ErrorKind> {
-        if input.len() > Self::MAX_LEN {
-            Err(ErrorKind::InvalidInput)
-        } else {
-            Ok(String42(ArrayString::from(input).unwrap()))
-        }
+    pub fn new(input: &str) -> Result<Self, ErrorKind> {
+        Ok(String42(
+            ArrayString::try_from(input).map_err(|_| ErrorKind::InvalidInput)?,
+        ))
     }
 }
 
@@ -508,12 +497,10 @@ pub struct String192(ArrayString<192>);
 impl String192 {
     const MAX_LEN: usize = 192;
 
-    fn new(input: &str) -> Result<Self, ErrorKind> {
-        if input.len() > Self::MAX_LEN {
-            Err(ErrorKind::InvalidInput)
-        } else {
-            Ok(String192(ArrayString::from(input).unwrap()))
-        }
+    pub fn new(input: &str) -> Result<Self, ErrorKind> {
+        Ok(String192(
+            ArrayString::try_from(input).map_err(|_| ErrorKind::InvalidInput)?,
+        ))
     }
 }
 
