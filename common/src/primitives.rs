@@ -11,6 +11,7 @@ use num_bigint::BigUint;
 use serde::de::{self, Visitor};
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use std::io::ErrorKind;
+use std::ops::Deref;
 
 pub type Int8 = i8;
 pub type UInt8 = u8;
@@ -379,12 +380,20 @@ pub struct String32(ArrayString<32>);
 impl String32 {
     const MAX_LEN: usize = 32;
 
-    fn new(input: &str) -> Result<Self, ErrorKind> {
+    pub fn new(input: &str) -> Result<Self, ErrorKind> {
         if input.len() > Self::MAX_LEN {
             Err(ErrorKind::InvalidInput)
         } else {
             Ok(String32(ArrayString::from(input).unwrap()))
         }
+    }
+}
+
+impl Deref for String32 {
+    type Target = str;
+
+    fn deref(&self) -> &Self::Target {
+        self.0.as_str()
     }
 }
 
