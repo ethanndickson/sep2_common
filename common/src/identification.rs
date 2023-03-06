@@ -1,4 +1,5 @@
-#![allow(clippy::needless_arbitrary_self_type)]
+#![allow(clippy::needless_arbitrary_self_type)] // Not needless, our macro uses a lifetime annotation
+#![allow(non_snake_case)] // We match the specs camel case usage
 
 use super::primitives::*;
 use super::types::*;
@@ -10,21 +11,21 @@ use serde::Serialize;
  * and in detail in section B.2.3.2. Specifically, it describes the
  *  Resource trait and traits that extend it (e.g. List, IdentifiedObject)
  */
-/// Attribute data
-/// was defined as a struct to allow for storage format flexibility
-/// but that was later decided to be pointless flexibility at the cost
-/// of simplicty
 
-/// anyURI mentioned in the specification can either be a relative
-/// address or an absolute reference (in the subs/notf function set)
-/// there is no mention of how it should be implemented, so for the moment
-/// it will be an owned String type.
+// anyURI mentioned in the specification can either be a relative
+// address or an absolute reference (in the subs/notf function set)
+// there is no mention of how it should be implemented, so for the moment
+// it will be an owned String type.
 
 // @[future] Ethan:
-// Plausibility of ditching the ported-OOP with composition into some other design? Will depend on how we make use of polymorphism, likely here to stay.
-// Determine if/how our 'getters' should borrow
+// Plausibility of ditching the ported-OOP with composition into some other design?
+// Seems like inheritance is here to stay
 
-// Traits
+/*
+=============
+=== Traits ==
+=============
+*/
 #[inheritable]
 pub trait Resource {
     fn href(&self) -> Option<&str>;
@@ -47,7 +48,23 @@ pub trait Identified {
     fn version(&self) -> Option<VersionType>;
 }
 
-// Data Containers
+#[inheritable]
+pub trait Link {
+    fn href(&self) -> String;
+}
+
+// TODO Ethan: PR to inheritance-rs that adds trait generic support so we can derive List from anything that has ListData
+// #[inheritable]
+pub trait List<T: Resource> {
+    // TODO Ethan: Figure out where Neel got this function signature from
+    fn values(s: UInt16, a: Option<TimeType>, l: UInt32) -> Vec<T>;
+}
+
+/*
+======================================
+=== Concrete Trait Implementations ===
+======================================
+*/
 #[derive(Default, Debug, Serialize, Deserialize)]
 pub struct ResourceObj {
     href: Option<String>,
@@ -118,6 +135,39 @@ impl Identified for IdentifiedData {
     }
 }
 
+#[derive(Default, Debug, Serialize, Deserialize)]
+pub struct ListObj<T: Resource> {
+    res: ResourceObj,
+    list: ListData<T>,
+}
+
+impl<T: Resource> List<T> for ListObj<T> {
+    fn values(s: UInt16, a: Option<TimeType>, l: UInt32) -> Vec<T> {
+        todo!()
+    }
+}
+
+impl<T: Resource> ListObj<T> {
+    fn new(href: &str) -> ListObj<T> {
+        ListObj {
+            res: ResourceObj::new(Some(href)),
+            list: ListData::new(),
+        }
+    }
+}
+
+impl<T: Resource> Resource for ListObj<T> {
+    fn href(&self) -> Option<&str> {
+        self.res.href()
+    }
+}
+
+/*
+==================
+=== Inheritors ===
+==================
+*/
+
 // TODO Ethan: Check this matches the spec alongside the remaining link & list code
 #[derive(Inheritance)]
 pub struct ListLink {
@@ -178,47 +228,14 @@ pub struct RespondableIdentifiedObject {
     ident: IdentifiedData,
 }
 
-// TODO Ethan: We don't need macro inheritance for thhis since we only have List & SubscribableList; worth implementing anyway?
-// inheritance-rs doesn't currently support inheritance of our inner type alias
-pub trait List {
-    type Inner; // every struct can only implement this trait for 1 type.
-    fn values(s: UInt16, a: Option<TimeType>, l: UInt32) -> Vec<Self::Inner>; // need query parameters.
-}
-#[inheritable]
-pub trait Link {
-    fn href(&self) -> String;
-}
-
-// TODO Ethan: This needs to be redesigned to match the spec
-// This will likely require a specialised implementation of subscribable & resource
 #[derive(Inheritance, Default, Debug, Serialize, Deserialize)]
-pub struct SubscribableList {
+pub struct SubscribableList<T: Resource> {
     #[inherits(Subscribable)]
     #[inherits(Resource)]
     subs: SubscribableResource,
-    list_subs: ListData<SubscribableResource>,
-}
-
-// TODO Ethan: List inheritance for SubscribableList
-#[derive(Default, Debug, Serialize, Deserialize)]
-struct ListObj<T: Resource> {
-    res: ResourceObj,
-    list: ListData<T>,
-}
-
-impl<T: Resource> ListObj<T> {
-    fn new(href: &str) -> ListObj<T> {
-        ListObj {
-            res: ResourceObj::new(Some(href)),
-            list: ListData::new(),
-        }
-    }
-}
-
-impl<T: Resource> Resource for ListObj<T> {
-    fn href(&self) -> Option<&str> {
-        self.res.href()
-    }
+    // TODO Ethan: This will need to also derive a List implementation
+    // #[inherits(List)]
+    list_subs: ListData<T>,
 }
 
 // «XSDattribute»
