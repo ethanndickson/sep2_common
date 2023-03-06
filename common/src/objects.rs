@@ -85,6 +85,21 @@ impl Randomizable for RandomizableObj {
 =======================
 */
 
+pub struct Error {
+    maxRetryDuration: Option<UInt16>,
+    reasonCode: reasonCode,
+}
+
+#[repr(u16)]
+enum reasonCode {
+    InvalidReqFormat = 0,
+    InvalidReqValues = 1,
+    RsrcLimitReached = 2,
+    CondSubsUnspprtd = 3,
+    MaxReqFreqExceed = 4,
+    // TODO Ethan: Remaining reserved
+}
+
 #[repr(u8)]
 pub enum currentStatus {
     Scheduled = 0,
