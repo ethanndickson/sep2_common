@@ -435,6 +435,16 @@ pub enum UnitType {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[repr(u8)]
+pub enum PriorityType {
+    Low = 0,
+    Normal = 3,
+    High = 4,
+    Critical = 6,
+    // TODO Ethan: Remaining reserved
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[repr(u8)]
 pub enum UomType {
     NotApplicable = 0,
     Amperes = 5,
