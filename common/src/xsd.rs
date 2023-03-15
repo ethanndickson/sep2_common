@@ -1,9 +1,944 @@
-// File auto-generated using xsd-parser-rs & IEEE 2030.5 sep.xsd
+// An 8-bit field encoded as a hex string (2 hex characters). Where applicable,
+// bit 0, or the least significant bit, goes on the right. Note that hexBinary
+// requires pairs of hex characters, so an odd number of characters requires a
+// leading "0".
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct HexBinary8 (pub String);
 
-use std::str::FromStr;
-use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
-use xsd_parser::generator::validator::Validate;
-use yaserde_derive::{YaDeserialize, YaSerialize};
+impl Validate for HexBinary8 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 1 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 1 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// A 16-bit field encoded as a hex string (4 hex characters max). Where
+// applicable, bit 0, or the least significant bit, goes on the right. Note that
+// hexBinary requires pairs of hex characters, so an odd number of characters
+// requires a leading "0".
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct HexBinary16 (pub String);
+
+impl Validate for HexBinary16 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 2 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 2 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// A 32-bit field encoded as a hex string (8 hex characters max). Where
+// applicable, bit 0, or the least significant bit, goes on the right. Note that
+// hexBinary requires pairs of hex characters, so an odd number of characters
+// requires a leading "0".
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct HexBinary32 (pub String);
+
+impl Validate for HexBinary32 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 4 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 4 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// A 48-bit field encoded as a hex string (12 hex characters max). Where
+// applicable, bit 0, or the least significant bit, goes on the right. Note that
+// hexBinary requires pairs of hex characters, so an odd number of characters
+// requires a leading "0".
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct HexBinary48 (pub String);
+
+impl Validate for HexBinary48 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 6 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 6 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// A 64-bit field encoded as a hex string (16 hex characters max). Where
+// applicable, bit 0, or the least significant bit, goes on the right. Note that
+// hexBinary requires pairs of hex characters, so an odd number of characters
+// requires a leading "0".
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct HexBinary64 (pub String);
+
+impl Validate for HexBinary64 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 8 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 8 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// A 128-bit field encoded as a hex string (32 hex characters max). Where
+// applicable, bit 0, or the least significant bit, goes on the right. Note that
+// hexBinary requires pairs of hex characters, so an odd number of characters
+// requires a leading "0".
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct HexBinary128 (pub String);
+
+impl Validate for HexBinary128 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 16 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 16 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// A 160-bit field encoded as a hex string (40 hex characters max). Where
+// applicable, bit 0, or the least significant bit, goes on the right. Note that
+// hexBinary requires pairs of hex characters, so an odd number of characters
+// requires a leading "0".
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct HexBinary160 (pub String);
+
+impl Validate for HexBinary160 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 20 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 20 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// Character string of max length 6. In order to limit internal storage,
+// implementations SHALL reduce the length of strings using multi-byte
+// characters so that the string may be stored using "maxLength" octets in the
+// given encoding.
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct String6 (pub String);
+
+impl Validate for String6 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 6 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 6 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// Character string of max length 16. In order to limit internal storage,
+// implementations SHALL reduce the length of strings using multi-byte
+// characters so that the string may be stored using "maxLength" octets in the
+// given encoding.
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct String16 (pub String);
+
+impl Validate for String16 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 16 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 16 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// Character string of max length 20. In order to limit internal storage,
+// implementations SHALL reduce the length of strings using multi-byte
+// characters so that the string may be stored using "maxLength" octets in the
+// given encoding.
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct String20 (pub String);
+
+impl Validate for String20 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 20 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 20 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// Character string of max length 32. In order to limit internal storage,
+// implementations SHALL reduce the length of strings using multi-byte
+// characters so that the string may be stored using "maxLength" octets in the
+// given encoding.
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct String32 (pub String);
+
+impl Validate for String32 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 32 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 32 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// Character string of max length 42. In order to limit internal storage,
+// implementations SHALL reduce the length of strings using multi-byte
+// characters so that the string may be stored using "maxLength" octets in the
+// given encoding.
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct String42 (pub String);
+
+impl Validate for String42 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 42 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 42 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// Character string of max length 192. For all string types, in order to limit
+// internal storage, implementations SHALL reduce the length of strings using
+// multi-byte characters so that the string may be stored using "maxLength"
+// octets in the given encoding.
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct String192 (pub String);
+
+impl Validate for String192 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0.len() > 192 {
+            return Err(format!("MaxLength validation error. \nExpected: 0 length <= 192 \nActual: 0 length == {}", self.0.len()));
+        }
+        Ok(())
+    }
+}
+
+// Unsigned integer, max inclusive 255 (2^8-1)
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct Uint8 (pub u8);
+
+impl Validate for Uint8 {}
+// Unsigned integer, max inclusive 65535 (2^16-1)
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct Uint16 (pub u16);
+
+impl Validate for Uint16 {}
+// Unsigned integer, max inclusive 4294967295 (2^32-1)
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct Uint32 (pub u32);
+
+impl Validate for Uint32 {}
+// Unsigned integer, max inclusive 1099511627775 (2^40-1)
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct Uint40 (pub u64);
+
+impl Validate for Uint40 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0 > "281474976710655".parse::<u64>().unwrap() {
+            return Err(format!("MaxInclusive validation error: invalid value of 0! \nExpected: 0 <= 281474976710655.\nActual: 0 == {}", self.0));
+        }
+        Ok(())
+    }
+}
+
+// Unsigned integer, max inclusive 281474976710655 (2^48-1)
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct Uint48 (pub u64);
+
+impl Validate for Uint48 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0 > "281474976710655".parse::<u64>().unwrap() {
+            return Err(format!("MaxInclusive validation error: invalid value of 0! \nExpected: 0 <= 281474976710655.\nActual: 0 == {}", self.0));
+        }
+        Ok(())
+    }
+}
+
+// Unsigned integer, max inclusive 18446744073709551615 (2^64-1)
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct Uint64 (pub u64);
+
+impl Validate for Uint64 {}
+// Signed integer, min -128 max +127
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct Int8 (pub i8);
+
+impl Validate for Int8 {}
+// Signed integer, min -32768 max +32767
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct Int16 (pub i16);
+
+impl Validate for Int16 {}
+// Signed integer, max inclusive 2147483647 (2^31), min inclusive -2147483647
+// (same as xs:int)
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct Int32 (pub i32);
+
+impl Validate for Int32 {}
+// Signed integer, max inclusive 140737488355328 (2^47), min inclusive
+// -140737488355328
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct Int48 (pub i64);
+
+impl Validate for Int48 {
+    fn validate(&self) -> Result<(), String> { 
+        if self.0 > "140737488355328".parse::<i64>().unwrap() {
+            return Err(format!("MaxInclusive validation error: invalid value of 0! \nExpected: 0 <= 140737488355328.\nActual: 0 == {}", self.0));
+        }
+        if self.0 < "-140737488355328".parse::<i64>().unwrap() {
+            return Err(format!("MinInclusive validation error: invalid value of 0! \nExpected: 0 >= -140737488355328.\nActual: 0 == {}", self.0));
+        }
+        Ok(())
+    }
+}
+
+// Signed integer, max inclusive 9223372036854775807 (2^63), min inclusive
+// -9223372036854775808 (same as xs:long)
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct Int64 (pub i64);
+
+impl Validate for Int64 {}
+// A resource is an addressable unit of information, either a collection (List)
+// or instance of an object (identifiedObject, or simply, Resource)
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct Resource {
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for Resource {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct Response {
+    // The createdDateTime field contains the date and time when the
+    // acknowledgement/status occurred in the client. The client will provide
+    // the timestamp to ensure the proper time is captured in case the response
+    // is delayed in reaching the server (server receipt time would not be the
+    // same as the actual confirmation time). The time reported from the client
+    // should be relative to the time server indicated by the
+    // FunctionSetAssignment that also indicated the event resource; if no
+    // FunctionSetAssignment exists, the time of the server where the event
+    // resource was hosted.
+    #[yaserde(rename = "createdDateTime")]
+    pub created_date_time: TimeType,
+
+    // Contains the LFDI of the device providing the response.
+    #[yaserde(rename = "endDeviceLFDI")]
+    pub end_device_lfdi: HexBinary160,
+
+    // The status field contains the acknowledgement or status. Each event type
+    // (DRLC, DER, Price, or Text) can return different status information (e.g.
+    // an Acknowledge will be returned for a Price event where a DRLC event can
+    // return Event Received, Event Started, and Event Completed). The Status
+    // field value definitions are defined in Table 27: Response Types by
+    // Function Set.
+    #[yaserde(rename = "status")]
+    pub status: Uint8,
+
+    // The subject field provides a method to match the response with the
+    // originating event. It is populated with the mRID of the original object.
+    #[yaserde(rename = "subject")]
+    pub subject: Mridtype,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for Response {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct List {
+    // The number specifying "all" of the items in the list. Required on a
+    // response to a GET, ignored otherwise.
+    #[yaserde(attribute, rename = "all")]
+    pub all: Uint32,
+
+    // Indicates the number of items in this page of results.
+    #[yaserde(attribute, rename = "results")]
+    pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for List {}
+
+
+// Links provide a reference, via URI, to another resource.
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct Link {
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
+}
+
+impl Validate for Link {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct ListLink {
+    // Indicates the total number of items in the referenced list. This
+    // attribute SHALL be present if the href is a local or relative URI. This
+    // attribute SHOULD NOT be present if the href is a remote or absolute URI,
+    // as the server may be unaware of changes to the value.
+    #[yaserde(attribute, rename = "all")]
+    pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
+}
+
+impl Validate for ListLink {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct IdentifiedObject {
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for IdentifiedObject {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct RespondableResource {
+    // A reference to the response resource address (URI). Required on a
+    // response to a GET if responseRequired is "true".
+    #[yaserde(attribute, rename = "replyTo")]
+    pub reply_to: Option<String>,
+
+    // Indicates whether or not a response is required upon receipt, creation or
+    // update of this resource. Responses shall be posted to the collection
+    // specified in "replyTo".
+    // If the resource has a deviceCategory field, devices that match one or
+    // more of the device types indicated in deviceCategory SHALL respond
+    // according to the rules listed below. If the category does not match, the
+    // device SHALL NOT respond. If the resource does not have a deviceCategory
+    // field, a device receiving the resource SHALL respond according to the
+    // rules listed below.
+    // Value encoded as hex according to the following bit assignments, any
+    // combination is possible.
+    // See Table 27 for the list of appropriate Response status codes to be sent
+    // for these purposes.
+    // 0 - End device shall indicate that message was received
+    // 1 - End device shall indicate specific response.
+    // 2 - End user / customer response is required.
+    // All other values reserved.
+    #[yaserde(attribute, rename = "responseRequired")]
+    pub response_required: Option<HexBinary8>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for RespondableResource {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct RespondableIdentifiedObject {
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the response resource address (URI). Required on a
+    // response to a GET if responseRequired is "true".
+    #[yaserde(attribute, rename = "replyTo")]
+    pub reply_to: Option<String>,
+
+    // Indicates whether or not a response is required upon receipt, creation or
+    // update of this resource. Responses shall be posted to the collection
+    // specified in "replyTo".
+    // If the resource has a deviceCategory field, devices that match one or
+    // more of the device types indicated in deviceCategory SHALL respond
+    // according to the rules listed below. If the category does not match, the
+    // device SHALL NOT respond. If the resource does not have a deviceCategory
+    // field, a device receiving the resource SHALL respond according to the
+    // rules listed below.
+    // Value encoded as hex according to the following bit assignments, any
+    // combination is possible.
+    // See Table 27 for the list of appropriate Response status codes to be sent
+    // for these purposes.
+    // 0 - End device shall indicate that message was received
+    // 1 - End device shall indicate specific response.
+    // 2 - End user / customer response is required.
+    // All other values reserved.
+    #[yaserde(attribute, rename = "responseRequired")]
+    pub response_required: Option<HexBinary8>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for RespondableIdentifiedObject {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct RespondableSubscribableIdentifiedObject {
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the response resource address (URI). Required on a
+    // response to a GET if responseRequired is "true".
+    #[yaserde(attribute, rename = "replyTo")]
+    pub reply_to: Option<String>,
+
+    // Indicates whether or not a response is required upon receipt, creation or
+    // update of this resource. Responses shall be posted to the collection
+    // specified in "replyTo".
+    // If the resource has a deviceCategory field, devices that match one or
+    // more of the device types indicated in deviceCategory SHALL respond
+    // according to the rules listed below. If the category does not match, the
+    // device SHALL NOT respond. If the resource does not have a deviceCategory
+    // field, a device receiving the resource SHALL respond according to the
+    // rules listed below.
+    // Value encoded as hex according to the following bit assignments, any
+    // combination is possible.
+    // See Table 27 for the list of appropriate Response status codes to be sent
+    // for these purposes.
+    // 0 - End device shall indicate that message was received
+    // 1 - End device shall indicate specific response.
+    // 2 - End user / customer response is required.
+    // All other values reserved.
+    #[yaserde(attribute, rename = "responseRequired")]
+    pub response_required: Option<HexBinary8>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for RespondableSubscribableIdentifiedObject {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct SubscribableResource {
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for SubscribableResource {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct SubscribableList {
+    // The number specifying "all" of the items in the list. Required on GET,
+    // ignored otherwise.
+    #[yaserde(attribute, rename = "all")]
+    pub all: Uint32,
+
+    // Indicates the number of items in this page of results.
+    #[yaserde(attribute, rename = "results")]
+    pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for SubscribableList {}
+
+
+// Contains information about the nature of an error if a request could not be
+// completed successfully.
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct Error {
+    // Contains the number of seconds the client SHOULD wait before retrying the
+    // request.
+    #[yaserde(rename = "maxRetryDuration")]
+    pub max_retry_duration: Uint16,
+
+    // Code indicating the reason for failure.
+    // 0 - Invalid request format
+    // 1 - Invalid request values (e.g. invalid threshold values)
+    // 2 - Resource limit reached
+    // 3 - Conditional subscription field not supported
+    // 4 - Maximum request frequency exceeded
+    // All other values reserved
+    #[yaserde(rename = "reasonCode")]
+    pub reason_code: Uint16,
+}
+
+impl Validate for Error {}
+
+
+// Current status information relevant to a specific object. The Status object
+// is used to indicate the current status of an Event. Devices can read the
+// containing resource (e.g. TextMessage) to get the most up to date status of
+// the event. Devices can also subscribe to a specific resource instance to get
+// updates when any of its attributes change, including the Status object.
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct EventStatus {
+    // Field representing the current status type.
+    // 0 = Scheduled
+    // This status indicates that the event has been scheduled and the event has
+    // not yet started. The server SHALL set the event to this status when the
+    // event is first scheduled and persist until the event has become active or
+    // has been cancelled. For events with a start time less than or equal to
+    // the current time, this status SHALL never be indicated, the event SHALL
+    // start with a status of “Active”.
+    // 1 = Active
+    // This status indicates that the event is currently active. The server
+    // SHALL set the event to this status when the event reaches its earliest
+    // Effective Start Time.
+    // 2 = Cancelled
+    // When events are cancelled, the Status.dateTime attribute SHALL be set to
+    // the time the cancellation occurred, which cannot be in the future. The
+    // server is responsible for maintaining the cancelled event in its
+    // collection for the duration of the original event, or until the server
+    // has run out of space and needs to store a new event. Client devices SHALL
+    // be aware of Cancelled events, determine if the Cancelled event applies to
+    // them, and cancel the event immediately if applicable.
+    // 3 = Cancelled with Randomization
+    // The server is responsible for maintaining the cancelled event in its
+    // collection for the duration of the Effective Scheduled Period. Client
+    // devices SHALL be aware of Cancelled with Randomization events, determine
+    // if the Cancelled event applies to them, and cancel the event immediately,
+    // using the larger of (absolute value of randomizeStart) and (absolute
+    // value of randomizeDuration) as the end randomization, in seconds. This
+    // Status.type SHALL NOT be used with "regular" Events, only with
+    // specializations of RandomizableEvent.
+    // 4 = Superseded
+    // Events marked as Superseded by servers are events that may have been
+    // replaced by new events from the same program that target the exact same
+    // set of deviceCategory's (if applicable) AND DERControl controls (e.g.,
+    // opModTargetW) (if applicable) and overlap for a given period of time.
+    // Servers SHALL mark an event as Superseded at the earliest Effective Start
+    // Time of the overlapping event. Servers are responsible for maintaining
+    // the Superseded event in their collection for the duration of the
+    // Effective Scheduled Period.
+    // Client devices encountering a Superseded event SHALL terminate execution
+    // of the event immediately and commence execution of the new event
+    // immediately, unless the current time is within the start randomization
+    // window of the superseded event, in which case the client SHALL obey the
+    // start randomization of the new event. This Status.type SHALL NOT be used
+    // with TextMessage, since multiple text messages can be active.
+    // All other values reserved.
+    #[yaserde(rename = "currentStatus")]
+    pub current_status: Uint8,
+
+    // The dateTime attribute will provide a timestamp of when the current
+    // status was defined. dateTime MUST be set to the time at which the status
+    // change occurred, not a time in the future or past.
+    #[yaserde(rename = "dateTime")]
+    pub date_time: TimeType,
+
+    // Set to true by a server of this event if there are events that overlap
+    // this event in time and also overlap in some, but not all,
+    // deviceCategory's (if applicable) AND DERControl controls (e.g.,
+    // opModTargetW) (if applicable) in the same function set instance.
+    #[yaserde(rename = "potentiallySuperseded")]
+    pub potentially_superseded: bool,
+
+    // Indicates the time that the potentiallySuperseded flag was set.
+    #[yaserde(rename = "potentiallySupersededTime")]
+    pub potentially_superseded_time: TimeType,
+
+    // The Reason attribute allows a Service provider to provide a textual
+    // explanation of the status.
+    #[yaserde(rename = "reason")]
+    pub reason: String192,
+}
+
+impl Validate for EventStatus {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct Event {
+    // The time at which the Event was created.
+    #[yaserde(rename = "creationTime")]
+    pub creation_time: TimeType,
+
+    #[yaserde(rename = "EventStatus")]
+    pub event_status: EventStatus,
+
+    // The period during which the Event applies.
+    #[yaserde(rename = "interval")]
+    pub interval: DateTimeInterval,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the response resource address (URI). Required on a
+    // response to a GET if responseRequired is "true".
+    #[yaserde(attribute, rename = "replyTo")]
+    pub reply_to: Option<String>,
+
+    // Indicates whether or not a response is required upon receipt, creation or
+    // update of this resource. Responses shall be posted to the collection
+    // specified in "replyTo".
+    // If the resource has a deviceCategory field, devices that match one or
+    // more of the device types indicated in deviceCategory SHALL respond
+    // according to the rules listed below. If the category does not match, the
+    // device SHALL NOT respond. If the resource does not have a deviceCategory
+    // field, a device receiving the resource SHALL respond according to the
+    // rules listed below.
+    // Value encoded as hex according to the following bit assignments, any
+    // combination is possible.
+    // See Table 27 for the list of appropriate Response status codes to be sent
+    // for these purposes.
+    // 0 - End device shall indicate that message was received
+    // 1 - End device shall indicate specific response.
+    // 2 - End user / customer response is required.
+    // All other values reserved.
+    #[yaserde(attribute, rename = "responseRequired")]
+    pub response_required: Option<HexBinary8>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for Event {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct RandomizableEvent {
+    // Number of seconds boundary inside which a random value must be selected
+    // to be applied to the associated interval duration, to avoid sudden
+    // synchronized demand changes. If related to price level changes, sign may
+    // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
+    // default.
+    #[yaserde(rename = "randomizeDuration")]
+    pub randomize_duration: OneHourRangeType,
+
+    // Number of seconds boundary inside which a random value must be selected
+    // to be applied to the associated interval start time, to avoid sudden
+    // synchronized demand changes. If related to price level changes, sign may
+    // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
+    // default.
+    #[yaserde(rename = "randomizeStart")]
+    pub randomize_start: OneHourRangeType,
+
+    // The time at which the Event was created.
+    #[yaserde(rename = "creationTime")]
+    pub creation_time: TimeType,
+
+    #[yaserde(rename = "EventStatus")]
+    pub event_status: EventStatus,
+
+    // The period during which the Event applies.
+    #[yaserde(rename = "interval")]
+    pub interval: DateTimeInterval,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the response resource address (URI). Required on a
+    // response to a GET if responseRequired is "true".
+    #[yaserde(attribute, rename = "replyTo")]
+    pub reply_to: Option<String>,
+
+    // Indicates whether or not a response is required upon receipt, creation or
+    // update of this resource. Responses shall be posted to the collection
+    // specified in "replyTo".
+    // If the resource has a deviceCategory field, devices that match one or
+    // more of the device types indicated in deviceCategory SHALL respond
+    // according to the rules listed below. If the category does not match, the
+    // device SHALL NOT respond. If the resource does not have a deviceCategory
+    // field, a device receiving the resource SHALL respond according to the
+    // rules listed below.
+    // Value encoded as hex according to the following bit assignments, any
+    // combination is possible.
+    // See Table 27 for the list of appropriate Response status codes to be sent
+    // for these purposes.
+    // 0 - End device shall indicate that message was received
+    // 1 - End device shall indicate specific response.
+    // 2 - End user / customer response is required.
+    // All other values reserved.
+    #[yaserde(attribute, rename = "responseRequired")]
+    pub response_required: Option<HexBinary8>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for RandomizableEvent {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct SubscribableIdentifiedObject {
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for SubscribableIdentifiedObject {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct FunctionSetAssignmentsBase {
+    #[yaserde(rename = "CustomerAccountListLink")]
+    pub customer_account_list_link: CustomerAccountListLink,
+
+    #[yaserde(rename = "DemandResponseProgramListLink")]
+    pub demand_response_program_list_link: DemandResponseProgramListLink,
+
+    #[yaserde(rename = "DERProgramListLink")]
+    pub der_program_list_link: DerprogramListLink,
+
+    #[yaserde(rename = "FileListLink")]
+    pub file_list_link: FileListLink,
+
+    #[yaserde(rename = "MessagingProgramListLink")]
+    pub messaging_program_list_link: MessagingProgramListLink,
+
+    #[yaserde(rename = "PrepaymentListLink")]
+    pub prepayment_list_link: PrepaymentListLink,
+
+    #[yaserde(rename = "ResponseSetListLink")]
+    pub response_set_list_link: ResponseSetListLink,
+
+    #[yaserde(rename = "TariffProfileListLink")]
+    pub tariff_profile_list_link: TariffProfileListLink,
+
+    #[yaserde(rename = "TimeLink")]
+    pub time_link: TimeLink,
+
+    #[yaserde(rename = "UsagePointListLink")]
+    pub usage_point_list_link: UsagePointListLink,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for FunctionSetAssignmentsBase {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -53,9 +988,15 @@ pub struct DeviceCapability {
 
     #[yaserde(rename = "UsagePointListLink")]
     pub usage_point_list_link: UsagePointListLink,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for DeviceCapability {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -109,9 +1050,15 @@ pub struct AbstractDevice {
     // specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for AbstractDevice {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -162,6 +1109,7 @@ pub struct DeviceStatus {
 }
 
 impl Validate for DeviceStatus {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -249,9 +1197,15 @@ pub struct EndDevice {
     // specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for EndDevice {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -274,9 +1228,21 @@ pub struct EndDeviceList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for EndDeviceList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -307,6 +1273,7 @@ pub struct Registration {
 }
 
 impl Validate for Registration {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -367,9 +1334,15 @@ pub struct SelfDevice {
     // specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for SelfDevice {}
+
 
 // Specification of a temperature.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -393,46 +1366,6 @@ pub struct Temperature {
 
 impl Validate for Temperature {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct FunctionSetAssignmentsBase {
-    #[yaserde(rename = "CustomerAccountListLink")]
-    pub customer_account_list_link: CustomerAccountListLink,
-
-    #[yaserde(rename = "DemandResponseProgramListLink")]
-    pub demand_response_program_list_link: DemandResponseProgramListLink,
-
-    #[yaserde(rename = "DERProgramListLink")]
-    pub der_program_list_link: DerprogramListLink,
-
-    #[yaserde(rename = "FileListLink")]
-    pub file_list_link: FileListLink,
-
-    #[yaserde(rename = "MessagingProgramListLink")]
-    pub messaging_program_list_link: MessagingProgramListLink,
-
-    #[yaserde(rename = "PrepaymentListLink")]
-    pub prepayment_list_link: PrepaymentListLink,
-
-    #[yaserde(rename = "ResponseSetListLink")]
-    pub response_set_list_link: ResponseSetListLink,
-
-    #[yaserde(rename = "TariffProfileListLink")]
-    pub tariff_profile_list_link: TariffProfileListLink,
-
-    #[yaserde(rename = "TimeLink")]
-    pub time_link: TimeLink,
-
-    #[yaserde(rename = "UsagePointListLink")]
-    pub usage_point_list_link: UsagePointListLink,
-
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl Validate for FunctionSetAssignmentsBase {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -494,6 +1427,7 @@ pub struct FunctionSetAssignments {
 
 impl Validate for FunctionSetAssignments {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FunctionSetAssignmentsList {
@@ -515,9 +1449,21 @@ pub struct FunctionSetAssignmentsList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for FunctionSetAssignmentsList {}
+
 
 // Indicates a condition that must be satisfied for the Notification to be
 // triggered.
@@ -540,6 +1486,7 @@ pub struct Condition {
 
 impl Validate for Condition {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscriptionBase {
@@ -556,6 +1503,7 @@ pub struct SubscriptionBase {
 }
 
 impl Validate for SubscriptionBase {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -615,6 +1563,7 @@ pub struct Subscription {
 
 impl Validate for Subscription {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscriptionList {
@@ -636,9 +1585,15 @@ pub struct SubscriptionList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for SubscriptionList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -681,6 +1636,7 @@ pub struct Notification {
 
 impl Validate for Notification {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct NotificationList {
@@ -695,9 +1651,15 @@ pub struct NotificationList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for NotificationList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -731,9 +1693,15 @@ pub struct DercontrolResponse {
     // originating event. It is populated with the mRID of the original object.
     #[yaserde(rename = "subject")]
     pub subject: Mridtype,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for DercontrolResponse {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -767,9 +1735,15 @@ pub struct FlowReservationResponseResponse {
     // originating event. It is populated with the mRID of the original object.
     #[yaserde(rename = "subject")]
     pub subject: Mridtype,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for FlowReservationResponseResponse {}
+
 
 // Specifies the value of the TargetReduction applied by the device.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -785,6 +1759,7 @@ pub struct AppliedTargetReduction {
 }
 
 impl Validate for AppliedTargetReduction {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -844,49 +1819,19 @@ pub struct DrResponse {
     // originating event. It is populated with the mRID of the original object.
     #[yaserde(rename = "subject")]
     pub subject: Mridtype,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for DrResponse {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PriceResponse {
-    // The createdDateTime field contains the date and time when the
-    // acknowledgement/status occurred in the client. The client will provide
-    // the timestamp to ensure the proper time is captured in case the response
-    // is delayed in reaching the server (server receipt time would not be the
-    // same as the actual confirmation time). The time reported from the client
-    // should be relative to the time server indicated by the
-    // FunctionSetAssignment that also indicated the event resource; if no
-    // FunctionSetAssignment exists, the time of the server where the event
-    // resource was hosted.
-    #[yaserde(rename = "createdDateTime")]
-    pub created_date_time: TimeType,
-
-    // Contains the LFDI of the device providing the response.
-    #[yaserde(rename = "endDeviceLFDI")]
-    pub end_device_lfdi: HexBinary160,
-
-    // The status field contains the acknowledgement or status. Each event type
-    // (DRLC, DER, Price, or Text) can return different status information (e.g.
-    // an Acknowledge will be returned for a Price event where a DRLC event can
-    // return Event Received, Event Started, and Event Completed). The Status
-    // field value definitions are defined in Table 27: Response Types by
-    // Function Set.
-    #[yaserde(rename = "status")]
-    pub status: Uint8,
-
-    // The subject field provides a method to match the response with the
-    // originating event. It is populated with the mRID of the original object.
-    #[yaserde(rename = "subject")]
-    pub subject: Mridtype,
-}
-
-impl Validate for PriceResponse {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Response {
     // The createdDateTime field contains the date and time when the
     // acknowledgement/status occurred in the client. The client will provide
     // the timestamp to ensure the proper time is captured in case the response
@@ -923,7 +1868,8 @@ pub struct Response {
     pub href: Option<String>,
 }
 
-impl Validate for Response {}
+impl Validate for PriceResponse {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -939,9 +1885,15 @@ pub struct ResponseList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for ResponseList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -961,9 +1913,15 @@ pub struct ResponseSet {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for ResponseSet {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -986,9 +1944,15 @@ pub struct ResponseSetList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for ResponseSetList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1030,6 +1994,7 @@ pub struct TextResponse {
 }
 
 impl Validate for TextResponse {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1091,6 +2056,7 @@ pub struct Time {
 }
 
 impl Validate for Time {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1190,6 +2156,7 @@ pub struct DeviceInformation {
 
 impl Validate for DeviceInformation {}
 
+
 // Contains information about the static capabilities of the device, to allow
 // service providers to know what types of functions are supported, what the
 // normal operating ranges and limits are, and other similar information, in
@@ -1233,6 +2200,7 @@ pub struct Drlccapabilities {
 
 impl Validate for Drlccapabilities {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SupportedLocale {
@@ -1248,6 +2216,7 @@ pub struct SupportedLocale {
 
 impl Validate for SupportedLocale {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SupportedLocaleList {
@@ -1262,9 +2231,15 @@ pub struct SupportedLocaleList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for SupportedLocaleList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1327,11 +2302,13 @@ pub struct PowerStatus {
 
 impl Validate for PowerStatus {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PowerSourceType {}
 
 impl Validate for PowerSourceType {}
+
 
 // Contains attributes that can be exposed by PEVs and other devices that have
 // charging requirements.
@@ -1393,6 +2370,7 @@ pub struct Pevinfo {
 
 impl Validate for Pevinfo {}
 
+
 // Contains 802.15.4 link layer specific attributes.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1410,6 +2388,7 @@ pub struct Ieee802154 {
 }
 
 impl Validate for Ieee802154 {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1429,6 +2408,7 @@ pub struct Ipaddr {
 
 impl Validate for Ipaddr {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct IpaddrList {
@@ -1443,9 +2423,15 @@ pub struct IpaddrList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for IpaddrList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1564,6 +2550,7 @@ pub struct Ipinterface {
 
 impl Validate for Ipinterface {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct IpinterfaceList {
@@ -1585,9 +2572,15 @@ pub struct IpinterfaceList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for IpinterfaceList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1673,6 +2666,7 @@ pub struct Llinterface {
 
 impl Validate for Llinterface {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LlinterfaceList {
@@ -1687,9 +2681,15 @@ pub struct LlinterfaceList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for LlinterfaceList {}
+
 
 // Contains information specific to 6LoWPAN.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1718,6 +2718,7 @@ pub struct LoWPAN {
 
 impl Validate for LoWPAN {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Neighbor {
@@ -1741,6 +2742,7 @@ pub struct Neighbor {
 
 impl Validate for Neighbor {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct NeighborList {
@@ -1755,9 +2757,15 @@ pub struct NeighborList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for NeighborList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1809,6 +2817,7 @@ pub struct Rplinstance {
 
 impl Validate for Rplinstance {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RplinstanceList {
@@ -1823,9 +2832,15 @@ pub struct RplinstanceList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for RplinstanceList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1846,6 +2861,7 @@ pub struct RplsourceRoutes {
 
 impl Validate for RplsourceRoutes {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RplsourceRoutesList {
@@ -1860,9 +2876,15 @@ pub struct RplsourceRoutesList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for RplsourceRoutesList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1948,6 +2970,7 @@ pub struct LogEvent {
 
 impl Validate for LogEvent {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LogEventList {
@@ -1969,9 +2992,21 @@ pub struct LogEventList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for LogEventList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2006,9 +3041,15 @@ pub struct Configuration {
     // specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for Configuration {}
+
 
 // Contains configuration related to the device's power sources
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2026,6 +3067,7 @@ pub struct PowerConfiguration {
 }
 
 impl Validate for PowerConfiguration {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2053,6 +3095,7 @@ pub struct PriceResponseCfg {
 
 impl Validate for PriceResponseCfg {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PriceResponseCfgList {
@@ -2067,9 +3110,15 @@ pub struct PriceResponseCfgList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for PriceResponseCfgList {}
+
 
 // Contains attributes related to the configuration of the time service.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2096,6 +3145,7 @@ pub struct TimeConfiguration {
 }
 
 impl Validate for TimeConfiguration {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2171,6 +3221,7 @@ pub struct File {
 
 impl Validate for File {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FileList {
@@ -2192,9 +3243,15 @@ pub struct FileList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for FileList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2273,6 +3330,7 @@ pub struct FileStatus {
 
 impl Validate for FileStatus {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LoadShedAvailabilityList {
@@ -2294,9 +3352,15 @@ pub struct LoadShedAvailabilityList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for LoadShedAvailabilityList {}
+
 
 // The ApplianceLoadReduction object is used by a Demand Response service
 // provider to provide signals for ENERGY STAR compliant appliances. See the
@@ -2310,6 +3374,7 @@ pub struct ApplianceLoadReduction {
 }
 
 impl Validate for ApplianceLoadReduction {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2358,9 +3423,15 @@ pub struct DemandResponseProgram {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for DemandResponseProgram {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2383,9 +3454,21 @@ pub struct DemandResponseProgramList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for DemandResponseProgramList {}
+
 
 // Duty cycle control is a device specific issue and is managed by the device.
 // The duty cycle of the device under control should span the shortest practical
@@ -2406,6 +3489,7 @@ pub struct DutyCycle {
 }
 
 impl Validate for DutyCycle {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2467,9 +3551,70 @@ pub struct EndDeviceControl {
     // default.
     #[yaserde(rename = "randomizeStart")]
     pub randomize_start: OneHourRangeType,
+
+    // The time at which the Event was created.
+    #[yaserde(rename = "creationTime")]
+    pub creation_time: TimeType,
+
+    #[yaserde(rename = "EventStatus")]
+    pub event_status: EventStatus,
+
+    // The period during which the Event applies.
+    #[yaserde(rename = "interval")]
+    pub interval: DateTimeInterval,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the response resource address (URI). Required on a
+    // response to a GET if responseRequired is "true".
+    #[yaserde(attribute, rename = "replyTo")]
+    pub reply_to: Option<String>,
+
+    // Indicates whether or not a response is required upon receipt, creation or
+    // update of this resource. Responses shall be posted to the collection
+    // specified in "replyTo".
+    // If the resource has a deviceCategory field, devices that match one or
+    // more of the device types indicated in deviceCategory SHALL respond
+    // according to the rules listed below. If the category does not match, the
+    // device SHALL NOT respond. If the resource does not have a deviceCategory
+    // field, a device receiving the resource SHALL respond according to the
+    // rules listed below.
+    // Value encoded as hex according to the following bit assignments, any
+    // combination is possible.
+    // See Table 27 for the list of appropriate Response status codes to be sent
+    // for these purposes.
+    // 0 - End device shall indicate that message was received
+    // 1 - End device shall indicate specific response.
+    // 2 - End user / customer response is required.
+    // All other values reserved.
+    #[yaserde(attribute, rename = "responseRequired")]
+    pub response_required: Option<HexBinary8>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for EndDeviceControl {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2485,9 +3630,21 @@ pub struct EndDeviceControlList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for EndDeviceControlList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2517,6 +3674,7 @@ pub struct LoadShedAvailability {
 }
 
 impl Validate for LoadShedAvailability {}
+
 
 // If a temperature offset is sent that causes the heating or cooling
 // temperature set point to exceed the limit boundaries that are programmed into
@@ -2557,6 +3715,7 @@ pub struct Offset {
 
 impl Validate for Offset {}
 
+
 // The SetPoint object is used to apply specific temperature set points to a
 // temperature control device. The values of the heatingSetpoint and
 // coolingSetpoint attributes SHALL be calculated as follows:
@@ -2585,6 +3744,7 @@ pub struct SetPoint {
 
 impl Validate for SetPoint {}
 
+
 // The TargetReduction object is used by a Demand Response service provider to
 // provide a RECOMMENDED threshold that a device/premises should maintain its
 // consumption below. For example, a service provider can provide a RECOMMENDED
@@ -2605,6 +3765,32 @@ pub struct TargetReduction {
 
 impl Validate for TargetReduction {}
 
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct MeterReadingBase {
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for MeterReadingBase {}
+
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MeterReading {
@@ -2619,9 +3805,28 @@ pub struct MeterReading {
 
     #[yaserde(rename = "ReadingTypeLink")]
     pub reading_type_link: ReadingTypeLink,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for MeterReading {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2637,9 +3842,71 @@ pub struct MeterReadingList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for MeterReadingList {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct ReadingBase {
+    // Indicates the consumption block related to the reading. REQUIRED if
+    // ReadingType numberOfConsumptionBlocks is non-zero. If not specified, is
+    // assumed to be "0 - N/A".
+    #[yaserde(rename = "consumptionBlock")]
+    pub consumption_block: ConsumptionBlockType,
+
+    // List of codes indicating the quality of the reading, using specification:
+    // Bit 0 - valid: data that has gone through all required validation checks
+    // and either passed them all or has been verified
+    // Bit 1 - manually edited: Replaced or approved by a human
+    // Bit 2 - estimated using reference day: data value was replaced by a
+    // machine computed value based on analysis of historical data using the
+    // same type of measurement.
+    // Bit 3 - estimated using linear interpolation: data value was computed
+    // using linear interpolation based on the readings before and after it
+    // Bit 4 - questionable: data that has failed one or more checks
+    // Bit 5 - derived: data that has been calculated (using logic or
+    // mathematical operations), not necessarily measured directly
+    // Bit 6 - projected (forecast): data that has been calculated as a
+    // projection or forecast of future readings
+    #[yaserde(rename = "qualityFlags")]
+    pub quality_flags: HexBinary16,
+
+    // The time interval associated with the reading. If not specified, then
+    // defaults to the intervalLength specified in the associated ReadingType.
+    #[yaserde(rename = "timePeriod")]
+    pub time_period: DateTimeInterval,
+
+    // Indicates the time of use tier related to the reading. REQUIRED if
+    // ReadingType numberOfTouTiers is non-zero. If not specified, is assumed to
+    // be "0 - N/A".
+    #[yaserde(rename = "touTier")]
+    pub tou_tier: Toutype,
+
+    // Value in units specified by ReadingType
+    #[yaserde(rename = "value")]
+    pub value: Int48,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for ReadingBase {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2694,9 +3961,15 @@ pub struct Reading {
     // Value in units specified by ReadingType
     #[yaserde(rename = "value")]
     pub value: Int48,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for Reading {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2712,9 +3985,50 @@ pub struct ReadingList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for ReadingList {}
+
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct ReadingSetBase {
+    // Specifies the time range during which the contained readings were taken.
+    #[yaserde(rename = "timePeriod")]
+    pub time_period: DateTimeInterval,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for ReadingSetBase {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2725,9 +4039,28 @@ pub struct ReadingSet {
     // Specifies the time range during which the contained readings were taken.
     #[yaserde(rename = "timePeriod")]
     pub time_period: DateTimeInterval,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for ReadingSet {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2743,9 +4076,21 @@ pub struct ReadingSetList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for ReadingSetList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2862,6 +4207,46 @@ pub struct ReadingType {
 
 impl Validate for ReadingType {}
 
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct UsagePointBase {
+    // Specifies the roles that apply to the usage point.
+    #[yaserde(rename = "roleFlags")]
+    pub role_flags: RoleFlagsType,
+
+    // The kind of service provided by this usage point.
+    #[yaserde(rename = "serviceCategoryKind")]
+    pub service_category_kind: ServiceKind,
+
+    // Specifies the current status of the service at this usage point.
+    // 0 = off
+    // 1 = on
+    #[yaserde(rename = "status")]
+    pub status: Uint8,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for UsagePointBase {}
+
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct UsagePoint {
@@ -2886,9 +4271,28 @@ pub struct UsagePoint {
     // 1 = on
     #[yaserde(rename = "status")]
     pub status: Uint8,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for UsagePoint {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2911,9 +4315,21 @@ pub struct UsagePointList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for UsagePointList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2954,6 +4370,7 @@ pub struct ConsumptionTariffInterval {
 
 impl Validate for ConsumptionTariffInterval {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ConsumptionTariffIntervalList {
@@ -2968,15 +4385,22 @@ pub struct ConsumptionTariffIntervalList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for ConsumptionTariffIntervalList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CostKindType {}
 
 impl Validate for CostKindType {}
+
 
 // Provides alternative or secondary price information for the relevant
 // RateComponent. Supports jurisdictions that seek to convey the environmental
@@ -3029,6 +4453,7 @@ pub struct EnvironmentalCost {
 }
 
 impl Validate for EnvironmentalCost {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3093,9 +4518,15 @@ pub struct RateComponent {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for RateComponent {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3111,9 +4542,15 @@ pub struct RateComponentList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for RateComponentList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3157,9 +4594,15 @@ pub struct TariffProfile {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for TariffProfile {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3182,9 +4625,21 @@ pub struct TariffProfileList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for TariffProfileList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3212,9 +4667,70 @@ pub struct TimeTariffInterval {
     // default.
     #[yaserde(rename = "randomizeStart")]
     pub randomize_start: OneHourRangeType,
+
+    // The time at which the Event was created.
+    #[yaserde(rename = "creationTime")]
+    pub creation_time: TimeType,
+
+    #[yaserde(rename = "EventStatus")]
+    pub event_status: EventStatus,
+
+    // The period during which the Event applies.
+    #[yaserde(rename = "interval")]
+    pub interval: DateTimeInterval,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the response resource address (URI). Required on a
+    // response to a GET if responseRequired is "true".
+    #[yaserde(attribute, rename = "replyTo")]
+    pub reply_to: Option<String>,
+
+    // Indicates whether or not a response is required upon receipt, creation or
+    // update of this resource. Responses shall be posted to the collection
+    // specified in "replyTo".
+    // If the resource has a deviceCategory field, devices that match one or
+    // more of the device types indicated in deviceCategory SHALL respond
+    // according to the rules listed below. If the category does not match, the
+    // device SHALL NOT respond. If the resource does not have a deviceCategory
+    // field, a device receiving the resource SHALL respond according to the
+    // rules listed below.
+    // Value encoded as hex according to the following bit assignments, any
+    // combination is possible.
+    // See Table 27 for the list of appropriate Response status codes to be sent
+    // for these purposes.
+    // 0 - End device shall indicate that message was received
+    // 1 - End device shall indicate specific response.
+    // 2 - End user / customer response is required.
+    // All other values reserved.
+    #[yaserde(attribute, rename = "responseRequired")]
+    pub response_required: Option<HexBinary8>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for TimeTariffInterval {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3230,9 +4746,21 @@ pub struct TimeTariffIntervalList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for TimeTariffIntervalList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3263,9 +4791,21 @@ pub struct MessagingProgram {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for MessagingProgram {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3288,15 +4828,28 @@ pub struct MessagingProgramList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for MessagingProgramList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PriorityType {}
 
 impl Validate for PriorityType {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3334,9 +4887,59 @@ pub struct TextMessage {
     // The period during which the Event applies.
     #[yaserde(rename = "interval")]
     pub interval: DateTimeInterval,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the response resource address (URI). Required on a
+    // response to a GET if responseRequired is "true".
+    #[yaserde(attribute, rename = "replyTo")]
+    pub reply_to: Option<String>,
+
+    // Indicates whether or not a response is required upon receipt, creation or
+    // update of this resource. Responses shall be posted to the collection
+    // specified in "replyTo".
+    // If the resource has a deviceCategory field, devices that match one or
+    // more of the device types indicated in deviceCategory SHALL respond
+    // according to the rules listed below. If the category does not match, the
+    // device SHALL NOT respond. If the resource does not have a deviceCategory
+    // field, a device receiving the resource SHALL respond according to the
+    // rules listed below.
+    // Value encoded as hex according to the following bit assignments, any
+    // combination is possible.
+    // See Table 27 for the list of appropriate Response status codes to be sent
+    // for these purposes.
+    // 0 - End device shall indicate that message was received
+    // 1 - End device shall indicate specific response.
+    // 2 - End user / customer response is required.
+    // All other values reserved.
+    #[yaserde(attribute, rename = "responseRequired")]
+    pub response_required: Option<HexBinary8>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for TextMessage {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3352,9 +4955,21 @@ pub struct TextMessageList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for TextMessageList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3383,6 +4998,7 @@ pub struct BillingPeriod {
 
 impl Validate for BillingPeriod {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingPeriodList {
@@ -3397,9 +5013,21 @@ pub struct BillingPeriodList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for BillingPeriodList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3409,9 +5037,28 @@ pub struct BillingMeterReadingBase {
 
     #[yaserde(rename = "ReadingTypeLink")]
     pub reading_type_link: ReadingTypeLink,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for BillingMeterReadingBase {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3456,9 +5103,15 @@ pub struct BillingReading {
     // Value in units specified by ReadingType
     #[yaserde(rename = "value")]
     pub value: Int48,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for BillingReading {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3474,9 +5127,15 @@ pub struct BillingReadingList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for BillingReadingList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3487,9 +5146,28 @@ pub struct BillingReadingSet {
     // Specifies the time range during which the contained readings were taken.
     #[yaserde(rename = "timePeriod")]
     pub time_period: DateTimeInterval,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for BillingReadingSet {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3505,9 +5183,21 @@ pub struct BillingReadingSetList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for BillingReadingSetList {}
+
 
 // Charges contain charges on a customer bill. These could be items like taxes,
 // levies, surcharges, rebates, or others. This is meant to allow the HAN device
@@ -3536,11 +5226,13 @@ pub struct Charge {
 
 impl Validate for Charge {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ChargeKind {}
 
 impl Validate for ChargeKind {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3582,9 +5274,15 @@ pub struct CustomerAccount {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for CustomerAccount {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3607,9 +5305,21 @@ pub struct CustomerAccountList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for CustomerAccountList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3664,9 +5374,15 @@ pub struct CustomerAgreement {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for CustomerAgreement {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3682,9 +5398,21 @@ pub struct CustomerAgreementList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for CustomerAgreementList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3694,9 +5422,28 @@ pub struct HistoricalReading {
 
     #[yaserde(rename = "ReadingTypeLink")]
     pub reading_type_link: ReadingTypeLink,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for HistoricalReading {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3712,9 +5459,15 @@ pub struct HistoricalReadingList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for HistoricalReadingList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3724,9 +5477,28 @@ pub struct ProjectionReading {
 
     #[yaserde(rename = "ReadingTypeLink")]
     pub reading_type_link: ReadingTypeLink,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for ProjectionReading {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3742,9 +5514,15 @@ pub struct ProjectionReadingList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for ProjectionReadingList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3754,9 +5532,28 @@ pub struct TargetReading {
 
     #[yaserde(rename = "ReadingTypeLink")]
     pub reading_type_link: ReadingTypeLink,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for TargetReading {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3772,9 +5569,15 @@ pub struct TargetReadingList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for TargetReadingList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3807,9 +5610,15 @@ pub struct ServiceSupplier {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for ServiceSupplier {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3825,9 +5634,15 @@ pub struct ServiceSupplierList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for ServiceSupplierList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3867,6 +5682,7 @@ pub struct AccountBalance {
 
 impl Validate for AccountBalance {}
 
+
 // Unit for accounting; use either 'energyUnit' or 'currencyUnit' to specify the
 // unit for 'value'.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3890,6 +5706,7 @@ pub struct AccountingUnit {
 }
 
 impl Validate for AccountingUnit {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3932,9 +5749,15 @@ pub struct CreditRegister {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for CreditRegister {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3950,9 +5773,15 @@ pub struct CreditRegisterList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for CreditRegisterList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4024,9 +5853,15 @@ pub struct Prepayment {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for Prepayment {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4049,15 +5884,28 @@ pub struct PrepaymentList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for PrepaymentList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PrepayModeType {}
 
 impl Validate for PrepayModeType {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4090,6 +5938,7 @@ pub struct PrepayOperationStatus {
 
 impl Validate for PrepayOperationStatus {}
 
+
 // Specifies a change to the service status.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4104,6 +5953,7 @@ pub struct ServiceChange {
 }
 
 impl Validate for ServiceChange {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4125,6 +5975,7 @@ pub struct SupplyInterruptionOverride {
 
 impl Validate for SupplyInterruptionOverride {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SupplyInterruptionOverrideList {
@@ -4139,9 +5990,15 @@ pub struct SupplyInterruptionOverrideList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for SupplyInterruptionOverrideList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4149,11 +6006,13 @@ pub struct CreditStatusType {}
 
 impl Validate for CreditStatusType {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CreditTypeType {}
 
 impl Validate for CreditTypeType {}
+
 
 // Specifies a change to the credit type.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4170,11 +6029,13 @@ pub struct CreditTypeChange {
 
 impl Validate for CreditTypeChange {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ServiceStatusType {}
 
 impl Validate for ServiceStatusType {}
+
 
 // The RequestStatus object is used to indicate the current status of a Flow
 // Reservation Request.
@@ -4196,6 +6057,7 @@ pub struct RequestStatus {
 }
 
 impl Validate for RequestStatus {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4252,9 +6114,15 @@ pub struct FlowReservationRequest {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for FlowReservationRequest {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4277,9 +6145,15 @@ pub struct FlowReservationRequestList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for FlowReservationRequestList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4308,9 +6182,59 @@ pub struct FlowReservationResponse {
     // The period during which the Event applies.
     #[yaserde(rename = "interval")]
     pub interval: DateTimeInterval,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the response resource address (URI). Required on a
+    // response to a GET if responseRequired is "true".
+    #[yaserde(attribute, rename = "replyTo")]
+    pub reply_to: Option<String>,
+
+    // Indicates whether or not a response is required upon receipt, creation or
+    // update of this resource. Responses shall be posted to the collection
+    // specified in "replyTo".
+    // If the resource has a deviceCategory field, devices that match one or
+    // more of the device types indicated in deviceCategory SHALL respond
+    // according to the rules listed below. If the category does not match, the
+    // device SHALL NOT respond. If the resource does not have a deviceCategory
+    // field, a device receiving the resource SHALL respond according to the
+    // rules listed below.
+    // Value encoded as hex according to the following bit assignments, any
+    // combination is possible.
+    // See Table 27 for the list of appropriate Response status codes to be sent
+    // for these purposes.
+    // 0 - End device shall indicate that message was received
+    // 1 - End device shall indicate specific response.
+    // 2 - End user / customer response is required.
+    // All other values reserved.
+    #[yaserde(attribute, rename = "responseRequired")]
+    pub response_required: Option<HexBinary8>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for FlowReservationResponse {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4333,9 +6257,21 @@ pub struct FlowReservationResponseList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for FlowReservationResponseList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4418,9 +6354,21 @@ pub struct DefaultDERControl {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for DefaultDERControl {}
+
 
 // Type for Frequency-Droop (Frequency-Watt) operation.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4458,6 +6406,7 @@ pub struct FreqDroopType {
 
 impl Validate for FreqDroopType {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Der {
@@ -4487,9 +6436,15 @@ pub struct Der {
     // specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for Der {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4512,9 +6467,15 @@ pub struct Derlist {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for Derlist {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4676,15 +6637,22 @@ pub struct Dersettings {
     // specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for Dersettings {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Dertype {}
 
 impl Validate for Dertype {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4727,9 +6695,15 @@ pub struct Deravailability {
     // specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for Deravailability {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4866,6 +6840,7 @@ pub struct Dercapability {
 }
 
 impl Validate for Dercapability {}
+
 
 // Distributed Energy Resource (DER) control values.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -5128,6 +7103,7 @@ pub struct DercontrolBase {
 
 impl Validate for DercontrolBase {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Dercontrol {
@@ -5155,9 +7131,70 @@ pub struct Dercontrol {
     // default.
     #[yaserde(rename = "randomizeStart")]
     pub randomize_start: OneHourRangeType,
+
+    // The time at which the Event was created.
+    #[yaserde(rename = "creationTime")]
+    pub creation_time: TimeType,
+
+    #[yaserde(rename = "EventStatus")]
+    pub event_status: EventStatus,
+
+    // The period during which the Event applies.
+    #[yaserde(rename = "interval")]
+    pub interval: DateTimeInterval,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the response resource address (URI). Required on a
+    // response to a GET if responseRequired is "true".
+    #[yaserde(attribute, rename = "replyTo")]
+    pub reply_to: Option<String>,
+
+    // Indicates whether or not a response is required upon receipt, creation or
+    // update of this resource. Responses shall be posted to the collection
+    // specified in "replyTo".
+    // If the resource has a deviceCategory field, devices that match one or
+    // more of the device types indicated in deviceCategory SHALL respond
+    // according to the rules listed below. If the category does not match, the
+    // device SHALL NOT respond. If the resource does not have a deviceCategory
+    // field, a device receiving the resource SHALL respond according to the
+    // rules listed below.
+    // Value encoded as hex according to the following bit assignments, any
+    // combination is possible.
+    // See Table 27 for the list of appropriate Response status codes to be sent
+    // for these purposes.
+    // 0 - End device shall indicate that message was received
+    // 1 - End device shall indicate specific response.
+    // 2 - End user / customer response is required.
+    // All other values reserved.
+    #[yaserde(attribute, rename = "responseRequired")]
+    pub response_required: Option<HexBinary8>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for Dercontrol {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5173,15 +7210,28 @@ pub struct DercontrolList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for DercontrolList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercontrolType {}
 
 impl Validate for DercontrolType {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5272,9 +7322,15 @@ pub struct Dercurve {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for Dercurve {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5285,6 +7341,7 @@ pub struct CurrentDERProgramLink {
 }
 
 impl Validate for CurrentDERProgramLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5300,9 +7357,15 @@ pub struct DercurveList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for DercurveList {}
+
 
 // Data point values for defining a curve or schedule
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -5331,11 +7394,13 @@ pub struct CurveData {
 
 impl Validate for CurveData {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercurveType {}
 
 impl Validate for DercurveType {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5368,9 +7433,21 @@ pub struct Derprogram {
     // details.
     #[yaserde(rename = "version")]
     pub version: VersionType,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for Derprogram {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5393,9 +7470,21 @@ pub struct DerprogramList {
     // Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for DerprogramList {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5465,15 +7554,22 @@ pub struct Derstatus {
     // specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for Derstatus {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DerunitRefType {}
 
 impl Validate for DerunitRefType {}
+
 
 // Average flow of charge through a conductor.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -5489,6 +7585,7 @@ pub struct CurrentRMS {
 }
 
 impl Validate for CurrentRMS {}
+
 
 // Abstract type for specifying a fixed-point value without a given unit of
 // measure.
@@ -5506,6 +7603,7 @@ pub struct FixedPointType {
 
 impl Validate for FixedPointType {}
 
+
 // Abstract type for specifying an unsigned fixed-point value without a given
 // unit of measure.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -5521,6 +7619,7 @@ pub struct UnsignedFixedPointType {
 }
 
 impl Validate for UnsignedFixedPointType {}
+
 
 // The active (real) power P (in W) is the product of root-mean-square (RMS)
 // voltage, RMS current, and cos(theta) where theta is the phase angle of
@@ -5540,6 +7639,7 @@ pub struct ActivePower {
 
 impl Validate for ActivePower {}
 
+
 // Available electric charge
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5554,6 +7654,7 @@ pub struct AmpereHour {
 }
 
 impl Validate for AmpereHour {}
+
 
 // The apparent power S (in VA) is the product of root mean square (RMS) voltage
 // and RMS current.
@@ -5570,6 +7671,7 @@ pub struct ApparentPower {
 }
 
 impl Validate for ApparentPower {}
+
 
 // The reactive power Q (in var) is the product of root mean square (RMS)
 // voltage, RMS current, and sin(theta) where theta is the phase angle of
@@ -5588,6 +7690,7 @@ pub struct ReactivePower {
 
 impl Validate for ReactivePower {}
 
+
 // Reactive susceptance
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5602,6 +7705,7 @@ pub struct ReactiveSusceptance {
 }
 
 impl Validate for ReactiveSusceptance {}
+
 
 // Specifies a setpoint for Displacement Power Factor, the ratio between
 // apparent and active powers at the fundamental frequency (e.g. 60 Hz).
@@ -5620,6 +7724,7 @@ pub struct PowerFactor {
 }
 
 impl Validate for PowerFactor {}
+
 
 // Specifies a setpoint for Displacement Power Factor, the ratio between
 // apparent and active powers at the fundamental frequency (e.g. 60 Hz) and
@@ -5645,6 +7750,7 @@ pub struct PowerFactorWithExcitation {
 
 impl Validate for PowerFactorWithExcitation {}
 
+
 // Specifies a signed setpoint for reactive power.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5661,6 +7767,7 @@ pub struct FixedVar {
 
 impl Validate for FixedVar {}
 
+
 // Active (real) energy
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5676,6 +7783,7 @@ pub struct WattHour {
 
 impl Validate for WattHour {}
 
+
 // Average electric potential difference between two points.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5690,6 +7798,7 @@ pub struct VoltageRMS {
 }
 
 impl Validate for VoltageRMS {}
+
 
 // DER ConnectStatus value (bitmap):
 // 0 - Connected
@@ -5711,6 +7820,7 @@ pub struct ConnectStatusType {
 }
 
 impl Validate for ConnectStatusType {}
+
 
 // DER InverterStatus value:
 // 0 - N/A
@@ -5739,6 +7849,7 @@ pub struct InverterStatusType {
 
 impl Validate for InverterStatusType {}
 
+
 // DER LocalControlModeStatus/value:
 // 0 – local control
 // 1 – remote control
@@ -5757,6 +7868,7 @@ pub struct LocalControlModeStatusType {
 
 impl Validate for LocalControlModeStatusType {}
 
+
 // DER ManufacturerStatus/value: String data type
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5771,6 +7883,7 @@ pub struct ManufacturerStatusType {
 }
 
 impl Validate for ManufacturerStatusType {}
+
 
 // DER OperationalModeStatus value:
 // 0 - Not applicable / Unknown
@@ -5792,6 +7905,7 @@ pub struct OperationalModeStatusType {
 
 impl Validate for OperationalModeStatusType {}
 
+
 // DER StateOfChargeStatus value: Percent data type
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5806,6 +7920,7 @@ pub struct StateOfChargeStatusType {
 }
 
 impl Validate for StateOfChargeStatusType {}
+
 
 // DER StorageModeStatus value:
 // 0 – storage charging
@@ -5826,6 +7941,7 @@ pub struct StorageModeStatusType {
 
 impl Validate for StorageModeStatusType {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct AccountBalanceLink {
@@ -5836,6 +7952,7 @@ pub struct AccountBalanceLink {
 
 impl Validate for AccountBalanceLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ActiveBillingPeriodListLink {
@@ -5845,9 +7962,14 @@ pub struct ActiveBillingPeriodListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ActiveBillingPeriodListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5858,9 +7980,14 @@ pub struct ActiveCreditRegisterListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ActiveCreditRegisterListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5871,9 +7998,14 @@ pub struct ActiveDERControlListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ActiveDERControlListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5884,9 +8016,14 @@ pub struct ActiveEndDeviceControlListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ActiveEndDeviceControlListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5897,9 +8034,14 @@ pub struct ActiveFlowReservationListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ActiveFlowReservationListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5910,9 +8052,14 @@ pub struct ActiveProjectionReadingListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ActiveProjectionReadingListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5923,9 +8070,14 @@ pub struct ActiveSupplyInterruptionOverrideListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ActiveSupplyInterruptionOverrideListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5936,9 +8088,14 @@ pub struct ActiveTargetReadingListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ActiveTargetReadingListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5949,9 +8106,14 @@ pub struct ActiveTextMessageListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ActiveTextMessageListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5962,9 +8124,14 @@ pub struct ActiveTimeTariffIntervalListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ActiveTimeTariffIntervalListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5975,9 +8142,14 @@ pub struct AssociatedDERProgramListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for AssociatedDERProgramListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5989,6 +8161,7 @@ pub struct AssociatedUsagePointLink {
 
 impl Validate for AssociatedUsagePointLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingPeriodListLink {
@@ -5998,9 +8171,14 @@ pub struct BillingPeriodListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for BillingPeriodListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6011,9 +8189,14 @@ pub struct BillingReadingListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for BillingReadingListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6024,9 +8207,14 @@ pub struct BillingReadingSetListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for BillingReadingSetListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6038,6 +8226,7 @@ pub struct ConfigurationLink {
 
 impl Validate for ConfigurationLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ConsumptionTariffIntervalListLink {
@@ -6047,9 +8236,14 @@ pub struct ConsumptionTariffIntervalListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ConsumptionTariffIntervalListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6060,9 +8254,14 @@ pub struct CreditRegisterListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for CreditRegisterListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6074,6 +8273,7 @@ pub struct CustomerAccountLink {
 
 impl Validate for CustomerAccountLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CustomerAccountListLink {
@@ -6083,9 +8283,14 @@ pub struct CustomerAccountListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for CustomerAccountListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6096,9 +8301,14 @@ pub struct CustomerAgreementListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for CustomerAgreementListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6110,6 +8320,7 @@ pub struct DemandResponseProgramLink {
 
 impl Validate for DemandResponseProgramLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DemandResponseProgramListLink {
@@ -6119,9 +8330,14 @@ pub struct DemandResponseProgramListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for DemandResponseProgramListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6133,6 +8349,7 @@ pub struct DeravailabilityLink {
 
 impl Validate for DeravailabilityLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DefaultDERControlLink {
@@ -6142,6 +8359,7 @@ pub struct DefaultDERControlLink {
 }
 
 impl Validate for DefaultDERControlLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6153,6 +8371,7 @@ pub struct DercapabilityLink {
 
 impl Validate for DercapabilityLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercontrolListLink {
@@ -6162,9 +8381,14 @@ pub struct DercontrolListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for DercontrolListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6176,6 +8400,7 @@ pub struct DercurveLink {
 
 impl Validate for DercurveLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercurveListLink {
@@ -6185,9 +8410,14 @@ pub struct DercurveListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for DercurveListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6199,6 +8429,7 @@ pub struct Derlink {
 
 impl Validate for Derlink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DerlistLink {
@@ -6208,9 +8439,14 @@ pub struct DerlistLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for DerlistLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6222,6 +8458,7 @@ pub struct DerprogramLink {
 
 impl Validate for DerprogramLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DerprogramListLink {
@@ -6231,9 +8468,14 @@ pub struct DerprogramListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for DerprogramListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6245,6 +8487,7 @@ pub struct DersettingsLink {
 
 impl Validate for DersettingsLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DerstatusLink {
@@ -6254,6 +8497,7 @@ pub struct DerstatusLink {
 }
 
 impl Validate for DerstatusLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6265,6 +8509,7 @@ pub struct DeviceCapabilityLink {
 
 impl Validate for DeviceCapabilityLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DeviceInformationLink {
@@ -6274,6 +8519,7 @@ pub struct DeviceInformationLink {
 }
 
 impl Validate for DeviceInformationLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6285,6 +8531,7 @@ pub struct DeviceStatusLink {
 
 impl Validate for DeviceStatusLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EndDeviceControlListLink {
@@ -6294,9 +8541,14 @@ pub struct EndDeviceControlListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for EndDeviceControlListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6308,6 +8560,7 @@ pub struct EndDeviceLink {
 
 impl Validate for EndDeviceLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EndDeviceListLink {
@@ -6317,9 +8570,14 @@ pub struct EndDeviceListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for EndDeviceListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6331,6 +8589,7 @@ pub struct FileLink {
 
 impl Validate for FileLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FileListLink {
@@ -6340,9 +8599,14 @@ pub struct FileListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for FileListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6354,6 +8618,7 @@ pub struct FileStatusLink {
 
 impl Validate for FileStatusLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FlowReservationRequestListLink {
@@ -6363,9 +8628,14 @@ pub struct FlowReservationRequestListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for FlowReservationRequestListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6376,9 +8646,14 @@ pub struct FlowReservationResponseListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for FlowReservationResponseListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6389,9 +8664,14 @@ pub struct FunctionSetAssignmentsListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for FunctionSetAssignmentsListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6402,9 +8682,14 @@ pub struct HistoricalReadingListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for HistoricalReadingListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6415,9 +8700,14 @@ pub struct IpaddrListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for IpaddrListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6428,9 +8718,14 @@ pub struct IpinterfaceListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for IpinterfaceListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6441,9 +8736,14 @@ pub struct LlinterfaceListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for LlinterfaceListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6454,9 +8754,14 @@ pub struct LoadShedAvailabilityListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for LoadShedAvailabilityListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6467,9 +8772,14 @@ pub struct LogEventListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for LogEventListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6480,9 +8790,14 @@ pub struct MessagingProgramListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for MessagingProgramListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6494,6 +8809,7 @@ pub struct MeterReadingLink {
 
 impl Validate for MeterReadingLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MeterReadingListLink {
@@ -6503,9 +8819,14 @@ pub struct MeterReadingListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for MeterReadingListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6516,9 +8837,14 @@ pub struct MirrorUsagePointListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for MirrorUsagePointListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6529,9 +8855,14 @@ pub struct NeighborListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for NeighborListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6542,9 +8873,14 @@ pub struct NotificationListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for NotificationListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6556,6 +8892,7 @@ pub struct PowerStatusLink {
 
 impl Validate for PowerStatusLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PrepaymentLink {
@@ -6566,6 +8903,7 @@ pub struct PrepaymentLink {
 
 impl Validate for PrepaymentLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PrepaymentListLink {
@@ -6575,9 +8913,14 @@ pub struct PrepaymentListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for PrepaymentListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6589,6 +8932,7 @@ pub struct PrepayOperationStatusLink {
 
 impl Validate for PrepayOperationStatusLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PriceResponseCfgListLink {
@@ -6598,9 +8942,14 @@ pub struct PriceResponseCfgListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for PriceResponseCfgListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6611,9 +8960,14 @@ pub struct ProjectionReadingListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ProjectionReadingListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6625,6 +8979,7 @@ pub struct RateComponentLink {
 
 impl Validate for RateComponentLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RateComponentListLink {
@@ -6634,9 +8989,14 @@ pub struct RateComponentListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for RateComponentListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6648,6 +9008,7 @@ pub struct ReadingLink {
 
 impl Validate for ReadingLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReadingListLink {
@@ -6657,9 +9018,14 @@ pub struct ReadingListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ReadingListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6670,9 +9036,14 @@ pub struct ReadingSetListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ReadingSetListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6684,6 +9055,7 @@ pub struct ReadingTypeLink {
 
 impl Validate for ReadingTypeLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RegistrationLink {
@@ -6694,6 +9066,7 @@ pub struct RegistrationLink {
 
 impl Validate for RegistrationLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseListLink {
@@ -6703,9 +9076,14 @@ pub struct ResponseListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ResponseListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6716,9 +9094,14 @@ pub struct ResponseSetListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for ResponseSetListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6729,9 +9112,14 @@ pub struct RplinstanceListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for RplinstanceListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6742,9 +9130,14 @@ pub struct RplsourceRoutesListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for RplsourceRoutesListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6756,6 +9149,7 @@ pub struct SelfDeviceLink {
 
 impl Validate for SelfDeviceLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ServiceSupplierLink {
@@ -6766,6 +9160,7 @@ pub struct ServiceSupplierLink {
 
 impl Validate for ServiceSupplierLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscriptionListLink {
@@ -6775,9 +9170,14 @@ pub struct SubscriptionListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for SubscriptionListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6788,9 +9188,14 @@ pub struct SupplyInterruptionOverrideListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for SupplyInterruptionOverrideListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6801,9 +9206,14 @@ pub struct SupportedLocaleListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for SupportedLocaleListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6814,9 +9224,14 @@ pub struct TargetReadingListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for TargetReadingListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6828,6 +9243,7 @@ pub struct TariffProfileLink {
 
 impl Validate for TariffProfileLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TariffProfileListLink {
@@ -6837,9 +9253,14 @@ pub struct TariffProfileListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for TariffProfileListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6850,9 +9271,14 @@ pub struct TextMessageListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for TextMessageListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6864,6 +9290,7 @@ pub struct TimeLink {
 
 impl Validate for TimeLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TimeTariffIntervalListLink {
@@ -6873,9 +9300,14 @@ pub struct TimeTariffIntervalListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for TimeTariffIntervalListLink {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6887,6 +9319,7 @@ pub struct UsagePointLink {
 
 impl Validate for UsagePointLink {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct UsagePointListLink {
@@ -6896,544 +9329,14 @@ pub struct UsagePointListLink {
     // as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
+
+    // A URI reference.
+    #[yaserde(attribute, rename = "href")]
+    pub href: String,
 }
 
 impl Validate for UsagePointListLink {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct IdentifiedObject {
-    // The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
-
-    // The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: String32,
-
-    // Contains the version number of the object. See the type definition for
-    // details.
-    #[yaserde(rename = "version")]
-    pub version: VersionType,
-
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl Validate for IdentifiedObject {}
-
-// Links provide a reference, via URI, to another resource.
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Link {
-    // A URI reference.
-    #[yaserde(attribute, rename = "href")]
-    pub href: String,
-}
-
-impl Validate for Link {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct List {
-    // The number specifying "all" of the items in the list. Required on a
-    // response to a GET, ignored otherwise.
-    #[yaserde(attribute, rename = "all")]
-    pub all: Uint32,
-
-    // Indicates the number of items in this page of results.
-    #[yaserde(attribute, rename = "results")]
-    pub results: Uint32,
-
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl Validate for List {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct ListLink {
-    // Indicates the total number of items in the referenced list. This
-    // attribute SHALL be present if the href is a local or relative URI. This
-    // attribute SHOULD NOT be present if the href is a remote or absolute URI,
-    // as the server may be unaware of changes to the value.
-    #[yaserde(attribute, rename = "all")]
-    pub all: Option<Uint32>,
-
-    // A URI reference.
-    #[yaserde(attribute, rename = "href")]
-    pub href: String,
-}
-
-impl Validate for ListLink {}
-
-// A resource is an addressable unit of information, either a collection (List)
-// or instance of an object (identifiedObject, or simply, Resource)
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Resource {
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl Validate for Resource {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct RespondableIdentifiedObject {
-    // The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
-
-    // The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: String32,
-
-    // Contains the version number of the object. See the type definition for
-    // details.
-    #[yaserde(rename = "version")]
-    pub version: VersionType,
-
-    // A reference to the response resource address (URI). Required on a
-    // response to a GET if responseRequired is "true".
-    #[yaserde(attribute, rename = "replyTo")]
-    pub reply_to: Option<String>,
-
-    // Indicates whether or not a response is required upon receipt, creation or
-    // update of this resource. Responses shall be posted to the collection
-    // specified in "replyTo".
-    // If the resource has a deviceCategory field, devices that match one or
-    // more of the device types indicated in deviceCategory SHALL respond
-    // according to the rules listed below. If the category does not match, the
-    // device SHALL NOT respond. If the resource does not have a deviceCategory
-    // field, a device receiving the resource SHALL respond according to the
-    // rules listed below.
-    // Value encoded as hex according to the following bit assignments, any
-    // combination is possible.
-    // See Table 27 for the list of appropriate Response status codes to be sent
-    // for these purposes.
-    // 0 - End device shall indicate that message was received
-    // 1 - End device shall indicate specific response.
-    // 2 - End user / customer response is required.
-    // All other values reserved.
-    #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
-}
-
-impl Validate for RespondableIdentifiedObject {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct RespondableResource {
-    // A reference to the response resource address (URI). Required on a
-    // response to a GET if responseRequired is "true".
-    #[yaserde(attribute, rename = "replyTo")]
-    pub reply_to: Option<String>,
-
-    // Indicates whether or not a response is required upon receipt, creation or
-    // update of this resource. Responses shall be posted to the collection
-    // specified in "replyTo".
-    // If the resource has a deviceCategory field, devices that match one or
-    // more of the device types indicated in deviceCategory SHALL respond
-    // according to the rules listed below. If the category does not match, the
-    // device SHALL NOT respond. If the resource does not have a deviceCategory
-    // field, a device receiving the resource SHALL respond according to the
-    // rules listed below.
-    // Value encoded as hex according to the following bit assignments, any
-    // combination is possible.
-    // See Table 27 for the list of appropriate Response status codes to be sent
-    // for these purposes.
-    // 0 - End device shall indicate that message was received
-    // 1 - End device shall indicate specific response.
-    // 2 - End user / customer response is required.
-    // All other values reserved.
-    #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
-
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl Validate for RespondableResource {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct RespondableSubscribableIdentifiedObject {
-    // The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
-
-    // The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: String32,
-
-    // Contains the version number of the object. See the type definition for
-    // details.
-    #[yaserde(rename = "version")]
-    pub version: VersionType,
-
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
-    #[yaserde(attribute, rename = "subscribable")]
-    pub subscribable: Option<SubscribableType>,
-
-    // A reference to the response resource address (URI). Required on a
-    // response to a GET if responseRequired is "true".
-    #[yaserde(attribute, rename = "replyTo")]
-    pub reply_to: Option<String>,
-
-    // Indicates whether or not a response is required upon receipt, creation or
-    // update of this resource. Responses shall be posted to the collection
-    // specified in "replyTo".
-    // If the resource has a deviceCategory field, devices that match one or
-    // more of the device types indicated in deviceCategory SHALL respond
-    // according to the rules listed below. If the category does not match, the
-    // device SHALL NOT respond. If the resource does not have a deviceCategory
-    // field, a device receiving the resource SHALL respond according to the
-    // rules listed below.
-    // Value encoded as hex according to the following bit assignments, any
-    // combination is possible.
-    // See Table 27 for the list of appropriate Response status codes to be sent
-    // for these purposes.
-    // 0 - End device shall indicate that message was received
-    // 1 - End device shall indicate specific response.
-    // 2 - End user / customer response is required.
-    // All other values reserved.
-    #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
-
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl Validate for RespondableSubscribableIdentifiedObject {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct SubscribableIdentifiedObject {
-    // The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
-
-    // The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: String32,
-
-    // Contains the version number of the object. See the type definition for
-    // details.
-    #[yaserde(rename = "version")]
-    pub version: VersionType,
-
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
-    #[yaserde(attribute, rename = "subscribable")]
-    pub subscribable: Option<SubscribableType>,
-}
-
-impl Validate for SubscribableIdentifiedObject {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct SubscribableList {
-    // The number specifying "all" of the items in the list. Required on GET,
-    // ignored otherwise.
-    #[yaserde(attribute, rename = "all")]
-    pub all: Uint32,
-
-    // Indicates the number of items in this page of results.
-    #[yaserde(attribute, rename = "results")]
-    pub results: Uint32,
-
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
-    #[yaserde(attribute, rename = "subscribable")]
-    pub subscribable: Option<SubscribableType>,
-}
-
-impl Validate for SubscribableList {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct SubscribableResource {
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
-    #[yaserde(attribute, rename = "subscribable")]
-    pub subscribable: Option<SubscribableType>,
-
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl Validate for SubscribableResource {}
-
-// Contains information about the nature of an error if a request could not be
-// completed successfully.
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Error {
-    // Contains the number of seconds the client SHOULD wait before retrying the
-    // request.
-    #[yaserde(rename = "maxRetryDuration")]
-    pub max_retry_duration: Uint16,
-
-    // Code indicating the reason for failure.
-    // 0 - Invalid request format
-    // 1 - Invalid request values (e.g. invalid threshold values)
-    // 2 - Resource limit reached
-    // 3 - Conditional subscription field not supported
-    // 4 - Maximum request frequency exceeded
-    // All other values reserved
-    #[yaserde(rename = "reasonCode")]
-    pub reason_code: Uint16,
-}
-
-impl Validate for Error {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Event {
-    // The time at which the Event was created.
-    #[yaserde(rename = "creationTime")]
-    pub creation_time: TimeType,
-
-    #[yaserde(rename = "EventStatus")]
-    pub event_status: EventStatus,
-
-    // The period during which the Event applies.
-    #[yaserde(rename = "interval")]
-    pub interval: DateTimeInterval,
-
-    // The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
-
-    // The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: String32,
-
-    // Contains the version number of the object. See the type definition for
-    // details.
-    #[yaserde(rename = "version")]
-    pub version: VersionType,
-
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
-    #[yaserde(attribute, rename = "subscribable")]
-    pub subscribable: Option<SubscribableType>,
-
-    // A reference to the response resource address (URI). Required on a
-    // response to a GET if responseRequired is "true".
-    #[yaserde(attribute, rename = "replyTo")]
-    pub reply_to: Option<String>,
-
-    // Indicates whether or not a response is required upon receipt, creation or
-    // update of this resource. Responses shall be posted to the collection
-    // specified in "replyTo".
-    // If the resource has a deviceCategory field, devices that match one or
-    // more of the device types indicated in deviceCategory SHALL respond
-    // according to the rules listed below. If the category does not match, the
-    // device SHALL NOT respond. If the resource does not have a deviceCategory
-    // field, a device receiving the resource SHALL respond according to the
-    // rules listed below.
-    // Value encoded as hex according to the following bit assignments, any
-    // combination is possible.
-    // See Table 27 for the list of appropriate Response status codes to be sent
-    // for these purposes.
-    // 0 - End device shall indicate that message was received
-    // 1 - End device shall indicate specific response.
-    // 2 - End user / customer response is required.
-    // All other values reserved.
-    #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
-
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl Validate for Event {}
-
-// Current status information relevant to a specific object. The Status object
-// is used to indicate the current status of an Event. Devices can read the
-// containing resource (e.g. TextMessage) to get the most up to date status of
-// the event. Devices can also subscribe to a specific resource instance to get
-// updates when any of its attributes change, including the Status object.
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct EventStatus {
-    // Field representing the current status type.
-    // 0 = Scheduled
-    // This status indicates that the event has been scheduled and the event has
-    // not yet started. The server SHALL set the event to this status when the
-    // event is first scheduled and persist until the event has become active or
-    // has been cancelled. For events with a start time less than or equal to
-    // the current time, this status SHALL never be indicated, the event SHALL
-    // start with a status of “Active”.
-    // 1 = Active
-    // This status indicates that the event is currently active. The server
-    // SHALL set the event to this status when the event reaches its earliest
-    // Effective Start Time.
-    // 2 = Cancelled
-    // When events are cancelled, the Status.dateTime attribute SHALL be set to
-    // the time the cancellation occurred, which cannot be in the future. The
-    // server is responsible for maintaining the cancelled event in its
-    // collection for the duration of the original event, or until the server
-    // has run out of space and needs to store a new event. Client devices SHALL
-    // be aware of Cancelled events, determine if the Cancelled event applies to
-    // them, and cancel the event immediately if applicable.
-    // 3 = Cancelled with Randomization
-    // The server is responsible for maintaining the cancelled event in its
-    // collection for the duration of the Effective Scheduled Period. Client
-    // devices SHALL be aware of Cancelled with Randomization events, determine
-    // if the Cancelled event applies to them, and cancel the event immediately,
-    // using the larger of (absolute value of randomizeStart) and (absolute
-    // value of randomizeDuration) as the end randomization, in seconds. This
-    // Status.type SHALL NOT be used with "regular" Events, only with
-    // specializations of RandomizableEvent.
-    // 4 = Superseded
-    // Events marked as Superseded by servers are events that may have been
-    // replaced by new events from the same program that target the exact same
-    // set of deviceCategory's (if applicable) AND DERControl controls (e.g.,
-    // opModTargetW) (if applicable) and overlap for a given period of time.
-    // Servers SHALL mark an event as Superseded at the earliest Effective Start
-    // Time of the overlapping event. Servers are responsible for maintaining
-    // the Superseded event in their collection for the duration of the
-    // Effective Scheduled Period.
-    // Client devices encountering a Superseded event SHALL terminate execution
-    // of the event immediately and commence execution of the new event
-    // immediately, unless the current time is within the start randomization
-    // window of the superseded event, in which case the client SHALL obey the
-    // start randomization of the new event. This Status.type SHALL NOT be used
-    // with TextMessage, since multiple text messages can be active.
-    // All other values reserved.
-    #[yaserde(rename = "currentStatus")]
-    pub current_status: Uint8,
-
-    // The dateTime attribute will provide a timestamp of when the current
-    // status was defined. dateTime MUST be set to the time at which the status
-    // change occurred, not a time in the future or past.
-    #[yaserde(rename = "dateTime")]
-    pub date_time: TimeType,
-
-    // Set to true by a server of this event if there are events that overlap
-    // this event in time and also overlap in some, but not all,
-    // deviceCategory's (if applicable) AND DERControl controls (e.g.,
-    // opModTargetW) (if applicable) in the same function set instance.
-    #[yaserde(rename = "potentiallySuperseded")]
-    pub potentially_superseded: bool,
-
-    // Indicates the time that the potentiallySuperseded flag was set.
-    #[yaserde(rename = "potentiallySupersededTime")]
-    pub potentially_superseded_time: TimeType,
-
-    // The Reason attribute allows a Service provider to provide a textual
-    // explanation of the status.
-    #[yaserde(rename = "reason")]
-    pub reason: String192,
-}
-
-impl Validate for EventStatus {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct RandomizableEvent {
-    // Number of seconds boundary inside which a random value must be selected
-    // to be applied to the associated interval duration, to avoid sudden
-    // synchronized demand changes. If related to price level changes, sign may
-    // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
-    // default.
-    #[yaserde(rename = "randomizeDuration")]
-    pub randomize_duration: OneHourRangeType,
-
-    // Number of seconds boundary inside which a random value must be selected
-    // to be applied to the associated interval start time, to avoid sudden
-    // synchronized demand changes. If related to price level changes, sign may
-    // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
-    // default.
-    #[yaserde(rename = "randomizeStart")]
-    pub randomize_start: OneHourRangeType,
-
-    // The time at which the Event was created.
-    #[yaserde(rename = "creationTime")]
-    pub creation_time: TimeType,
-
-    #[yaserde(rename = "EventStatus")]
-    pub event_status: EventStatus,
-
-    // The period during which the Event applies.
-    #[yaserde(rename = "interval")]
-    pub interval: DateTimeInterval,
-
-    // The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
-
-    // The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: String32,
-
-    // Contains the version number of the object. See the type definition for
-    // details.
-    #[yaserde(rename = "version")]
-    pub version: VersionType,
-
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
-    #[yaserde(attribute, rename = "subscribable")]
-    pub subscribable: Option<SubscribableType>,
-
-    // A reference to the response resource address (URI). Required on a
-    // response to a GET if responseRequired is "true".
-    #[yaserde(attribute, rename = "replyTo")]
-    pub reply_to: Option<String>,
-
-    // Indicates whether or not a response is required upon receipt, creation or
-    // update of this resource. Responses shall be posted to the collection
-    // specified in "replyTo".
-    // If the resource has a deviceCategory field, devices that match one or
-    // more of the device types indicated in deviceCategory SHALL respond
-    // according to the rules listed below. If the category does not match, the
-    // device SHALL NOT respond. If the resource does not have a deviceCategory
-    // field, a device receiving the resource SHALL respond according to the
-    // rules listed below.
-    // Value encoded as hex according to the following bit assignments, any
-    // combination is possible.
-    // See Table 27 for the list of appropriate Response status codes to be sent
-    // for these purposes.
-    // 0 - End device shall indicate that message was received
-    // 1 - End device shall indicate specific response.
-    // 2 - End user / customer response is required.
-    // All other values reserved.
-    #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
-
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl Validate for RandomizableEvent {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7441,11 +9344,13 @@ pub struct AccumulationBehaviourType {}
 
 impl Validate for AccumulationBehaviourType {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ApplianceLoadReductionType {}
 
 impl Validate for ApplianceLoadReductionType {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7453,11 +9358,13 @@ pub struct CommodityType {}
 
 impl Validate for CommodityType {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ConsumptionBlockType {}
 
 impl Validate for ConsumptionBlockType {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7465,11 +9372,13 @@ pub struct CurrencyCode {}
 
 impl Validate for CurrencyCode {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DataQualifierType {}
 
 impl Validate for DataQualifierType {}
+
 
 // Interval of date and time.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7486,11 +9395,13 @@ pub struct DateTimeInterval {
 
 impl Validate for DateTimeInterval {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DeviceCategoryType {}
 
 impl Validate for DeviceCategoryType {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7498,11 +9409,13 @@ pub struct DstRuleType {}
 
 impl Validate for DstRuleType {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FlowDirectionType {}
 
 impl Validate for FlowDirectionType {}
+
 
 // Specifies a GPS location, expressed in WGS 84 coordinates.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7521,11 +9434,13 @@ pub struct GpslocationType {
 
 impl Validate for GpslocationType {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct KindType {}
 
 impl Validate for KindType {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7533,11 +9448,13 @@ pub struct LocaleType {}
 
 impl Validate for LocaleType {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Mridtype {}
 
 impl Validate for Mridtype {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7545,11 +9462,13 @@ pub struct OneHourRangeType {}
 
 impl Validate for OneHourRangeType {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Pentype {}
 
 impl Validate for Pentype {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7557,11 +9476,13 @@ pub struct PerCent {}
 
 impl Validate for PerCent {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PhaseCode {}
 
 impl Validate for PhaseCode {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7569,17 +9490,20 @@ pub struct Pintype {}
 
 impl Validate for Pintype {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PowerOfTenMultiplierType {}
 
 impl Validate for PowerOfTenMultiplierType {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PrimacyType {}
 
 impl Validate for PrimacyType {}
+
 
 // Real electrical energy
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7596,11 +9520,13 @@ pub struct RealEnergy {
 
 impl Validate for RealEnergy {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RoleFlagsType {}
 
 impl Validate for RoleFlagsType {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7608,17 +9534,20 @@ pub struct ServiceKind {}
 
 impl Validate for ServiceKind {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Sfditype {}
 
 impl Validate for Sfditype {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SignedPerCent {}
 
 impl Validate for SignedPerCent {}
+
 
 // Real electrical energy, signed.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7635,6 +9564,7 @@ pub struct SignedRealEnergy {
 
 impl Validate for SignedRealEnergy {}
 
+
 // The subscribable values.
 // 0 - Resource does not support subscriptions
 // 1 - Resource supports non-conditional subscriptions
@@ -7642,7 +9572,7 @@ impl Validate for SignedRealEnergy {}
 // 3 - Resource supports both conditional and non-conditional subscriptions
 // All other values reserved.
 #[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct SubscribableType(pub Uint8);
+pub struct SubscribableType (pub Uint8);
 
 impl Validate for SubscribableType {}
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7651,11 +9581,13 @@ pub struct TimeOffsetType {}
 
 impl Validate for TimeOffsetType {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TimeType {}
 
 impl Validate for TimeType {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7663,11 +9595,13 @@ pub struct Toutype {}
 
 impl Validate for Toutype {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct UnitType {}
 
 impl Validate for UnitType {}
+
 
 // Type for specification of a specific value, with units and power of ten
 // multiplier.
@@ -7689,11 +9623,13 @@ pub struct UnitValueType {
 
 impl Validate for UnitValueType {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct UomType {}
 
 impl Validate for UomType {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7701,338 +9637,7 @@ pub struct VersionType {}
 
 impl Validate for VersionType {}
 
-// An 8-bit field encoded as a hex string (2 hex characters). Where applicable,
-// bit 0, or the least significant bit, goes on the right. Note that hexBinary
-// requires pairs of hex characters, so an odd number of characters requires a
-// leading "0".
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct HexBinary8(pub String);
 
-impl Validate for HexBinary8 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 1 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 1 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// A 16-bit field encoded as a hex string (4 hex characters max). Where
-// applicable, bit 0, or the least significant bit, goes on the right. Note that
-// hexBinary requires pairs of hex characters, so an odd number of characters
-// requires a leading "0".
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct HexBinary16(pub String);
-
-impl Validate for HexBinary16 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 2 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 2 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// A 32-bit field encoded as a hex string (8 hex characters max). Where
-// applicable, bit 0, or the least significant bit, goes on the right. Note that
-// hexBinary requires pairs of hex characters, so an odd number of characters
-// requires a leading "0".
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct HexBinary32(pub String);
-
-impl Validate for HexBinary32 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 4 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 4 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// A 48-bit field encoded as a hex string (12 hex characters max). Where
-// applicable, bit 0, or the least significant bit, goes on the right. Note that
-// hexBinary requires pairs of hex characters, so an odd number of characters
-// requires a leading "0".
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct HexBinary48(pub String);
-
-impl Validate for HexBinary48 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 6 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 6 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// A 64-bit field encoded as a hex string (16 hex characters max). Where
-// applicable, bit 0, or the least significant bit, goes on the right. Note that
-// hexBinary requires pairs of hex characters, so an odd number of characters
-// requires a leading "0".
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct HexBinary64(pub String);
-
-impl Validate for HexBinary64 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 8 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 8 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// A 128-bit field encoded as a hex string (32 hex characters max). Where
-// applicable, bit 0, or the least significant bit, goes on the right. Note that
-// hexBinary requires pairs of hex characters, so an odd number of characters
-// requires a leading "0".
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct HexBinary128(pub String);
-
-impl Validate for HexBinary128 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 16 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 16 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// A 160-bit field encoded as a hex string (40 hex characters max). Where
-// applicable, bit 0, or the least significant bit, goes on the right. Note that
-// hexBinary requires pairs of hex characters, so an odd number of characters
-// requires a leading "0".
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct HexBinary160(pub String);
-
-impl Validate for HexBinary160 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 20 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 20 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// Character string of max length 6. In order to limit internal storage,
-// implementations SHALL reduce the length of strings using multi-byte
-// characters so that the string may be stored using "maxLength" octets in the
-// given encoding.
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct String6(pub String);
-
-impl Validate for String6 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 6 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 6 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// Character string of max length 16. In order to limit internal storage,
-// implementations SHALL reduce the length of strings using multi-byte
-// characters so that the string may be stored using "maxLength" octets in the
-// given encoding.
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct String16(pub String);
-
-impl Validate for String16 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 16 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 16 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// Character string of max length 20. In order to limit internal storage,
-// implementations SHALL reduce the length of strings using multi-byte
-// characters so that the string may be stored using "maxLength" octets in the
-// given encoding.
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct String20(pub String);
-
-impl Validate for String20 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 20 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 20 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// Character string of max length 32. In order to limit internal storage,
-// implementations SHALL reduce the length of strings using multi-byte
-// characters so that the string may be stored using "maxLength" octets in the
-// given encoding.
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct String32(pub String);
-
-impl Validate for String32 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 32 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 32 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// Character string of max length 42. In order to limit internal storage,
-// implementations SHALL reduce the length of strings using multi-byte
-// characters so that the string may be stored using "maxLength" octets in the
-// given encoding.
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct String42(pub String);
-
-impl Validate for String42 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 42 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 42 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// Character string of max length 192. For all string types, in order to limit
-// internal storage, implementations SHALL reduce the length of strings using
-// multi-byte characters so that the string may be stored using "maxLength"
-// octets in the given encoding.
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct String192(pub String);
-
-impl Validate for String192 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0.len() > 192 {
-            return Err(format!(
-                "MaxLength validation error. \nExpected: 0 length <= 192 \nActual: 0 length == {}",
-                self.0.len()
-            ));
-        }
-        Ok(())
-    }
-}
-
-// Unsigned integer, max inclusive 255 (2^8-1)
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct Uint8(pub u8);
-
-impl Validate for Uint8 {}
-// Unsigned integer, max inclusive 65535 (2^16-1)
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct Uint16(pub u16);
-
-impl Validate for Uint16 {}
-// Unsigned integer, max inclusive 4294967295 (2^32-1)
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct Uint32(pub u32);
-
-impl Validate for Uint32 {}
-// Unsigned integer, max inclusive 1099511627775 (2^40-1)
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct Uint40(pub u64);
-
-impl Validate for Uint40 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0 > "281474976710655".parse::<u64>().unwrap() {
-            return Err(format!("MaxInclusive validation error: invalid value of 0! \nExpected: 0 <= 281474976710655.\nActual: 0 == {}", self.0));
-        }
-        Ok(())
-    }
-}
-
-// Unsigned integer, max inclusive 281474976710655 (2^48-1)
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct Uint48(pub u64);
-
-impl Validate for Uint48 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0 > "281474976710655".parse::<u64>().unwrap() {
-            return Err(format!("MaxInclusive validation error: invalid value of 0! \nExpected: 0 <= 281474976710655.\nActual: 0 == {}", self.0));
-        }
-        Ok(())
-    }
-}
-
-// Unsigned integer, max inclusive 18446744073709551615 (2^64-1)
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct Uint64(pub u64);
-
-impl Validate for Uint64 {}
-// Signed integer, min -128 max +127
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct Int8(pub i8);
-
-impl Validate for Int8 {}
-// Signed integer, min -32768 max +32767
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct Int16(pub i16);
-
-impl Validate for Int16 {}
-// Signed integer, max inclusive 2147483647 (2^31), min inclusive -2147483647
-// (same as xs:int)
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct Int32(pub i32);
-
-impl Validate for Int32 {}
-// Signed integer, max inclusive 140737488355328 (2^47), min inclusive
-// -140737488355328
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct Int48(pub i64);
-
-impl Validate for Int48 {
-    fn validate(&self) -> Result<(), String> {
-        if self.0 > "140737488355328".parse::<i64>().unwrap() {
-            return Err(format!("MaxInclusive validation error: invalid value of 0! \nExpected: 0 <= 140737488355328.\nActual: 0 == {}", self.0));
-        }
-        if self.0 < "-140737488355328".parse::<i64>().unwrap() {
-            return Err(format!("MinInclusive validation error: invalid value of 0! \nExpected: 0 >= -140737488355328.\nActual: 0 == {}", self.0));
-        }
-        Ok(())
-    }
-}
-
-// Signed integer, max inclusive 9223372036854775807 (2^63), min inclusive
-// -9223372036854775808 (same as xs:long)
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct Int64(pub i64);
-
-impl Validate for Int64 {}
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MirrorMeterReading {
@@ -8052,9 +9657,28 @@ pub struct MirrorMeterReading {
 
     #[yaserde(rename = "ReadingType")]
     pub reading_type: ReadingType,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for MirrorMeterReading {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -8079,9 +9703,17 @@ pub struct MirrorMeterReadingList {
 
 impl Validate for MirrorMeterReadingList {}
 
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct MeterReadingBase {
+pub struct MirrorReadingSet {
+    #[yaserde(rename = "Reading")]
+    pub reading: Vec<Reading>,
+
+    // Specifies the time range during which the contained readings were taken.
+    #[yaserde(rename = "timePeriod")]
+    pub time_period: DateTimeInterval,
+
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub m_rid: Mridtype,
@@ -8101,20 +9733,8 @@ pub struct MeterReadingBase {
     pub href: Option<String>,
 }
 
-impl Validate for MeterReadingBase {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct MirrorReadingSet {
-    #[yaserde(rename = "Reading")]
-    pub reading: Vec<Reading>,
-
-    // Specifies the time range during which the contained readings were taken.
-    #[yaserde(rename = "timePeriod")]
-    pub time_period: DateTimeInterval,
-}
-
 impl Validate for MirrorReadingSet {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -8145,9 +9765,28 @@ pub struct MirrorUsagePoint {
     // 1 = on
     #[yaserde(rename = "status")]
     pub status: Uint8,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: String32,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: VersionType,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
 }
 
 impl Validate for MirrorUsagePoint {}
+
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -8179,120 +9818,6 @@ pub struct MirrorUsagePointList {
 
 impl Validate for MirrorUsagePointList {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct ReadingBase {
-    // Indicates the consumption block related to the reading. REQUIRED if
-    // ReadingType numberOfConsumptionBlocks is non-zero. If not specified, is
-    // assumed to be "0 - N/A".
-    #[yaserde(rename = "consumptionBlock")]
-    pub consumption_block: ConsumptionBlockType,
-
-    // List of codes indicating the quality of the reading, using specification:
-    // Bit 0 - valid: data that has gone through all required validation checks
-    // and either passed them all or has been verified
-    // Bit 1 - manually edited: Replaced or approved by a human
-    // Bit 2 - estimated using reference day: data value was replaced by a
-    // machine computed value based on analysis of historical data using the
-    // same type of measurement.
-    // Bit 3 - estimated using linear interpolation: data value was computed
-    // using linear interpolation based on the readings before and after it
-    // Bit 4 - questionable: data that has failed one or more checks
-    // Bit 5 - derived: data that has been calculated (using logic or
-    // mathematical operations), not necessarily measured directly
-    // Bit 6 - projected (forecast): data that has been calculated as a
-    // projection or forecast of future readings
-    #[yaserde(rename = "qualityFlags")]
-    pub quality_flags: HexBinary16,
-
-    // The time interval associated with the reading. If not specified, then
-    // defaults to the intervalLength specified in the associated ReadingType.
-    #[yaserde(rename = "timePeriod")]
-    pub time_period: DateTimeInterval,
-
-    // Indicates the time of use tier related to the reading. REQUIRED if
-    // ReadingType numberOfTouTiers is non-zero. If not specified, is assumed to
-    // be "0 - N/A".
-    #[yaserde(rename = "touTier")]
-    pub tou_tier: Toutype,
-
-    // Value in units specified by ReadingType
-    #[yaserde(rename = "value")]
-    pub value: Int48,
-
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl Validate for ReadingBase {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct ReadingSetBase {
-    // Specifies the time range during which the contained readings were taken.
-    #[yaserde(rename = "timePeriod")]
-    pub time_period: DateTimeInterval,
-
-    // The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
-
-    // The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: String32,
-
-    // Contains the version number of the object. See the type definition for
-    // details.
-    #[yaserde(rename = "version")]
-    pub version: VersionType,
-
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl Validate for ReadingSetBase {}
-
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct UsagePointBase {
-    // Specifies the roles that apply to the usage point.
-    #[yaserde(rename = "roleFlags")]
-    pub role_flags: RoleFlagsType,
-
-    // The kind of service provided by this usage point.
-    #[yaserde(rename = "serviceCategoryKind")]
-    pub service_category_kind: ServiceKind,
-
-    // Specifies the current status of the service at this usage point.
-    // 0 = off
-    // 1 = on
-    #[yaserde(rename = "status")]
-    pub status: Uint8,
-
-    // The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
-
-    // The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: String32,
-
-    // Contains the version number of the object. See the type definition for
-    // details.
-    #[yaserde(rename = "version")]
-    pub version: VersionType,
-
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl Validate for UsagePointBase {}
 
 // pub type DeviceCapability = DeviceCapability;
 // pub type AbstractDevice = AbstractDevice;
