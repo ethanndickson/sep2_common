@@ -1,8 +1,10 @@
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
-
+// Types should eventually be put in a module corresponding to their package
+use bitflags::bitflags;
 use std::str::FromStr;
 use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
 use xsd_parser::generator::validator::Validate;
+use yaserde::{YaDeserialize, YaSerialize};
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
 // An 8-bit field encoded as a hex string (2 hex characters). Where applicable,
@@ -252,6 +254,7 @@ impl Validate for String192 {
     }
 }
 
+// TODO: These can likely be made type aliases, not newtypes
 // Unsigned integer, max inclusive 255 (2^8-1)
 #[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Uint8(pub u8);
@@ -5846,6 +5849,7 @@ impl Validate for PrepaymentList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
 pub enum PrepayModeType {
     #[default]
     CentralWallet = 0,
@@ -5948,6 +5952,7 @@ impl Validate for SupplyInterruptionOverrideList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
 pub enum CreditStatusType {
     #[default]
     Ok = 0,
@@ -5961,6 +5966,7 @@ impl Validate for CreditStatusType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
 pub enum CreditTypeType {
     #[default]
     Regular = 0,
@@ -6605,6 +6611,7 @@ impl Validate for Dersettings {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
 pub enum Dertype {
     // Not applicable / Unknown
     #[default]
@@ -7193,9 +7200,60 @@ pub struct DercontrolList {
 
 impl Validate for DercontrolList {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DercontrolType {}
+bitflags! {
+    #[derive(Default, PartialEq, Debug)]
+    pub struct DercontrolType: u32 {
+        const ChargeMode = 1;
+        const DischargeMode = 2;
+        const OpModConnect = 4;
+        const OpModEnergize = 8;
+        const OpModFixedPFAbsorbW = 16;
+        const OpModFixedPFInjectW = 32;
+        const OpModFixedVar = 64;
+        const OpModFixedW = 128;
+        const OpModFreqDroop = 256;
+        const OpModFreqWatt = 512;
+        const OpModHFRTMayTrip = 1024;
+        const OpModHFRTMustTrip = 2048;
+        const OpModHVRTMayTrip = 4096;
+        const OpModHVRTMomentaryCessation = 8192;
+        const OpModHVRTMustTrip = 16384;
+        const OpModLFRTMayTrip = 32768;
+    }
+}
+
+// TODO: Implement this properly
+impl YaSerialize for DercontrolType {
+    fn serialize<W: std::io::Write>(
+        &self,
+        writer: &mut yaserde::ser::Serializer<W>,
+    ) -> Result<(), String> {
+        let _ = writer.write(xml::writer::XmlEvent::Characters(&self.bits().to_string()));
+        Ok(())
+    }
+
+    fn serialize_attributes(
+        &self,
+        attributes: Vec<xml::attribute::OwnedAttribute>,
+        namespace: xml::namespace::Namespace,
+    ) -> Result<
+        (
+            Vec<xml::attribute::OwnedAttribute>,
+            xml::namespace::Namespace,
+        ),
+        String,
+    > {
+        todo!()
+    }
+}
+// TODO: Implement this properly
+impl YaDeserialize for DercontrolType {
+    fn deserialize<R: std::io::Read>(
+        reader: &mut yaserde::de::Deserializer<R>,
+    ) -> Result<Self, String> {
+        todo!()
+    }
+}
 
 impl Validate for DercontrolType {}
 
@@ -7359,7 +7417,25 @@ impl Validate for CurveData {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DercurveType {}
+#[repr(u8)]
+pub enum DercurveType {
+    #[default]
+    OpModFreqWatt = 0, // (Frequency-Watt Curve Mode)
+    OpModHfrtmayTrip = 1,  // (High Frequency Ride Through, May Trip Mode)
+    OpModHfrtmustTrip = 2, // High Frequency Ride Through, Must Trip Mode)
+    OpModHvrtmayTrip = 3,  // (High Voltage Ride Through, May Trip Mode)
+    OpModHvrtmomentaryCessation = 4, // (High Voltage Ride Through, Momentary Cessation Mode)
+    OpModHvrtmustTrip = 5, // (High Voltage Ride Through, Must Trip Mode)
+    OpModLfrtmayTrip = 6,  // (Low Frequency Ride Through, May Trip Mode)
+    OpModLfrtmustTrip = 7, // (Low Frequency Ride Through, Must Trip Mode)
+    OpModLvrtmayTrip = 8,  // (Low Voltage Ride Through, May Trip Mode)
+    OpModLvrtmomentaryCessation = 9, // (Low Voltage Ride Through, Momentary Cessation Mode)
+    OpModLvrtmustTrip = 10, // (Low Voltage Ride Through, Must Trip Mode)
+    OpModVoltVar = 11,     // (Volt-Var Mode)
+    OpModVoltWatt = 12,    // (Volt-Watt Mode)
+    OpModWattPf = 13,      // (Watt-PowerFactor Mode)
+    OpModWattVar = 14,     // (Watt-Var Mode)
+}
 
 impl Validate for DercurveType {}
 
@@ -7524,7 +7600,20 @@ impl Validate for Derstatus {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DerunitRefType {}
+#[repr(u8)]
+pub enum DerunitRefType {
+    // Specifies context for interpreting percent values:
+    #[default]
+    NotApplicable = 0,
+    SetMaxW = 1,
+    SetMaxVar = 2,
+    StatVarAvail = 3,
+    SetEffectiveV = 4,
+    SetMaxChargeRateW = 5,
+    SetMaxDischargeRateW = 6,
+    StatWAvail = 7,
+    // 8-255 Reserved
+}
 
 impl Validate for DerunitRefType {}
 
@@ -9187,46 +9276,117 @@ impl Validate for UsagePointListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct AccumulationBehaviourType {}
+#[repr(u8)]
+pub enum AccumulationBehaviourType {
+    #[default]
+    // (default, if not specified)
+    NotApplicable = 0,
+    // The sum of the previous billing period values. Note: “Cumulative” is commonly used in conjunction with “demand.” Each demand reset causes the maximum demand value for the present billing period (since the last demand reset) to accumulate as an accumulative total of all maximum demands. So instead of “zeroing” the demand register, a demand reset has the affect of adding the present maximum demand to this accumulating total.
+    Cumulative = 3,
+    // The difference between the value at the end of the prescribed interval and the beginning of the interval. This is used for incremental interval data.
+    // Note: One common application would be for load profile data, another use might be to report the number of events within an interval (such as the number of equipment energizations within the specified period of time.)
+    DeltaData = 4,
+    // As if a needle is swung out on the meter face to a value to indicate the current value. (Note: An “indicating” value is typically measured over hundreds of milliseconds or greater, or may imply a “pusher” mechanism to capture a value. Compare this to “instantaneous” which is measured over a shorter period of time.)
+    Indicating = 6,
+    // A form of accumulation which is selective with respect to time.
+    // Note : “Summation” could be considered a specialization of “Bulk Quantity” according to the rules of inheritance where “Summation” selectively accumulates pulses over a timing pattern, and “BulkQuantity” accumulates pulses all of the time.
+    Summation = 9,
+    // Typically measured over the fastest period of time allowed by the definition of the metric (usually milliseconds or tens of milliseconds.) (Note: “Instantaneous” was moved to attribute #3 in 61968-9Ed2 from attribute #1 in 61968-9Ed1.)
+    Instantaneous = 12,
+    // ALL OTHERS RESERVED
+}
 
 impl Validate for AccumulationBehaviourType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
 pub enum ApplianceLoadReductionType {
     #[default]
-    NotApplicable = 0,
-    Cumulative = 3,
-    DeltaData = 4,
-    Indicating = 6,
-    Summation = 9,
-    Instantaneous = 12,
-    // ALL OTHERS RESERVED
+    // Parameter requesting the appliance to respond by providing a moderate load reduction for the duration of a delay period.  Typically referring to a “non-emergency” event in which appliances can continue operating if already in a load consuming period.
+    DelayApplianceLoad = 0,
+    TemporaryApplianceLoadReduction = 1,
+    // 2-255 reserved
+    // * Full definition of how appliances react when receiving each parameter is document in the EPA document - ENERGY STAR® Program Requirements, Product Specification for Residential Refrigerators and Freezers, Eligibility Criteria 5, Draft 2 Version 5.0.
 }
 
 impl Validate for ApplianceLoadReductionType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct CommodityType {}
+pub enum CommodityType {
+    #[default]
+    NotApplicable = 0, // (default, if not specified)
+    ElectricitySecondaryMetered = 1, // metered value (a premises meter is typically on the low voltage, or secondary, side of a service transformer)
+    ElectricityPrimaryMetered = 2, // metered value (measured on the high voltage, or primary, side of the service transformer)
+    Air = 4,
+    NaturalGas = 7,
+    Propane = 8,
+    PotableWater = 9,
+    Steam = 10,
+    WasteWater = 11,
+    HeatingFluid = 12,
+    CoolingFluid = 13,
+    // All other values reserved
+}
 
 impl Validate for CommodityType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct ConsumptionBlockType {}
+#[repr(u8)]
+pub enum ConsumptionBlockType {
+    #[default]
+    NotApplicable = 0,
+    Block1 = 1,
+    Block2 = 2,
+    Block3 = 3,
+    Block4 = 4,
+    Block5 = 5,
+    Block6 = 6,
+    Block7 = 7,
+    Block8 = 8,
+    Block9 = 9,
+    Block10 = 10,
+    Block11 = 11,
+    Block12 = 12,
+    Block13 = 13,
+    Block14 = 14,
+    Block15 = 15,
+    Block16 = 16,
+    // 17-255 RESERVED
+}
 
 impl Validate for ConsumptionBlockType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct CurrencyCode {}
+#[repr(u16)]
+pub enum CurrencyCode {
+    // Follows codes defind in ISO 4217
+    #[default]
+    NotApplicable = 0,
+    AUD = 36,
+    CAD = 124,
+    USD = 840,
+    EUR = 978,
+}
 
 impl Validate for CurrencyCode {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DataQualifierType {}
+#[repr(u8)]
+pub enum DataQualifierType {
+    #[default]
+    NotApplicable = 0,
+    Average = 2,
+    Maximum = 8,
+    Minimum = 9,
+    Normal = 12,
+    StandardDeviationOfPopulation = 29,
+    StandardDeviationOfSample = 30,
+}
 
 impl Validate for DataQualifierType {}
 
@@ -9245,9 +9405,68 @@ pub struct DateTimeInterval {
 
 impl Validate for DateTimeInterval {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DeviceCategoryType {}
+bitflags! {
+    #[derive(Default, PartialEq, Debug)]
+    // #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+    pub struct DeviceCategoryType: u32 {
+        const ProgrammableCommunicatingThermostat = 1;
+        const StripHeaters = 2;
+        const BaseboardHeaters = 4;
+        const WaterHeater = 8;
+        const PoolPump = 16;
+        const Sauna = 32;
+        const HotTub = 64;
+        const SmartAppliance = 128;
+        const IrrigationPump = 256;
+        const ManagedCommercialAndIndustrialLoads = 512;
+        const SimpleMiscLoads = 1024;
+        const ExteriorLighting = 2048;
+        const InteriorLighting = 4096;
+        const LoadControlSwitch = 8192;
+        const Energy_managementSystem = 16384;
+        const SmartEnergyModule = 65536;
+        const ElectricVehicle = 262144;
+        const VirutalOrMixedDer = 524288;
+        const ReciprocatingEngine = 2097152;
+        const PhotovoltaicSystem = 8388608;
+        const CombinedPvAndStorage = 16777216;
+        const OtherGenerationSystem = 33554432;
+        const OtherStorageSystem = 67108864;
+    }
+}
+
+// TODO: Implement this properly
+impl YaSerialize for DeviceCategoryType {
+    fn serialize<W: std::io::Write>(
+        &self,
+        writer: &mut yaserde::ser::Serializer<W>,
+    ) -> Result<(), String> {
+        let _ = writer.write(xml::writer::XmlEvent::Characters(&self.bits().to_string()));
+        Ok(())
+    }
+
+    fn serialize_attributes(
+        &self,
+        attributes: Vec<xml::attribute::OwnedAttribute>,
+        namespace: xml::namespace::Namespace,
+    ) -> Result<
+        (
+            Vec<xml::attribute::OwnedAttribute>,
+            xml::namespace::Namespace,
+        ),
+        String,
+    > {
+        todo!()
+    }
+}
+// TODO: Implement this properly
+impl YaDeserialize for DeviceCategoryType {
+    fn deserialize<R: std::io::Read>(
+        reader: &mut yaserde::de::Deserializer<R>,
+    ) -> Result<Self, String> {
+        todo!()
+    }
+}
 
 impl Validate for DeviceCategoryType {}
 
@@ -9259,7 +9478,13 @@ impl Validate for DstRuleType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct FlowDirectionType {}
+#[repr(u8)]
+pub enum FlowDirectionType {
+    #[default]
+    NotApplicable = 0,
+    Forward = 1,  // delivered to customer
+    Reverse = 19, // received from customer
+}
 
 impl Validate for FlowDirectionType {}
 
@@ -9282,7 +9507,15 @@ impl Validate for GpslocationType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct KindType {}
+#[repr(u8)]
+pub enum KindType {
+    #[default]
+    NotApplicable = 0,
+    Currency = 3,
+    Demand = 8,
+    Energy = 12,
+    Power = 37,
+}
 
 impl Validate for KindType {}
 
@@ -9318,7 +9551,22 @@ impl Validate for PerCent {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct PhaseCode {}
+#[repr(u8)]
+pub enum PhaseCode {
+    #[default]
+    NotApplicable = 0,
+    PhaseC = 32,  // and S2
+    PhaseCN = 33, // and S2N
+    PhaseCA = 40,
+    PhaseB = 64,
+    PhaseBN = 65,
+    PhaseBC = 66,
+    PhaseA = 128,  // and S1
+    PhaseAN = 129, // and S1N
+    PhaseAB = 132,
+    PhaseABC = 224,
+    // ALL OTHERS RESERVED
+}
 
 impl Validate for PhaseCode {}
 
@@ -9418,13 +9666,48 @@ impl Validate for TimeType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Toutype {}
+#[repr(u8)]
+pub enum Toutype {
+    #[default]
+    NotApplicable = 0,
+    TouA = 1,
+    TouB = 2,
+    TouC = 3,
+    TouD = 4,
+    TouE = 5,
+    TouF = 6,
+    TouG = 7,
+    TouH = 8,
+    TouI = 9,
+    TouJ = 10,
+    TouK = 11,
+    TouL = 12,
+    TouM = 13,
+    TouN = 14,
+    TouO = 15,
+}
 
 impl Validate for Toutype {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct UnitType {}
+#[repr(u8)]
+pub enum UnitType {
+    #[default]
+    kWh = 0,
+    kW = 1,
+    Watts = 2,
+    CubicMeters = 3,
+    CubicFeet = 4,
+    USGallons = 5,
+    ImperialGallons = 6,
+    BTU = 7,
+    Liters = 8,
+    kPAGauge = 9,
+    kPAAbsolute = 10,
+    Megajoule = 11,
+    Unitless = 12,
+}
 
 impl Validate for UnitType {}
 
@@ -9450,7 +9733,42 @@ impl Validate for UnitValueType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct UomType {}
+#[repr(u8)]
+pub enum UomType {
+    #[default]
+    NotApplicable = 0,
+    Amperes = 5,
+    Kelvin = 6,
+    DegreesCelsius = 23,
+    Voltage = 29,
+    Joule = 31,
+    Hz = 33,
+    W = 38,
+    MtrCubed = 42,
+    VA = 61,
+    VAr = 63,
+    CosTheta = 65,
+    VSquared = 67,
+    ASquared = 69,
+    VAh = 71,
+    Wh = 72,
+    VArh = 73,
+    Ah = 106,
+    FtCubed = 119,
+    FtCubedPerHour = 122,
+    MCubedPerHour = 125,
+    USGallons = 128,
+    UGGallonsPerHour = 129,
+    ImperialGallons = 130,
+    ImperialGallonsPerHour = 131,
+    BTU = 132,
+    BTUPerHour = 133,
+    Liter = 134,
+    LiterPerHour = 137,
+    PAGauge = 140,
+    PAAbsolute = 155,
+    Therm = 169,
+}
 
 impl Validate for UomType {}
 
