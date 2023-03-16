@@ -1,10 +1,8 @@
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 // Types should eventually be put in a module corresponding to their package
-use bitflags::bitflags;
 use std::str::FromStr;
 use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
 use xsd_parser::generator::validator::Validate;
-use yaserde::{YaDeserialize, YaSerialize};
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
 // An 8-bit field encoded as a hex string (2 hex characters). Where applicable,
@@ -366,7 +364,7 @@ pub struct Response {
     // FunctionSetAssignment exists, the time of the server where the event
     // resource was hosted.
     #[yaserde(rename = "createdDateTime")]
-    pub created_date_time: TimeType,
+    pub created_date_time: Option<TimeType>,
 
     // Contains the LFDI of the device providing the response.
     #[yaserde(rename = "endDeviceLFDI")]
@@ -379,7 +377,7 @@ pub struct Response {
     // field value definitions are defined in Table 27: Response Types by
     // Function Set.
     #[yaserde(rename = "status")]
-    pub status: Uint8,
+    pub status: Option<Uint8>,
 
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
@@ -451,12 +449,12 @@ pub struct IdentifiedObject {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -511,12 +509,12 @@ pub struct RespondableIdentifiedObject {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the response resource address (URI). Required on a
     // response to a GET if responseRequired is "true".
@@ -560,12 +558,12 @@ pub struct RespondableSubscribableIdentifiedObject {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -657,7 +655,7 @@ pub struct Error {
     // Contains the number of seconds the client SHOULD wait before retrying the
     // request.
     #[yaserde(rename = "maxRetryDuration")]
-    pub max_retry_duration: Uint16,
+    pub max_retry_duration: Option<Uint16>,
 
     // Code indicating the reason for failure.
     // 0 - Invalid request format
@@ -743,12 +741,12 @@ pub struct EventStatus {
 
     // Indicates the time that the potentiallySuperseded flag was set.
     #[yaserde(rename = "potentiallySupersededTime")]
-    pub potentially_superseded_time: TimeType,
+    pub potentially_superseded_time: Option<TimeType>,
 
     // The Reason attribute allows a Service provider to provide a textual
     // explanation of the status.
     #[yaserde(rename = "reason")]
-    pub reason: String192,
+    pub reason: Option<String192>,
 }
 
 impl Validate for EventStatus {}
@@ -773,12 +771,12 @@ pub struct Event {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -828,7 +826,7 @@ pub struct RandomizableEvent {
     // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
     // default.
     #[yaserde(rename = "randomizeDuration")]
-    pub randomize_duration: OneHourRangeType,
+    pub randomize_duration: Option<OneHourRangeType>,
 
     // Number of seconds boundary inside which a random value must be selected
     // to be applied to the associated interval start time, to avoid sudden
@@ -836,7 +834,7 @@ pub struct RandomizableEvent {
     // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
     // default.
     #[yaserde(rename = "randomizeStart")]
-    pub randomize_start: OneHourRangeType,
+    pub randomize_start: Option<OneHourRangeType>,
 
     // The time at which the Event was created.
     #[yaserde(rename = "creationTime")]
@@ -855,12 +853,12 @@ pub struct RandomizableEvent {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -910,12 +908,12 @@ pub struct SubscribableIdentifiedObject {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -935,34 +933,34 @@ impl Validate for SubscribableIdentifiedObject {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FunctionSetAssignmentsBase {
     #[yaserde(rename = "CustomerAccountListLink")]
-    pub customer_account_list_link: CustomerAccountListLink,
+    pub customer_account_list_link: Option<CustomerAccountListLink>,
 
     #[yaserde(rename = "DemandResponseProgramListLink")]
-    pub demand_response_program_list_link: DemandResponseProgramListLink,
+    pub demand_response_program_list_link: Option<DemandResponseProgramListLink>,
 
     #[yaserde(rename = "DERProgramListLink")]
-    pub der_program_list_link: DerprogramListLink,
+    pub der_program_list_link: Option<DerprogramListLink>,
 
     #[yaserde(rename = "FileListLink")]
-    pub file_list_link: FileListLink,
+    pub file_list_link: Option<FileListLink>,
 
     #[yaserde(rename = "MessagingProgramListLink")]
-    pub messaging_program_list_link: MessagingProgramListLink,
+    pub messaging_program_list_link: Option<MessagingProgramListLink>,
 
     #[yaserde(rename = "PrepaymentListLink")]
-    pub prepayment_list_link: PrepaymentListLink,
+    pub prepayment_list_link: Option<PrepaymentListLink>,
 
     #[yaserde(rename = "ResponseSetListLink")]
-    pub response_set_list_link: ResponseSetListLink,
+    pub response_set_list_link: Option<ResponseSetListLink>,
 
     #[yaserde(rename = "TariffProfileListLink")]
-    pub tariff_profile_list_link: TariffProfileListLink,
+    pub tariff_profile_list_link: Option<TariffProfileListLink>,
 
     #[yaserde(rename = "TimeLink")]
-    pub time_link: TimeLink,
+    pub time_link: Option<TimeLink>,
 
     #[yaserde(rename = "UsagePointListLink")]
-    pub usage_point_list_link: UsagePointListLink,
+    pub usage_point_list_link: Option<UsagePointListLink>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -976,13 +974,13 @@ impl Validate for FunctionSetAssignmentsBase {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DeviceCapability {
     #[yaserde(rename = "EndDeviceListLink")]
-    pub end_device_list_link: EndDeviceListLink,
+    pub end_device_list_link: Option<EndDeviceListLink>,
 
     #[yaserde(rename = "MirrorUsagePointListLink")]
-    pub mirror_usage_point_list_link: MirrorUsagePointListLink,
+    pub mirror_usage_point_list_link: Option<MirrorUsagePointListLink>,
 
     #[yaserde(rename = "SelfDeviceLink")]
-    pub self_device_link: SelfDeviceLink,
+    pub self_device_link: Option<SelfDeviceLink>,
 
     // The default polling rate for this function set (this resource and all
     // resources below), in seconds. If not specified, a default of 900 seconds
@@ -992,34 +990,34 @@ pub struct DeviceCapability {
     pub poll_rate: Option<Uint32>,
 
     #[yaserde(rename = "CustomerAccountListLink")]
-    pub customer_account_list_link: CustomerAccountListLink,
+    pub customer_account_list_link: Option<CustomerAccountListLink>,
 
     #[yaserde(rename = "DemandResponseProgramListLink")]
-    pub demand_response_program_list_link: DemandResponseProgramListLink,
+    pub demand_response_program_list_link: Option<DemandResponseProgramListLink>,
 
     #[yaserde(rename = "DERProgramListLink")]
-    pub der_program_list_link: DerprogramListLink,
+    pub der_program_list_link: Option<DerprogramListLink>,
 
     #[yaserde(rename = "FileListLink")]
-    pub file_list_link: FileListLink,
+    pub file_list_link: Option<FileListLink>,
 
     #[yaserde(rename = "MessagingProgramListLink")]
-    pub messaging_program_list_link: MessagingProgramListLink,
+    pub messaging_program_list_link: Option<MessagingProgramListLink>,
 
     #[yaserde(rename = "PrepaymentListLink")]
-    pub prepayment_list_link: PrepaymentListLink,
+    pub prepayment_list_link: Option<PrepaymentListLink>,
 
     #[yaserde(rename = "ResponseSetListLink")]
-    pub response_set_list_link: ResponseSetListLink,
+    pub response_set_list_link: Option<ResponseSetListLink>,
 
     #[yaserde(rename = "TariffProfileListLink")]
-    pub tariff_profile_list_link: TariffProfileListLink,
+    pub tariff_profile_list_link: Option<TariffProfileListLink>,
 
     #[yaserde(rename = "TimeLink")]
-    pub time_link: TimeLink,
+    pub time_link: Option<TimeLink>,
 
     #[yaserde(rename = "UsagePointListLink")]
-    pub usage_point_list_link: UsagePointListLink,
+    pub usage_point_list_link: Option<UsagePointListLink>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -1033,43 +1031,43 @@ impl Validate for DeviceCapability {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct AbstractDevice {
     #[yaserde(rename = "ConfigurationLink")]
-    pub configuration_link: ConfigurationLink,
+    pub configuration_link: Option<ConfigurationLink>,
 
     #[yaserde(rename = "DERListLink")]
-    pub der_list_link: DerlistLink,
+    pub der_list_link: Option<DerlistLink>,
 
     // This field is for use in devices that can adjust energy usage (e.g.,
     // demand response, distributed energy resources). For devices that do not
     // respond to EndDeviceControls or DERControls (for instance, an ESI), this
     // field should not have any bits set.
     #[yaserde(rename = "deviceCategory")]
-    pub device_category: DeviceCategoryType,
+    pub device_category: Option<DeviceCategoryType>,
 
     #[yaserde(rename = "DeviceInformationLink")]
-    pub device_information_link: DeviceInformationLink,
+    pub device_information_link: Option<DeviceInformationLink>,
 
     #[yaserde(rename = "DeviceStatusLink")]
-    pub device_status_link: DeviceStatusLink,
+    pub device_status_link: Option<DeviceStatusLink>,
 
     #[yaserde(rename = "FileStatusLink")]
-    pub file_status_link: FileStatusLink,
+    pub file_status_link: Option<FileStatusLink>,
 
     #[yaserde(rename = "IPInterfaceListLink")]
-    pub ip_interface_list_link: IpinterfaceListLink,
+    pub ip_interface_list_link: Option<IpinterfaceListLink>,
 
     // Long form of device identifier. See the Security section for additional
     // details.
     #[yaserde(rename = "lFDI")]
-    pub l_fdi: HexBinary160,
+    pub l_fdi: Option<HexBinary160>,
 
     #[yaserde(rename = "LoadShedAvailabilityListLink")]
-    pub load_shed_availability_list_link: LoadShedAvailabilityListLink,
+    pub load_shed_availability_list_link: Option<LoadShedAvailabilityListLink>,
 
     #[yaserde(rename = "LogEventListLink")]
-    pub log_event_list_link: LogEventListLink,
+    pub log_event_list_link: Option<LogEventListLink>,
 
     #[yaserde(rename = "PowerStatusLink")]
-    pub power_status_link: PowerStatusLink,
+    pub power_status_link: Option<PowerStatusLink>,
 
     // Short form of device identifier, WITH the checksum digit. See the
     // Security section for additional details.
@@ -1100,7 +1098,7 @@ pub struct DeviceStatus {
     // The number of times that the device has been turned on: Count of "device
     // on" times, since the last time the counter was reset
     #[yaserde(rename = "onCount")]
-    pub on_count: Uint16,
+    pub on_count: Option<Uint16>,
 
     // Device operational state:
     // 0 - Not applicable / Unknown
@@ -1112,18 +1110,18 @@ pub struct DeviceStatus {
     // 6 - kW ramping
     // 7 - kVar ramping
     #[yaserde(rename = "opState")]
-    pub op_state: Uint8,
+    pub op_state: Option<Uint8>,
 
     // Total time device has operated: re-settable: Accumulated time in seconds
     // since the last time the counter was reset.
     #[yaserde(rename = "opTime")]
-    pub op_time: Uint32,
+    pub op_time: Option<Uint32>,
 
     #[yaserde(rename = "Temperature")]
     pub temperature: Vec<Temperature>,
 
     #[yaserde(rename = "TimeLink")]
-    pub time_link: TimeLink,
+    pub time_link: Option<TimeLink>,
 
     // The default polling rate for this function set (this resource and all
     // resources below), in seconds. If not specified, a default of 900 seconds
@@ -1153,68 +1151,68 @@ pub struct EndDevice {
     // delete EndDevice instances, but using this attribute for some time is
     // more convenient for clients.
     #[yaserde(rename = "enabled")]
-    pub enabled: bool,
+    pub enabled: Option<bool>,
 
     #[yaserde(rename = "FlowReservationRequestListLink")]
-    pub flow_reservation_request_list_link: FlowReservationRequestListLink,
+    pub flow_reservation_request_list_link: Option<FlowReservationRequestListLink>,
 
     #[yaserde(rename = "FlowReservationResponseListLink")]
-    pub flow_reservation_response_list_link: FlowReservationResponseListLink,
+    pub flow_reservation_response_list_link: Option<FlowReservationResponseListLink>,
 
     #[yaserde(rename = "FunctionSetAssignmentsListLink")]
-    pub function_set_assignments_list_link: FunctionSetAssignmentsListLink,
+    pub function_set_assignments_list_link: Option<FunctionSetAssignmentsListLink>,
 
     // POST rate, or how often EndDevice and subordinate resources should be
     // POSTed, in seconds. A client MAY indicate a preferred postRate when
     // POSTing EndDevice. A server MAY add or modify postRate to indicate its
     // preferred posting rate.
     #[yaserde(rename = "postRate")]
-    pub post_rate: Uint32,
+    pub post_rate: Option<Uint32>,
 
     #[yaserde(rename = "RegistrationLink")]
-    pub registration_link: RegistrationLink,
+    pub registration_link: Option<RegistrationLink>,
 
     #[yaserde(rename = "SubscriptionListLink")]
-    pub subscription_list_link: SubscriptionListLink,
+    pub subscription_list_link: Option<SubscriptionListLink>,
 
     #[yaserde(rename = "ConfigurationLink")]
-    pub configuration_link: ConfigurationLink,
+    pub configuration_link: Option<ConfigurationLink>,
 
     #[yaserde(rename = "DERListLink")]
-    pub der_list_link: DerlistLink,
+    pub der_list_link: Option<DerlistLink>,
 
     // This field is for use in devices that can adjust energy usage (e.g.,
     // demand response, distributed energy resources). For devices that do not
     // respond to EndDeviceControls or DERControls (for instance, an ESI), this
     // field should not have any bits set.
     #[yaserde(rename = "deviceCategory")]
-    pub device_category: DeviceCategoryType,
+    pub device_category: Option<DeviceCategoryType>,
 
     #[yaserde(rename = "DeviceInformationLink")]
-    pub device_information_link: DeviceInformationLink,
+    pub device_information_link: Option<DeviceInformationLink>,
 
     #[yaserde(rename = "DeviceStatusLink")]
-    pub device_status_link: DeviceStatusLink,
+    pub device_status_link: Option<DeviceStatusLink>,
 
     #[yaserde(rename = "FileStatusLink")]
-    pub file_status_link: FileStatusLink,
+    pub file_status_link: Option<FileStatusLink>,
 
     #[yaserde(rename = "IPInterfaceListLink")]
-    pub ip_interface_list_link: IpinterfaceListLink,
+    pub ip_interface_list_link: Option<IpinterfaceListLink>,
 
     // Long form of device identifier. See the Security section for additional
     // details.
     #[yaserde(rename = "lFDI")]
-    pub l_fdi: HexBinary160,
+    pub l_fdi: Option<HexBinary160>,
 
     #[yaserde(rename = "LoadShedAvailabilityListLink")]
-    pub load_shed_availability_list_link: LoadShedAvailabilityListLink,
+    pub load_shed_availability_list_link: Option<LoadShedAvailabilityListLink>,
 
     #[yaserde(rename = "LogEventListLink")]
-    pub log_event_list_link: LogEventListLink,
+    pub log_event_list_link: Option<LogEventListLink>,
 
     #[yaserde(rename = "PowerStatusLink")]
-    pub power_status_link: PowerStatusLink,
+    pub power_status_link: Option<PowerStatusLink>,
 
     // Short form of device identifier, WITH the checksum digit. See the
     // Security section for additional details.
@@ -1312,43 +1310,43 @@ pub struct SelfDevice {
     pub poll_rate: Option<Uint32>,
 
     #[yaserde(rename = "ConfigurationLink")]
-    pub configuration_link: ConfigurationLink,
+    pub configuration_link: Option<ConfigurationLink>,
 
     #[yaserde(rename = "DERListLink")]
-    pub der_list_link: DerlistLink,
+    pub der_list_link: Option<DerlistLink>,
 
     // This field is for use in devices that can adjust energy usage (e.g.,
     // demand response, distributed energy resources). For devices that do not
     // respond to EndDeviceControls or DERControls (for instance, an ESI), this
     // field should not have any bits set.
     #[yaserde(rename = "deviceCategory")]
-    pub device_category: DeviceCategoryType,
+    pub device_category: Option<DeviceCategoryType>,
 
     #[yaserde(rename = "DeviceInformationLink")]
-    pub device_information_link: DeviceInformationLink,
+    pub device_information_link: Option<DeviceInformationLink>,
 
     #[yaserde(rename = "DeviceStatusLink")]
-    pub device_status_link: DeviceStatusLink,
+    pub device_status_link: Option<DeviceStatusLink>,
 
     #[yaserde(rename = "FileStatusLink")]
-    pub file_status_link: FileStatusLink,
+    pub file_status_link: Option<FileStatusLink>,
 
     #[yaserde(rename = "IPInterfaceListLink")]
-    pub ip_interface_list_link: IpinterfaceListLink,
+    pub ip_interface_list_link: Option<IpinterfaceListLink>,
 
     // Long form of device identifier. See the Security section for additional
     // details.
     #[yaserde(rename = "lFDI")]
-    pub l_fdi: HexBinary160,
+    pub l_fdi: Option<HexBinary160>,
 
     #[yaserde(rename = "LoadShedAvailabilityListLink")]
-    pub load_shed_availability_list_link: LoadShedAvailabilityListLink,
+    pub load_shed_availability_list_link: Option<LoadShedAvailabilityListLink>,
 
     #[yaserde(rename = "LogEventListLink")]
-    pub log_event_list_link: LogEventListLink,
+    pub log_event_list_link: Option<LogEventListLink>,
 
     #[yaserde(rename = "PowerStatusLink")]
-    pub power_status_link: PowerStatusLink,
+    pub power_status_link: Option<PowerStatusLink>,
 
     // Short form of device identifier, WITH the checksum digit. See the
     // Security section for additional details.
@@ -1400,12 +1398,12 @@ pub struct FunctionSetAssignments {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -1414,34 +1412,34 @@ pub struct FunctionSetAssignments {
     pub subscribable: Option<SubscribableType>,
 
     #[yaserde(rename = "CustomerAccountListLink")]
-    pub customer_account_list_link: CustomerAccountListLink,
+    pub customer_account_list_link: Option<CustomerAccountListLink>,
 
     #[yaserde(rename = "DemandResponseProgramListLink")]
-    pub demand_response_program_list_link: DemandResponseProgramListLink,
+    pub demand_response_program_list_link: Option<DemandResponseProgramListLink>,
 
     #[yaserde(rename = "DERProgramListLink")]
-    pub der_program_list_link: DerprogramListLink,
+    pub der_program_list_link: Option<DerprogramListLink>,
 
     #[yaserde(rename = "FileListLink")]
-    pub file_list_link: FileListLink,
+    pub file_list_link: Option<FileListLink>,
 
     #[yaserde(rename = "MessagingProgramListLink")]
-    pub messaging_program_list_link: MessagingProgramListLink,
+    pub messaging_program_list_link: Option<MessagingProgramListLink>,
 
     #[yaserde(rename = "PrepaymentListLink")]
-    pub prepayment_list_link: PrepaymentListLink,
+    pub prepayment_list_link: Option<PrepaymentListLink>,
 
     #[yaserde(rename = "ResponseSetListLink")]
-    pub response_set_list_link: ResponseSetListLink,
+    pub response_set_list_link: Option<ResponseSetListLink>,
 
     #[yaserde(rename = "TariffProfileListLink")]
-    pub tariff_profile_list_link: TariffProfileListLink,
+    pub tariff_profile_list_link: Option<TariffProfileListLink>,
 
     #[yaserde(rename = "TimeLink")]
-    pub time_link: TimeLink,
+    pub time_link: Option<TimeLink>,
 
     #[yaserde(rename = "UsagePointListLink")]
-    pub usage_point_list_link: UsagePointListLink,
+    pub usage_point_list_link: Option<UsagePointListLink>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -1529,7 +1527,7 @@ impl Validate for SubscriptionBase {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Subscription {
     #[yaserde(rename = "Condition")]
-    pub condition: Condition,
+    pub condition: Option<Condition>,
 
     // 0 - application/sep+xml
     // 1 - application/sep-exi
@@ -1619,10 +1617,10 @@ pub struct Notification {
     // The new location of the resource, if moved. This attribute SHALL be a
     // fully-qualified absolute URI, not a relative reference.
     #[yaserde(rename = "newResourceURI")]
-    pub new_resource_uri: String,
+    pub new_resource_uri: Option<String>,
 
     #[yaserde(rename = "Resource")]
-    pub resource: Resource,
+    pub resource: Option<Resource>,
 
     // 0 = Default Status
     // 1 = Subscription canceled, no additional information
@@ -1690,7 +1688,7 @@ pub struct DercontrolResponse {
     // FunctionSetAssignment exists, the time of the server where the event
     // resource was hosted.
     #[yaserde(rename = "createdDateTime")]
-    pub created_date_time: TimeType,
+    pub created_date_time: Option<TimeType>,
 
     // Contains the LFDI of the device providing the response.
     #[yaserde(rename = "endDeviceLFDI")]
@@ -1703,7 +1701,7 @@ pub struct DercontrolResponse {
     // field value definitions are defined in Table 27: Response Types by
     // Function Set.
     #[yaserde(rename = "status")]
-    pub status: Uint8,
+    pub status: Option<Uint8>,
 
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
@@ -1731,7 +1729,7 @@ pub struct FlowReservationResponseResponse {
     // FunctionSetAssignment exists, the time of the server where the event
     // resource was hosted.
     #[yaserde(rename = "createdDateTime")]
-    pub created_date_time: TimeType,
+    pub created_date_time: Option<TimeType>,
 
     // Contains the LFDI of the device providing the response.
     #[yaserde(rename = "endDeviceLFDI")]
@@ -1744,7 +1742,7 @@ pub struct FlowReservationResponseResponse {
     // field value definitions are defined in Table 27: Response Types by
     // Function Set.
     #[yaserde(rename = "status")]
-    pub status: Uint8,
+    pub status: Option<Uint8>,
 
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
@@ -1778,16 +1776,16 @@ impl Validate for AppliedTargetReduction {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DrResponse {
     #[yaserde(rename = "ApplianceLoadReduction")]
-    pub appliance_load_reduction: ApplianceLoadReduction,
+    pub appliance_load_reduction: Option<ApplianceLoadReduction>,
 
     #[yaserde(rename = "AppliedTargetReduction")]
-    pub applied_target_reduction: AppliedTargetReduction,
+    pub applied_target_reduction: Option<AppliedTargetReduction>,
 
     #[yaserde(rename = "DutyCycle")]
-    pub duty_cycle: DutyCycle,
+    pub duty_cycle: Option<DutyCycle>,
 
     #[yaserde(rename = "Offset")]
-    pub offset: Offset,
+    pub offset: Option<Offset>,
 
     // Indicates the amount of time, in seconds, that the client partially
     // opts-out during the demand response event. When overriding within the
@@ -1798,10 +1796,10 @@ pub struct DrResponse {
     // the user partially opts-out for longer than
     // EndDeviceControl.overrideDuration.
     #[yaserde(rename = "overrideDuration")]
-    pub override_duration: Uint16,
+    pub override_duration: Option<Uint16>,
 
     #[yaserde(rename = "SetPoint")]
-    pub set_point: SetPoint,
+    pub set_point: Option<SetPoint>,
 
     // The createdDateTime field contains the date and time when the
     // acknowledgement/status occurred in the client. The client will provide
@@ -1813,7 +1811,7 @@ pub struct DrResponse {
     // FunctionSetAssignment exists, the time of the server where the event
     // resource was hosted.
     #[yaserde(rename = "createdDateTime")]
-    pub created_date_time: TimeType,
+    pub created_date_time: Option<TimeType>,
 
     // Contains the LFDI of the device providing the response.
     #[yaserde(rename = "endDeviceLFDI")]
@@ -1826,7 +1824,7 @@ pub struct DrResponse {
     // field value definitions are defined in Table 27: Response Types by
     // Function Set.
     #[yaserde(rename = "status")]
-    pub status: Uint8,
+    pub status: Option<Uint8>,
 
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
@@ -1854,7 +1852,7 @@ pub struct PriceResponse {
     // FunctionSetAssignment exists, the time of the server where the event
     // resource was hosted.
     #[yaserde(rename = "createdDateTime")]
-    pub created_date_time: TimeType,
+    pub created_date_time: Option<TimeType>,
 
     // Contains the LFDI of the device providing the response.
     #[yaserde(rename = "endDeviceLFDI")]
@@ -1867,7 +1865,7 @@ pub struct PriceResponse {
     // field value definitions are defined in Table 27: Response Types by
     // Function Set.
     #[yaserde(rename = "status")]
-    pub status: Uint8,
+    pub status: Option<Uint8>,
 
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
@@ -1909,7 +1907,7 @@ impl Validate for ResponseList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseSet {
     #[yaserde(rename = "ResponseListLink")]
-    pub response_list_link: ResponseListLink,
+    pub response_list_link: Option<ResponseListLink>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -1917,12 +1915,12 @@ pub struct ResponseSet {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -1975,7 +1973,7 @@ pub struct TextResponse {
     // FunctionSetAssignment exists, the time of the server where the event
     // resource was hosted.
     #[yaserde(rename = "createdDateTime")]
-    pub created_date_time: TimeType,
+    pub created_date_time: Option<TimeType>,
 
     // Contains the LFDI of the device providing the response.
     #[yaserde(rename = "endDeviceLFDI")]
@@ -1988,7 +1986,7 @@ pub struct TextResponse {
     // field value definitions are defined in Table 27: Response Types by
     // Function Set.
     #[yaserde(rename = "status")]
-    pub status: Uint8,
+    pub status: Option<Uint8>,
 
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
@@ -2029,7 +2027,7 @@ pub struct Time {
     // Local time: localTime = currentTime + tzOffset (+ dstOffset when in
     // effect).
     #[yaserde(rename = "localTime")]
-    pub local_time: TimeType,
+    pub local_time: Option<TimeType>,
 
     // Metric indicating the quality of the time source from which the service
     // acquired time. Lower (smaller) quality enumeration values are assumed to
@@ -2068,7 +2066,7 @@ impl Validate for Time {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DeviceInformation {
     #[yaserde(rename = "DRLCCapabilities")]
-    pub drlc_capabilities: Drlccapabilities,
+    pub drlc_capabilities: Option<Drlccapabilities>,
 
     // Bitmap indicating the function sets used by the device as a client.
     // 0 - Device Capability
@@ -2093,11 +2091,11 @@ pub struct DeviceInformation {
     // 19 - Flow Reservation
     // 20 - DER Control
     #[yaserde(rename = "functionsImplemented")]
-    pub functions_implemented: HexBinary64,
+    pub functions_implemented: Option<HexBinary64>,
 
     // GPS location of this device.
     #[yaserde(rename = "gpsLocation")]
-    pub gps_location: GpslocationType,
+    pub gps_location: Option<GpslocationType>,
 
     // Long form device identifier. See the Security section for full details.
     #[yaserde(rename = "lFDI")]
@@ -2118,7 +2116,7 @@ pub struct DeviceInformation {
     // Manufacturer dependent information related to the manufacture of this
     // device
     #[yaserde(rename = "mfInfo")]
-    pub mf_info: String32,
+    pub mf_info: Option<String32>,
 
     // Manufacturer's model number
     #[yaserde(rename = "mfModel")]
@@ -2137,7 +2135,7 @@ pub struct DeviceInformation {
     pub secondary_power: PowerSourceType,
 
     #[yaserde(rename = "SupportedLocaleListLink")]
-    pub supported_locale_list_link: SupportedLocaleListLink,
+    pub supported_locale_list_link: Option<SupportedLocaleListLink>,
 
     // Activation date/time of currently running software
     #[yaserde(rename = "swActTime")]
@@ -2267,27 +2265,27 @@ pub struct PowerStatus {
 
     // Estimate of remaining battery charge as a percent of full charge.
     #[yaserde(rename = "estimatedChargeRemaining")]
-    pub estimated_charge_remaining: PerCent,
+    pub estimated_charge_remaining: Option<PerCent>,
 
     // Estimated time (in seconds) to total battery charge depletion (under
     // current load)
     #[yaserde(rename = "estimatedTimeRemaining")]
-    pub estimated_time_remaining: Uint32,
+    pub estimated_time_remaining: Option<Uint32>,
 
     #[yaserde(rename = "PEVInfo")]
-    pub pev_info: Pevinfo,
+    pub pev_info: Option<Pevinfo>,
 
     // If the device has a battery, this is the time since the device last
     // switched to battery power, or the time since the device was restarted,
     // whichever is less, in seconds.
     #[yaserde(rename = "sessionTimeOnBattery")]
-    pub session_time_on_battery: Uint32,
+    pub session_time_on_battery: Option<Uint32>,
 
     // If the device has a battery, this is the total time the device has been
     // on battery power, in seconds. It may be reset when the battery is
     // replaced.
     #[yaserde(rename = "totalTimeOnBattery")]
-    pub total_time_on_battery: Uint32,
+    pub total_time_on_battery: Option<Uint32>,
 
     // The default polling rate for this function set (this resource and all
     // resources below), in seconds. If not specified, a default of 900 seconds
@@ -2388,7 +2386,7 @@ pub struct Ieee802154 {
     pub capability_info: HexBinary8,
 
     #[yaserde(rename = "NeighborListLink")]
-    pub neighbor_list_link: NeighborListLink,
+    pub neighbor_list_link: Option<NeighborListLink>,
 
     // As defined by IEEE 802.15.4
     #[yaserde(rename = "shortAddress")]
@@ -2405,7 +2403,7 @@ pub struct Ipaddr {
     pub address: HexBinary128,
 
     #[yaserde(rename = "RPLInstanceListLink")]
-    pub rpl_instance_list_link: RplinstanceListLink,
+    pub rpl_instance_list_link: Option<RplinstanceListLink>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -2443,109 +2441,109 @@ impl Validate for IpaddrList {}
 pub struct Ipinterface {
     // Use rules from [RFC 2863].
     #[yaserde(rename = "ifDescr")]
-    pub if_descr: String192,
+    pub if_descr: Option<String192>,
 
     // Use rules from [RFC 2863].
     #[yaserde(rename = "ifHighSpeed")]
-    pub if_high_speed: Uint32,
+    pub if_high_speed: Option<Uint32>,
 
     // Use rules from [RFC 2863].
     #[yaserde(rename = "ifInBroadcastPkts")]
-    pub if_in_broadcast_pkts: Uint32,
+    pub if_in_broadcast_pkts: Option<Uint32>,
 
     // Use rules from [RFC 2863].
     #[yaserde(rename = "ifIndex")]
-    pub if_index: Uint32,
+    pub if_index: Option<Uint32>,
 
     // Use rules from [RFC 2863]. Can be thought of as Input Datagrams
     // Discarded.
     #[yaserde(rename = "ifInDiscards")]
-    pub if_in_discards: Uint32,
+    pub if_in_discards: Option<Uint32>,
 
     // Use rules from [RFC 2863].
     #[yaserde(rename = "ifInErrors")]
-    pub if_in_errors: Uint32,
+    pub if_in_errors: Option<Uint32>,
 
     // Use rules from [RFC 2863]. Can be thought of as Multicast Datagrams
     // Received.
     #[yaserde(rename = "ifInMulticastPkts")]
-    pub if_in_multicast_pkts: Uint32,
+    pub if_in_multicast_pkts: Option<Uint32>,
 
     // Use rules from [RFC 2863]. Can be thought of as Bytes Received.
     #[yaserde(rename = "ifInOctets")]
-    pub if_in_octets: Uint32,
+    pub if_in_octets: Option<Uint32>,
 
     // Use rules from [RFC 2863]. Can be thought of as Datagrams Received.
     #[yaserde(rename = "ifInUcastPkts")]
-    pub if_in_ucast_pkts: Uint32,
+    pub if_in_ucast_pkts: Option<Uint32>,
 
     // Use rules from [RFC 2863]. Can be thought of as Datagrams with Unknown
     // Protocol Received.
     #[yaserde(rename = "ifInUnknownProtos")]
-    pub if_in_unknown_protos: Uint32,
+    pub if_in_unknown_protos: Option<Uint32>,
 
     // Use rules from [RFC 2863].
     #[yaserde(rename = "ifMtu")]
-    pub if_mtu: Uint32,
+    pub if_mtu: Option<Uint32>,
 
     // Use rules from [RFC 2863].
     #[yaserde(rename = "ifName")]
-    pub if_name: String16,
+    pub if_name: Option<String16>,
 
     // Use rules and assignments from [RFC 2863].
     #[yaserde(rename = "ifOperStatus")]
-    pub if_oper_status: Uint8,
+    pub if_oper_status: Option<Uint8>,
 
     // Use rules from [RFC 2863]. Can be thought of as Broadcast Datagrams Sent.
     #[yaserde(rename = "ifOutBroadcastPkts")]
-    pub if_out_broadcast_pkts: Uint32,
+    pub if_out_broadcast_pkts: Option<Uint32>,
 
     // Use rules from [RFC 2863]. Can be thought of as Output Datagrams
     // Discarded.
     #[yaserde(rename = "ifOutDiscards")]
-    pub if_out_discards: Uint32,
+    pub if_out_discards: Option<Uint32>,
 
     // Use rules from [RFC 2863].
     #[yaserde(rename = "ifOutErrors")]
-    pub if_out_errors: Uint32,
+    pub if_out_errors: Option<Uint32>,
 
     // Use rules from [RFC 2863]. Can be thought of as Multicast Datagrams Sent.
     #[yaserde(rename = "ifOutMulticastPkts")]
-    pub if_out_multicast_pkts: Uint32,
+    pub if_out_multicast_pkts: Option<Uint32>,
 
     // Use rules from [RFC 2863]. Can be thought of as Bytes Sent.
     #[yaserde(rename = "ifOutOctets")]
-    pub if_out_octets: Uint32,
+    pub if_out_octets: Option<Uint32>,
 
     // Use rules from [RFC 2863]. Can be thought of as Datagrams Sent.
     #[yaserde(rename = "ifOutUcastPkts")]
-    pub if_out_ucast_pkts: Uint32,
+    pub if_out_ucast_pkts: Option<Uint32>,
 
     // Use rules from [RFC 2863].
     #[yaserde(rename = "ifPromiscuousMode")]
-    pub if_promiscuous_mode: bool,
+    pub if_promiscuous_mode: Option<bool>,
 
     // Use rules from [RFC 2863].
     #[yaserde(rename = "ifSpeed")]
-    pub if_speed: Uint32,
+    pub if_speed: Option<Uint32>,
 
     // Use rules and assignments from [RFC 2863].
     #[yaserde(rename = "ifType")]
-    pub if_type: Uint16,
+    pub if_type: Option<Uint16>,
 
     #[yaserde(rename = "IPAddrListLink")]
-    pub ip_addr_list_link: IpaddrListLink,
+    pub ip_addr_list_link: Option<IpaddrListLink>,
 
     // Similar to ifLastChange in [RFC 2863].
     #[yaserde(rename = "lastResetTime")]
-    pub last_reset_time: Int64,
+    pub last_reset_time: Option<Int64>,
 
     // The date/time of the reported status.
     #[yaserde(rename = "lastUpdatedTime")]
-    pub last_updated_time: Int64,
+    pub last_updated_time: Option<Int64>,
 
     #[yaserde(rename = "LLInterfaceListLink")]
-    pub ll_interface_list_link: LlinterfaceListLink,
+    pub ll_interface_list_link: Option<LlinterfaceListLink>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -2600,7 +2598,7 @@ pub struct Llinterface {
     pub eui64: HexBinary64,
 
     #[yaserde(rename = "IEEE_802_15_4")]
-    pub ieee_802_15_4: Ieee802154,
+    pub ieee_802_15_4: Option<Ieee802154>,
 
     // Specifies the type of link layer interface associated with the
     // IPInterface. Values are below.
@@ -2616,50 +2614,50 @@ pub struct Llinterface {
     // Number of times an ACK was not received for a frame transmitted (when ACK
     // was requested).
     #[yaserde(rename = "LLAckNotRx")]
-    pub ll_ack_not_rx: Uint32,
+    pub ll_ack_not_rx: Option<Uint32>,
 
     // Number of times CSMA failed.
     #[yaserde(rename = "LLCSMAFail")]
-    pub llcsma_fail: Uint32,
+    pub llcsma_fail: Option<Uint32>,
 
     // Number of dropped receive frames.
     #[yaserde(rename = "LLFramesDropRx")]
-    pub ll_frames_drop_rx: Uint32,
+    pub ll_frames_drop_rx: Option<Uint32>,
 
     // Number of dropped transmit frames.
     #[yaserde(rename = "LLFramesDropTx")]
-    pub ll_frames_drop_tx: Uint32,
+    pub ll_frames_drop_tx: Option<Uint32>,
 
     // Number of link layer frames received.
     #[yaserde(rename = "LLFramesRx")]
-    pub ll_frames_rx: Uint32,
+    pub ll_frames_rx: Option<Uint32>,
 
     // Number of link layer frames transmitted.
     #[yaserde(rename = "LLFramesTx")]
-    pub ll_frames_tx: Uint32,
+    pub ll_frames_tx: Option<Uint32>,
 
     // Number of times access to media failed.
     #[yaserde(rename = "LLMediaAccessFail")]
-    pub ll_media_access_fail: Uint32,
+    pub ll_media_access_fail: Option<Uint32>,
 
     // Number of Bytes received.
     #[yaserde(rename = "LLOctetsRx")]
-    pub ll_octets_rx: Uint32,
+    pub ll_octets_rx: Option<Uint32>,
 
     // Number of Bytes transmitted.
     #[yaserde(rename = "LLOctetsTx")]
-    pub ll_octets_tx: Uint32,
+    pub ll_octets_tx: Option<Uint32>,
 
     // Number of MAC transmit retries.
     #[yaserde(rename = "LLRetryCount")]
-    pub ll_retry_count: Uint32,
+    pub ll_retry_count: Option<Uint32>,
 
     // Number of receive security errors.
     #[yaserde(rename = "LLSecurityErrorRx")]
-    pub ll_security_error_rx: Uint32,
+    pub ll_security_error_rx: Option<Uint32>,
 
     #[yaserde(rename = "loWPAN")]
-    pub lo_wpan: LoWPAN,
+    pub lo_wpan: Option<LoWPAN>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -2698,11 +2696,11 @@ impl Validate for LlinterfaceList {}
 pub struct LoWPAN {
     // Number of Bytes received
     #[yaserde(rename = "octetsRx")]
-    pub octets_rx: Uint32,
+    pub octets_rx: Option<Uint32>,
 
     // Number of Bytes transmitted
     #[yaserde(rename = "octetsTx")]
-    pub octets_tx: Uint32,
+    pub octets_tx: Option<Uint32>,
 
     // Number of packets received
     #[yaserde(rename = "packetsRx")]
@@ -2801,7 +2799,7 @@ pub struct Rplinstance {
     pub rpl_instance_id: Uint8,
 
     #[yaserde(rename = "RPLSourceRoutesListLink")]
-    pub rpl_source_routes_list_link: RplsourceRoutesListLink,
+    pub rpl_source_routes_list_link: Option<RplsourceRoutesListLink>,
 
     // See [RFC 6550].
     #[yaserde(rename = "versionNumber")]
@@ -2890,11 +2888,11 @@ pub struct LogEvent {
     // Human readable text that MAY be used to transmit additional details about
     // the event. A host MAY remove this field when received.
     #[yaserde(rename = "details")]
-    pub details: String32,
+    pub details: Option<String32>,
 
     // May be used to transmit additional details about the event.
     #[yaserde(rename = "extendedData")]
-    pub extended_data: Uint32,
+    pub extended_data: Option<Uint32>,
 
     // If the profileID indicates this is IEEE 2030.5, the functionSet is
     // defined by IEEE 2030.5 and SHALL be one of the values from the table
@@ -3011,7 +3009,7 @@ pub struct Configuration {
     pub power_configuration: Vec<PowerConfiguration>,
 
     #[yaserde(rename = "PriceResponseCfgListLink")]
-    pub price_response_cfg_list_link: PriceResponseCfgListLink,
+    pub price_response_cfg_list_link: Option<PriceResponseCfgListLink>,
 
     #[yaserde(rename = "TimeConfiguration")]
     pub time_configuration: Vec<TimeConfiguration>,
@@ -3048,13 +3046,13 @@ impl Validate for Configuration {}
 pub struct PowerConfiguration {
     // Time/Date at which battery was installed,
     #[yaserde(rename = "batteryInstallTime")]
-    pub battery_install_time: TimeType,
+    pub battery_install_time: Option<TimeType>,
 
     // In context of the PowerStatus resource, this is the value of
     // EstimatedTimeRemaining below which BatteryStatus "low" is indicated and
     // the PS_LOW_BATTERY is raised.
     #[yaserde(rename = "lowChargeThreshold")]
-    pub low_charge_threshold: Uint32,
+    pub low_charge_threshold: Option<Uint32>,
 }
 
 impl Validate for PowerConfiguration {}
@@ -3147,7 +3145,7 @@ pub struct File {
     // take any action to activate the file until a subsequent GET to this File
     // resource provides an activateTime.
     #[yaserde(rename = "activateTime")]
-    pub activate_time: TimeType,
+    pub activate_time: Option<TimeType>,
 
     // This element MUST be set to the URI location of the file binary artifact.
     // This is the BLOB (binary large object) that is actually loaded by the LD
@@ -3157,12 +3155,12 @@ pub struct File {
     // This element MUST be set to the LFDI of the device for which this file in
     // targeted.
     #[yaserde(rename = "lFDI")]
-    pub l_fdi: HexBinary160,
+    pub l_fdi: Option<HexBinary160>,
 
     // This element MUST be set to the hardware version for which this file is
     // targeted.
     #[yaserde(rename = "mfHwVer")]
-    pub mf_hw_ver: String32,
+    pub mf_hw_ver: Option<String32>,
 
     // This element MUST be set to the manufacturer's Private Enterprise Number
     // (assigned by IANA).
@@ -3177,7 +3175,7 @@ pub struct File {
     // This element MUST be set to the manufacturer serial number for which this
     // file is targeted. The syntax and semantics are left to the manufacturer.
     #[yaserde(rename = "mfSerNum")]
-    pub mf_ser_num: String32,
+    pub mf_ser_num: Option<String32>,
 
     // This element MUST be set to the software version information for this
     // file. The syntax and semantics are left to the manufacturer.
@@ -3246,10 +3244,10 @@ pub struct FileStatus {
     // omission or presence and value of the activateTime element from the File
     // resource.
     #[yaserde(rename = "activateTime")]
-    pub activate_time: TimeType,
+    pub activate_time: Option<TimeType>,
 
     #[yaserde(rename = "FileLink")]
-    pub file_link: FileLink,
+    pub file_link: Option<FileLink>,
 
     // This element MUST be set to the percentage of the file, indicated by
     // FileLink, that was loaded during the latest load attempt. This value MUST
@@ -3362,7 +3360,7 @@ impl Validate for ApplianceLoadReduction {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DemandResponseProgram {
     #[yaserde(rename = "ActiveEndDeviceControlListLink")]
-    pub active_end_device_control_list_link: ActiveEndDeviceControlListLink,
+    pub active_end_device_control_list_link: Option<ActiveEndDeviceControlListLink>,
 
     // This attribute allows program providers to specify the requested
     // granularity of updates to LoadShedAvailability sheddablePercent. If not
@@ -3373,7 +3371,7 @@ pub struct DemandResponseProgram {
     // the current value of LoadShedAvailability sheddablePercent is greater
     // than availabilityUpdatePercentChangeThreshold.
     #[yaserde(rename = "availabilityUpdatePercentChangeThreshold")]
-    pub availability_update_percent_change_threshold: PerCent,
+    pub availability_update_percent_change_threshold: Option<PerCent>,
 
     // This attribute allows program providers to specify the requested
     // granularity of updates to LoadShedAvailability sheddablePower. If not
@@ -3384,10 +3382,10 @@ pub struct DemandResponseProgram {
     // the current value of LoadShedAvailability sheddablePower is greater than
     // availabilityUpdatePowerChangeThreshold.
     #[yaserde(rename = "availabilityUpdatePowerChangeThreshold")]
-    pub availability_update_power_change_threshold: ActivePower,
+    pub availability_update_power_change_threshold: Option<ActivePower>,
 
     #[yaserde(rename = "EndDeviceControlListLink")]
-    pub end_device_control_list_link: EndDeviceControlListLink,
+    pub end_device_control_list_link: Option<EndDeviceControlListLink>,
 
     // Indicates the relative primacy of the provider of this program.
     #[yaserde(rename = "primacy")]
@@ -3399,12 +3397,12 @@ pub struct DemandResponseProgram {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -3474,7 +3472,7 @@ impl Validate for DutyCycle {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EndDeviceControl {
     #[yaserde(rename = "ApplianceLoadReduction")]
-    pub appliance_load_reduction: ApplianceLoadReduction,
+    pub appliance_load_reduction: Option<ApplianceLoadReduction>,
 
     // Specifies the bitmap indicating the categories of devices that SHOULD
     // respond. Devices SHOULD ignore events that do not indicate their device
@@ -3491,7 +3489,7 @@ pub struct EndDeviceControl {
     pub dr_program_mandatory: bool,
 
     #[yaserde(rename = "DutyCycle")]
-    pub duty_cycle: DutyCycle,
+    pub duty_cycle: Option<DutyCycle>,
 
     // Indicates that the event intends to increase consumption. A value of true
     // indicates the intention to increase usage value, and a value of false
@@ -3500,20 +3498,20 @@ pub struct EndDeviceControl {
     pub load_shift_forward: bool,
 
     #[yaserde(rename = "Offset")]
-    pub offset: Offset,
+    pub offset: Option<Offset>,
 
     // The overrideDuration attribute provides a duration, in seconds, for which
     // a client device is allowed to override this EndDeviceControl and still
     // meet the contractual agreement with a service provider without opting
     // out. If overrideDuration is not specified, then it SHALL default to 0.
     #[yaserde(rename = "overrideDuration")]
-    pub override_duration: Uint16,
+    pub override_duration: Option<Uint16>,
 
     #[yaserde(rename = "SetPoint")]
-    pub set_point: SetPoint,
+    pub set_point: Option<SetPoint>,
 
     #[yaserde(rename = "TargetReduction")]
-    pub target_reduction: TargetReduction,
+    pub target_reduction: Option<TargetReduction>,
 
     // Number of seconds boundary inside which a random value must be selected
     // to be applied to the associated interval duration, to avoid sudden
@@ -3521,7 +3519,7 @@ pub struct EndDeviceControl {
     // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
     // default.
     #[yaserde(rename = "randomizeDuration")]
-    pub randomize_duration: OneHourRangeType,
+    pub randomize_duration: Option<OneHourRangeType>,
 
     // Number of seconds boundary inside which a random value must be selected
     // to be applied to the associated interval start time, to avoid sudden
@@ -3529,7 +3527,7 @@ pub struct EndDeviceControl {
     // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
     // default.
     #[yaserde(rename = "randomizeStart")]
-    pub randomize_start: OneHourRangeType,
+    pub randomize_start: Option<OneHourRangeType>,
 
     // The time at which the Event was created.
     #[yaserde(rename = "creationTime")]
@@ -3548,18 +3546,18 @@ pub struct EndDeviceControl {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
     // specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
-    pub subscribable: SubscribableType,
+    pub subscribable: Option<SubscribableType>,
 
     // A reference to the response resource address (URI). Required on a
     // response to a GET if responseRequired is "true".
@@ -3629,20 +3627,20 @@ pub struct LoadShedAvailability {
     // Indicates for how many seconds the consuming device will be able to
     // reduce consumption at the maximum response level.
     #[yaserde(rename = "availabilityDuration")]
-    pub availability_duration: Uint32,
+    pub availability_duration: Option<Uint32>,
 
     #[yaserde(rename = "DemandResponseProgramLink")]
-    pub demand_response_program_link: DemandResponseProgramLink,
+    pub demand_response_program_link: Option<DemandResponseProgramLink>,
 
     // Maximum percent of current operating load that is estimated to be
     // sheddable.
     #[yaserde(rename = "sheddablePercent")]
-    pub sheddable_percent: PerCent,
+    pub sheddable_percent: Option<PerCent>,
 
     // Maximum amount of current operating load that is estimated to be
     // sheddable, in Watts.
     #[yaserde(rename = "sheddablePower")]
-    pub sheddable_power: ActivePower,
+    pub sheddable_power: Option<ActivePower>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -3674,19 +3672,19 @@ pub struct Offset {
     // loadShiftForward is true, then the value should be subtracted from the
     // normal set point.
     #[yaserde(rename = "coolingOffset")]
-    pub cooling_offset: Uint8,
+    pub cooling_offset: Option<Uint8>,
 
     // The value change requested for the heating offset, in degree C / 10. The
     // value should be subtracted for heating, or if loadShiftForward is true,
     // then the value should be added to the normal set point.
     #[yaserde(rename = "heatingOffset")]
-    pub heating_offset: Uint8,
+    pub heating_offset: Option<Uint8>,
 
     // The value change requested for the load adjustment percentage. The value
     // should be subtracted from the normal setting, or if loadShiftForward is
     // true, then the value should be added to the normal setting.
     #[yaserde(rename = "loadAdjustmentPercentageOffset")]
-    pub load_adjustment_percentage_offset: PerCent,
+    pub load_adjustment_percentage_offset: Option<PerCent>,
 }
 
 impl Validate for Offset {}
@@ -3709,12 +3707,12 @@ pub struct SetPoint {
     // This attribute represents the cooling temperature set point in degrees
     // Celsius / 100. (Hundredths of a degree C)
     #[yaserde(rename = "coolingSetpoint")]
-    pub cooling_setpoint: Int16,
+    pub cooling_setpoint: Option<Int16>,
 
     // This attribute represents the heating temperature set point in degrees
     // Celsius / 100. (Hundredths of a degree C)
     #[yaserde(rename = "heatingSetpoint")]
-    pub heating_setpoint: Int16,
+    pub heating_setpoint: Option<Int16>,
 }
 
 impl Validate for SetPoint {}
@@ -3748,12 +3746,12 @@ pub struct MeterReadingBase {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -3767,13 +3765,13 @@ impl Validate for MeterReadingBase {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MeterReading {
     #[yaserde(rename = "RateComponentListLink")]
-    pub rate_component_list_link: RateComponentListLink,
+    pub rate_component_list_link: Option<RateComponentListLink>,
 
     #[yaserde(rename = "ReadingLink")]
-    pub reading_link: ReadingLink,
+    pub reading_link: Option<ReadingLink>,
 
     #[yaserde(rename = "ReadingSetListLink")]
-    pub reading_set_list_link: ReadingSetListLink,
+    pub reading_set_list_link: Option<ReadingSetListLink>,
 
     #[yaserde(rename = "ReadingTypeLink")]
     pub reading_type_link: ReadingTypeLink,
@@ -3784,12 +3782,12 @@ pub struct MeterReading {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -3835,7 +3833,7 @@ pub struct ReadingBase {
     // ReadingType numberOfConsumptionBlocks is non-zero. If not specified, is
     // assumed to be "0 - N/A".
     #[yaserde(rename = "consumptionBlock")]
-    pub consumption_block: ConsumptionBlockType,
+    pub consumption_block: Option<ConsumptionBlockType>,
 
     // List of codes indicating the quality of the reading, using specification:
     // Bit 0 - valid: data that has gone through all required validation checks
@@ -3852,22 +3850,22 @@ pub struct ReadingBase {
     // Bit 6 - projected (forecast): data that has been calculated as a
     // projection or forecast of future readings
     #[yaserde(rename = "qualityFlags")]
-    pub quality_flags: HexBinary16,
+    pub quality_flags: Option<HexBinary16>,
 
     // The time interval associated with the reading. If not specified, then
     // defaults to the intervalLength specified in the associated ReadingType.
     #[yaserde(rename = "timePeriod")]
-    pub time_period: DateTimeInterval,
+    pub time_period: Option<DateTimeInterval>,
 
     // Indicates the time of use tier related to the reading. REQUIRED if
     // ReadingType numberOfTouTiers is non-zero. If not specified, is assumed to
     // be "0 - N/A".
     #[yaserde(rename = "touTier")]
-    pub tou_tier: Toutype,
+    pub tou_tier: Option<Toutype>,
 
     // Value in units specified by ReadingType
     #[yaserde(rename = "value")]
-    pub value: Int48,
+    pub value: Option<Int48>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -3885,7 +3883,7 @@ pub struct Reading {
     // SHALL increase with each interval time, and for block/tier readings,
     // localID SHALL not be specified.
     #[yaserde(rename = "localID")]
-    pub local_id: HexBinary16,
+    pub local_id: Option<HexBinary16>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -3897,7 +3895,7 @@ pub struct Reading {
     // ReadingType numberOfConsumptionBlocks is non-zero. If not specified, is
     // assumed to be "0 - N/A".
     #[yaserde(rename = "consumptionBlock")]
-    pub consumption_block: ConsumptionBlockType,
+    pub consumption_block: Option<ConsumptionBlockType>,
 
     // List of codes indicating the quality of the reading, using specification:
     // Bit 0 - valid: data that has gone through all required validation checks
@@ -3914,22 +3912,22 @@ pub struct Reading {
     // Bit 6 - projected (forecast): data that has been calculated as a
     // projection or forecast of future readings
     #[yaserde(rename = "qualityFlags")]
-    pub quality_flags: HexBinary16,
+    pub quality_flags: Option<HexBinary16>,
 
     // The time interval associated with the reading. If not specified, then
     // defaults to the intervalLength specified in the associated ReadingType.
     #[yaserde(rename = "timePeriod")]
-    pub time_period: DateTimeInterval,
+    pub time_period: Option<DateTimeInterval>,
 
     // Indicates the time of use tier related to the reading. REQUIRED if
     // ReadingType numberOfTouTiers is non-zero. If not specified, is assumed to
     // be "0 - N/A".
     #[yaserde(rename = "touTier")]
-    pub tou_tier: Toutype,
+    pub tou_tier: Option<Toutype>,
 
     // Value in units specified by ReadingType
     #[yaserde(rename = "value")]
-    pub value: Int48,
+    pub value: Option<Int48>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -3981,12 +3979,12 @@ pub struct ReadingSetBase {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -4000,7 +3998,7 @@ impl Validate for ReadingSetBase {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReadingSet {
     #[yaserde(rename = "ReadingListLink")]
-    pub reading_list_link: ReadingListLink,
+    pub reading_list_link: Option<ReadingListLink>,
 
     // Specifies the time range during which the contained readings were taken.
     #[yaserde(rename = "timePeriod")]
@@ -4012,12 +4010,12 @@ pub struct ReadingSet {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -4062,18 +4060,18 @@ pub struct ReadingType {
     // The “accumulation behaviour” indicates how the value is represented
     // to accumulate over time.
     #[yaserde(rename = "accumulationBehaviour")]
-    pub accumulation_behaviour: AccumulationBehaviourType,
+    pub accumulation_behaviour: Option<AccumulationBehaviourType>,
 
     // The amount of heat generated when a given mass of fuel is completely
     // burned. The CalorificValue is used to convert the measured volume or mass
     // of gas into kWh. The CalorificValue attribute represents the current
     // active value.
     #[yaserde(rename = "calorificValue")]
-    pub calorific_value: UnitValueType,
+    pub calorific_value: Option<UnitValueType>,
 
     // Indicates the commodity applicable to this ReadingType.
     #[yaserde(rename = "commodity")]
-    pub commodity: CommodityType,
+    pub commodity: Option<CommodityType>,
 
     // Accounts for changes in the volume of gas based on temperature and
     // pressure. The ConversionFactor attribute represents the current active
@@ -4081,37 +4079,37 @@ pub struct ReadingType {
     // ConversionFactor is 1, which means no conversion is applied. A price
     // server can advertise a new/different value at any time.
     #[yaserde(rename = "conversionFactor")]
-    pub conversion_factor: UnitValueType,
+    pub conversion_factor: Option<UnitValueType>,
 
     // The data type can be used to describe a salient attribute of the data.
     // Possible values are average, absolute, and etc.
     #[yaserde(rename = "dataQualifier")]
-    pub data_qualifier: DataQualifierType,
+    pub data_qualifier: Option<DataQualifierType>,
 
     // Anything involving current might have a flow direction. Possible values
     // include forward and reverse.
     #[yaserde(rename = "flowDirection")]
-    pub flow_direction: FlowDirectionType,
+    pub flow_direction: Option<FlowDirectionType>,
 
     // Default interval length specified in seconds.
     #[yaserde(rename = "intervalLength")]
-    pub interval_length: Uint32,
+    pub interval_length: Option<Uint32>,
 
     // Compound class that contains kindCategory and kindIndex
     #[yaserde(rename = "kind")]
-    pub kind: KindType,
+    pub kind: Option<KindType>,
 
     // To be populated for mirrors of interval data to set the expected number
     // of intervals per ReadingSet. Servers may discard intervals received that
     // exceed this number.
     #[yaserde(rename = "maxNumberOfIntervals")]
-    pub max_number_of_intervals: Uint8,
+    pub max_number_of_intervals: Option<Uint8>,
 
     // Number of consumption blocks. 0 means not applicable, and is the default
     // if not specified. The value needs to be at least 1 if any actual prices
     // are provided.
     #[yaserde(rename = "numberOfConsumptionBlocks")]
-    pub number_of_consumption_blocks: Uint8,
+    pub number_of_consumption_blocks: Option<Uint8>,
 
     // The number of TOU tiers that can be used by any resource configured by
     // this ReadingType. Servers SHALL populate this value with the largest
@@ -4123,16 +4121,16 @@ pub struct ReadingType {
     // pricing SHOULD set numberOfTouTiers to 0, as in practice there is no
     // difference between having no tiers and having one tier).
     #[yaserde(rename = "numberOfTouTiers")]
-    pub number_of_tou_tiers: Uint8,
+    pub number_of_tou_tiers: Option<Uint8>,
 
     // Contains phase information associated with the type.
     #[yaserde(rename = "phase")]
-    pub phase: PhaseCode,
+    pub phase: Option<PhaseCode>,
 
     // Indicates the power of ten multiplier applicable to the unit of measure
     // of this ReadingType.
     #[yaserde(rename = "powerOfTenMultiplier")]
-    pub power_of_ten_multiplier: PowerOfTenMultiplierType,
+    pub power_of_ten_multiplier: Option<PowerOfTenMultiplierType>,
 
     // Default sub-interval length specified in seconds for Readings of
     // ReadingType. Some demand calculations are done over a number of smaller
@@ -4143,25 +4141,25 @@ pub struct ReadingType {
     // intervalLength. The number of sub-intervals can be calculated by dividing
     // the intervalLength by the subintervalLength.
     #[yaserde(rename = "subIntervalLength")]
-    pub sub_interval_length: Uint32,
+    pub sub_interval_length: Option<Uint32>,
 
     // Reflects the supply limit set in the meter. This value can be compared to
     // the Reading value to understand if limits are being approached or
     // exceeded. Units follow the same definition as in this ReadingType.
     #[yaserde(rename = "supplyLimit")]
-    pub supply_limit: Uint48,
+    pub supply_limit: Option<Uint48>,
 
     // Specifies whether or not the consumption blocks are differentiated by
     // TOUTier or not. Default is false, if not specified.
     // true = consumption accumulated over individual tiers
     // false = consumption accumulated over all tiers
     #[yaserde(rename = "tieredConsumptionBlocks")]
-    pub tiered_consumption_blocks: bool,
+    pub tiered_consumption_blocks: Option<bool>,
 
     // Indicates the measurement type for the units of measure for the readings
     // of this type.
     #[yaserde(rename = "uom")]
-    pub uom: UomType,
+    pub uom: Option<UomType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -4194,12 +4192,12 @@ pub struct UsagePointBase {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -4215,10 +4213,10 @@ pub struct UsagePoint {
     // The LFDI of the source device. This attribute SHALL be present when
     // mirroring.
     #[yaserde(rename = "deviceLFDI")]
-    pub device_lfdi: HexBinary160,
+    pub device_lfdi: Option<HexBinary160>,
 
     #[yaserde(rename = "MeterReadingListLink")]
-    pub meter_reading_list_link: MeterReadingListLink,
+    pub meter_reading_list_link: Option<MeterReadingListLink>,
 
     // Specifies the roles that apply to the usage point.
     #[yaserde(rename = "roleFlags")]
@@ -4240,12 +4238,12 @@ pub struct UsagePoint {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -4310,7 +4308,7 @@ pub struct ConsumptionTariffInterval {
     // The Billing function set provides the ability to represent billing
     // information in a more detailed manner.
     #[yaserde(rename = "price")]
-    pub price: Int32,
+    pub price: Option<Int32>,
 
     // The lowest level of consumption that defines the starting point of this
     // consumption step or block. Thresholds start at zero for each billing
@@ -4427,7 +4425,7 @@ impl Validate for EnvironmentalCost {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RateComponent {
     #[yaserde(rename = "ActiveTimeTariffIntervalListLink")]
-    pub active_time_tariff_interval_list_link: ActiveTimeTariffIntervalListLink,
+    pub active_time_tariff_interval_list_link: Option<ActiveTimeTariffIntervalListLink>,
 
     // Specifies the maximum flow rate (e.g. kW for electricity) for which this
     // RateComponent applies, for the usage point and given rate / tariff.
@@ -4451,7 +4449,7 @@ pub struct RateComponent {
     // community can then use as source material for the next version of IEEE
     // 2030.5.
     #[yaserde(rename = "flowRateEndLimit")]
-    pub flow_rate_end_limit: UnitValueType,
+    pub flow_rate_end_limit: Option<UnitValueType>,
 
     // Specifies the minimum flow rate (e.g., kW for electricity) for which this
     // RateComponent applies, for the usage point and given rate / tariff.
@@ -4460,7 +4458,7 @@ pub struct RateComponent {
     // a server includes the flowRateStartLimit attribute, then it SHALL also
     // include flowRateEndLimit attribute.
     #[yaserde(rename = "flowRateStartLimit")]
-    pub flow_rate_start_limit: UnitValueType,
+    pub flow_rate_start_limit: Option<UnitValueType>,
 
     // Provides indication of the ReadingType with which this price is
     // associated.
@@ -4480,12 +4478,12 @@ pub struct RateComponent {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -4523,11 +4521,11 @@ impl Validate for RateComponentList {}
 pub struct TariffProfile {
     // The currency code indicating the currency for this TariffProfile.
     #[yaserde(rename = "currency")]
-    pub currency: CurrencyCode,
+    pub currency: Option<CurrencyCode>,
 
     // Indicates the power of ten multiplier for the price attribute.
     #[yaserde(rename = "pricePowerOfTenMultiplier")]
-    pub price_power_of_ten_multiplier: PowerOfTenMultiplierType,
+    pub price_power_of_ten_multiplier: Option<PowerOfTenMultiplierType>,
 
     // Indicates the relative primacy of the provider of this program.
     #[yaserde(rename = "primacy")]
@@ -4539,10 +4537,10 @@ pub struct TariffProfile {
     // This would typically not be communicated to the user except to facilitate
     // troubleshooting due to its service provider-specific technical nature.
     #[yaserde(rename = "rateCode")]
-    pub rate_code: String20,
+    pub rate_code: Option<String20>,
 
     #[yaserde(rename = "RateComponentListLink")]
-    pub rate_component_list_link: RateComponentListLink,
+    pub rate_component_list_link: Option<RateComponentListLink>,
 
     // The kind of service provided by this usage point.
     #[yaserde(rename = "serviceCategoryKind")]
@@ -4554,12 +4552,12 @@ pub struct TariffProfile {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -4609,7 +4607,7 @@ impl Validate for TariffProfileList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TimeTariffInterval {
     #[yaserde(rename = "ConsumptionTariffIntervalListLink")]
-    pub consumption_tariff_interval_list_link: ConsumptionTariffIntervalListLink,
+    pub consumption_tariff_interval_list_link: Option<ConsumptionTariffIntervalListLink>,
 
     // Indicates the time of use tier related to the reading. If not specified,
     // is assumed to be "0 - N/A".
@@ -4622,7 +4620,7 @@ pub struct TimeTariffInterval {
     // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
     // default.
     #[yaserde(rename = "randomizeDuration")]
-    pub randomize_duration: OneHourRangeType,
+    pub randomize_duration: Option<OneHourRangeType>,
 
     // Number of seconds boundary inside which a random value must be selected
     // to be applied to the associated interval start time, to avoid sudden
@@ -4630,7 +4628,7 @@ pub struct TimeTariffInterval {
     // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
     // default.
     #[yaserde(rename = "randomizeStart")]
-    pub randomize_start: OneHourRangeType,
+    pub randomize_start: Option<OneHourRangeType>,
 
     // The time at which the Event was created.
     #[yaserde(rename = "creationTime")]
@@ -4649,12 +4647,12 @@ pub struct TimeTariffInterval {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -4728,7 +4726,7 @@ impl Validate for TimeTariffIntervalList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MessagingProgram {
     #[yaserde(rename = "ActiveTextMessageListLink")]
-    pub active_text_message_list_link: ActiveTextMessageListLink,
+    pub active_text_message_list_link: Option<ActiveTextMessageListLink>,
 
     // Indicates the language and region of the messages in this collection.
     #[yaserde(rename = "locale")]
@@ -4739,7 +4737,7 @@ pub struct MessagingProgram {
     pub primacy: PrimacyType,
 
     #[yaserde(rename = "TextMessageListLink")]
-    pub text_message_list_link: TextMessageListLink,
+    pub text_message_list_link: Option<TextMessageListLink>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -4747,12 +4745,12 @@ pub struct MessagingProgram {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -4823,7 +4821,7 @@ impl Validate for PriorityType {}
 pub struct TextMessage {
     // Indicates the human-readable name of the publisher of the message
     #[yaserde(rename = "originator")]
-    pub originator: String20,
+    pub originator: Option<String20>,
 
     // The priority is used to inform the client of the priority of the
     // particular message. Devices with constrained or limited resources for
@@ -4861,12 +4859,12 @@ pub struct TextMessage {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -4941,11 +4939,11 @@ impl Validate for TextMessageList {}
 pub struct BillingPeriod {
     // The amount of the bill for the previous billing period.
     #[yaserde(rename = "billLastPeriod")]
-    pub bill_last_period: Int48,
+    pub bill_last_period: Option<Int48>,
 
     // The bill amount related to the billing period as of the statusTimeStamp.
     #[yaserde(rename = "billToDate")]
-    pub bill_to_date: Int48,
+    pub bill_to_date: Option<Int48>,
 
     // The time interval for this billing period.
     #[yaserde(rename = "interval")]
@@ -4953,7 +4951,7 @@ pub struct BillingPeriod {
 
     // The date / time of the last update of this resource.
     #[yaserde(rename = "statusTimeStamp")]
-    pub status_time_stamp: TimeType,
+    pub status_time_stamp: Option<TimeType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -4996,10 +4994,10 @@ impl Validate for BillingPeriodList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingMeterReadingBase {
     #[yaserde(rename = "BillingReadingSetListLink")]
-    pub billing_reading_set_list_link: BillingReadingSetListLink,
+    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
 
     #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: ReadingTypeLink,
+    pub reading_type_link: Option<ReadingTypeLink>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -5007,12 +5005,12 @@ pub struct BillingMeterReadingBase {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -5032,7 +5030,7 @@ pub struct BillingReading {
     // ReadingType numberOfConsumptionBlocks is non-zero. If not specified, is
     // assumed to be "0 - N/A".
     #[yaserde(rename = "consumptionBlock")]
-    pub consumption_block: ConsumptionBlockType,
+    pub consumption_block: Option<ConsumptionBlockType>,
 
     // List of codes indicating the quality of the reading, using specification:
     // Bit 0 - valid: data that has gone through all required validation checks
@@ -5049,22 +5047,22 @@ pub struct BillingReading {
     // Bit 6 - projected (forecast): data that has been calculated as a
     // projection or forecast of future readings
     #[yaserde(rename = "qualityFlags")]
-    pub quality_flags: HexBinary16,
+    pub quality_flags: Option<HexBinary16>,
 
     // The time interval associated with the reading. If not specified, then
     // defaults to the intervalLength specified in the associated ReadingType.
     #[yaserde(rename = "timePeriod")]
-    pub time_period: DateTimeInterval,
+    pub time_period: Option<DateTimeInterval>,
 
     // Indicates the time of use tier related to the reading. REQUIRED if
     // ReadingType numberOfTouTiers is non-zero. If not specified, is assumed to
     // be "0 - N/A".
     #[yaserde(rename = "touTier")]
-    pub tou_tier: Toutype,
+    pub tou_tier: Option<Toutype>,
 
     // Value in units specified by ReadingType
     #[yaserde(rename = "value")]
-    pub value: Int48,
+    pub value: Option<Int48>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -5101,7 +5099,7 @@ impl Validate for BillingReadingList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingReadingSet {
     #[yaserde(rename = "BillingReadingListLink")]
-    pub billing_reading_list_link: BillingReadingListLink,
+    pub billing_reading_list_link: Option<BillingReadingListLink>,
 
     // Specifies the time range during which the contained readings were taken.
     #[yaserde(rename = "timePeriod")]
@@ -5113,12 +5111,12 @@ pub struct BillingReadingSet {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -5171,11 +5169,11 @@ impl Validate for BillingReadingSetList {}
 pub struct Charge {
     // A description of the charge.
     #[yaserde(rename = "description")]
-    pub description: String20,
+    pub description: Option<String20>,
 
     // The type (kind) of charge.
     #[yaserde(rename = "kind")]
-    pub kind: ChargeKind,
+    pub kind: Option<ChargeKind>,
 
     // A monetary charge.
     #[yaserde(rename = "value")]
@@ -5210,14 +5208,14 @@ pub struct CustomerAccount {
 
     // The account number for the customer (if applicable).
     #[yaserde(rename = "customerAccount")]
-    pub customer_account: String42,
+    pub customer_account: Option<String42>,
 
     #[yaserde(rename = "CustomerAgreementListLink")]
-    pub customer_agreement_list_link: CustomerAgreementListLink,
+    pub customer_agreement_list_link: Option<CustomerAgreementListLink>,
 
     // The name of the customer.
     #[yaserde(rename = "customerName")]
-    pub customer_name: String42,
+    pub customer_name: Option<String42>,
 
     // Indicates the power of ten multiplier for the prices in this function
     // set.
@@ -5225,7 +5223,7 @@ pub struct CustomerAccount {
     pub price_power_of_ten_multiplier: PowerOfTenMultiplierType,
 
     #[yaserde(rename = "ServiceSupplierLink")]
-    pub service_supplier_link: ServiceSupplierLink,
+    pub service_supplier_link: Option<ServiceSupplierLink>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -5233,12 +5231,12 @@ pub struct CustomerAccount {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -5288,42 +5286,42 @@ impl Validate for CustomerAccountList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CustomerAgreement {
     #[yaserde(rename = "ActiveBillingPeriodListLink")]
-    pub active_billing_period_list_link: ActiveBillingPeriodListLink,
+    pub active_billing_period_list_link: Option<ActiveBillingPeriodListLink>,
 
     #[yaserde(rename = "ActiveProjectionReadingListLink")]
-    pub active_projection_reading_list_link: ActiveProjectionReadingListLink,
+    pub active_projection_reading_list_link: Option<ActiveProjectionReadingListLink>,
 
     #[yaserde(rename = "ActiveTargetReadingListLink")]
-    pub active_target_reading_list_link: ActiveTargetReadingListLink,
+    pub active_target_reading_list_link: Option<ActiveTargetReadingListLink>,
 
     #[yaserde(rename = "BillingPeriodListLink")]
-    pub billing_period_list_link: BillingPeriodListLink,
+    pub billing_period_list_link: Option<BillingPeriodListLink>,
 
     #[yaserde(rename = "HistoricalReadingListLink")]
-    pub historical_reading_list_link: HistoricalReadingListLink,
+    pub historical_reading_list_link: Option<HistoricalReadingListLink>,
 
     #[yaserde(rename = "PrepaymentLink")]
-    pub prepayment_link: PrepaymentLink,
+    pub prepayment_link: Option<PrepaymentLink>,
 
     #[yaserde(rename = "ProjectionReadingListLink")]
-    pub projection_reading_list_link: ProjectionReadingListLink,
+    pub projection_reading_list_link: Option<ProjectionReadingListLink>,
 
     // The account number of the service account (if applicable).
     #[yaserde(rename = "serviceAccount")]
-    pub service_account: String42,
+    pub service_account: Option<String42>,
 
     // The address or textual description of the service location.
     #[yaserde(rename = "serviceLocation")]
-    pub service_location: String42,
+    pub service_location: Option<String42>,
 
     #[yaserde(rename = "TargetReadingListLink")]
-    pub target_reading_list_link: TargetReadingListLink,
+    pub target_reading_list_link: Option<TargetReadingListLink>,
 
     #[yaserde(rename = "TariffProfileLink")]
-    pub tariff_profile_link: TariffProfileLink,
+    pub tariff_profile_link: Option<TariffProfileLink>,
 
     #[yaserde(rename = "UsagePointLink")]
-    pub usage_point_link: UsagePointLink,
+    pub usage_point_link: Option<UsagePointLink>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -5331,12 +5329,12 @@ pub struct CustomerAgreement {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -5379,10 +5377,10 @@ impl Validate for CustomerAgreementList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct HistoricalReading {
     #[yaserde(rename = "BillingReadingSetListLink")]
-    pub billing_reading_set_list_link: BillingReadingSetListLink,
+    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
 
     #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: ReadingTypeLink,
+    pub reading_type_link: Option<ReadingTypeLink>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -5390,12 +5388,12 @@ pub struct HistoricalReading {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -5432,10 +5430,10 @@ impl Validate for HistoricalReadingList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ProjectionReading {
     #[yaserde(rename = "BillingReadingSetListLink")]
-    pub billing_reading_set_list_link: BillingReadingSetListLink,
+    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
 
     #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: ReadingTypeLink,
+    pub reading_type_link: Option<ReadingTypeLink>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -5443,12 +5441,12 @@ pub struct ProjectionReading {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -5485,10 +5483,10 @@ impl Validate for ProjectionReadingList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TargetReading {
     #[yaserde(rename = "BillingReadingSetListLink")]
-    pub billing_reading_set_list_link: BillingReadingSetListLink,
+    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
 
     #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: ReadingTypeLink,
+    pub reading_type_link: Option<ReadingTypeLink>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -5496,12 +5494,12 @@ pub struct TargetReading {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -5539,19 +5537,19 @@ impl Validate for TargetReadingList {}
 pub struct ServiceSupplier {
     // E-mail address for this service supplier.
     #[yaserde(rename = "email")]
-    pub email: String32,
+    pub email: Option<String32>,
 
     // Human-readable phone number for this service supplier.
     #[yaserde(rename = "phone")]
-    pub phone: String20,
+    pub phone: Option<String20>,
 
     // Contains the IANA PEN for the commodity provider.
     #[yaserde(rename = "providerID")]
-    pub provider_id: Uint32,
+    pub provider_id: Option<Uint32>,
 
     // Website URI address for this service supplier.
     #[yaserde(rename = "web")]
-    pub web: String42,
+    pub web: Option<String42>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -5559,12 +5557,12 @@ pub struct ServiceSupplier {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -5614,18 +5612,18 @@ pub struct AccountBalance {
     // CreditStatus identifies whether the present value of availableCredit is
     // considered OK, low, exhausted, or negative.
     #[yaserde(rename = "creditStatus")]
-    pub credit_status: CreditStatusType,
+    pub credit_status: Option<CreditStatusType>,
 
     // EmergencyCredit is the amount of credit still available for the given
     // service or commodity prepayment instance. If both availableCredit and
     // emergyCredit are exhausted, then service will typically be disconnected.
     #[yaserde(rename = "emergencyCredit")]
-    pub emergency_credit: AccountingUnit,
+    pub emergency_credit: Option<AccountingUnit>,
 
     // EmergencyCreditStatus identifies whether the present value of
     // emergencyCredit is considered OK, low, exhausted, or negative.
     #[yaserde(rename = "emergencyCreditStatus")]
-    pub emergency_credit_status: CreditStatusType,
+    pub emergency_credit_status: Option<CreditStatusType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -5642,7 +5640,7 @@ impl Validate for AccountBalance {}
 pub struct AccountingUnit {
     // Unit of service.
     #[yaserde(rename = "energyUnit")]
-    pub energy_unit: RealEnergy,
+    pub energy_unit: Option<RealEnergy>,
 
     // Unit of currency.
     #[yaserde(rename = "monetaryUnit")]
@@ -5671,7 +5669,7 @@ pub struct CreditRegister {
     // CreditType indicates whether the credit transaction applies to regular or
     // emergency credit.
     #[yaserde(rename = "creditType")]
-    pub credit_type: CreditTypeType,
+    pub credit_type: Option<CreditTypeType>,
 
     // EffectiveTime identifies the time at which the credit transaction goes
     // into effect. For credit addition transactions, this is typically the
@@ -5694,12 +5692,12 @@ pub struct CreditRegister {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -5739,10 +5737,11 @@ pub struct Prepayment {
     pub account_balance_link: AccountBalanceLink,
 
     #[yaserde(rename = "ActiveCreditRegisterListLink")]
-    pub active_credit_register_list_link: ActiveCreditRegisterListLink,
+    pub active_credit_register_list_link: Option<ActiveCreditRegisterListLink>,
 
     #[yaserde(rename = "ActiveSupplyInterruptionOverrideListLink")]
-    pub active_supply_interruption_override_list_link: ActiveSupplyInterruptionOverrideListLink,
+    pub active_supply_interruption_override_list_link:
+        Option<ActiveSupplyInterruptionOverrideListLink>,
 
     // CreditExpiryLevel is the set point for availableCredit at which the
     // service level may be changed. The typical value for this attribute is 0,
@@ -5750,7 +5749,7 @@ pub struct Prepayment {
     // commodity basis. The units for this attribute SHALL match the units used
     // for availableCredit.
     #[yaserde(rename = "creditExpiryLevel")]
-    pub credit_expiry_level: AccountingUnit,
+    pub credit_expiry_level: Option<AccountingUnit>,
 
     #[yaserde(rename = "CreditRegisterListLink")]
     pub credit_register_list_link: CreditRegisterListLink,
@@ -5761,7 +5760,7 @@ pub struct Prepayment {
     // units used for availableCredit. Typically, this value is set by the
     // service provider.
     #[yaserde(rename = "lowCreditWarningLevel")]
-    pub low_credit_warning_level: AccountingUnit,
+    pub low_credit_warning_level: Option<AccountingUnit>,
 
     // LowEmergencyCreditWarningLevel is the set point for emergencyCredit at
     // which the creditStatus attribute in the AccountBalance resource SHALL
@@ -5769,7 +5768,7 @@ pub struct Prepayment {
     // match the units used for availableCredit. Typically, this value is set by
     // the service provider.
     #[yaserde(rename = "lowEmergencyCreditWarningLevel")]
-    pub low_emergency_credit_warning_level: AccountingUnit,
+    pub low_emergency_credit_warning_level: Option<AccountingUnit>,
 
     // PrepayMode specifies whether the given Prepayment instance is operating
     // in Credit, Central Wallet, ESI, or Local prepayment mode. The Credit mode
@@ -5788,7 +5787,7 @@ pub struct Prepayment {
     pub usage_point: Vec<UsagePoint>,
 
     #[yaserde(rename = "UsagePointLink")]
-    pub usage_point_link: UsagePointLink,
+    pub usage_point_link: Option<UsagePointLink>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -5796,12 +5795,12 @@ pub struct Prepayment {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -5867,17 +5866,17 @@ pub struct PrepayOperationStatus {
     // CreditTypeChange is used to define a pending change of creditTypeInUse,
     // which will activate at a specified time.
     #[yaserde(rename = "creditTypeChange")]
-    pub credit_type_change: CreditTypeChange,
+    pub credit_type_change: Option<CreditTypeChange>,
 
     // CreditTypeInUse identifies whether the present mode of operation is
     // consuming regular credit or emergency credit.
     #[yaserde(rename = "creditTypeInUse")]
-    pub credit_type_in_use: CreditTypeType,
+    pub credit_type_in_use: Option<CreditTypeType>,
 
     // ServiceChange is used to define a pending change of serviceStatus, which
     // will activate at a specified time.
     #[yaserde(rename = "serviceChange")]
-    pub service_change: ServiceChange,
+    pub service_change: Option<ServiceChange>,
 
     // ServiceStatus identifies whether the service is connected or
     // disconnected, or armed for connection or disconnection.
@@ -5912,7 +5911,7 @@ impl Validate for ServiceChange {}
 pub struct SupplyInterruptionOverride {
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Interval defines the period of time during which supply should not be
     // interrupted.
@@ -6042,7 +6041,7 @@ pub struct FlowReservationRequest {
     // transaction, including any ramp times and conditioning times, if
     // applicable.
     #[yaserde(rename = "durationRequested")]
-    pub duration_requested: Uint16,
+    pub duration_requested: Option<Uint16>,
 
     // Indicates the total amount of energy, in Watt-Hours, requested to be
     // transferred between the storage device and the electric power system.
@@ -6079,12 +6078,12 @@ pub struct FlowReservationRequest {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -6158,12 +6157,12 @@ pub struct FlowReservationResponse {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -6250,45 +6249,45 @@ pub struct DefaultDERControl {
     // SHALL update the value of the corresponding setting
     // (DERSettings::setESDelay).
     #[yaserde(rename = "setESDelay")]
-    pub set_es_delay: Uint32,
+    pub set_es_delay: Option<Uint32>,
 
     // Enter service frequency high. Specified in hundredths of Hz. When
     // present, this value SHALL update the value of the corresponding setting
     // (DERSettings::setESHighFreq).
     #[yaserde(rename = "setESHighFreq")]
-    pub set_es_high_freq: Uint16,
+    pub set_es_high_freq: Option<Uint16>,
 
     // Enter service voltage high. Specified as an effective percent voltage,
     // defined as (100% * (locally measured voltage - setVRefOfs) / setVRef), in
     // hundredths of a percent. When present, this value SHALL update the value
     // of the corresponding setting (DERSettings::setESHighVolt).
     #[yaserde(rename = "setESHighVolt")]
-    pub set_es_high_volt: Int16,
+    pub set_es_high_volt: Option<Int16>,
 
     // Enter service frequency low. Specified in hundredths of Hz. When present,
     // this value SHALL update the value of the corresponding setting
     // (DERSettings::setESLowFreq).
     #[yaserde(rename = "setESLowFreq")]
-    pub set_es_low_freq: Uint16,
+    pub set_es_low_freq: Option<Uint16>,
 
     // Enter service voltage low. Specified as an effective percent voltage,
     // defined as (100% * (locally measured voltage - setVRefOfs) / setVRef), in
     // hundredths of a percent. When present, this value SHALL update the value
     // of the corresponding setting (DERSettings::setESLowVolt).
     #[yaserde(rename = "setESLowVolt")]
-    pub set_es_low_volt: Int16,
+    pub set_es_low_volt: Option<Int16>,
 
     // Enter service ramp time, in hundredths of a second. When present, this
     // value SHALL update the value of the corresponding setting
     // (DERSettings::setESRampTms).
     #[yaserde(rename = "setESRampTms")]
-    pub set_es_ramp_tms: Uint32,
+    pub set_es_ramp_tms: Option<Uint32>,
 
     // Enter service randomized delay, in hundredths of a second. When present,
     // this value SHALL update the value of the corresponding setting
     // (DERSettings::setESRandomDelay).
     #[yaserde(rename = "setESRandomDelay")]
-    pub set_es_random_delay: Uint32,
+    pub set_es_random_delay: Option<Uint32>,
 
     // Set default rate of change (ramp rate) of active power output due to
     // command or internal action, defined in %setWMax / second. Resolution is
@@ -6297,7 +6296,7 @@ pub struct DefaultDERControl {
     // when used as a default ramp rate. When present, this value SHALL update
     // the value of the corresponding setting (DERSettings::setGradW).
     #[yaserde(rename = "setGradW")]
-    pub set_grad_w: Uint16,
+    pub set_grad_w: Option<Uint16>,
 
     // Set soft-start rate of change (soft-start ramp rate) of active power
     // output due to command or internal action, defined in %setWMax / second.
@@ -6307,7 +6306,7 @@ pub struct DefaultDERControl {
     // update the value of the corresponding setting
     // (DERSettings::setSoftGradW).
     #[yaserde(rename = "setSoftGradW")]
-    pub set_soft_grad_w: Uint16,
+    pub set_soft_grad_w: Option<Uint16>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -6315,12 +6314,12 @@ pub struct DefaultDERControl {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -6376,25 +6375,25 @@ impl Validate for FreqDroopType {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Der {
     #[yaserde(rename = "AssociatedDERProgramListLink")]
-    pub associated_der_program_list_link: AssociatedDERProgramListLink,
+    pub associated_der_program_list_link: Option<AssociatedDERProgramListLink>,
 
     #[yaserde(rename = "AssociatedUsagePointLink")]
-    pub associated_usage_point_link: AssociatedUsagePointLink,
+    pub associated_usage_point_link: Option<AssociatedUsagePointLink>,
 
     #[yaserde(rename = "CurrentDERProgramLink")]
-    pub current_der_program_link: CurrentDERProgramLink,
+    pub current_der_program_link: Option<CurrentDERProgramLink>,
 
     #[yaserde(rename = "DERAvailabilityLink")]
-    pub der_availability_link: DeravailabilityLink,
+    pub der_availability_link: Option<DeravailabilityLink>,
 
     #[yaserde(rename = "DERCapabilityLink")]
-    pub der_capability_link: DercapabilityLink,
+    pub der_capability_link: Option<DercapabilityLink>,
 
     #[yaserde(rename = "DERSettingsLink")]
-    pub der_settings_link: DersettingsLink,
+    pub der_settings_link: Option<DersettingsLink>,
 
     #[yaserde(rename = "DERStatusLink")]
-    pub der_status_link: DerstatusLink,
+    pub der_status_link: Option<DerstatusLink>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -6448,39 +6447,39 @@ pub struct Dersettings {
     // DERCapability::modesSupported), but not enabled, the control will not be
     // executed if encountered.
     #[yaserde(rename = "modesEnabled")]
-    pub modes_enabled: DercontrolType,
+    pub modes_enabled: Option<DercontrolType>,
 
     // Enter service delay, in hundredths of a second.
     #[yaserde(rename = "setESDelay")]
-    pub set_es_delay: Uint32,
+    pub set_es_delay: Option<Uint32>,
 
     // Enter service frequency high. Specified in hundredths of Hz.
     #[yaserde(rename = "setESHighFreq")]
-    pub set_es_high_freq: Uint16,
+    pub set_es_high_freq: Option<Uint16>,
 
     // Enter service voltage high. Specified as an effective percent voltage,
     // defined as (100% * (locally measured voltage - setVRefOfs) / setVRef), in
     // hundredths of a percent.
     #[yaserde(rename = "setESHighVolt")]
-    pub set_es_high_volt: Int16,
+    pub set_es_high_volt: Option<Int16>,
 
     // Enter service frequency low. Specified in hundredths of Hz.
     #[yaserde(rename = "setESLowFreq")]
-    pub set_es_low_freq: Uint16,
+    pub set_es_low_freq: Option<Uint16>,
 
     // Enter service voltage low. Specified as an effective percent voltage,
     // defined as (100% * (locally measured voltage - setVRefOfs) / setVRef), in
     // hundredths of a percent.
     #[yaserde(rename = "setESLowVolt")]
-    pub set_es_low_volt: Int16,
+    pub set_es_low_volt: Option<Int16>,
 
     // Enter service ramp time, in hundredths of a second.
     #[yaserde(rename = "setESRampTms")]
-    pub set_es_ramp_tms: Uint32,
+    pub set_es_ramp_tms: Option<Uint32>,
 
     // Enter service randomized delay, in hundredths of a second.
     #[yaserde(rename = "setESRandomDelay")]
-    pub set_es_random_delay: Uint32,
+    pub set_es_random_delay: Option<Uint32>,
 
     // Set default rate of change (ramp rate) of active power output due to
     // command or internal action, defined in %setWMax / second. Resolution is
@@ -6492,54 +6491,54 @@ pub struct Dersettings {
 
     // AC current maximum. Maximum AC current in RMS Amperes.
     #[yaserde(rename = "setMaxA")]
-    pub set_max_a: CurrentRMS,
+    pub set_max_a: Option<CurrentRMS>,
 
     // Maximum usable energy storage capacity of the DER, in AmpHours. Note:
     // this may be different from physical capability.
     #[yaserde(rename = "setMaxAh")]
-    pub set_max_ah: AmpereHour,
+    pub set_max_ah: Option<AmpereHour>,
 
     // Apparent power charge maximum. Maximum apparent power the DER can absorb
     // from the grid in Volt-Amperes. May differ from the apparent power maximum
     // (setMaxVA).
     #[yaserde(rename = "setMaxChargeRateVA")]
-    pub set_max_charge_rate_va: ApparentPower,
+    pub set_max_charge_rate_va: Option<ApparentPower>,
 
     // Maximum rate of energy transfer received by the storage device, in Watts.
     // Defaults to rtgMaxChargeRateW.
     #[yaserde(rename = "setMaxChargeRateW")]
-    pub set_max_charge_rate_w: ActivePower,
+    pub set_max_charge_rate_w: Option<ActivePower>,
 
     // Apparent power discharge maximum. Maximum apparent power the DER can
     // deliver to the grid in Volt-Amperes. May differ from the apparent power
     // maximum (setMaxVA).
     #[yaserde(rename = "setMaxDischargeRateVA")]
-    pub set_max_discharge_rate_va: ApparentPower,
+    pub set_max_discharge_rate_va: Option<ApparentPower>,
 
     // Maximum rate of energy transfer delivered by the storage device, in
     // Watts. Defaults to rtgMaxDischargeRateW.
     #[yaserde(rename = "setMaxDischargeRateW")]
-    pub set_max_discharge_rate_w: ActivePower,
+    pub set_max_discharge_rate_w: Option<ActivePower>,
 
     // AC voltage maximum setting.
     #[yaserde(rename = "setMaxV")]
-    pub set_max_v: VoltageRMS,
+    pub set_max_v: Option<VoltageRMS>,
 
     // Set limit for maximum apparent power capability of the DER (in VA).
     // Defaults to rtgMaxVA.
     #[yaserde(rename = "setMaxVA")]
-    pub set_max_va: ApparentPower,
+    pub set_max_va: Option<ApparentPower>,
 
     // Set limit for maximum reactive power delivered by the DER (in var). SHALL
     // be a positive value &lt;= rtgMaxVar (default).
     #[yaserde(rename = "setMaxVar")]
-    pub set_max_var: ReactivePower,
+    pub set_max_var: Option<ReactivePower>,
 
     // Set limit for maximum reactive power received by the DER (in var). If
     // present, SHALL be a negative value &gt;= rtgMaxVarNeg (default). If
     // absent, defaults to negative setMaxVar.
     #[yaserde(rename = "setMaxVarNeg")]
-    pub set_max_var_neg: ReactivePower,
+    pub set_max_var_neg: Option<ReactivePower>,
 
     // Set limit for maximum active power capability of the DER (in W). Defaults
     // to rtgMaxW.
@@ -6549,14 +6548,14 @@ pub struct Dersettings {
     // Maximum energy storage capacity of the DER, in WattHours. Note: this may
     // be different from physical capability.
     #[yaserde(rename = "setMaxWh")]
-    pub set_max_wh: WattHour,
+    pub set_max_wh: Option<WattHour>,
 
     // Set minimum Power Factor displacement limit of the DER when injecting
     // reactive power (over-excited); SHALL be a positive value between 0.0
     // (typically &gt; 0.7) and 1.0. SHALL be &gt;= rtgMinPFOverExcited
     // (default).
     #[yaserde(rename = "setMinPFOverExcited")]
-    pub set_min_pf_over_excited: PowerFactor,
+    pub set_min_pf_over_excited: Option<PowerFactor>,
 
     // Set minimum Power Factor displacement limit of the DER when absorbing
     // reactive power (under-excited); SHALL be a positive value between 0.0
@@ -6564,11 +6563,11 @@ pub struct Dersettings {
     // rtgMinPFUnderExcited (default). If absent, defaults to
     // setMinPFOverExcited.
     #[yaserde(rename = "setMinPFUnderExcited")]
-    pub set_min_pf_under_excited: PowerFactor,
+    pub set_min_pf_under_excited: Option<PowerFactor>,
 
     // AC voltage minimum setting.
     #[yaserde(rename = "setMinV")]
-    pub set_min_v: VoltageRMS,
+    pub set_min_v: Option<VoltageRMS>,
 
     // Set soft-start rate of change (soft-start ramp rate) of active power
     // output due to command or internal action, defined in %setWMax / second.
@@ -6576,20 +6575,20 @@ pub struct Dersettings {
     // is no limit. Interpreted as a percentage change in output capability
     // limit per second when used as a ramp rate.
     #[yaserde(rename = "setSoftGradW")]
-    pub set_soft_grad_w: Uint16,
+    pub set_soft_grad_w: Option<Uint16>,
 
     // AC voltage nominal setting.
     #[yaserde(rename = "setVNom")]
-    pub set_v_nom: VoltageRMS,
+    pub set_v_nom: Option<VoltageRMS>,
 
     // The nominal AC voltage (RMS) at the utility's point of common coupling.
     #[yaserde(rename = "setVRef")]
-    pub set_v_ref: VoltageRMS,
+    pub set_v_ref: Option<VoltageRMS>,
 
     // The nominal AC voltage (RMS) offset between the DER's electrical
     // connection point and the utility's point of common coupling.
     #[yaserde(rename = "setVRefOfs")]
-    pub set_v_ref_ofs: VoltageRMS,
+    pub set_v_ref_ofs: Option<VoltageRMS>,
 
     // Specifies the time at which the DER information was last updated.
     #[yaserde(rename = "updatedTime")]
@@ -6639,12 +6638,12 @@ pub struct Deravailability {
     // Indicates number of seconds the DER will be able to deliver active power
     // at the reservePercent level.
     #[yaserde(rename = "availabilityDuration")]
-    pub availability_duration: Uint32,
+    pub availability_duration: Option<Uint32>,
 
     // Indicates number of seconds the DER will be able to receive active power
     // at the reserveChargePercent level.
     #[yaserde(rename = "maxChargeDuration")]
-    pub max_charge_duration: Uint32,
+    pub max_charge_duration: Option<Uint32>,
 
     // The timestamp when the DER availability was last updated.
     #[yaserde(rename = "readingTime")]
@@ -6653,21 +6652,21 @@ pub struct Deravailability {
     // Percent of continuous received active power (%setMaxChargeRateW) that is
     // estimated to be available in reserve.
     #[yaserde(rename = "reserveChargePercent")]
-    pub reserve_charge_percent: PerCent,
+    pub reserve_charge_percent: Option<PerCent>,
 
     // Percent of continuous delivered active power (%setMaxW) that is estimated
     // to be available in reserve.
     #[yaserde(rename = "reservePercent")]
-    pub reserve_percent: PerCent,
+    pub reserve_percent: Option<PerCent>,
 
     // Estimated reserve reactive power, in var. Represents the lesser of
     // received or delivered reactive power.
     #[yaserde(rename = "statVarAvail")]
-    pub stat_var_avail: ReactivePower,
+    pub stat_var_avail: Option<ReactivePower>,
 
     // Estimated reserve active power, in watts.
     #[yaserde(rename = "statWAvail")]
-    pub stat_w_avail: ActivePower,
+    pub stat_w_avail: Option<ActivePower>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -6699,51 +6698,51 @@ pub struct Dercapability {
     // 3 - Category III
     // All other values reserved.
     #[yaserde(rename = "rtgAbnormalCategory")]
-    pub rtg_abnormal_category: Uint8,
+    pub rtg_abnormal_category: Option<Uint8>,
 
     // Maximum continuous AC current capability of the DER, in Amperes (RMS).
     #[yaserde(rename = "rtgMaxA")]
-    pub rtg_max_a: CurrentRMS,
+    pub rtg_max_a: Option<CurrentRMS>,
 
     // Usable energy storage capacity of the DER, in AmpHours.
     #[yaserde(rename = "rtgMaxAh")]
-    pub rtg_max_ah: AmpereHour,
+    pub rtg_max_ah: Option<AmpereHour>,
 
     // Maximum apparent power charge rating in Volt-Amperes. May differ from the
     // maximum apparent power rating.
     #[yaserde(rename = "rtgMaxChargeRateVA")]
-    pub rtg_max_charge_rate_va: ApparentPower,
+    pub rtg_max_charge_rate_va: Option<ApparentPower>,
 
     // Maximum rate of energy transfer received by the storage DER, in Watts.
     #[yaserde(rename = "rtgMaxChargeRateW")]
-    pub rtg_max_charge_rate_w: ActivePower,
+    pub rtg_max_charge_rate_w: Option<ActivePower>,
 
     // Maximum apparent power discharge rating in Volt-Amperes. May differ from
     // the maximum apparent power rating.
     #[yaserde(rename = "rtgMaxDischargeRateVA")]
-    pub rtg_max_discharge_rate_va: ApparentPower,
+    pub rtg_max_discharge_rate_va: Option<ApparentPower>,
 
     // Maximum rate of energy transfer delivered by the storage DER, in Watts.
     // Required for combined generation/storage DERs (e.g. DERType == 83).
     #[yaserde(rename = "rtgMaxDischargeRateW")]
-    pub rtg_max_discharge_rate_w: ActivePower,
+    pub rtg_max_discharge_rate_w: Option<ActivePower>,
 
     // AC voltage maximum rating.
     #[yaserde(rename = "rtgMaxV")]
-    pub rtg_max_v: VoltageRMS,
+    pub rtg_max_v: Option<VoltageRMS>,
 
     // Maximum continuous apparent power output capability of the DER, in VA.
     #[yaserde(rename = "rtgMaxVA")]
-    pub rtg_max_va: ApparentPower,
+    pub rtg_max_va: Option<ApparentPower>,
 
     // Maximum continuous reactive power delivered by the DER, in var.
     #[yaserde(rename = "rtgMaxVar")]
-    pub rtg_max_var: ReactivePower,
+    pub rtg_max_var: Option<ReactivePower>,
 
     // Maximum continuous reactive power received by the DER, in var. If absent,
     // defaults to negative rtgMaxVar.
     #[yaserde(rename = "rtgMaxVarNeg")]
-    pub rtg_max_var_neg: ReactivePower,
+    pub rtg_max_var_neg: Option<ReactivePower>,
 
     // Maximum continuous active power output capability of the DER, in watts.
     // Represents combined generation plus storage output if DERType == 83.
@@ -6752,24 +6751,24 @@ pub struct Dercapability {
 
     // Maximum energy storage capacity of the DER, in WattHours.
     #[yaserde(rename = "rtgMaxWh")]
-    pub rtg_max_wh: WattHour,
+    pub rtg_max_wh: Option<WattHour>,
 
     // Minimum Power Factor displacement capability of the DER when injecting
     // reactive power (over-excited); SHALL be a positive value between 0.0
     // (typically &gt; 0.7) and 1.0. If absent, defaults to unity.
     #[yaserde(rename = "rtgMinPFOverExcited")]
-    pub rtg_min_pf_over_excited: PowerFactor,
+    pub rtg_min_pf_over_excited: Option<PowerFactor>,
 
     // Minimum Power Factor displacement capability of the DER when absorbing
     // reactive power (under-excited); SHALL be a positive value between 0.0
     // (typically &gt; 0.7) and 0.9999. If absent, defaults to
     // rtgMinPFOverExcited.
     #[yaserde(rename = "rtgMinPFUnderExcited")]
-    pub rtg_min_pf_under_excited: PowerFactor,
+    pub rtg_min_pf_under_excited: Option<PowerFactor>,
 
     // AC voltage minimum rating.
     #[yaserde(rename = "rtgMinV")]
-    pub rtg_min_v: VoltageRMS,
+    pub rtg_min_v: Option<VoltageRMS>,
 
     // Normal operating performance category as defined by IEEE 1547-2018. One
     // of:
@@ -6778,34 +6777,34 @@ pub struct Dercapability {
     // 2 - Category B
     // All other values reserved.
     #[yaserde(rename = "rtgNormalCategory")]
-    pub rtg_normal_category: Uint8,
+    pub rtg_normal_category: Option<Uint8>,
 
     // Specified over-excited power factor.
     #[yaserde(rename = "rtgOverExcitedPF")]
-    pub rtg_over_excited_pf: PowerFactor,
+    pub rtg_over_excited_pf: Option<PowerFactor>,
 
     // Active power rating in Watts at specified over-excited power factor
     // (rtgOverExcitedPF). If present, rtgOverExcitedPF SHALL be present.
     #[yaserde(rename = "rtgOverExcitedW")]
-    pub rtg_over_excited_w: ActivePower,
+    pub rtg_over_excited_w: Option<ActivePower>,
 
     // Reactive susceptance that remains connected to the Area EPS in the cease
     // to energize and trip state.
     #[yaserde(rename = "rtgReactiveSusceptance")]
-    pub rtg_reactive_susceptance: ReactiveSusceptance,
+    pub rtg_reactive_susceptance: Option<ReactiveSusceptance>,
 
     // Specified under-excited power factor.
     #[yaserde(rename = "rtgUnderExcitedPF")]
-    pub rtg_under_excited_pf: PowerFactor,
+    pub rtg_under_excited_pf: Option<PowerFactor>,
 
     // Active power rating in Watts at specified under-excited power factor
     // (rtgUnderExcitedPF). If present, rtgUnderExcitedPF SHALL be present.
     #[yaserde(rename = "rtgUnderExcitedW")]
-    pub rtg_under_excited_w: ActivePower,
+    pub rtg_under_excited_w: Option<ActivePower>,
 
     // AC voltage nominal rating.
     #[yaserde(rename = "rtgVNom")]
-    pub rtg_v_nom: VoltageRMS,
+    pub rtg_v_nom: Option<VoltageRMS>,
 
     // Type of DER; see DERType object
     #[yaserde(rename = "type")]
@@ -6826,12 +6825,12 @@ pub struct DercontrolBase {
     // Set DER as connected (true) or disconnected (false). Used in conjunction
     // with ramp rate when re-connecting. Implies galvanic isolation.
     #[yaserde(rename = "opModConnect")]
-    pub op_mod_connect: bool,
+    pub op_mod_connect: Option<bool>,
 
     // Set DER as energized (true) or de-energized (false). Used in conjunction
     // with ramp rate when re-energizing.
     #[yaserde(rename = "opModEnergize")]
-    pub op_mod_energize: bool,
+    pub op_mod_energize: Option<bool>,
 
     // The opModFixedPFAbsorbW function specifies a requested fixed Power Factor
     // (PF) setting for when active power is being absorbed. The actual
@@ -6840,7 +6839,7 @@ pub struct DercontrolBase {
     // with other reactive power controls (e.g. opModFixedVar) the control
     // resulting in least var magnitude SHOULD take precedence.
     #[yaserde(rename = "opModFixedPFAbsorbW")]
-    pub op_mod_fixed_pf_absorb_w: PowerFactorWithExcitation,
+    pub op_mod_fixed_pf_absorb_w: Option<PowerFactorWithExcitation>,
 
     // The opModFixedPFInjectW function specifies a requested fixed Power Factor
     // (PF) setting for when active power is being injected. The actual
@@ -6849,7 +6848,7 @@ pub struct DercontrolBase {
     // with other reactive power controls (e.g. opModFixedVar) the control
     // resulting in least var magnitude SHOULD take precedence.
     #[yaserde(rename = "opModFixedPFInjectW")]
-    pub op_mod_fixed_pf_inject_w: PowerFactorWithExcitation,
+    pub op_mod_fixed_pf_inject_w: Option<PowerFactorWithExcitation>,
 
     // The opModFixedVar function specifies the delivered or received reactive
     // power setpoint. The context for the setpoint value is determined by
@@ -6858,19 +6857,19 @@ pub struct DercontrolBase {
     // opModFixedPFInjectW) the control resulting in least var magnitude SHOULD
     // take precedence.
     #[yaserde(rename = "opModFixedVar")]
-    pub op_mod_fixed_var: FixedVar,
+    pub op_mod_fixed_var: Option<FixedVar>,
 
     // The opModFixedW function specifies a requested charge or discharge mode
     // setpoint, in %setMaxChargeRateW if negative value or %setMaxW or
     // %setMaxDischargeRateW if positive value (in hundredths).
     #[yaserde(rename = "opModFixedW")]
-    pub op_mod_fixed_w: SignedPerCent,
+    pub op_mod_fixed_w: Option<SignedPerCent>,
 
     // Specifies a frequency-watt operation. This operation limits active power
     // generation or consumption when the line frequency deviates from nominal
     // by a specified amount.
     #[yaserde(rename = "opModFreqDroop")]
-    pub op_mod_freq_droop: FreqDroopType,
+    pub op_mod_freq_droop: Option<FreqDroopType>,
 
     // Specify DERCurveLink for curveType == 0. The Frequency-Watt function
     // limits active power generation or consumption when the line frequency
@@ -6880,7 +6879,7 @@ pub struct DercontrolBase {
     // specifies a frequency in Hz. The y value specifies a corresponding active
     // power output in %setMaxW.
     #[yaserde(rename = "opModFreqWatt")]
-    pub op_mod_freq_watt: DercurveLink,
+    pub op_mod_freq_watt: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 1. The High Frequency Ride-Through
     // (HFRT) function is specified by one or two duration-frequency curves that
@@ -6891,7 +6890,7 @@ pub struct DercontrolBase {
     // frequency in seconds). The y value of each pair specifies a frequency, in
     // Hz. This control specifies the "may trip" region.
     #[yaserde(rename = "opModHFRTMayTrip")]
-    pub op_mod_hfrt_may_trip: DercurveLink,
+    pub op_mod_hfrt_may_trip: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 2. The High Frequency Ride-Through
     // (HFRT) function is specified by a duration-frequency curve that defines
@@ -6902,7 +6901,7 @@ pub struct DercontrolBase {
     // frequency in seconds). The y value of each pair specifies a frequency, in
     // Hz. This control specifies the "must trip" region.
     #[yaserde(rename = "opModHFRTMustTrip")]
-    pub op_mod_hfrt_must_trip: DercurveLink,
+    pub op_mod_hfrt_must_trip: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 3. The High Voltage Ride-Through
     // (HVRT) function is specified by one, two, or three duration-volt curves
@@ -6914,7 +6913,7 @@ pub struct DercontrolBase {
     // percentage voltage, defined as ((locally measured voltage - setVRefOfs /
     // setVRef). This control specifies the "may trip" region.
     #[yaserde(rename = "opModHVRTMayTrip")]
-    pub op_mod_hvrt_may_trip: DercurveLink,
+    pub op_mod_hvrt_may_trip: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 4. The High Voltage Ride-Through
     // (HVRT) function is specified by duration-volt curves that define the
@@ -6926,7 +6925,7 @@ pub struct DercontrolBase {
     // voltage, defined as ((locally measured voltage - setVRefOfs) / setVRef).
     // This control specifies the "momentary cessation" region.
     #[yaserde(rename = "opModHVRTMomentaryCessation")]
-    pub op_mod_hvrt_momentary_cessation: DercurveLink,
+    pub op_mod_hvrt_momentary_cessation: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 5. The High Voltage Ride-Through
     // (HVRT) function is specified by duration-volt curves that define the
@@ -6938,7 +6937,7 @@ pub struct DercontrolBase {
     // voltage, defined as ((locally measured voltage - setVRefOfs) / setVRef).
     // This control specifies the "must trip" region.
     #[yaserde(rename = "opModHVRTMustTrip")]
-    pub op_mod_hvrt_must_trip: DercurveLink,
+    pub op_mod_hvrt_must_trip: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 6. The Low Frequency Ride-Through
     // (LFRT) function is specified by one or two duration-frequency curves that
@@ -6949,7 +6948,7 @@ pub struct DercontrolBase {
     // frequency in seconds). The y value of each pair specifies a frequency, in
     // Hz. This control specifies the "may trip" region.
     #[yaserde(rename = "opModLFRTMayTrip")]
-    pub op_mod_lfrt_may_trip: DercurveLink,
+    pub op_mod_lfrt_may_trip: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 7. The Low Frequency Ride-Through
     // (LFRT) function is specified by a duration-frequency curve that defines
@@ -6960,7 +6959,7 @@ pub struct DercontrolBase {
     // frequency in seconds). The y value of each pair specifies a frequency, in
     // Hz. This control specifies the "must trip" region.
     #[yaserde(rename = "opModLFRTMustTrip")]
-    pub op_mod_lfrt_must_trip: DercurveLink,
+    pub op_mod_lfrt_must_trip: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 8. The Low Voltage Ride-Through
     // (LVRT) function is specified by one, two, or three duration-volt curves
@@ -6972,7 +6971,7 @@ pub struct DercontrolBase {
     // percent voltage, defined as ((locally measured voltage - setVRefOfs) /
     // setVRef). This control specifies the "may trip" region.
     #[yaserde(rename = "opModLVRTMayTrip")]
-    pub op_mod_lvrt_may_trip: DercurveLink,
+    pub op_mod_lvrt_may_trip: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 9. The Low Voltage Ride-Through
     // (LVRT) function is specified by duration-volt curves that define the
@@ -6984,7 +6983,7 @@ pub struct DercontrolBase {
     // voltage, defined as ((locally measured voltage - setVRefOfs) / setVRef).
     // This control specifies the "momentary cessation" region.
     #[yaserde(rename = "opModLVRTMomentaryCessation")]
-    pub op_mod_lvrt_momentary_cessation: DercurveLink,
+    pub op_mod_lvrt_momentary_cessation: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 10. The Low Voltage Ride-Through
     // (LVRT) function is specified by duration-volt curves that define the
@@ -6996,26 +6995,26 @@ pub struct DercontrolBase {
     // voltage, defined as ((locally measured voltage - setVRefOfs) / setVRef).
     // This control specifies the "must trip" region.
     #[yaserde(rename = "opModLVRTMustTrip")]
-    pub op_mod_lvrt_must_trip: DercurveLink,
+    pub op_mod_lvrt_must_trip: Option<DercurveLink>,
 
     // The opModMaxLimW function sets the maximum active power generation level
     // at the electrical coupling point as a percentage of set capacity
     // (%setMaxW, in hundredths). This limitation may be met e.g. by reducing PV
     // output or by using excess PV output to charge associated storage.
     #[yaserde(rename = "opModMaxLimW")]
-    pub op_mod_max_lim_w: PerCent,
+    pub op_mod_max_lim_w: Option<PerCent>,
 
     // Target reactive power, in var. This control is likely to be more useful
     // for aggregators, as individual DERs may not be able to maintain a target
     // setting.
     #[yaserde(rename = "opModTargetVar")]
-    pub op_mod_target_var: ReactivePower,
+    pub op_mod_target_var: Option<ReactivePower>,
 
     // Target output power, in Watts. This control is likely to be more useful
     // for aggregators, as individual DERs may not be able to maintain a target
     // setting.
     #[yaserde(rename = "opModTargetW")]
-    pub op_mod_target_w: ActivePower,
+    pub op_mod_target_w: Option<ActivePower>,
 
     // Specify DERCurveLink for curveType == 11. The static volt-var function
     // provides over- or under-excited var compensation as a function of
@@ -7030,7 +7029,7 @@ pub struct DercontrolBase {
     // determined by yRefType and must be one of %setMaxW, %setMaxVar, or
     // %statVarAvail.
     #[yaserde(rename = "opModVoltVar")]
-    pub op_mod_volt_var: DercurveLink,
+    pub op_mod_volt_var: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 12. The Volt-Watt reduces active
     // power output as a function of measured voltage. The Volt-Watt curve is
@@ -7042,7 +7041,7 @@ pub struct DercontrolBase {
     // percentage (0 - 100). The meaning of the y value is determined by
     // yRefType and must be one of %setMaxW or %statWAvail.
     #[yaserde(rename = "opModVoltWatt")]
-    pub op_mod_volt_watt: DercurveLink,
+    pub op_mod_volt_watt: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 13. The Watt-PF function varies
     // Power Factor (PF) as a function of delivered active power. The Watt-PF
@@ -7057,7 +7056,7 @@ pub struct DercontrolBase {
     // (e.g. opModFixedPFInjectW) the control resulting in least var magnitude
     // SHOULD take precedence.
     #[yaserde(rename = "opModWattPF")]
-    pub op_mod_watt_pf: DercurveLink,
+    pub op_mod_watt_pf: Option<DercurveLink>,
 
     // Specify DERCurveLink for curveType == 14. The Watt-Var function varies
     // vars as a function of delivered active power. The Watt-Var curve is
@@ -7068,14 +7067,14 @@ pub struct DercontrolBase {
     // meaning of the y value is determined by yRefType and must be one of
     // %setMaxW, %setMaxVar, or %statVarAvail.
     #[yaserde(rename = "opModWattVar")]
-    pub op_mod_watt_var: DercurveLink,
+    pub op_mod_watt_var: Option<DercurveLink>,
 
     // Requested ramp time, in hundredths of a second, for the device to
     // transition from the current DERControl mode setting(s) to the new mode
     // setting(s). If absent, use default ramp rate (setGradW). Resolution is
     // 1/100 sec.
     #[yaserde(rename = "rampTms")]
-    pub ramp_tms: Uint16,
+    pub ramp_tms: Option<Uint16>,
 }
 
 impl Validate for DercontrolBase {}
@@ -7090,7 +7089,7 @@ pub struct Dercontrol {
     // respond. Devices SHOULD ignore events that do not indicate their device
     // category. If not present, all devices SHOULD respond.
     #[yaserde(rename = "deviceCategory")]
-    pub device_category: DeviceCategoryType,
+    pub device_category: Option<DeviceCategoryType>,
 
     // Number of seconds boundary inside which a random value must be selected
     // to be applied to the associated interval duration, to avoid sudden
@@ -7098,7 +7097,7 @@ pub struct Dercontrol {
     // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
     // default.
     #[yaserde(rename = "randomizeDuration")]
-    pub randomize_duration: OneHourRangeType,
+    pub randomize_duration: Option<OneHourRangeType>,
 
     // Number of seconds boundary inside which a random value must be selected
     // to be applied to the associated interval start time, to avoid sudden
@@ -7106,7 +7105,7 @@ pub struct Dercontrol {
     // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
     // default.
     #[yaserde(rename = "randomizeStart")]
-    pub randomize_start: OneHourRangeType,
+    pub randomize_start: Option<OneHourRangeType>,
 
     // The time at which the Event was created.
     #[yaserde(rename = "creationTime")]
@@ -7125,12 +7124,12 @@ pub struct Dercontrol {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -7200,62 +7199,27 @@ pub struct DercontrolList {
 
 impl Validate for DercontrolList {}
 
-bitflags! {
-    #[derive(Default, PartialEq, Debug)]
-    pub struct DercontrolType: u32 {
-        const ChargeMode = 1;
-        const DischargeMode = 2;
-        const OpModConnect = 4;
-        const OpModEnergize = 8;
-        const OpModFixedPFAbsorbW = 16;
-        const OpModFixedPFInjectW = 32;
-        const OpModFixedVar = 64;
-        const OpModFixedW = 128;
-        const OpModFreqDroop = 256;
-        const OpModFreqWatt = 512;
-        const OpModHFRTMayTrip = 1024;
-        const OpModHFRTMustTrip = 2048;
-        const OpModHVRTMayTrip = 4096;
-        const OpModHVRTMomentaryCessation = 8192;
-        const OpModHVRTMustTrip = 16384;
-        const OpModLFRTMayTrip = 32768;
-    }
-}
+type DercontrolType = Uint32;
 
-// TODO: Implement this properly
-impl YaSerialize for DercontrolType {
-    fn serialize<W: std::io::Write>(
-        &self,
-        writer: &mut yaserde::ser::Serializer<W>,
-    ) -> Result<(), String> {
-        let _ = writer.write(xml::writer::XmlEvent::Characters(&self.bits().to_string()));
-        Ok(())
-    }
-
-    fn serialize_attributes(
-        &self,
-        attributes: Vec<xml::attribute::OwnedAttribute>,
-        namespace: xml::namespace::Namespace,
-    ) -> Result<
-        (
-            Vec<xml::attribute::OwnedAttribute>,
-            xml::namespace::Namespace,
-        ),
-        String,
-    > {
-        todo!()
-    }
+#[repr(u32)]
+pub enum DercontrolTypeFlags {
+    ChargeMode = 1,
+    DischargeMode = 2,
+    OpModConnect = 4,
+    OpModEnergize = 8,
+    OpModFixedPFAbsorbW = 16,
+    OpModFixedPFInjectW = 32,
+    OpModFixedVar = 64,
+    OpModFixedW = 128,
+    OpModFreqDroop = 256,
+    OpModFreqWatt = 512,
+    OpModHFRTMayTrip = 1024,
+    OpModHFRTMustTrip = 2048,
+    OpModHVRTMayTrip = 4096,
+    OpModHVRTMomentaryCessation = 8192,
+    OpModHVRTMustTrip = 16384,
+    OpModLFRTMayTrip = 32768,
 }
-// TODO: Implement this properly
-impl YaDeserialize for DercontrolType {
-    fn deserialize<R: std::io::Read>(
-        reader: &mut yaserde::de::Deserializer<R>,
-    ) -> Result<Self, String> {
-        todo!()
-    }
-}
-
-impl Validate for DercontrolType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7269,13 +7233,13 @@ pub struct Dercurve {
     // the DER SHALL execute the curve without autonomous vRef adjustment. If
     // not specified, then the value is false.
     #[yaserde(rename = "autonomousVRefEnable")]
-    pub autonomous_v_ref_enable: bool,
+    pub autonomous_v_ref_enable: Option<bool>,
 
     // If the curveType is opModVoltVar, then this field MAY be present. If the
     // curveType is not opModVoltVar, then this field SHALL NOT be present.
     // Adjustment range for vRef time constant, in hundredths of a second.
     #[yaserde(rename = "autonomousVRefTimeConstant")]
-    pub autonomous_v_ref_time_constant: Uint32,
+    pub autonomous_v_ref_time_constant: Option<Uint32>,
 
     // The time at which the object was created.
     #[yaserde(rename = "creationTime")]
@@ -7293,34 +7257,34 @@ pub struct Dercurve {
     // is 1/100 sec. A value of 0 is used to mean no limit. When not present,
     // the device SHOULD follow its default behavior.
     #[yaserde(rename = "openLoopTms")]
-    pub open_loop_tms: Uint16,
+    pub open_loop_tms: Option<Uint16>,
 
     // Decreasing ramp rate, interpreted as a percentage change in output
     // capability limit per second (e.g. %setMaxW / sec). Resolution is in
     // hundredths of a percent/second. A value of 0 means there is no limit. If
     // absent, ramp rate defaults to setGradW.
     #[yaserde(rename = "rampDecTms")]
-    pub ramp_dec_tms: Uint16,
+    pub ramp_dec_tms: Option<Uint16>,
 
     // Increasing ramp rate, interpreted as a percentage change in output
     // capability limit per second (e.g. %setMaxW / sec). Resolution is in
     // hundredths of a percent/second. A value of 0 means there is no limit. If
     // absent, ramp rate defaults to rampDecTms.
     #[yaserde(rename = "rampIncTms")]
-    pub ramp_inc_tms: Uint16,
+    pub ramp_inc_tms: Option<Uint16>,
 
     // The configuration parameter for a low-pass filter, PT1 is a time, in
     // hundredths of a second, in which the filter will settle to 95% of a step
     // change in the input value. Resolution is 1/100 sec.
     #[yaserde(rename = "rampPT1Tms")]
-    pub ramp_pt1_tms: Uint16,
+    pub ramp_pt1_tms: Option<Uint16>,
 
     // If the curveType is opModVoltVar, then this field MAY be present. If the
     // curveType is not opModVoltVar, then this field SHALL NOT be present. The
     // nominal AC voltage (RMS) adjustment to the voltage curve points for
     // Volt-Var curves.
     #[yaserde(rename = "vRef")]
-    pub v_ref: PerCent,
+    pub v_ref: Option<PerCent>,
 
     // Exponent for X-axis value.
     #[yaserde(rename = "xMultiplier")]
@@ -7340,12 +7304,12 @@ pub struct Dercurve {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -7397,7 +7361,7 @@ pub struct CurveData {
     // True when DER is absorbing reactive power (under-excited), false
     // when DER is injecting reactive power (over-excited).
     #[yaserde(rename = "excitation")]
-    pub excitation: bool,
+    pub excitation: Option<bool>,
 
     // The data value of the X-axis (independent) variable, depending on the
     // curve type. See definitions in DERControlBase for further information.
@@ -7443,16 +7407,16 @@ impl Validate for DercurveType {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Derprogram {
     #[yaserde(rename = "ActiveDERControlListLink")]
-    pub active_der_control_list_link: ActiveDERControlListLink,
+    pub active_der_control_list_link: Option<ActiveDERControlListLink>,
 
     #[yaserde(rename = "DefaultDERControlLink")]
-    pub default_der_control_link: DefaultDERControlLink,
+    pub default_der_control_link: Option<DefaultDERControlLink>,
 
     #[yaserde(rename = "DERControlListLink")]
-    pub der_control_list_link: DercontrolListLink,
+    pub der_control_list_link: Option<DercontrolListLink>,
 
     #[yaserde(rename = "DERCurveListLink")]
-    pub der_curve_list_link: DercurveListLink,
+    pub der_curve_list_link: Option<DercurveListLink>,
 
     // Indicates the relative primacy of the provider of this Program.
     #[yaserde(rename = "primacy")]
@@ -7464,12 +7428,12 @@ pub struct Derprogram {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -7539,31 +7503,31 @@ pub struct Derstatus {
     // 10 - DER_FAULT_PHASE_ROTATION
     // 11-31 - Reserved
     #[yaserde(rename = "alarmStatus")]
-    pub alarm_status: HexBinary32,
+    pub alarm_status: Option<HexBinary32>,
 
     // Connect/status value for generator DER.
     // See ConnectStatusType for values.
     #[yaserde(rename = "genConnectStatus")]
-    pub gen_connect_status: ConnectStatusType,
+    pub gen_connect_status: Option<ConnectStatusType>,
 
     // DER InverterStatus/value.
     // See InverterStatusType for values.
     #[yaserde(rename = "inverterStatus")]
-    pub inverter_status: InverterStatusType,
+    pub inverter_status: Option<InverterStatusType>,
 
     // The local control mode status.
     // See LocalControlModeStatusType for values.
     #[yaserde(rename = "localControlModeStatus")]
-    pub local_control_mode_status: LocalControlModeStatusType,
+    pub local_control_mode_status: Option<LocalControlModeStatusType>,
 
     // Manufacturer status code.
     #[yaserde(rename = "manufacturerStatus")]
-    pub manufacturer_status: ManufacturerStatusType,
+    pub manufacturer_status: Option<ManufacturerStatusType>,
 
     // Operational mode currently in use.
     // See OperationalModeStatusType for values.
     #[yaserde(rename = "operationalModeStatus")]
-    pub operational_mode_status: OperationalModeStatusType,
+    pub operational_mode_status: Option<OperationalModeStatusType>,
 
     // The timestamp when the current status was last updated.
     #[yaserde(rename = "readingTime")]
@@ -7572,17 +7536,17 @@ pub struct Derstatus {
     // State of charge status.
     // See StateOfChargeStatusType for values.
     #[yaserde(rename = "stateOfChargeStatus")]
-    pub state_of_charge_status: StateOfChargeStatusType,
+    pub state_of_charge_status: Option<StateOfChargeStatusType>,
 
     // Storage mode status.
     // See StorageModeStatusType for values.
     #[yaserde(rename = "storageModeStatus")]
-    pub storage_mode_status: StorageModeStatusType,
+    pub storage_mode_status: Option<StorageModeStatusType>,
 
     // Connect/status value for storage DER.
     // See ConnectStatusType for values.
     #[yaserde(rename = "storConnectStatus")]
-    pub stor_connect_status: ConnectStatusType,
+    pub stor_connect_status: Option<ConnectStatusType>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -9405,70 +9369,32 @@ pub struct DateTimeInterval {
 
 impl Validate for DateTimeInterval {}
 
-bitflags! {
-    #[derive(Default, PartialEq, Debug)]
-    // #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-    pub struct DeviceCategoryType: u32 {
-        const ProgrammableCommunicatingThermostat = 1;
-        const StripHeaters = 2;
-        const BaseboardHeaters = 4;
-        const WaterHeater = 8;
-        const PoolPump = 16;
-        const Sauna = 32;
-        const HotTub = 64;
-        const SmartAppliance = 128;
-        const IrrigationPump = 256;
-        const ManagedCommercialAndIndustrialLoads = 512;
-        const SimpleMiscLoads = 1024;
-        const ExteriorLighting = 2048;
-        const InteriorLighting = 4096;
-        const LoadControlSwitch = 8192;
-        const Energy_managementSystem = 16384;
-        const SmartEnergyModule = 65536;
-        const ElectricVehicle = 262144;
-        const VirutalOrMixedDer = 524288;
-        const ReciprocatingEngine = 2097152;
-        const PhotovoltaicSystem = 8388608;
-        const CombinedPvAndStorage = 16777216;
-        const OtherGenerationSystem = 33554432;
-        const OtherStorageSystem = 67108864;
-    }
+type DeviceCategoryType = HexBinary32;
+pub enum DeviceCategoryTypeFlags {
+    ProgrammableCommunicatingThermostat = 1,
+    StripHeaters = 2,
+    BaseboardHeaters = 4,
+    WaterHeater = 8,
+    PoolPump = 16,
+    Sauna = 32,
+    HotTub = 64,
+    SmartAppliance = 128,
+    IrrigationPump = 256,
+    ManagedCommercialAndIndustrialLoads = 512,
+    SimpleMiscLoads = 1024,
+    ExteriorLighting = 2048,
+    InteriorLighting = 4096,
+    LoadControlSwitch = 8192,
+    EnergyManagementSystem = 16384,
+    SmartEnergyModule = 65536,
+    ElectricVehicle = 262144,
+    VirutalOrMixedDer = 524288,
+    ReciprocatingEngine = 2097152,
+    PhotovoltaicSystem = 8388608,
+    CombinedPvAndStorage = 16777216,
+    OtherGenerationSystem = 33554432,
+    OtherStorageSystem = 67108864,
 }
-
-// TODO: Implement this properly
-impl YaSerialize for DeviceCategoryType {
-    fn serialize<W: std::io::Write>(
-        &self,
-        writer: &mut yaserde::ser::Serializer<W>,
-    ) -> Result<(), String> {
-        let _ = writer.write(xml::writer::XmlEvent::Characters(&self.bits().to_string()));
-        Ok(())
-    }
-
-    fn serialize_attributes(
-        &self,
-        attributes: Vec<xml::attribute::OwnedAttribute>,
-        namespace: xml::namespace::Namespace,
-    ) -> Result<
-        (
-            Vec<xml::attribute::OwnedAttribute>,
-            xml::namespace::Namespace,
-        ),
-        String,
-    > {
-        todo!()
-    }
-}
-// TODO: Implement this properly
-impl YaDeserialize for DeviceCategoryType {
-    fn deserialize<R: std::io::Read>(
-        reader: &mut yaserde::de::Deserializer<R>,
-    ) -> Result<Self, String> {
-        todo!()
-    }
-}
-
-impl Validate for DeviceCategoryType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -9782,20 +9708,20 @@ type VersionType = Uint16;
 pub struct MirrorMeterReading {
     // The date and time of the last update.
     #[yaserde(rename = "lastUpdateTime")]
-    pub last_update_time: TimeType,
+    pub last_update_time: Option<TimeType>,
 
     #[yaserde(rename = "MirrorReadingSet")]
     pub mirror_reading_set: Vec<MirrorReadingSet>,
 
     // The date and time of the next planned update.
     #[yaserde(rename = "nextUpdateTime")]
-    pub next_update_time: TimeType,
+    pub next_update_time: Option<TimeType>,
 
     #[yaserde(rename = "Reading")]
-    pub reading: Reading,
+    pub reading: Option<Reading>,
 
     #[yaserde(rename = "ReadingType")]
-    pub reading_type: ReadingType,
+    pub reading_type: Option<ReadingType>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -9803,12 +9729,12 @@ pub struct MirrorMeterReading {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -9857,12 +9783,12 @@ pub struct MirrorReadingSet {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -9886,7 +9812,7 @@ pub struct MirrorUsagePoint {
     // client MAY indicate a preferred postRate when POSTing MirrorUsagePoint. A
     // server MAY add or modify postRate to indicate its preferred posting rate.
     #[yaserde(rename = "postRate")]
-    pub post_rate: Uint32,
+    pub post_rate: Option<Uint32>,
 
     // Specifies the roles that apply to the usage point.
     #[yaserde(rename = "roleFlags")]
@@ -9908,12 +9834,12 @@ pub struct MirrorUsagePoint {
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
-    pub description: String32,
+    pub description: Option<String32>,
 
     // Contains the version number of the object. See the type definition for
     // details.
     #[yaserde(rename = "version")]
-    pub version: VersionType,
+    pub version: Option<VersionType>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
