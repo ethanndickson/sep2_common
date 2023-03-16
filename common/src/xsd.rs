@@ -307,7 +307,7 @@ pub struct Int8(pub i8);
 
 impl Validate for Int8 {}
 // Signed integer, min -32768 max +32767
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Int16(pub i16);
 
 impl Validate for Int16 {}
@@ -3559,7 +3559,7 @@ pub struct EndDeviceControl {
     // and whether or not conditional (thresholds) are supported. If not
     // specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
-    pub subscribable: Option<SubscribableType>,
+    pub subscribable: SubscribableType,
 
     // A reference to the response resource address (URI). Required on a
     // response to a GET if responseRequired is "true".
@@ -9525,17 +9525,22 @@ pub struct LocaleType {}
 
 impl Validate for LocaleType {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Mridtype {}
+pub type Mridtype = HexBinary128;
 
-impl Validate for Mridtype {}
+#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+pub struct OneHourRangeType(pub Int16);
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct OneHourRangeType {}
-
-impl Validate for OneHourRangeType {}
+impl Validate for OneHourRangeType {
+    fn validate(&self) -> Result<(), String> {
+        if self.0 .0 > "3600".parse::<i16>().unwrap() {
+            return Err(format!("MaxInclusive validation error: invalid value of 0! \nExpected: 0 <= 3600.\nActual: 0 == {}", self.0));
+        }
+        if self.0 .0 < "-3600".parse::<i16>().unwrap() {
+            return Err(format!("MinInclusive validation error: invalid value of 0! \nExpected: 0 >= -140737488355328.\nActual: 0 == {}", self.0));
+        }
+        Ok(())
+    }
+}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -9543,11 +9548,7 @@ pub struct Pentype {}
 
 impl Validate for Pentype {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct PerCent {}
-
-impl Validate for PerCent {}
+type PerCent = Uint16;
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -9648,8 +9649,14 @@ impl Validate for SignedRealEnergy {}
 // 2 - Resource supports conditional subscriptions
 // 3 - Resource supports both conditional and non-conditional subscriptions
 // All other values reserved.
-#[derive(Default, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct SubscribableType(pub Uint8);
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+pub enum SubscribableType {
+    #[default]
+    NoSubscriptionsSupported = 0,
+    NonConditionalSubscriptions = 1,
+    ConditionalSubscriptions = 2,
+    AllSubscriptions = 3,
+}
 
 impl Validate for SubscribableType {}
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -9658,11 +9665,7 @@ pub struct TimeOffsetType {}
 
 impl Validate for TimeOffsetType {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct TimeType {}
-
-impl Validate for TimeType {}
+type TimeType = Int64;
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -9772,11 +9775,7 @@ pub enum UomType {
 
 impl Validate for UomType {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct VersionType {}
-
-impl Validate for VersionType {}
+type VersionType = Uint16;
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
