@@ -57,7 +57,7 @@ pub trait Link {
 // #[inheritable]
 pub trait List<T: Resource> {
     // TODO Ethan: Figure out where Neel got this function signature from
-    fn values(s: UInt16, a: Option<TimeType>, l: UInt32) -> Vec<T>;
+    fn values(s: Uint16, a: Option<TimeType>, l: Uint32) -> Vec<T>;
 }
 
 /*
@@ -142,7 +142,7 @@ pub struct ListObj<T: Resource> {
 }
 
 impl<T: Resource> List<T> for ListObj<T> {
-    fn values(s: UInt16, a: Option<TimeType>, l: UInt32) -> Vec<T> {
+    fn values(s: Uint16, a: Option<TimeType>, l: Uint32) -> Vec<T> {
         todo!()
     }
 }
@@ -173,7 +173,7 @@ impl<T: Resource> Resource for ListObj<T> {
 pub struct ListLink {
     #[inherits(Link)]
     link: LinkObj,
-    all: Option<UInt32>,
+    all: Option<Uint32>,
 }
 
 #[derive(Inheritance, Default, Debug, Serialize, Deserialize)]

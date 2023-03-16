@@ -19,14 +19,14 @@ pub type DstRuleType = HexBinary32;
 
 pub type LocaleType = String42;
 pub type mRIDType = HexBinary128;
-pub type PENType = UInt32;
-pub type SFDIType = UInt40;
+pub type PENType = Uint32;
+pub type SFDIType = Uint40;
 pub type TimeOffsetType = Int32;
 pub type TimeType = Int64;
-pub type VersionType = UInt16;
+pub type VersionType = Uint16;
 
 pub struct DateTimeInterval {
-    duration: UInt16,
+    duration: Uint16,
     start: TimeType,
 }
 
@@ -37,7 +37,7 @@ pub struct GPSLocationType {
 
 pub struct RealEnergy {
     multiplier: PowerOfTenMultiplierType,
-    value: UInt48,
+    value: Uint48,
 }
 
 pub struct SignedRealEnergy {
@@ -53,7 +53,7 @@ pub struct OneHourRangeType(Int16);
 
 impl OneHourRangeType {
     fn new(value: Int16) -> Result<OneHourRangeType, Error> {
-        if !(-3600..=3600).contains(&value) {
+        if !(-3600..=3600).contains(&value.0) {
             Err(Error::from(ErrorKind::InvalidInput))
         } else {
             Ok(OneHourRangeType(value))
@@ -70,11 +70,11 @@ impl fmt::Display for OneHourRangeType {
 
 // measured in 1/100ths of a percent (eg. PerCent(102) is 1.02%)
 #[derive(Debug)]
-pub struct PerCent(UInt16);
+pub struct PerCent(Uint16);
 
 impl PerCent {
-    fn new(value: UInt16) -> Result<PerCent, Error> {
-        if value > 10000 {
+    fn new(value: Uint16) -> Result<PerCent, Error> {
+        if value.0 > 10000 {
             Err(Error::from(ErrorKind::InvalidInput))
         } else {
             Ok(PerCent(value))
@@ -84,8 +84,7 @@ impl PerCent {
 
 impl fmt::Display for PerCent {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let PerCent(a) = self;
-        write!(f, "{:.2}%", *a as f32 / 100.00)
+        write!(f, "{:.2}%", self.0 .0 as f32 / 100.00)
     }
 }
 
@@ -94,7 +93,7 @@ pub struct SignedPerCent(Int16);
 
 impl SignedPerCent {
     fn new(value: Int16) -> Result<SignedPerCent, Error> {
-        if !(-10000..=10000).contains(&value) {
+        if !(-10000..=10000).contains(&value.0) {
             Err(Error::from(ErrorKind::InvalidInput))
         } else {
             Ok(SignedPerCent(value))
@@ -104,17 +103,16 @@ impl SignedPerCent {
 
 impl fmt::Display for SignedPerCent {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let SignedPerCent(a) = self;
-        write!(f, "{:.2}%", *a as f32 / 100.00)
+        write!(f, "{:.2}%", self.0 .0 as f32 / 100.00)
     }
 }
 
 #[derive(Debug)]
-pub struct PINType(UInt32);
+pub struct PINType(Uint32);
 
 impl PINType {
-    fn new(value: UInt32) -> Result<PINType, Error> {
-        if value > 999999 {
+    fn new(value: Uint32) -> Result<PINType, Error> {
+        if value.0 > 999999 {
             Err(Error::from(ErrorKind::InvalidInput))
         } else {
             Ok(PINType(value))
@@ -134,7 +132,7 @@ pub struct PowerOfTenMultiplierType(Int8);
 
 impl PowerOfTenMultiplierType {
     fn new(value: Int8) -> Result<PowerOfTenMultiplierType, Error> {
-        if !(-9..=9).contains(&value) {
+        if !(-9..=9).contains(&value.0) {
             Err(Error::from(ErrorKind::InvalidInput))
         } else {
             Ok(PowerOfTenMultiplierType(value))
@@ -486,64 +484,65 @@ impl Default for UomType {
     }
 }
 
-bitflags! {
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
-    pub struct RoleFlagsType: UInt16 {
-        const IsMirror = 1;
-        const IsPremiseAggregationPoint = 2;
-        const IsPEV = 4;
-        const IsDER = 8;
-        const IsRevenueQuality = 16;
-        const IsDC = 32;
-        const IsSubmeter = 64;
-    }
-}
+// TODO: Implement these properly
+// bitflags! {
+//     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+//     pub struct RoleFlagsType: Uint16 {
+//         const IsMirror = 1;
+//         const IsPremiseAggregationPoint = 2;
+//         const IsPEV = 4;
+//         const IsDER = 8;
+//         const IsRevenueQuality = 16;
+//         const IsDC = 32;
+//         const IsSubmeter = 64;
+//     }
+// }
 
-bitflags! {
-    pub struct DeviceCategoryType: UInt32 {
-        const ProgrammableCommunicatingThermostat = 1;
-        const StripHeaters = 2;
-        const BaseboardHeaters = 4;
-        const WaterHeater = 8;
-        const PoolPump = 16;
-        const Sauna = 32;
-        const HotTub = 64;
-        const SmartAppliance = 128;
-        const IrrigationPump = 256;
-        const ManagedCommercialAndIndustrialLoads = 512;
-        const SimpleMiscLoads = 1024;
-        const ExteriorLighting = 2048;
-        const InteriorLighting = 4096;
-        const LoadControlSwitch = 8192;
-        const Energy_managementSystem = 16384;
-        const SmartEnergyModule = 65536;
-        const ElectricVehicle = 262144;
-        const VirutalOrMixedDer = 524288;
-        const ReciprocatingEngine = 2097152;
-        const PhotovoltaicSystem = 8388608;
-        const CombinedPvAndStorage = 16777216;
-        const OtherGenerationSystem = 33554432;
-        const OtherStorageSystem = 67108864;
-    }
-}
+// bitflags! {
+//     pub struct DeviceCategoryType: Uint32 {
+//         const ProgrammableCommunicatingThermostat = 1;
+//         const StripHeaters = 2;
+//         const BaseboardHeaters = 4;
+//         const WaterHeater = 8;
+//         const PoolPump = 16;
+//         const Sauna = 32;
+//         const HotTub = 64;
+//         const SmartAppliance = 128;
+//         const IrrigationPump = 256;
+//         const ManagedCommercialAndIndustrialLoads = 512;
+//         const SimpleMiscLoads = 1024;
+//         const ExteriorLighting = 2048;
+//         const InteriorLighting = 4096;
+//         const LoadControlSwitch = 8192;
+//         const Energy_managementSystem = 16384;
+//         const SmartEnergyModule = 65536;
+//         const ElectricVehicle = 262144;
+//         const VirutalOrMixedDer = 524288;
+//         const ReciprocatingEngine = 2097152;
+//         const PhotovoltaicSystem = 8388608;
+//         const CombinedPvAndStorage = 16777216;
+//         const OtherGenerationSystem = 33554432;
+//         const OtherStorageSystem = 67108864;
+//     }
+// }
 
-bitflags! {
-    pub struct DERControlType: UInt32 {
-        const ChargeMode = 1;
-        const DischargeMode = 2;
-        const OpModConnect = 4;
-        const OpModEnergize = 8;
-        const OpModFixedPFAbsorbW = 16;
-        const OpModFixedPFInjectW = 32;
-        const OpModFixedVar = 64;
-        const OpModFixedW = 128;
-        const OpModFreqDroop = 256;
-        const OpModFreqWatt = 512;
-        const OpModHFRTMayTrip = 1024;
-        const OpModHFRTMustTrip = 2048;
-        const OpModHVRTMayTrip = 4096;
-        const OpModHVRTMomentaryCessation = 8192;
-        const OpModHVRTMustTrip = 16384;
-        const OpModLFRTMayTrip = 32768;
-    }
-}
+// bitflags! {
+//     pub struct DERControlType: Uint32 {
+//         const ChargeMode = 1;
+//         const DischargeMode = 2;
+//         const OpModConnect = 4;
+//         const OpModEnergize = 8;
+//         const OpModFixedPFAbsorbW = 16;
+//         const OpModFixedPFInjectW = 32;
+//         const OpModFixedVar = 64;
+//         const OpModFixedW = 128;
+//         const OpModFreqDroop = 256;
+//         const OpModFreqWatt = 512;
+//         const OpModHFRTMayTrip = 1024;
+//         const OpModHFRTMustTrip = 2048;
+//         const OpModHVRTMayTrip = 4096;
+//         const OpModHVRTMomentaryCessation = 8192;
+//         const OpModHVRTMustTrip = 16384;
+//         const OpModLFRTMayTrip = 32768;
+//     }
+// }
