@@ -1,8 +1,8 @@
+use common::primitives::*;
 use common::xsd::{
     ApplianceLoadReduction, ApplianceLoadReductionType, DateTimeInterval, DeviceCategoryTypeFlags,
-    DutyCycle, EndDeviceControl, EventStatus, HexBinary128, HexBinary32, HexBinary8, Int16, Int64,
-    Offset, OneHourRangeType, SetPoint, String192, String32, SubscribableType, TargetReduction,
-    Uint16, Uint32, Uint8, UnitType,
+    DutyCycle, EndDeviceControl, EventStatus, Offset, OneHourRangeType, SetPoint, SubscribableType,
+    TargetReduction, UnitType,
 };
 use yaserde::ser::Config;
 
@@ -18,7 +18,7 @@ fn edc_deserialize() {
         appliance_load_reduction: Some(ApplianceLoadReduction {
             _type: ApplianceLoadReductionType::TemporaryApplianceLoadReduction,
         }),
-        device_category: HexBinary32((DeviceCategoryTypeFlags::Sauna as u32).to_string()),
+        device_category: HexBinary32(Uint32(DeviceCategoryTypeFlags::Sauna as u32)),
         dr_program_mandatory: true,
         duty_cycle: Some(DutyCycle {
             normal_value: Uint8(0),
@@ -52,12 +52,12 @@ fn edc_deserialize() {
             duration: Uint32(0),
             start: Int64(0),
         },
-        m_rid: HexBinary128("".to_string()),
+        m_rid: HexBinary128(0),
         description: Some(String32("".to_string())),
         version: Some(Uint16(0)),
         subscribable: Some(SubscribableType::AllSubscriptions),
         reply_to: Some("Test".to_string()),
-        response_required: Some(HexBinary8("test".to_string())),
+        response_required: Some(HexBinary8(Uint8(0))),
         href: Some("test".to_string()),
     };
     println!(

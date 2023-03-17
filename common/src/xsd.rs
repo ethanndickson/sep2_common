@@ -9041,6 +9041,7 @@ pub struct DateTimeInterval {
 impl Validate for DateTimeInterval {}
 
 type DeviceCategoryType = HexBinary32;
+#[repr(u32)]
 pub enum DeviceCategoryTypeFlags {
     ProgrammableCommunicatingThermostat = 1,
     StripHeaters = 2,
