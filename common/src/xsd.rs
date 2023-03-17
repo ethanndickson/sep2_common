@@ -2368,13 +2368,13 @@ pub struct Configuration {
     pub current_locale: LocaleType,
 
     #[yaserde(rename = "PowerConfiguration")]
-    pub power_configuration: Vec<PowerConfiguration>,
+    pub power_configuration: Option<PowerConfiguration>,
 
     #[yaserde(rename = "PriceResponseCfgListLink")]
     pub price_response_cfg_list_link: Option<PriceResponseCfgListLink>,
 
     #[yaserde(rename = "TimeConfiguration")]
-    pub time_configuration: Vec<TimeConfiguration>,
+    pub time_configuration: Option<TimeConfiguration>,
 
     // User assigned, convenience name used for network browsing displays, etc.
     // Example "My Thermostat"
@@ -6607,6 +6607,9 @@ pub struct Dercurve {
     #[yaserde(rename = "creationTime")]
     pub creation_time: TimeType,
 
+    // Data point values for defining a curve or schedule
+    // Max size: 10
+    // TODO: Validate this max
     #[yaserde(rename = "CurveData")]
     pub curve_data: Vec<CurveData>,
 
