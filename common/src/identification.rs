@@ -316,6 +316,36 @@ pub struct SubscribableList {
 
 impl Validate for SubscribableList {}
 
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct SubscribableIdentifiedObject {
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub m_rid: Mridtype,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl Validate for SubscribableIdentifiedObject {}
+
 #[derive(Default, Debug)]
 struct ListImpl<T> {
     all: u32,
