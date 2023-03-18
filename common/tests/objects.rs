@@ -1,8 +1,8 @@
+use common::objects::{EndDeviceControl, EventStatus, PrimacyType};
 use common::primitives::*;
 use common::xsd::{
     ApplianceLoadReduction, ApplianceLoadReductionType, DateTimeInterval, DeviceCategoryTypeFlags,
-    DutyCycle, EndDeviceControl, EventStatus, Offset, OneHourRangeType, SetPoint, SubscribableType,
-    TargetReduction, UnitType,
+    DutyCycle, Offset, OneHourRangeType, SetPoint, SubscribableType, TargetReduction, UnitType,
 };
 use yaserde::ser::Config;
 
@@ -11,6 +11,17 @@ const yaserde_cfg: Config = yaserde::ser::Config {
     write_document_declaration: false,
     indent_string: None,
 };
+
+#[test]
+fn reserved_enum() {
+    let primacy = PrimacyType::InHomeEnergyManagementSystem;
+    println!(
+        "{}",
+        yaserde::ser::to_string_with_config(&primacy, &yaserde_cfg)
+            .ok()
+            .unwrap()
+    );
+}
 
 #[test]
 fn edc_deserialize() {
