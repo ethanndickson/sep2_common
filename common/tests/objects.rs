@@ -6,7 +6,7 @@ use common::xsd::{
 };
 use yaserde::ser::Config;
 
-const yaserde_cfg: Config = yaserde::ser::Config {
+const YASERDE_CFG: Config = yaserde::ser::Config {
     perform_indent: true,
     write_document_declaration: false,
     indent_string: None,
@@ -17,7 +17,7 @@ fn reserved_enum() {
     let primacy = PrimacyType::InHomeEnergyManagementSystem;
     println!(
         "{}",
-        yaserde::ser::to_string_with_config(&primacy, &yaserde_cfg)
+        yaserde::ser::to_string_with_config(&primacy, &YASERDE_CFG)
             .ok()
             .unwrap()
     );
@@ -73,7 +73,7 @@ fn edc_deserialize() {
     };
     println!(
         "{}",
-        yaserde::ser::to_string_with_config(&edc, &yaserde_cfg)
+        yaserde::ser::to_string_with_config(&edc, &YASERDE_CFG)
             .ok()
             .unwrap()
     );

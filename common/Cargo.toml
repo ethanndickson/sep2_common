@@ -6,11 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-arrayvec = "0.7.2"
 num-bigint = "0.4.3"
-serde = {version = "1.0", features= ["derive"]}
-bitflags = "2.0.0-rc.1"
-inheritance = { version = "0.0.1-alpha.2" }
 yaserde = {version = "0.7.1"}
 yaserde_derive = "0.7.1"
 xsd-types = { git = "https://github.com/lumeohq/xsd-parser-rs", rev = "d8dd37e" }

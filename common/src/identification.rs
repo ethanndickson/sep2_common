@@ -1,7 +1,5 @@
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 // Types should eventually be put in a module corresponding to their package
-use std::str::FromStr;
-use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
 use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 

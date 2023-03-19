@@ -1,6 +1,3 @@
-use std::fmt;
-use std::str::FromStr;
-use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
 use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
