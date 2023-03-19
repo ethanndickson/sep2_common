@@ -815,10 +815,4 @@ pub enum PrimacyType {
     ContractedPremisesServiceProvider = 1,
     NonContractualServiceProvider = 2,
 }
-impl fmt::Display for PrimacyType {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", *self as u8)
-    }
-}
-
 impl Validate for PrimacyType {}

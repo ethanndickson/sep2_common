@@ -5735,7 +5735,7 @@ pub struct DercontrolList {
 
 impl Validate for DercontrolList {}
 
-type DercontrolType = Uint32;
+type DercontrolType = HexBinary32;
 
 #[repr(u32)]
 pub enum DercontrolTypeFlags {
@@ -7936,11 +7936,8 @@ pub enum DeviceCategoryTypeFlags {
     OtherStorageSystem = 67108864,
 }
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DstRuleType {}
-
-impl Validate for DstRuleType {}
+// TODO Ethan: How can we make this usable?
+pub type DstRuleType = HexBinary32;
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -7985,11 +7982,7 @@ pub enum KindType {
 
 impl Validate for KindType {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct LocaleType {}
-
-impl Validate for LocaleType {}
+pub type LocaleType = String42;
 
 pub type Mridtype = HexBinary128;
 
@@ -8008,13 +8001,29 @@ impl Validate for OneHourRangeType {
     }
 }
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Pentype {}
+pub type Pentype = Uint32;
 
-impl Validate for Pentype {}
-
+// TODO Ethan: This will need to be a newtype for validation
 pub type PerCent = Uint16;
+// // measured in 1/100ths of a percent (eg. PerCent(102) is 1.02%)
+// #[derive(Debug)]
+// pub struct PerCent(Uint16);
+
+// impl PerCent {
+//     fn new(value: Uint16) -> Result<PerCent, Error> {
+//         if value.0 > 10000 {
+//             Err(Error::from(ErrorKind::InvalidInput))
+//         } else {
+//             Ok(PerCent(value))
+//         }
+//     }
+// }
+
+// impl fmt::Display for PerCent {
+//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+//         write!(f, "{:.2}%", self.0 .0 as f32 / 100.00)
+//     }
+// }
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -8037,17 +8046,51 @@ pub enum PhaseCode {
 
 impl Validate for PhaseCode {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Pintype {}
+// TODO Ethan: newtype for valdiation
+pub type Pintype = Uint32;
+// #[derive(Debug)]
+// pub struct PINType(Uint32);
 
-impl Validate for Pintype {}
+// impl PINType {
+//     fn new(value: Uint32) -> Result<PINType, Error> {
+//         if value.0 > 999999 {
+//             Err(Error::from(ErrorKind::InvalidInput))
+//         } else {
+//             Ok(PINType(value))
+//         }
+//     }
+// }
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct PowerOfTenMultiplierType {}
+// impl fmt::Display for PINType {
+//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+//         let PINType(a) = self;
+//         write!(f, "{}", a)
+//     }
+// }
 
-impl Validate for PowerOfTenMultiplierType {}
+// TODO Ethan: newtype for validation
+pub type PowerOfTenMultiplierType = Int8;
+
+// #[derive(Debug, Default)]
+// pub struct PowerOfTenMultiplierType(Int8);
+
+// impl PowerOfTenMultiplierType {
+//     fn new(value: Int8) -> Result<PowerOfTenMultiplierType, Error> {
+//         if !(-9..=9).contains(&value.0) {
+//             Err(Error::from(ErrorKind::InvalidInput))
+//         } else {
+//             Ok(PowerOfTenMultiplierType(value))
+//         }
+//     }
+// }
+
+// impl fmt::Display for PowerOfTenMultiplierType {
+//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+//         let PowerOfTenMultiplierType(a) = self;
+//         write!(f, "x {}", a)
+//     }
+// }
+
 // Real electrical energy
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -8071,22 +8114,43 @@ impl Validate for RoleFlagsType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct ServiceKind {}
+#[repr(u8)]
+pub enum ServiceKind {
+    #[default]
+    Electricity = 0,
+    Gas = 1,
+    Water = 2,
+    Time = 3,
+    Pressure = 4,
+    Heat = 5,
+    Cooling = 6,
+}
 
 impl Validate for ServiceKind {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Sfditype {}
+pub type Sfditype = Uint40;
 
-impl Validate for Sfditype {}
+// TODO Ethan: Newtype for validation
+pub type SignedPerCent = Int16;
+// measured in 1/100ths of a percent (eg. PerCent(102) is 1.02%)
+// #[derive(Debug)]
+// pub struct PerCent(Uint16);
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct SignedPerCent {}
+// impl PerCent {
+//     fn new(value: Uint16) -> Result<PerCent, Error> {
+//         if value.0 > 10000 {
+//             Err(Error::from(ErrorKind::InvalidInput))
+//         } else {
+//             Ok(PerCent(value))
+//         }
+//     }
+// }
 
-impl Validate for SignedPerCent {}
-
+// impl fmt::Display for PerCent {
+//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+//         write!(f, "{:.2}%", self.0 .0 as f32 / 100.00)
+//     }
+// }
 // Real electrical energy, signed.
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -8119,11 +8183,8 @@ pub enum SubscribableType {
 }
 
 impl Validate for SubscribableType {}
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct TimeOffsetType {}
 
-impl Validate for TimeOffsetType {}
+pub type TimeOffsetType = Int32;
 
 pub type TimeType = Int64;
 
