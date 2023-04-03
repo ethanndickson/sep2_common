@@ -1,15 +1,9 @@
+use common::config::YASERDE_CFG;
 use common::objects::{EndDeviceControl, EventStatus, PrimacyType};
 use common::primitives::*;
 use common::xsd::{
     ApplianceLoadReduction, ApplianceLoadReductionType, DateTimeInterval, DeviceCategoryTypeFlags,
     DutyCycle, Offset, OneHourRangeType, SetPoint, SubscribableType, TargetReduction, UnitType,
-};
-use yaserde::ser::Config;
-
-const YASERDE_CFG: Config = yaserde::ser::Config {
-    perform_indent: true,
-    write_document_declaration: false,
-    indent_string: None,
 };
 
 #[test]
