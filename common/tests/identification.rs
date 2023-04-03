@@ -1,14 +1,11 @@
 use common::config::YASERDE_CFG;
-use common::{identification::List, primitives::Uint32};
+use common::identification::List;
+use yaserde::de::from_str;
+use yaserde::ser::to_string_with_config;
 #[test]
-fn list_deserialize() {
-    let list = List {
-        all: Uint32(0),
-        results: Uint32(0),
-        href: Some(String::from("/sample/list/uri/")),
-    };
-    println!(
-        "{}",
-        yaserde::ser::to_string_with_config(&list, &YASERDE_CFG).unwrap()
-    )
+fn list_serde() {
+    let orig = List::default();
+    println!("{}", to_string_with_config(&orig, &YASERDE_CFG).unwrap());
+    let new: List = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    assert_eq!(orig, new);
 }
