@@ -5735,7 +5735,7 @@ pub struct DercontrolList {
 
 impl Validate for DercontrolList {}
 
-type DercontrolType = HexBinary32;
+pub type DercontrolType = HexBinary32;
 
 #[repr(u32)]
 pub enum DercontrolTypeFlags {
