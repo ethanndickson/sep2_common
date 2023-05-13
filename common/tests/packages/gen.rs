@@ -1,9 +1,8 @@
 #![allow(non_snake_case)]
 use common::config::YASERDE_CFG;
 // TODO Ethan: Temporary import all
-use common::identification::*;
-use common::objects::*;
-use common::xsd::*;
+use common::packages::identification::*;
+use common::packages::xsd::*;
 use yaserde::de::from_str;
 use yaserde::ser::to_string_with_config;
 

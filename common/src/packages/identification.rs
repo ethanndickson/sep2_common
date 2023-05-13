@@ -4,8 +4,8 @@ use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
-use crate::primitives::*;
-use crate::xsd::*;
+use crate::packages::primitives::*;
+use crate::packages::xsd::*;
 
 // A resource is an addressable unit of information, either a collection (List)
 // or instance of an object (identifiedObject, or simply, Resource)

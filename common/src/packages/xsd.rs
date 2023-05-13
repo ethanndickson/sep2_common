@@ -6,9 +6,9 @@ use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
-use crate::identification::*;
-use crate::objects::*;
-use crate::primitives::*;
+use crate::packages::identification::*;
+use crate::packages::objects::*;
+use crate::packages::primitives::*;
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]

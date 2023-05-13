@@ -1,8 +1,8 @@
 #![allow(non_snake_case)]
 use common::config::YASERDE_CFG;
-use common::objects::*;
-use common::primitives::*;
-use common::xsd::{
+use common::packages::objects::*;
+use common::packages::primitives::*;
+use common::packages::xsd::{
     ApplianceLoadReduction, ApplianceLoadReductionType, DateTimeInterval, DeviceCategoryTypeFlags,
     DutyCycle, Offset, OneHourRangeType, SetPoint, SubscribableType, TargetReduction, UnitType,
 };

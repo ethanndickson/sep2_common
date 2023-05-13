@@ -3,8 +3,8 @@ use yaserde_derive::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
 
-use crate::primitives::*;
-use crate::xsd::*;
+use crate::packages::primitives::*;
+use crate::packages::xsd::*;
 
 // Current status information relevant to a specific object. The Status object
 // is used to indicate the current status of an Event. Devices can read the
