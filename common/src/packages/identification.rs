@@ -1,11 +1,12 @@
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
-// Types should eventually be put in a module corresponding to their package
 use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
 use crate::packages::primitives::*;
 use crate::packages::xsd::*;
+
+use super::traits::*;
 
 // A resource is an addressable unit of information, either a collection (List)
 // or instance of an object (identifiedObject, or simply, Resource)
@@ -18,6 +19,7 @@ pub struct Resource {
     pub href: Option<String>,
 }
 
+impl SEResource for Resource {}
 impl Validate for Resource {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -59,6 +61,8 @@ pub struct Response {
     pub href: Option<String>,
 }
 
+impl SEResponse for Response {}
+impl SEResource for Response {}
 impl Validate for Response {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -79,6 +83,8 @@ pub struct List {
     pub href: Option<String>,
 }
 
+impl SEList for List {}
+impl SEResource for List {}
 impl Validate for List {}
 
 // Links provide a reference, via URI, to another resource.
@@ -90,6 +96,7 @@ pub struct Link {
     pub href: String,
 }
 
+impl SELink for Link {}
 impl Validate for Link {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -106,7 +113,8 @@ pub struct ListLink {
     #[yaserde(attribute, rename = "href")]
     pub href: String,
 }
-
+impl SEListLink for ListLink {}
+impl SELink for ListLink {}
 impl Validate for ListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -130,7 +138,8 @@ pub struct IdentifiedObject {
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
-
+impl SEIdentifiedObject for IdentifiedObject {}
+impl SEResource for IdentifiedObject {}
 impl Validate for IdentifiedObject {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -167,6 +176,8 @@ pub struct RespondableResource {
     pub href: Option<String>,
 }
 
+impl SERespondableResource for RespondableResource {}
+impl SEResource for RespondableResource {}
 impl Validate for RespondableResource {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -216,6 +227,9 @@ pub struct RespondableIdentifiedObject {
     pub href: Option<String>,
 }
 
+impl SERespondableIdentifiedObject for RespondableIdentifiedObject {}
+impl SERespondableResource for RespondableIdentifiedObject {}
+impl SEResource for RespondableIdentifiedObject {}
 impl Validate for RespondableIdentifiedObject {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -271,6 +285,9 @@ pub struct RespondableSubscribableIdentifiedObject {
     pub href: Option<String>,
 }
 
+impl SERespondableSubscribableIdentifiedObject for RespondableSubscribableIdentifiedObject {}
+impl SERespondableResource for RespondableSubscribableIdentifiedObject {}
+impl SEResource for RespondableSubscribableIdentifiedObject {}
 impl Validate for RespondableSubscribableIdentifiedObject {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -287,6 +304,10 @@ pub struct SubscribableResource {
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
+
+impl SESubscribableResource for SubscribableResource {}
+impl SEResource for SubscribableResource {}
+impl Validate for SubscribableResource {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -312,6 +333,9 @@ pub struct SubscribableList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for SubscribableList {}
+impl SESubscribableResource for SubscribableList {}
+impl SEResource for SubscribableList {}
 impl Validate for SubscribableList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -342,6 +366,9 @@ pub struct SubscribableIdentifiedObject {
     pub href: Option<String>,
 }
 
+impl SESubscribableIdentifiedObject for SubscribableIdentifiedObject {}
+impl SESubscribableResource for SubscribableIdentifiedObject {}
+impl SEResource for SubscribableIdentifiedObject {}
 impl Validate for SubscribableIdentifiedObject {}
 
 #[derive(Default, Debug)]

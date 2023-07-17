@@ -10,6 +10,8 @@ use crate::packages::identification::*;
 use crate::packages::objects::*;
 use crate::packages::primitives::*;
 
+use super::traits::*;
+
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FunctionSetAssignmentsBase {
@@ -49,6 +51,8 @@ pub struct FunctionSetAssignmentsBase {
     pub href: Option<String>,
 }
 
+impl SEFunctionSetAssignmentsBase for FunctionSetAssignmentsBase {}
+impl SEResource for FunctionSetAssignmentsBase {}
 impl Validate for FunctionSetAssignmentsBase {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -106,6 +110,8 @@ pub struct DeviceCapability {
     pub href: Option<String>,
 }
 
+impl SEFunctionSetAssignmentsBase for DeviceCapability {}
+impl SEResource for DeviceCapability {}
 impl Validate for DeviceCapability {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -167,6 +173,9 @@ pub struct AbstractDevice {
     pub href: Option<String>,
 }
 
+impl SEAbstractDevice for AbstractDevice {}
+impl SESubscribableResource for AbstractDevice {}
+impl SEResource for AbstractDevice {}
 impl Validate for AbstractDevice {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -217,6 +226,7 @@ pub struct DeviceStatus {
     pub href: Option<String>,
 }
 
+impl SEResource for DeviceStatus {}
 impl Validate for DeviceStatus {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -312,6 +322,9 @@ pub struct EndDevice {
     pub href: Option<String>,
 }
 
+impl SEAbstractDevice for EndDevice {}
+impl SESubscribableResource for EndDevice {}
+impl SEResource for EndDevice {}
 impl Validate for EndDevice {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -348,6 +361,9 @@ pub struct EndDeviceList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for EndDeviceList {}
+impl SESubscribableResource for EndDeviceList {}
+impl SEResource for EndDeviceList {}
 impl Validate for EndDeviceList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -378,6 +394,7 @@ pub struct Registration {
     pub href: Option<String>,
 }
 
+impl SEResource for Registration {}
 impl Validate for Registration {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -446,6 +463,9 @@ pub struct SelfDevice {
     pub href: Option<String>,
 }
 
+impl SEAbstractDevice for SelfDevice {}
+impl SESubscribableResource for SelfDevice {}
+impl SEResource for SelfDevice {}
 impl Validate for SelfDevice {}
 
 // Specification of a temperature.
@@ -528,6 +548,8 @@ pub struct FunctionSetAssignments {
     pub href: Option<String>,
 }
 
+impl SEFunctionSetAssignmentsBase for FunctionSetAssignments {}
+impl SEResource for FunctionSetAssignments {}
 impl Validate for FunctionSetAssignments {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -564,6 +586,9 @@ pub struct FunctionSetAssignmentsList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for FunctionSetAssignmentsList {}
+impl SESubscribableResource for FunctionSetAssignmentsList {}
+impl SEResource for FunctionSetAssignmentsList {}
 impl Validate for FunctionSetAssignmentsList {}
 
 // Indicates a condition that must be satisfied for the Notification to be
@@ -602,6 +627,7 @@ pub struct SubscriptionBase {
     pub href: Option<String>,
 }
 
+impl SEResource for SubscriptionBase {}
 impl Validate for SubscriptionBase {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -660,6 +686,8 @@ pub struct Subscription {
     pub href: Option<String>,
 }
 
+impl SESubscriptionBase for Subscription {}
+impl SEResource for Subscription {}
 impl Validate for Subscription {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -690,6 +718,8 @@ pub struct SubscriptionList {
     pub href: Option<String>,
 }
 
+impl SEList for SubscriptionList {}
+impl SEResource for SubscriptionList {}
 impl Validate for SubscriptionList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -731,6 +761,8 @@ pub struct Notification {
     pub href: Option<String>,
 }
 
+impl SESubscriptionBase for Notification {}
+impl SEResource for Notification {}
 impl Validate for Notification {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -754,6 +786,8 @@ pub struct NotificationList {
     pub href: Option<String>,
 }
 
+impl SEList for NotificationList {}
+impl SEResource for NotificationList {}
 impl Validate for NotificationList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -795,6 +829,8 @@ pub struct DercontrolResponse {
     pub href: Option<String>,
 }
 
+impl SEResponse for DercontrolResponse {}
+impl SEResource for DercontrolResponse {}
 impl Validate for DercontrolResponse {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -836,6 +872,8 @@ pub struct FlowReservationResponseResponse {
     pub href: Option<String>,
 }
 
+impl SEResponse for FlowReservationResponseResponse {}
+impl SEResource for FlowReservationResponseResponse {}
 impl Validate for FlowReservationResponseResponse {}
 
 // Specifies the value of the TargetReduction applied by the device.
@@ -918,6 +956,8 @@ pub struct DrResponse {
     pub href: Option<String>,
 }
 
+impl SEResponse for DrResponse {}
+impl SEResource for DrResponse {}
 impl Validate for DrResponse {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -959,6 +999,8 @@ pub struct PriceResponse {
     pub href: Option<String>,
 }
 
+impl SEResponse for PriceResponse {}
+impl SEResource for PriceResponse {}
 impl Validate for PriceResponse {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -982,6 +1024,8 @@ pub struct ResponseList {
     pub href: Option<String>,
 }
 
+impl SEList for ResponseList {}
+impl SEResource for ResponseList {}
 impl Validate for ResponseList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1009,6 +1053,8 @@ pub struct ResponseSet {
     pub href: Option<String>,
 }
 
+impl SEIdentifiedObject for ResponseSet {}
+impl SEResource for ResponseSet {}
 impl Validate for ResponseSet {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1039,6 +1085,8 @@ pub struct ResponseSetList {
     pub href: Option<String>,
 }
 
+impl SEList for ResponseSetList {}
+impl SEResource for ResponseSetList {}
 impl Validate for ResponseSetList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1080,6 +1128,8 @@ pub struct TextResponse {
     pub href: Option<String>,
 }
 
+impl SEResponse for TextResponse {}
+impl SEResource for TextResponse {}
 impl Validate for TextResponse {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1141,6 +1191,7 @@ pub struct Time {
     pub href: Option<String>,
 }
 
+impl SEResource for Time {}
 impl Validate for Time {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1239,6 +1290,7 @@ pub struct DeviceInformation {
     pub href: Option<String>,
 }
 
+impl SEResource for DeviceInformation {}
 impl Validate for DeviceInformation {}
 
 // Contains information about the static capabilities of the device, to allow
@@ -1297,6 +1349,7 @@ pub struct SupportedLocale {
     pub href: Option<String>,
 }
 
+impl SEResource for SupportedLocale {}
 impl Validate for SupportedLocale {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1320,6 +1373,8 @@ pub struct SupportedLocaleList {
     pub href: Option<String>,
 }
 
+impl SEList for SupportedLocaleList {}
+impl SEResource for SupportedLocaleList {}
 impl Validate for SupportedLocaleList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1381,6 +1436,7 @@ pub struct PowerStatus {
     pub href: Option<String>,
 }
 
+impl SEResource for PowerStatus {}
 impl Validate for PowerStatus {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1492,6 +1548,7 @@ pub struct Ipaddr {
     pub href: Option<String>,
 }
 
+impl SEResource for Ipaddr {}
 impl Validate for Ipaddr {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1515,6 +1572,8 @@ pub struct IpaddrList {
     pub href: Option<String>,
 }
 
+impl SEList for IpaddrList {}
+impl SEResource for IpaddrList {}
 impl Validate for IpaddrList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1632,6 +1691,7 @@ pub struct Ipinterface {
     pub href: Option<String>,
 }
 
+impl SEResource for Ipinterface {}
 impl Validate for Ipinterface {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1662,6 +1722,8 @@ pub struct IpinterfaceList {
     pub href: Option<String>,
 }
 
+impl SEList for IpinterfaceList {}
+impl SEResource for IpinterfaceList {}
 impl Validate for IpinterfaceList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1746,6 +1808,7 @@ pub struct Llinterface {
     pub href: Option<String>,
 }
 
+impl SEResource for Llinterface {}
 impl Validate for Llinterface {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1769,6 +1832,8 @@ pub struct LlinterfaceList {
     pub href: Option<String>,
 }
 
+impl SEList for LlinterfaceList {}
+impl SEResource for LlinterfaceList {}
 impl Validate for LlinterfaceList {}
 
 // Contains information specific to 6LoWPAN.
@@ -1819,6 +1884,7 @@ pub struct Neighbor {
     pub href: Option<String>,
 }
 
+impl SEResource for Neighbor {}
 impl Validate for Neighbor {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1842,6 +1908,8 @@ pub struct NeighborList {
     pub href: Option<String>,
 }
 
+impl SEList for NeighborList {}
+impl SEResource for NeighborList {}
 impl Validate for NeighborList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1892,6 +1960,7 @@ pub struct Rplinstance {
     pub href: Option<String>,
 }
 
+impl SEResource for Rplinstance {}
 impl Validate for Rplinstance {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1915,6 +1984,8 @@ pub struct RplinstanceList {
     pub href: Option<String>,
 }
 
+impl SEList for RplinstanceList {}
+impl SEResource for RplinstanceList {}
 impl Validate for RplinstanceList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1934,6 +2005,7 @@ pub struct RplsourceRoutes {
     pub href: Option<String>,
 }
 
+impl SEResource for RplsourceRoutes {}
 impl Validate for RplsourceRoutes {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -1957,6 +2029,8 @@ pub struct RplsourceRoutesList {
     pub href: Option<String>,
 }
 
+impl SEList for RplsourceRoutesList {}
+impl SEResource for RplsourceRoutesList {}
 impl Validate for RplsourceRoutesList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2041,6 +2115,7 @@ pub struct LogEvent {
     pub href: Option<String>,
 }
 
+impl SEResource for LogEvent {}
 impl Validate for LogEvent {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2077,6 +2152,9 @@ pub struct LogEventList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for LogEventList {}
+impl SESubscribableResource for LogEventList {}
+impl SEResource for LogEventList {}
 impl Validate for LogEventList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2119,6 +2197,8 @@ pub struct Configuration {
     pub href: Option<String>,
 }
 
+impl SESubscribableResource for Configuration {}
+impl SEResource for Configuration {}
 impl Validate for Configuration {}
 
 // Contains configuration related to the device's power sources
@@ -2162,6 +2242,7 @@ pub struct PriceResponseCfg {
     pub href: Option<String>,
 }
 
+impl SEResource for PriceResponseCfg {}
 impl Validate for PriceResponseCfg {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2185,6 +2266,8 @@ pub struct PriceResponseCfgList {
     pub href: Option<String>,
 }
 
+impl SEList for PriceResponseCfgList {}
+impl SEResource for PriceResponseCfgList {}
 impl Validate for PriceResponseCfgList {}
 
 // Contains attributes related to the configuration of the time service.
@@ -2285,6 +2368,7 @@ pub struct File {
     pub href: Option<String>,
 }
 
+impl SEResource for File {}
 impl Validate for File {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2315,6 +2399,8 @@ pub struct FileList {
     pub href: Option<String>,
 }
 
+impl SEList for FileList {}
+impl SEResource for FileList {}
 impl Validate for FileList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2392,6 +2478,7 @@ pub struct FileStatus {
     pub href: Option<String>,
 }
 
+impl SEResource for FileStatus {}
 impl Validate for FileStatus {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2422,6 +2509,8 @@ pub struct LoadShedAvailabilityList {
     pub href: Option<String>,
 }
 
+impl SEList for LoadShedAvailabilityList {}
+impl SEResource for LoadShedAvailabilityList {}
 impl Validate for LoadShedAvailabilityList {}
 
 // The ApplianceLoadReduction object is used by a Demand Response service
@@ -2471,6 +2560,9 @@ pub struct DemandResponseProgramList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for DemandResponseProgramList {}
+impl SESubscribableResource for DemandResponseProgramList {}
+impl SEResource for DemandResponseProgramList {}
 impl Validate for DemandResponseProgramList {}
 
 // Duty cycle control is a device specific issue and is managed by the device.
@@ -2520,6 +2612,9 @@ pub struct EndDeviceControlList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for EndDeviceControlList {}
+impl SESubscribableResource for EndDeviceControlList {}
+impl SEResource for EndDeviceControlList {}
 impl Validate for EndDeviceControlList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2549,6 +2644,7 @@ pub struct LoadShedAvailability {
     pub href: Option<String>,
 }
 
+impl SEResource for LoadShedAvailability {}
 impl Validate for LoadShedAvailability {}
 
 // If a temperature offset is sent that causes the heating or cooling
@@ -2660,6 +2756,9 @@ pub struct MeterReadingBase {
     pub href: Option<String>,
 }
 
+impl SEMeterReadingBase for MeterReadingBase {}
+impl SEIdentifiedObject for MeterReadingBase {}
+impl SEResource for MeterReadingBase {}
 impl Validate for MeterReadingBase {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2696,6 +2795,9 @@ pub struct MeterReading {
     pub href: Option<String>,
 }
 
+impl SEMeterReadingBase for MeterReading {}
+impl SEIdentifiedObject for MeterReading {}
+impl SEResource for MeterReading {}
 impl Validate for MeterReading {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2725,6 +2827,9 @@ pub struct MeterReadingList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for MeterReadingList {}
+impl SESubscribableResource for MeterReadingList {}
+impl SEResource for MeterReadingList {}
 impl Validate for MeterReadingList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2774,6 +2879,8 @@ pub struct ReadingBase {
     pub href: Option<String>,
 }
 
+impl SEReadingBase for ReadingBase {}
+impl SEResource for ReadingBase {}
 impl Validate for ReadingBase {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2836,6 +2943,8 @@ pub struct Reading {
     pub href: Option<String>,
 }
 
+impl SEReadingBase for Reading {}
+impl SEResource for Reading {}
 impl Validate for Reading {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2865,6 +2974,9 @@ pub struct ReadingList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for ReadingList {}
+impl SESubscribableResource for ReadingList {}
+impl SEResource for ReadingList {}
 impl Validate for ReadingList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2893,6 +3005,8 @@ pub struct ReadingSetBase {
     pub href: Option<String>,
 }
 
+impl SEIdentifiedObject for ReadingSetBase {}
+impl SEResource for ReadingSetBase {}
 impl Validate for ReadingSetBase {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2924,6 +3038,9 @@ pub struct ReadingSet {
     pub href: Option<String>,
 }
 
+impl SEReadingSetBase for ReadingSet {}
+impl SEIdentifiedObject for ReadingSet {}
+impl SEResource for ReadingSet {}
 impl Validate for ReadingSet {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -2953,6 +3070,9 @@ pub struct ReadingSetList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for ReadingSetList {}
+impl SESubscribableResource for ReadingSetList {}
+impl SEResource for ReadingSetList {}
 impl Validate for ReadingSetList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3068,6 +3188,7 @@ pub struct ReadingType {
     pub href: Option<String>,
 }
 
+impl SEResource for ReadingType {}
 impl Validate for ReadingType {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3106,6 +3227,9 @@ pub struct UsagePointBase {
     pub href: Option<String>,
 }
 
+impl SEUsagePointBase for UsagePointBase {}
+impl SEIdentifiedObject for UsagePointBase {}
+impl SEResource for UsagePointBase {}
 impl Validate for UsagePointBase {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3152,6 +3276,9 @@ pub struct UsagePoint {
     pub href: Option<String>,
 }
 
+impl SEUsagePointBase for UsagePoint {}
+impl SEIdentifiedObject for UsagePoint {}
+impl SEResource for UsagePoint {}
 impl Validate for UsagePoint {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3188,6 +3315,9 @@ pub struct UsagePointList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for UsagePointList {}
+impl SESubscribableResource for UsagePointList {}
+impl SEResource for UsagePointList {}
 impl Validate for UsagePointList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3227,6 +3357,7 @@ pub struct ConsumptionTariffInterval {
     pub href: Option<String>,
 }
 
+impl SEResource for ConsumptionTariffInterval {}
 impl Validate for ConsumptionTariffInterval {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3250,6 +3381,8 @@ pub struct ConsumptionTariffIntervalList {
     pub href: Option<String>,
 }
 
+impl SEList for ConsumptionTariffIntervalList {}
+impl SEResource for ConsumptionTariffIntervalList {}
 impl Validate for ConsumptionTariffIntervalList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3392,6 +3525,8 @@ pub struct RateComponent {
     pub href: Option<String>,
 }
 
+impl SEIdentifiedObject for RateComponent {}
+impl SEResource for RateComponent {}
 impl Validate for RateComponent {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3415,6 +3550,8 @@ pub struct RateComponentList {
     pub href: Option<String>,
 }
 
+impl SEList for RateComponentList {}
+impl SEResource for RateComponentList {}
 impl Validate for RateComponentList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3451,6 +3588,9 @@ pub struct TariffProfileList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for TariffProfileList {}
+impl SESubscribableResource for TariffProfileList {}
+impl SEResource for TariffProfileList {}
 impl Validate for TariffProfileList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3480,6 +3620,9 @@ pub struct TimeTariffIntervalList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for TimeTariffIntervalList {}
+impl SESubscribableResource for TimeTariffIntervalList {}
+impl SEResource for TimeTariffIntervalList {}
 impl Validate for TimeTariffIntervalList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3516,6 +3659,9 @@ pub struct MessagingProgramList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for MessagingProgramList {}
+impl SESubscribableResource for MessagingProgramList {}
+impl SEResource for MessagingProgramList {}
 impl Validate for MessagingProgramList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3559,6 +3705,9 @@ pub struct TextMessageList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for TextMessageList {}
+impl SESubscribableResource for TextMessageList {}
+impl SEResource for TextMessageList {}
 impl Validate for TextMessageList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3586,6 +3735,7 @@ pub struct BillingPeriod {
     pub href: Option<String>,
 }
 
+impl SEResource for BillingPeriod {}
 impl Validate for BillingPeriod {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3615,6 +3765,9 @@ pub struct BillingPeriodList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for BillingPeriodList {}
+impl SESubscribableResource for BillingPeriodList {}
+impl SEResource for BillingPeriodList {}
 impl Validate for BillingPeriodList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3645,6 +3798,10 @@ pub struct BillingMeterReadingBase {
     pub href: Option<String>,
 }
 
+impl SEBillingMeterReadingBase for BillingMeterReadingBase {}
+impl SEMeterReadingBase for BillingMeterReadingBase {}
+impl SEIdentifiedObject for BillingMeterReadingBase {}
+impl SEResource for BillingMeterReadingBase {}
 impl Validate for BillingMeterReadingBase {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3697,6 +3854,8 @@ pub struct BillingReading {
     pub href: Option<String>,
 }
 
+impl SEReadingBase for BillingReading {}
+impl SEResource for BillingReading {}
 impl Validate for BillingReading {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3720,6 +3879,8 @@ pub struct BillingReadingList {
     pub href: Option<String>,
 }
 
+impl SEList for BillingReadingList {}
+impl SEResource for BillingReadingList {}
 impl Validate for BillingReadingList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3751,6 +3912,9 @@ pub struct BillingReadingSet {
     pub href: Option<String>,
 }
 
+impl SEReadingSetBase for BillingReadingSet {}
+impl SEIdentifiedObject for BillingReadingSet {}
+impl SEResource for BillingReadingSet {}
 impl Validate for BillingReadingSet {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3780,6 +3944,9 @@ pub struct BillingReadingSetList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for BillingReadingSetList {}
+impl SESubscribableResource for BillingReadingSetList {}
+impl SEResource for BillingReadingSetList {}
 impl Validate for BillingReadingSetList {}
 
 // Charges contain charges on a customer bill. These could be items like taxes,
@@ -3871,6 +4038,8 @@ pub struct CustomerAccount {
     pub href: Option<String>,
 }
 
+impl SEIdentifiedObject for CustomerAccount {}
+impl SEResource for CustomerAccount {}
 impl Validate for CustomerAccount {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3907,6 +4076,9 @@ pub struct CustomerAccountList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for CustomerAccountList {}
+impl SESubscribableResource for CustomerAccountList {}
+impl SEResource for CustomerAccountList {}
 impl Validate for CustomerAccountList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3969,6 +4141,8 @@ pub struct CustomerAgreement {
     pub href: Option<String>,
 }
 
+impl SEIdentifiedObject for CustomerAgreement {}
+impl SEResource for CustomerAgreement {}
 impl Validate for CustomerAgreement {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -3998,6 +4172,9 @@ pub struct CustomerAgreementList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for CustomerAgreementList {}
+impl SESubscribableResource for CustomerAgreementList {}
+impl SEResource for CustomerAgreementList {}
 impl Validate for CustomerAgreementList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4028,6 +4205,10 @@ pub struct HistoricalReading {
     pub href: Option<String>,
 }
 
+impl SEBillingMeterReadingBase for HistoricalReading {}
+impl SEMeterReadingBase for HistoricalReading {}
+impl SEIdentifiedObject for HistoricalReading {}
+impl SEResource for HistoricalReading {}
 impl Validate for HistoricalReading {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4051,6 +4232,8 @@ pub struct HistoricalReadingList {
     pub href: Option<String>,
 }
 
+impl SEList for HistoricalReadingList {}
+impl SEResource for HistoricalReadingList {}
 impl Validate for HistoricalReadingList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4081,6 +4264,10 @@ pub struct ProjectionReading {
     pub href: Option<String>,
 }
 
+impl SEBillingMeterReadingBase for ProjectionReading {}
+impl SEMeterReadingBase for ProjectionReading {}
+impl SEIdentifiedObject for ProjectionReading {}
+impl SEResource for ProjectionReading {}
 impl Validate for ProjectionReading {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4104,6 +4291,8 @@ pub struct ProjectionReadingList {
     pub href: Option<String>,
 }
 
+impl SEList for ProjectionReadingList {}
+impl SEResource for ProjectionReadingList {}
 impl Validate for ProjectionReadingList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4134,6 +4323,10 @@ pub struct TargetReading {
     pub href: Option<String>,
 }
 
+impl SEBillingMeterReadingBase for TargetReading {}
+impl SEMeterReadingBase for TargetReading {}
+impl SEIdentifiedObject for TargetReading {}
+impl SEResource for TargetReading {}
 impl Validate for TargetReading {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4157,6 +4350,8 @@ pub struct TargetReadingList {
     pub href: Option<String>,
 }
 
+impl SEList for TargetReadingList {}
+impl SEResource for TargetReadingList {}
 impl Validate for TargetReadingList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4197,6 +4392,8 @@ pub struct ServiceSupplier {
     pub href: Option<String>,
 }
 
+impl SEIdentifiedObject for ServiceSupplier {}
+impl SEResource for ServiceSupplier {}
 impl Validate for ServiceSupplier {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4220,6 +4417,8 @@ pub struct ServiceSupplierList {
     pub href: Option<String>,
 }
 
+impl SEList for ServiceSupplierList {}
+impl SEResource for ServiceSupplierList {}
 impl Validate for ServiceSupplierList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4258,6 +4457,7 @@ pub struct AccountBalance {
     pub href: Option<String>,
 }
 
+impl SEResource for AccountBalance {}
 impl Validate for AccountBalance {}
 
 // Unit for accounting; use either 'energyUnit' or 'currencyUnit' to specify the
@@ -4332,6 +4532,8 @@ pub struct CreditRegister {
     pub href: Option<String>,
 }
 
+impl SEIdentifiedObject for CreditRegister {}
+impl SEResource for CreditRegister {}
 impl Validate for CreditRegister {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4355,6 +4557,8 @@ pub struct CreditRegisterList {
     pub href: Option<String>,
 }
 
+impl SEList for CreditRegisterList {}
+impl SEResource for CreditRegisterList {}
 impl Validate for CreditRegisterList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4435,6 +4639,8 @@ pub struct Prepayment {
     pub href: Option<String>,
 }
 
+impl SEIdentifiedObject for Prepayment {}
+impl SEResource for Prepayment {}
 impl Validate for Prepayment {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4471,6 +4677,9 @@ pub struct PrepaymentList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for PrepaymentList {}
+impl SESubscribableResource for PrepaymentList {}
+impl SEResource for PrepaymentList {}
 impl Validate for PrepaymentList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4516,6 +4725,7 @@ pub struct PrepayOperationStatus {
     pub href: Option<String>,
 }
 
+impl SEResource for PrepayOperationStatus {}
 impl Validate for PrepayOperationStatus {}
 
 // Specifies a change to the service status.
@@ -4551,6 +4761,7 @@ pub struct SupplyInterruptionOverride {
     pub href: Option<String>,
 }
 
+impl SEResource for SupplyInterruptionOverride {}
 impl Validate for SupplyInterruptionOverride {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4574,6 +4785,8 @@ pub struct SupplyInterruptionOverrideList {
     pub href: Option<String>,
 }
 
+impl SEList for SupplyInterruptionOverrideList {}
+impl SEResource for SupplyInterruptionOverrideList {}
 impl Validate for SupplyInterruptionOverrideList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4718,6 +4931,8 @@ pub struct FlowReservationRequest {
     pub href: Option<String>,
 }
 
+impl SEIdentifiedObject for FlowReservationRequest {}
+impl SEResource for FlowReservationRequest {}
 impl Validate for FlowReservationRequest {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4748,6 +4963,8 @@ pub struct FlowReservationRequestList {
     pub href: Option<String>,
 }
 
+impl SEList for FlowReservationRequestList {}
+impl SEResource for FlowReservationRequestList {}
 impl Validate for FlowReservationRequestList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4828,6 +5045,10 @@ pub struct FlowReservationResponse {
     pub href: Option<String>,
 }
 
+impl SEEvent for FlowReservationResponse {}
+impl SERespondableSubscribableIdentifiedObject for FlowReservationResponse {}
+impl SERespondableResource for FlowReservationResponse {}
+impl SEResource for FlowReservationResponse {}
 impl Validate for FlowReservationResponse {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4864,6 +5085,9 @@ pub struct FlowReservationResponseList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for FlowReservationResponseList {}
+impl SESubscribableResource for FlowReservationResponseList {}
+impl SEResource for FlowReservationResponseList {}
 impl Validate for FlowReservationResponseList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -4960,6 +5184,9 @@ pub struct DefaultDERControl {
     pub href: Option<String>,
 }
 
+impl SESubscribableIdentifiedObject for DefaultDERControl {}
+impl SESubscribableResource for DefaultDERControl {}
+impl SEResource for DefaultDERControl {}
 impl Validate for DefaultDERControl {}
 
 // Type for Frequency-Droop (Frequency-Watt) operation.
@@ -5034,6 +5261,8 @@ pub struct Der {
     pub href: Option<String>,
 }
 
+impl SESubscribableResource for Der {}
+impl SEResource for Der {}
 impl Validate for Der {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -5064,6 +5293,8 @@ pub struct Derlist {
     pub href: Option<String>,
 }
 
+impl SEList for Derlist {}
+impl SEResource for Derlist {}
 impl Validate for Derlist {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -5233,6 +5464,8 @@ pub struct Dersettings {
     pub href: Option<String>,
 }
 
+impl SESubscribableResource for Dersettings {}
+impl SEResource for Dersettings {}
 impl Validate for Dersettings {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -5307,6 +5540,8 @@ pub struct Deravailability {
     pub href: Option<String>,
 }
 
+impl SESubscribableResource for Deravailability {}
+impl SEResource for Deravailability {}
 impl Validate for Deravailability {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -5443,6 +5678,7 @@ pub struct Dercapability {
     pub href: Option<String>,
 }
 
+impl SEResource for Dercapability {}
 impl Validate for Dercapability {}
 
 // Distributed Energy Resource (DER) control values.
@@ -5733,6 +5969,9 @@ pub struct DercontrolList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for DercontrolList {}
+impl SESubscribableResource for DercontrolList {}
+impl SEResource for DercontrolList {}
 impl Validate for DercontrolList {}
 
 pub type DercontrolType = HexBinary32;
@@ -5856,6 +6095,8 @@ pub struct Dercurve {
     pub href: Option<String>,
 }
 
+impl SEIdentifiedObject for Dercurve {}
+impl SEResource for Dercurve {}
 impl Validate for Dercurve {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -5866,6 +6107,7 @@ pub struct CurrentDERProgramLink {
     pub href: String,
 }
 
+impl SELink for CurrentDERProgramLink {}
 impl Validate for CurrentDERProgramLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -5889,6 +6131,8 @@ pub struct DercurveList {
     pub href: Option<String>,
 }
 
+impl SEList for DercurveList {}
+impl SEResource for DercurveList {}
 impl Validate for DercurveList {}
 
 // Data point values for defining a curve or schedule
@@ -5986,6 +6230,9 @@ pub struct Derprogram {
     pub href: Option<String>,
 }
 
+impl SESubscribableIdentifiedObject for Derprogram {}
+impl SESubscribableResource for Derprogram {}
+impl SEResource for Derprogram {}
 impl Validate for Derprogram {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6022,6 +6269,9 @@ pub struct DerprogramList {
     pub href: Option<String>,
 }
 
+impl SESubscribableList for DerprogramList {}
+impl SESubscribableResource for DerprogramList {}
+impl SEResource for DerprogramList {}
 impl Validate for DerprogramList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6099,6 +6349,8 @@ pub struct Derstatus {
     pub href: Option<String>,
 }
 
+impl SESubscribableResource for Derstatus {}
+impl SEResource for Derstatus {}
 impl Validate for Derstatus {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6479,6 +6731,7 @@ pub struct AccountBalanceLink {
     pub href: String,
 }
 
+impl SELink for AccountBalanceLink {}
 impl Validate for AccountBalanceLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6496,6 +6749,8 @@ pub struct ActiveBillingPeriodListLink {
     pub href: String,
 }
 
+impl SEListLink for ActiveBillingPeriodListLink {}
+impl SELink for ActiveBillingPeriodListLink {}
 impl Validate for ActiveBillingPeriodListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6513,6 +6768,8 @@ pub struct ActiveCreditRegisterListLink {
     pub href: String,
 }
 
+impl SEListLink for ActiveCreditRegisterListLink {}
+impl SELink for ActiveCreditRegisterListLink {}
 impl Validate for ActiveCreditRegisterListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6530,6 +6787,8 @@ pub struct ActiveDERControlListLink {
     pub href: String,
 }
 
+impl SEListLink for ActiveDERControlListLink {}
+impl SELink for ActiveDERControlListLink {}
 impl Validate for ActiveDERControlListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6547,6 +6806,8 @@ pub struct ActiveEndDeviceControlListLink {
     pub href: String,
 }
 
+impl SEListLink for ActiveEndDeviceControlListLink {}
+impl SELink for ActiveEndDeviceControlListLink {}
 impl Validate for ActiveEndDeviceControlListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6564,6 +6825,8 @@ pub struct ActiveFlowReservationListLink {
     pub href: String,
 }
 
+impl SEListLink for ActiveFlowReservationListLink {}
+impl SELink for ActiveFlowReservationListLink {}
 impl Validate for ActiveFlowReservationListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6581,6 +6844,8 @@ pub struct ActiveProjectionReadingListLink {
     pub href: String,
 }
 
+impl SEListLink for ActiveProjectionReadingListLink {}
+impl SELink for ActiveProjectionReadingListLink {}
 impl Validate for ActiveProjectionReadingListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6598,6 +6863,8 @@ pub struct ActiveSupplyInterruptionOverrideListLink {
     pub href: String,
 }
 
+impl SEListLink for ActiveSupplyInterruptionOverrideListLink {}
+impl SELink for ActiveSupplyInterruptionOverrideListLink {}
 impl Validate for ActiveSupplyInterruptionOverrideListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6615,6 +6882,8 @@ pub struct ActiveTargetReadingListLink {
     pub href: String,
 }
 
+impl SEListLink for ActiveTargetReadingListLink {}
+impl SELink for ActiveTargetReadingListLink {}
 impl Validate for ActiveTargetReadingListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6632,6 +6901,8 @@ pub struct ActiveTextMessageListLink {
     pub href: String,
 }
 
+impl SEListLink for ActiveTextMessageListLink {}
+impl SELink for ActiveTextMessageListLink {}
 impl Validate for ActiveTextMessageListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6649,6 +6920,8 @@ pub struct ActiveTimeTariffIntervalListLink {
     pub href: String,
 }
 
+impl SEListLink for ActiveTimeTariffIntervalListLink {}
+impl SELink for ActiveTimeTariffIntervalListLink {}
 impl Validate for ActiveTimeTariffIntervalListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6666,6 +6939,8 @@ pub struct AssociatedDERProgramListLink {
     pub href: String,
 }
 
+impl SEListLink for AssociatedDERProgramListLink {}
+impl SELink for AssociatedDERProgramListLink {}
 impl Validate for AssociatedDERProgramListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6676,6 +6951,7 @@ pub struct AssociatedUsagePointLink {
     pub href: String,
 }
 
+impl SELink for AssociatedUsagePointLink {}
 impl Validate for AssociatedUsagePointLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6693,6 +6969,8 @@ pub struct BillingPeriodListLink {
     pub href: String,
 }
 
+impl SEListLink for BillingPeriodListLink {}
+impl SELink for BillingPeriodListLink {}
 impl Validate for BillingPeriodListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6710,6 +6988,8 @@ pub struct BillingReadingListLink {
     pub href: String,
 }
 
+impl SEListLink for BillingReadingListLink {}
+impl SELink for BillingReadingListLink {}
 impl Validate for BillingReadingListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6727,6 +7007,8 @@ pub struct BillingReadingSetListLink {
     pub href: String,
 }
 
+impl SEListLink for BillingReadingSetListLink {}
+impl SELink for BillingReadingSetListLink {}
 impl Validate for BillingReadingSetListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6737,6 +7019,7 @@ pub struct ConfigurationLink {
     pub href: String,
 }
 
+impl SELink for ConfigurationLink {}
 impl Validate for ConfigurationLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6754,6 +7037,8 @@ pub struct ConsumptionTariffIntervalListLink {
     pub href: String,
 }
 
+impl SEListLink for ConsumptionTariffIntervalListLink {}
+impl SELink for ConsumptionTariffIntervalListLink {}
 impl Validate for ConsumptionTariffIntervalListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6771,6 +7056,8 @@ pub struct CreditRegisterListLink {
     pub href: String,
 }
 
+impl SEListLink for CreditRegisterListLink {}
+impl SELink for CreditRegisterListLink {}
 impl Validate for CreditRegisterListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6781,6 +7068,7 @@ pub struct CustomerAccountLink {
     pub href: String,
 }
 
+impl SELink for CustomerAccountLink {}
 impl Validate for CustomerAccountLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6798,6 +7086,8 @@ pub struct CustomerAccountListLink {
     pub href: String,
 }
 
+impl SEListLink for CustomerAccountListLink {}
+impl SELink for CustomerAccountListLink {}
 impl Validate for CustomerAccountListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6815,6 +7105,8 @@ pub struct CustomerAgreementListLink {
     pub href: String,
 }
 
+impl SEListLink for CustomerAgreementListLink {}
+impl SELink for CustomerAgreementListLink {}
 impl Validate for CustomerAgreementListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6825,6 +7117,7 @@ pub struct DemandResponseProgramLink {
     pub href: String,
 }
 
+impl SELink for DemandResponseProgramLink {}
 impl Validate for DemandResponseProgramLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6842,6 +7135,8 @@ pub struct DemandResponseProgramListLink {
     pub href: String,
 }
 
+impl SEListLink for DemandResponseProgramListLink {}
+impl SELink for DemandResponseProgramListLink {}
 impl Validate for DemandResponseProgramListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6852,6 +7147,7 @@ pub struct DeravailabilityLink {
     pub href: String,
 }
 
+impl SELink for DeravailabilityLink {}
 impl Validate for DeravailabilityLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6862,6 +7158,7 @@ pub struct DefaultDERControlLink {
     pub href: String,
 }
 
+impl SELink for DefaultDERControlLink {}
 impl Validate for DefaultDERControlLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6872,6 +7169,7 @@ pub struct DercapabilityLink {
     pub href: String,
 }
 
+impl SELink for DercapabilityLink {}
 impl Validate for DercapabilityLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6889,6 +7187,8 @@ pub struct DercontrolListLink {
     pub href: String,
 }
 
+impl SEListLink for DercontrolListLink {}
+impl SELink for DercontrolListLink {}
 impl Validate for DercontrolListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6899,6 +7199,7 @@ pub struct DercurveLink {
     pub href: String,
 }
 
+impl SELink for DercurveLink {}
 impl Validate for DercurveLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6916,6 +7217,8 @@ pub struct DercurveListLink {
     pub href: String,
 }
 
+impl SEListLink for DercurveListLink {}
+impl SELink for DercurveListLink {}
 impl Validate for DercurveListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6926,6 +7229,7 @@ pub struct Derlink {
     pub href: String,
 }
 
+impl SELink for Derlink {}
 impl Validate for Derlink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6943,6 +7247,8 @@ pub struct DerlistLink {
     pub href: String,
 }
 
+impl SEListLink for DerlistLink {}
+impl SELink for DerlistLink {}
 impl Validate for DerlistLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6953,6 +7259,7 @@ pub struct DerprogramLink {
     pub href: String,
 }
 
+impl SELink for DerprogramLink {}
 impl Validate for DerprogramLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6970,6 +7277,8 @@ pub struct DerprogramListLink {
     pub href: String,
 }
 
+impl SEListLink for DerprogramListLink {}
+impl SELink for DerprogramListLink {}
 impl Validate for DerprogramListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6980,6 +7289,7 @@ pub struct DersettingsLink {
     pub href: String,
 }
 
+impl SELink for DersettingsLink {}
 impl Validate for DersettingsLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -6990,6 +7300,7 @@ pub struct DerstatusLink {
     pub href: String,
 }
 
+impl SELink for DerstatusLink {}
 impl Validate for DerstatusLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7000,6 +7311,7 @@ pub struct DeviceCapabilityLink {
     pub href: String,
 }
 
+impl SELink for DeviceCapabilityLink {}
 impl Validate for DeviceCapabilityLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7010,6 +7322,7 @@ pub struct DeviceInformationLink {
     pub href: String,
 }
 
+impl SELink for DeviceInformationLink {}
 impl Validate for DeviceInformationLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7020,6 +7333,7 @@ pub struct DeviceStatusLink {
     pub href: String,
 }
 
+impl SELink for DeviceStatusLink {}
 impl Validate for DeviceStatusLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7037,6 +7351,8 @@ pub struct EndDeviceControlListLink {
     pub href: String,
 }
 
+impl SEListLink for EndDeviceControlListLink {}
+impl SELink for EndDeviceControlListLink {}
 impl Validate for EndDeviceControlListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7047,6 +7363,7 @@ pub struct EndDeviceLink {
     pub href: String,
 }
 
+impl SELink for EndDeviceLink {}
 impl Validate for EndDeviceLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7064,6 +7381,8 @@ pub struct EndDeviceListLink {
     pub href: String,
 }
 
+impl SEListLink for EndDeviceListLink {}
+impl SELink for EndDeviceListLink {}
 impl Validate for EndDeviceListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7074,6 +7393,7 @@ pub struct FileLink {
     pub href: String,
 }
 
+impl SELink for FileLink {}
 impl Validate for FileLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7091,6 +7411,8 @@ pub struct FileListLink {
     pub href: String,
 }
 
+impl SEListLink for FileListLink {}
+impl SELink for FileListLink {}
 impl Validate for FileListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7101,6 +7423,7 @@ pub struct FileStatusLink {
     pub href: String,
 }
 
+impl SELink for FileStatusLink {}
 impl Validate for FileStatusLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7118,6 +7441,8 @@ pub struct FlowReservationRequestListLink {
     pub href: String,
 }
 
+impl SEListLink for FlowReservationRequestListLink {}
+impl SELink for FlowReservationRequestListLink {}
 impl Validate for FlowReservationRequestListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7135,6 +7460,8 @@ pub struct FlowReservationResponseListLink {
     pub href: String,
 }
 
+impl SEListLink for FlowReservationResponseListLink {}
+impl SELink for FlowReservationResponseListLink {}
 impl Validate for FlowReservationResponseListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7152,6 +7479,8 @@ pub struct FunctionSetAssignmentsListLink {
     pub href: String,
 }
 
+impl SEListLink for FunctionSetAssignmentsListLink {}
+impl SELink for FunctionSetAssignmentsListLink {}
 impl Validate for FunctionSetAssignmentsListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7169,6 +7498,8 @@ pub struct HistoricalReadingListLink {
     pub href: String,
 }
 
+impl SEListLink for HistoricalReadingListLink {}
+impl SELink for HistoricalReadingListLink {}
 impl Validate for HistoricalReadingListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7186,6 +7517,8 @@ pub struct IpaddrListLink {
     pub href: String,
 }
 
+impl SEListLink for IpaddrListLink {}
+impl SELink for IpaddrListLink {}
 impl Validate for IpaddrListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7203,6 +7536,8 @@ pub struct IpinterfaceListLink {
     pub href: String,
 }
 
+impl SEListLink for IpinterfaceListLink {}
+impl SELink for IpinterfaceListLink {}
 impl Validate for IpinterfaceListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7220,6 +7555,8 @@ pub struct LlinterfaceListLink {
     pub href: String,
 }
 
+impl SEListLink for LlinterfaceListLink {}
+impl SELink for LlinterfaceListLink {}
 impl Validate for LlinterfaceListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7237,6 +7574,8 @@ pub struct LoadShedAvailabilityListLink {
     pub href: String,
 }
 
+impl SEListLink for LoadShedAvailabilityListLink {}
+impl SELink for LoadShedAvailabilityListLink {}
 impl Validate for LoadShedAvailabilityListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7254,6 +7593,8 @@ pub struct LogEventListLink {
     pub href: String,
 }
 
+impl SEListLink for LogEventListLink {}
+impl SELink for LogEventListLink {}
 impl Validate for LogEventListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7271,6 +7612,8 @@ pub struct MessagingProgramListLink {
     pub href: String,
 }
 
+impl SEListLink for MessagingProgramListLink {}
+impl SELink for MessagingProgramListLink {}
 impl Validate for MessagingProgramListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7281,6 +7624,7 @@ pub struct MeterReadingLink {
     pub href: String,
 }
 
+impl SELink for MeterReadingLink {}
 impl Validate for MeterReadingLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7298,6 +7642,8 @@ pub struct MeterReadingListLink {
     pub href: String,
 }
 
+impl SEListLink for MeterReadingListLink {}
+impl SELink for MeterReadingListLink {}
 impl Validate for MeterReadingListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7315,6 +7661,8 @@ pub struct MirrorUsagePointListLink {
     pub href: String,
 }
 
+impl SEListLink for MirrorUsagePointListLink {}
+impl SELink for MirrorUsagePointListLink {}
 impl Validate for MirrorUsagePointListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7332,6 +7680,8 @@ pub struct NeighborListLink {
     pub href: String,
 }
 
+impl SEListLink for NeighborListLink {}
+impl SELink for NeighborListLink {}
 impl Validate for NeighborListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7349,6 +7699,8 @@ pub struct NotificationListLink {
     pub href: String,
 }
 
+impl SEListLink for NotificationListLink {}
+impl SELink for NotificationListLink {}
 impl Validate for NotificationListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7359,6 +7711,7 @@ pub struct PowerStatusLink {
     pub href: String,
 }
 
+impl SELink for PowerStatusLink {}
 impl Validate for PowerStatusLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7369,6 +7722,7 @@ pub struct PrepaymentLink {
     pub href: String,
 }
 
+impl SELink for PrepaymentLink {}
 impl Validate for PrepaymentLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7386,6 +7740,8 @@ pub struct PrepaymentListLink {
     pub href: String,
 }
 
+impl SEListLink for PrepaymentListLink {}
+impl SELink for PrepaymentListLink {}
 impl Validate for PrepaymentListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7396,6 +7752,7 @@ pub struct PrepayOperationStatusLink {
     pub href: String,
 }
 
+impl SELink for PrepayOperationStatusLink {}
 impl Validate for PrepayOperationStatusLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7413,6 +7770,8 @@ pub struct PriceResponseCfgListLink {
     pub href: String,
 }
 
+impl SEListLink for PriceResponseCfgListLink {}
+impl SELink for PriceResponseCfgListLink {}
 impl Validate for PriceResponseCfgListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7430,6 +7789,8 @@ pub struct ProjectionReadingListLink {
     pub href: String,
 }
 
+impl SEListLink for ProjectionReadingListLink {}
+impl SELink for ProjectionReadingListLink {}
 impl Validate for ProjectionReadingListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7440,6 +7801,7 @@ pub struct RateComponentLink {
     pub href: String,
 }
 
+impl SELink for RateComponentLink {}
 impl Validate for RateComponentLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7457,6 +7819,8 @@ pub struct RateComponentListLink {
     pub href: String,
 }
 
+impl SEListLink for RateComponentListLink {}
+impl SELink for RateComponentListLink {}
 impl Validate for RateComponentListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7467,6 +7831,7 @@ pub struct ReadingLink {
     pub href: String,
 }
 
+impl SELink for ReadingLink {}
 impl Validate for ReadingLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7484,6 +7849,8 @@ pub struct ReadingListLink {
     pub href: String,
 }
 
+impl SEListLink for ReadingListLink {}
+impl SELink for ReadingListLink {}
 impl Validate for ReadingListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7501,6 +7868,8 @@ pub struct ReadingSetListLink {
     pub href: String,
 }
 
+impl SEListLink for ReadingSetListLink {}
+impl SELink for ReadingSetListLink {}
 impl Validate for ReadingSetListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7511,6 +7880,7 @@ pub struct ReadingTypeLink {
     pub href: String,
 }
 
+impl SELink for ReadingTypeLink {}
 impl Validate for ReadingTypeLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7521,6 +7891,7 @@ pub struct RegistrationLink {
     pub href: String,
 }
 
+impl SELink for RegistrationLink {}
 impl Validate for RegistrationLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7538,6 +7909,8 @@ pub struct ResponseListLink {
     pub href: String,
 }
 
+impl SEListLink for ResponseListLink {}
+impl SELink for ResponseListLink {}
 impl Validate for ResponseListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7555,6 +7928,8 @@ pub struct ResponseSetListLink {
     pub href: String,
 }
 
+impl SEListLink for ResponseSetListLink {}
+impl SELink for ResponseSetListLink {}
 impl Validate for ResponseSetListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7572,6 +7947,8 @@ pub struct RplinstanceListLink {
     pub href: String,
 }
 
+impl SEListLink for RplinstanceListLink {}
+impl SELink for RplinstanceListLink {}
 impl Validate for RplinstanceListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7589,6 +7966,8 @@ pub struct RplsourceRoutesListLink {
     pub href: String,
 }
 
+impl SEListLink for RplsourceRoutesListLink {}
+impl SELink for RplsourceRoutesListLink {}
 impl Validate for RplsourceRoutesListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7599,6 +7978,7 @@ pub struct SelfDeviceLink {
     pub href: String,
 }
 
+impl SELink for SelfDeviceLink {}
 impl Validate for SelfDeviceLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7609,6 +7989,7 @@ pub struct ServiceSupplierLink {
     pub href: String,
 }
 
+impl SELink for ServiceSupplierLink {}
 impl Validate for ServiceSupplierLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7626,6 +8007,8 @@ pub struct SubscriptionListLink {
     pub href: String,
 }
 
+impl SEListLink for SubscriptionListLink {}
+impl SELink for SubscriptionListLink {}
 impl Validate for SubscriptionListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7643,6 +8026,8 @@ pub struct SupplyInterruptionOverrideListLink {
     pub href: String,
 }
 
+impl SEListLink for SupplyInterruptionOverrideListLink {}
+impl SELink for SupplyInterruptionOverrideListLink {}
 impl Validate for SupplyInterruptionOverrideListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7660,6 +8045,8 @@ pub struct SupportedLocaleListLink {
     pub href: String,
 }
 
+impl SEListLink for SupportedLocaleListLink {}
+impl SELink for SupportedLocaleListLink {}
 impl Validate for SupportedLocaleListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7677,6 +8064,8 @@ pub struct TargetReadingListLink {
     pub href: String,
 }
 
+impl SEListLink for TargetReadingListLink {}
+impl SELink for TargetReadingListLink {}
 impl Validate for TargetReadingListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7687,6 +8076,7 @@ pub struct TariffProfileLink {
     pub href: String,
 }
 
+impl SELink for TariffProfileLink {}
 impl Validate for TariffProfileLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7704,6 +8094,8 @@ pub struct TariffProfileListLink {
     pub href: String,
 }
 
+impl SEListLink for TariffProfileListLink {}
+impl SELink for TariffProfileListLink {}
 impl Validate for TariffProfileListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7721,6 +8113,8 @@ pub struct TextMessageListLink {
     pub href: String,
 }
 
+impl SEListLink for TextMessageListLink {}
+impl SELink for TextMessageListLink {}
 impl Validate for TextMessageListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7731,6 +8125,7 @@ pub struct TimeLink {
     pub href: String,
 }
 
+impl SELink for TimeLink {}
 impl Validate for TimeLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7748,6 +8143,8 @@ pub struct TimeTariffIntervalListLink {
     pub href: String,
 }
 
+impl SEListLink for TimeTariffIntervalListLink {}
+impl SELink for TimeTariffIntervalListLink {}
 impl Validate for TimeTariffIntervalListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7758,6 +8155,7 @@ pub struct UsagePointLink {
     pub href: String,
 }
 
+impl SELink for UsagePointLink {}
 impl Validate for UsagePointLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -7775,6 +8173,8 @@ pub struct UsagePointListLink {
     pub href: String,
 }
 
+impl SEListLink for UsagePointListLink {}
+impl SELink for UsagePointListLink {}
 impl Validate for UsagePointListLink {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -8337,6 +8737,9 @@ pub struct MirrorMeterReading {
     pub href: Option<String>,
 }
 
+impl SEMeterReadingBase for MirrorMeterReading {}
+impl SEIdentifiedObject for MirrorMeterReading {}
+impl SEResource for MirrorMeterReading {}
 impl Validate for MirrorMeterReading {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -8360,6 +8763,8 @@ pub struct MirrorMeterReadingList {
     pub href: Option<String>,
 }
 
+impl SEList for MirrorMeterReadingList {}
+impl SEResource for MirrorMeterReadingList {}
 impl Validate for MirrorMeterReadingList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -8391,6 +8796,9 @@ pub struct MirrorReadingSet {
     pub href: Option<String>,
 }
 
+impl SEReadingSetBase for MirrorReadingSet {}
+impl SEIdentifiedObject for MirrorReadingSet {}
+impl SEResource for MirrorReadingSet {}
 impl Validate for MirrorReadingSet {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -8442,6 +8850,9 @@ pub struct MirrorUsagePoint {
     pub href: Option<String>,
 }
 
+impl SEUsagePointBase for MirrorUsagePoint {}
+impl SEIdentifiedObject for MirrorUsagePoint {}
+impl SEResource for MirrorUsagePoint {}
 impl Validate for MirrorUsagePoint {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -8472,6 +8883,8 @@ pub struct MirrorUsagePointList {
     pub href: Option<String>,
 }
 
+impl SEList for MirrorUsagePointList {}
+impl SEResource for MirrorUsagePointList {}
 impl Validate for MirrorUsagePointList {}
 
 // pub type DeviceCapability = DeviceCapability;

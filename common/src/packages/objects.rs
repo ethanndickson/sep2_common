@@ -6,6 +6,8 @@ use yaserde_derive::{YaDeserialize, YaSerialize};
 use crate::packages::primitives::*;
 use crate::packages::xsd::*;
 
+use super::traits::*;
+
 // Current status information relevant to a specific object. The Status object
 // is used to indicate the current status of an Event. Devices can read the
 // containing resource (e.g. TextMessage) to get the most up to date status of
@@ -150,7 +152,10 @@ pub struct Event {
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
-
+impl SEEvent for Event {}
+impl SERespondableSubscribableIdentifiedObject for Event {}
+impl SERespondableResource for Event {}
+impl SEResource for Event {}
 impl Validate for Event {}
 
 // Contains information about the nature of an error if a request could not be
@@ -256,6 +261,10 @@ pub struct RandomizableEvent {
     pub href: Option<String>,
 }
 
+impl SEEvent for RandomizableEvent {}
+impl SERespondableSubscribableIdentifiedObject for RandomizableEvent {}
+impl SERespondableResource for RandomizableEvent {}
+impl SEResource for RandomizableEvent {}
 impl Validate for RandomizableEvent {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -347,6 +356,11 @@ pub struct Dercontrol {
     pub href: Option<String>,
 }
 
+impl SERandomizableEvent for Dercontrol {}
+impl SEEvent for Dercontrol {}
+impl SERespondableSubscribableIdentifiedObject for Dercontrol {}
+impl SERespondableResource for Dercontrol {}
+impl SEResource for Dercontrol {}
 impl Validate for Dercontrol {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -436,6 +450,10 @@ pub struct TextMessage {
     pub href: Option<String>,
 }
 
+impl SEEvent for TextMessage {}
+impl SERespondableSubscribableIdentifiedObject for TextMessage {}
+impl SERespondableResource for TextMessage {}
+impl SEResource for TextMessage {}
 impl Validate for TextMessage {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -526,6 +544,11 @@ pub struct TimeTariffInterval {
     pub href: Option<String>,
 }
 
+impl SERandomizableEvent for TimeTariffInterval {}
+impl SEEvent for TimeTariffInterval {}
+impl SERespondableSubscribableIdentifiedObject for TimeTariffInterval {}
+impl SERespondableResource for TimeTariffInterval {}
+impl SEResource for TimeTariffInterval {}
 impl Validate for TimeTariffInterval {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -650,6 +673,11 @@ pub struct EndDeviceControl {
     pub href: Option<String>,
 }
 
+impl SERandomizableEvent for EndDeviceControl {}
+impl SEEvent for EndDeviceControl {}
+impl SERespondableSubscribableIdentifiedObject for EndDeviceControl {}
+impl SERespondableResource for EndDeviceControl {}
+impl SEResource for EndDeviceControl {}
 impl Validate for EndDeviceControl {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -706,6 +734,8 @@ pub struct DemandResponseProgram {
     pub href: Option<String>,
 }
 
+impl SEIdentifiedObject for DemandResponseProgram {}
+impl SEResource for DemandResponseProgram {}
 impl Validate for DemandResponseProgram {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -757,6 +787,8 @@ pub struct TariffProfile {
     pub href: Option<String>,
 }
 
+impl SEIdentifiedObject for TariffProfile {}
+impl SEResource for TariffProfile {}
 impl Validate for TariffProfile {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
@@ -801,6 +833,9 @@ pub struct MessagingProgram {
     pub href: Option<String>,
 }
 
+impl SESubscribableIdentifiedObject for MessagingProgram {}
+impl SESubscribableResource for MessagingProgram {}
+impl SEResource for MessagingProgram {}
 impl Validate for MessagingProgram {}
 
 #[derive(Default, Clone, Copy, PartialEq, Debug, YaSerialize, YaDeserialize)]
