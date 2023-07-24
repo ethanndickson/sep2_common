@@ -2,6 +2,7 @@
 use common::config::YASERDE_CFG;
 // TODO Ethan: Temporary import all
 use common::packages::identification::*;
+use common::packages::objects::EndDeviceControl;
 use common::packages::xsd::*;
 use yaserde::de::from_str;
 use yaserde::ser::to_string_with_config;
@@ -121,15 +122,16 @@ fn default_SubscriptionList() {
 
 #[test]
 fn default_Notification() {
-    let orig = Notification::default();
-    let new: Notification = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig: Notification<EndDeviceControl> = Notification::default();
+    let new: Notification<EndDeviceControl> =
+        from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_NotificationList() {
-    let orig = NotificationList::default();
-    let new: NotificationList =
+    let orig: NotificationList<EndDeviceControl> = NotificationList::default();
+    let new: NotificationList<EndDeviceControl> =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
@@ -175,8 +177,9 @@ fn default_PriceResponse() {
 
 #[test]
 fn default_ResponseList() {
-    let orig = ResponseList::default();
-    let new: ResponseList = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig: ResponseList<TextResponse> = ResponseList::default();
+    let new: ResponseList<TextResponse> =
+        from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 

@@ -152,6 +152,7 @@ pub struct Event {
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
+
 impl SEEvent for Event {}
 impl SERespondableSubscribableIdentifiedObject for Event {}
 impl SERespondableResource for Event {}
@@ -847,4 +848,5 @@ pub enum PrimacyType {
     ContractedPremisesServiceProvider = 1,
     NonContractualServiceProvider = 2,
 }
+
 impl Validate for PrimacyType {}

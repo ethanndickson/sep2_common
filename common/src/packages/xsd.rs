@@ -1,8 +1,11 @@
+use std::borrow::Cow;
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 // Types should eventually be put in a module corresponding to their package
 use std::str::FromStr;
 use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
 use xsd_parser::generator::validator::Validate;
+use yaserde::YaDeserialize;
+use yaserde::YaSerialize;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
@@ -722,16 +725,15 @@ impl SEList for SubscriptionList {}
 impl SEResource for SubscriptionList {}
 impl Validate for SubscriptionList {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Notification {
+#[derive(Default, PartialEq, Debug)]
+pub struct Notification<T: SEResource> {
     // The new location of the resource, if moved. This attribute SHALL be a
     // fully-qualified absolute URI, not a relative reference.
-    #[yaserde(rename = "newResourceURI")]
+    // #[yaserde(rename = "newResourceURI")]
     pub new_resource_uri: Option<String>,
 
-    #[yaserde(rename = "Resource")]
-    pub resource: Option<Resource>,
+    // #[yaserde(rename = "Resource")]
+    pub resource: Option<T>,
 
     // 0 = Default Status
     // 1 = Subscription canceled, no additional information
@@ -740,55 +742,190 @@ pub struct Notification {
     // version of IEEE 2030.5)
     // 4 = Subscription canceled, resource deleted
     // All other values reserved.
-    #[yaserde(rename = "status")]
+    // #[yaserde(rename = "status")]
     pub status: Uint8,
 
     // The subscription from which this notification was triggered. This
     // attribute SHALL be a fully-qualified absolute URI, not a relative
     // reference.
-    #[yaserde(rename = "subscriptionURI")]
+    // #[yaserde(rename = "subscriptionURI")]
     pub subscription_uri: String,
 
     // The resource for which the subscription applies. Query string parameters
     // SHALL NOT be specified when subscribing to list resources. Should a query
     // string parameter be specified, servers SHALL ignore them.
-    #[yaserde(rename = "subscribedResource")]
+    // #[yaserde(rename = "subscribedResource")]
     pub subscribed_resource: String,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
+    // #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
 
-impl SESubscriptionBase for Notification {}
-impl SEResource for Notification {}
-impl Validate for Notification {}
+impl<T: SEResource> YaSerialize for Notification<T> {
+    fn serialize<W: std::io::Write>(
+        &self,
+        writer: &mut yaserde::ser::Serializer<W>,
+    ) -> Result<(), String> {
+        let skip = writer.skip_start_end();
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct NotificationList {
-    #[yaserde(rename = "Notification")]
-    pub notification: Vec<Notification>,
+        if !skip {
+            let child_attr = vec![];
+            let child_attr_ns = xml::namespace::Namespace::empty();
+
+            let yaserde_label = writer
+                .get_start_event_name()
+                .unwrap_or_else(|| "Notification".to_string());
+            let struct_start_event = xml::writer::XmlEvent::start_element(yaserde_label.as_ref())
+                .ns("", "urn:ieee:std:2030.5:ns");
+            let struct_start_event = if let Some(ref value) = self.href {
+                struct_start_event.attr("href", value)
+            } else {
+                struct_start_event
+            };
+            let event: xml::writer::events::XmlEvent = struct_start_event.into();
+            match event {
+                xml::writer::XmlEvent::StartElement {
+                    name,
+                    attributes,
+                    namespace,
+                } => {
+                    let mut attributes: Vec<xml::attribute::OwnedAttribute> = attributes
+                        .into_owned()
+                        .to_vec()
+                        .iter()
+                        .map(|k| k.to_owned())
+                        .collect();
+                    attributes.extend(child_attr);
+                    let all_attributes = attributes.iter().map(|ca| ca.borrow()).collect();
+                    let mut all_namespaces = namespace.into_owned();
+                    all_namespaces.extend(&child_attr_ns);
+                    writer
+                        .write(xml::writer::events::XmlEvent::StartElement {
+                            name,
+                            attributes: Cow::Owned(all_attributes),
+                            namespace: Cow::Owned(all_namespaces),
+                        })
+                        .map_err(|e| e.to_string())?;
+                }
+                _ => unreachable!(),
+            }
+        }
+        Ok(())
+    }
+
+    fn serialize_attributes(
+        &self,
+        mut source_attributes: Vec<xml::attribute::OwnedAttribute>,
+        mut source_namespace: xml::namespace::Namespace,
+    ) -> Result<
+        (
+            Vec<xml::attribute::OwnedAttribute>,
+            xml::namespace::Namespace,
+        ),
+        String,
+    > {
+        let child_attr: Vec<xml::attribute::OwnedAttribute> = vec![];
+        let child_attr_ns = xml::namespace::Namespace::empty();
+        let struct_start_event =
+            xml::writer::XmlEvent::start_element("temp").ns("", "urn:ieee:std:2030.5:ns");
+        let struct_start_event = if let Some(ref value) = self.href {
+            struct_start_event.attr("href", value)
+        } else {
+            struct_start_event
+        };
+        let event: xml::writer::events::XmlEvent = struct_start_event.into();
+
+        match event {
+            xml::writer::events::XmlEvent::StartElement {
+                attributes,
+                namespace,
+                ..
+            } => {
+                source_namespace.extend(&namespace.into_owned());
+                source_namespace.extend(&child_attr_ns);
+                let a: Vec<xml::attribute::OwnedAttribute> = attributes
+                    .into_owned()
+                    .to_vec()
+                    .iter()
+                    .map(|k| k.to_owned())
+                    .collect();
+                source_attributes.extend(a);
+                source_attributes.extend(child_attr);
+                Ok((source_attributes, source_namespace))
+            }
+            _ => unreachable!(),
+        }
+    }
+}
+
+impl<T: SEResource> YaDeserialize for Notification<T> {
+    fn deserialize<R: std::io::Read>(
+        reader: &mut yaserde::de::Deserializer<R>,
+    ) -> Result<Self, String> {
+        todo!()
+    }
+}
+
+impl<T: SEResource> SESubscriptionBase for Notification<T> {}
+impl<T: SEResource> SEResource for Notification<T> {}
+impl<T: SEResource> Validate for Notification<T> {}
+
+#[derive(Default, PartialEq, Debug)]
+pub struct NotificationList<T: SEResource> {
+    // #[yaserde(rename = "Notification")]
+    pub notification: Vec<Notification<T>>,
 
     // The number specifying "all" of the items in the list. Required on a
     // response to a GET, ignored otherwise.
-    #[yaserde(attribute, rename = "all")]
+    // #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
     // Indicates the number of items in this page of results.
-    #[yaserde(attribute, rename = "results")]
+    // #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
+    // #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
 
-impl SEList for NotificationList {}
-impl SEResource for NotificationList {}
-impl Validate for NotificationList {}
+impl<T: SEResource> YaSerialize for NotificationList<T> {
+    fn serialize<W: std::io::Write>(
+        &self,
+        writer: &mut yaserde::ser::Serializer<W>,
+    ) -> Result<(), String> {
+        todo!()
+    }
+
+    fn serialize_attributes(
+        &self,
+        attributes: Vec<xml::attribute::OwnedAttribute>,
+        namespace: xml::namespace::Namespace,
+    ) -> Result<
+        (
+            Vec<xml::attribute::OwnedAttribute>,
+            xml::namespace::Namespace,
+        ),
+        String,
+    > {
+        todo!()
+    }
+}
+
+impl<T: SEResource> YaDeserialize for NotificationList<T> {
+    fn deserialize<R: std::io::Read>(
+        reader: &mut yaserde::de::Deserializer<R>,
+    ) -> Result<Self, String> {
+        todo!()
+    }
+}
+
+impl<T: SEResource> SEList for NotificationList<T> {}
+impl<T: SEResource> SEResource for NotificationList<T> {}
+impl<T: SEResource> Validate for NotificationList<T> {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1003,30 +1140,60 @@ impl SEResponse for PriceResponse {}
 impl SEResource for PriceResponse {}
 impl Validate for PriceResponse {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct ResponseList {
-    #[yaserde(rename = "Response")]
-    pub response: Vec<Response>,
+#[derive(Default, PartialEq, Debug)]
+pub struct ResponseList<T: SEResponse> {
+    // #[yaserde(rename = "Response")]
+    pub response: Vec<T>,
 
     // The number specifying "all" of the items in the list. Required on a
     // response to a GET, ignored otherwise.
-    #[yaserde(attribute, rename = "all")]
+    // #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
     // Indicates the number of items in this page of results.
-    #[yaserde(attribute, rename = "results")]
+    // #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
+    // #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
 
-impl SEList for ResponseList {}
-impl SEResource for ResponseList {}
-impl Validate for ResponseList {}
+impl<T: SEResponse> YaSerialize for ResponseList<T> {
+    fn serialize<W: std::io::Write>(
+        &self,
+        writer: &mut yaserde::ser::Serializer<W>,
+    ) -> Result<(), String> {
+        todo!()
+    }
+
+    fn serialize_attributes(
+        &self,
+        attributes: Vec<xml::attribute::OwnedAttribute>,
+        namespace: xml::namespace::Namespace,
+    ) -> Result<
+        (
+            Vec<xml::attribute::OwnedAttribute>,
+            xml::namespace::Namespace,
+        ),
+        String,
+    > {
+        todo!()
+    }
+}
+
+impl<T: SEResponse> YaDeserialize for ResponseList<T> {
+    fn deserialize<R: std::io::Read>(
+        reader: &mut yaserde::de::Deserializer<R>,
+    ) -> Result<Self, String> {
+        todo!()
+    }
+}
+
+impl<T: SEResponse> SEList for ResponseList<T> {}
+impl<T: SEResponse> SEResource for ResponseList<T> {}
+impl<T: SEResponse> Validate for ResponseList<T> {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -8506,11 +8673,7 @@ pub struct RealEnergy {
 
 impl Validate for RealEnergy {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct RoleFlagsType {}
-
-impl Validate for RoleFlagsType {}
+pub type RoleFlagsType = HexBinary32;
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
