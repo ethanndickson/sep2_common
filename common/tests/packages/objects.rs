@@ -10,19 +10,8 @@ use yaserde::de::from_str;
 use yaserde::ser::to_string_with_config;
 
 #[test]
-fn reserved_enum() {
-    let primacy = PrimacyType::InHomeEnergyManagementSystem;
-    println!(
-        "{}",
-        yaserde::ser::to_string_with_config(&primacy, &YASERDE_CFG)
-            .ok()
-            .unwrap()
-    );
-}
-
-#[test]
-fn edc_deserialize() {
-    let edc = EndDeviceControl {
+fn complex_serde() {
+    let orig = EndDeviceControl {
         appliance_load_reduction: Some(ApplianceLoadReduction {
             _type: ApplianceLoadReductionType::TemporaryApplianceLoadReduction,
         }),
@@ -68,12 +57,9 @@ fn edc_deserialize() {
         response_required: Some(HexBinary8(Uint8(0))),
         href: Some("test".to_string()),
     };
-    println!(
-        "{}",
-        yaserde::ser::to_string_with_config(&edc, &YASERDE_CFG)
-            .ok()
-            .unwrap()
-    );
+    let new: EndDeviceControl =
+        from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    assert_eq!(orig, new);
 }
 
 #[test]

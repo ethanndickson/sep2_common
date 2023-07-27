@@ -117,6 +117,7 @@ impl Validate for HexBinary8 {}
 impl fmt::Display for HexBinary8 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let HexBinary8(a) = self;
+        let Uint8(a) = a;
         write!(f, "{:#04x?}", a)
     }
 }
@@ -125,7 +126,9 @@ impl FromStr for HexBinary8 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        todo!()
+        Ok(HexBinary8(Uint8(
+            u8::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary8")?,
+        )))
     }
 }
 
@@ -141,6 +144,7 @@ impl Validate for HexBinary16 {}
 impl fmt::Display for HexBinary16 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let HexBinary16(a) = self;
+        let Uint16(a) = a;
         write!(f, "{:#06x?}", a)
     }
 }
@@ -149,7 +153,9 @@ impl FromStr for HexBinary16 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        todo!()
+        Ok(HexBinary16(Uint16(
+            u16::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary16")?,
+        )))
     }
 }
 
@@ -165,6 +171,7 @@ impl Validate for HexBinary32 {}
 impl fmt::Display for HexBinary32 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let HexBinary32(a) = self;
+        let Uint32(a) = a;
         write!(f, "{:#010x?}", a)
     }
 }
@@ -173,7 +180,9 @@ impl FromStr for HexBinary32 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        todo!()
+        Ok(HexBinary32(Uint32(
+            u32::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary32")?,
+        )))
     }
 }
 
@@ -194,6 +203,7 @@ impl Validate for HexBinary48 {
 impl fmt::Display for HexBinary48 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let HexBinary48(a) = self;
+        let Uint64(a) = a;
         write!(f, "{:#014x?}", a)
     }
 }
@@ -202,7 +212,9 @@ impl FromStr for HexBinary48 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        todo!()
+        Ok(HexBinary48(Uint64(
+            u64::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary48")?,
+        )))
     }
 }
 
@@ -218,6 +230,7 @@ impl Validate for HexBinary64 {}
 impl fmt::Display for HexBinary64 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let HexBinary64(a) = self;
+        let Uint64(a) = a;
         write!(f, "{:#018x?}", a)
     }
 }
@@ -226,7 +239,9 @@ impl FromStr for HexBinary64 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        todo!()
+        Ok(HexBinary64(Uint64(
+            u64::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary48")?,
+        )))
     }
 }
 
@@ -251,7 +266,9 @@ impl FromStr for HexBinary128 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        todo!()
+        Ok(HexBinary128(
+            u128::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary128")?,
+        ))
     }
 }
 
