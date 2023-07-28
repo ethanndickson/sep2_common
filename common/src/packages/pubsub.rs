@@ -189,66 +189,64 @@ pub struct Notification<T: SEResource> {
 
 impl<T: SEResource> YaSerialize for Notification<T> {
     fn serialize<W: std::io::Write>(&self, writer: &mut Serializer<W>) -> Result<(), String> {
-        let skip = writer.skip_start_end();
+        let child_attr = vec![];
+        let child_attr_ns = Namespace::empty();
 
-        if !skip {
-            let child_attr = vec![];
-            let child_attr_ns = Namespace::empty();
-
-            let yaserde_label = writer
-                .get_start_event_name()
-                .unwrap_or_else(|| "Notification".to_string());
-            let struct_start_event =
-                XmlEventW::start_element(yaserde_label.as_ref()).ns("", "urn:ieee:std:2030.5:ns");
-            let struct_start_event = if let Some(ref value) = self.href {
-                struct_start_event.attr("href", value)
-            } else {
-                struct_start_event
-            };
-            let event: XmlEventW = struct_start_event.into();
-            match event {
-                XmlEventW::StartElement {
-                    name,
-                    attributes,
-                    namespace,
-                } => {
-                    let mut attributes: Vec<OwnedAttribute> = attributes
-                        .into_owned()
-                        .to_vec()
-                        .iter()
-                        .map(|k| k.to_owned())
-                        .collect();
-                    attributes.extend(child_attr);
-                    let all_attributes = attributes.iter().map(|ca| ca.borrow()).collect();
-                    let mut all_namespaces = namespace.into_owned();
-                    all_namespaces.extend(&child_attr_ns);
-                    writer
-                        .write(XmlEventW::StartElement {
-                            name,
-                            attributes: Cow::Owned(all_attributes),
-                            namespace: Cow::Owned(all_namespaces),
-                        })
-                        .map_err(|e| e.to_string())?;
-                }
-                _ => unreachable!(),
-            }
-            if let Some(ref item) = self.new_resource_uri {
+        let yaserde_label = writer
+            .get_start_event_name()
+            .unwrap_or_else(|| "Notification".to_string());
+        let struct_start_event =
+            XmlEventW::start_element(yaserde_label.as_ref()).ns("", "urn:ieee:std:2030.5:ns");
+        let struct_start_event = if let Some(ref value) = self.href {
+            struct_start_event.attr("href", value)
+        } else {
+            struct_start_event
+        };
+        let event: XmlEventW = struct_start_event.into();
+        match event {
+            XmlEventW::StartElement {
+                name,
+                attributes,
+                namespace,
+            } => {
+                let mut attributes: Vec<OwnedAttribute> = attributes
+                    .into_owned()
+                    .to_vec()
+                    .iter()
+                    .map(|k| k.to_owned())
+                    .collect();
+                attributes.extend(child_attr);
+                let all_attributes = attributes.iter().map(|ca| ca.borrow()).collect();
+                let mut all_namespaces = namespace.into_owned();
+                all_namespaces.extend(&child_attr_ns);
                 writer
-                    .write(XmlEventW::start_element("newResourceURI"))
-                    .map_err(|e| e.to_string())?;
-                let value = item.to_string();
-                let data_event = XmlEventW::characters(&value);
-                writer.write(data_event).map_err(|e| e.to_string())?;
-                writer
-                    .write(XmlEventW::end_element())
+                    .write(XmlEventW::StartElement {
+                        name,
+                        attributes: Cow::Owned(all_attributes),
+                        namespace: Cow::Owned(all_namespaces),
+                    })
                     .map_err(|e| e.to_string())?;
             }
-            if let Some(ref item) = &self.resource {
-                genericize_resource(
-                    &yaserde::ser::to_string_with_config(item, &INNER_CFG)?,
-                    writer,
-                )?;
-            }
+            _ => unreachable!(),
+        }
+        if let Some(ref item) = self.new_resource_uri {
+            writer
+                .write(XmlEventW::start_element("newResourceURI"))
+                .map_err(|e| e.to_string())?;
+            let value = item.to_string();
+            let data_event = XmlEventW::characters(&value);
+            writer.write(data_event).map_err(|e| e.to_string())?;
+            writer
+                .write(XmlEventW::end_element())
+                .map_err(|e| e.to_string())?;
+        }
+        if let Some(ref item) = &self.resource {
+            genericize_resource(
+                &yaserde::ser::to_string_with_config(item, &INNER_CFG)?,
+                writer,
+            )?;
+        }
+        {
             let start_event = XmlEventW::start_element("subscriptionURI");
             writer.write(start_event).map_err(|e| e.to_string())?;
             let value = self.subscription_uri.to_string();
@@ -257,7 +255,8 @@ impl<T: SEResource> YaSerialize for Notification<T> {
             writer
                 .write(XmlEventW::end_element())
                 .map_err(|e| e.to_string())?;
-
+        }
+        {
             let start_event = XmlEventW::start_element("subscribedResource");
             writer.write(start_event).map_err(|e| e.to_string())?;
             let value = self.subscribed_resource.to_string();
@@ -266,11 +265,11 @@ impl<T: SEResource> YaSerialize for Notification<T> {
             writer
                 .write(XmlEventW::end_element())
                 .map_err(|e| e.to_string())?;
-
-            writer
-                .write(XmlEventW::end_element())
-                .map_err(|e| e.to_string())?;
         }
+        writer
+            .write(XmlEventW::end_element())
+            .map_err(|e| e.to_string())?;
+
         Ok(())
     }
 
