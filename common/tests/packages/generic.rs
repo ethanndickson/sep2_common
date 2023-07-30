@@ -1,3 +1,5 @@
+use std::env;
+
 use common::{
     config::YASERDE_CFG,
     packages::{
@@ -6,11 +8,12 @@ use common::{
         xsd::{DateTimeInterval, Reading},
     },
 };
-use yaserde::ser::to_string_with_config;
+use yaserde::{de::from_str, ser::to_string_with_config};
 
 /// resources/Examples/16_06_04_Notification.xml
 #[test]
 fn notification_example() {
+    env::set_var("RUST_BACKTRACE", "full");
     let inner: Reading = Reading {
         local_id: None,
         subscribable: None,
@@ -32,7 +35,7 @@ fn notification_example() {
         subscribed_resource: "/upt/0/mr/4/r".to_owned(),
         href: None,
     };
-    let expected = r#"<Notification xmlns="urn:ieee:std:2030.5:ns">
+    let expected = r#"<Notification xmlns="urn:ieee:std:2030.5:ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Resource xsi:type="Reading">
     <timePeriod>
       <duration>0</duration>
@@ -45,4 +48,6 @@ fn notification_example() {
 </Notification>"#;
     let out = to_string_with_config(&orig, &YASERDE_CFG).unwrap();
     assert_eq!(expected, out);
+    let new: Notification<Reading> = from_str(&expected).unwrap();
+    assert_eq!(orig, new);
 }

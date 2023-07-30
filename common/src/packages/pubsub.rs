@@ -148,15 +148,15 @@ pub struct SubscriptionList {
 impl SEList for SubscriptionList {}
 impl SEResource for SubscriptionList {}
 impl Validate for SubscriptionList {}
-
-#[derive(Default, PartialEq, Debug)]
+#[derive(Default, PartialEq, Debug, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Notification<T: SEResource> {
     // The new location of the resource, if moved. This attribute SHALL be a
     // fully-qualified absolute URI, not a relative reference.
-    // #[yaserde(rename = "newResourceURI")]
+    #[yaserde(rename = "newResourceURI")]
     pub new_resource_uri: Option<String>,
 
-    // #[yaserde(rename = "Resource")]
+    #[yaserde(rename = "Resource")]
     pub resource: Option<T>,
 
     // 0 = Default Status
@@ -166,24 +166,24 @@ pub struct Notification<T: SEResource> {
     // version of IEEE 2030.5)
     // 4 = Subscription canceled, resource deleted
     // All other values reserved.
-    // #[yaserde(rename = "status")]
+    #[yaserde(rename = "status")]
     pub status: Uint8,
 
     // The subscription from which this notification was triggered. This
     // attribute SHALL be a fully-qualified absolute URI, not a relative
     // reference.
-    // #[yaserde(rename = "subscriptionURI")]
+    #[yaserde(rename = "subscriptionURI")]
     pub subscription_uri: String,
 
     // The resource for which the subscription applies. Query string parameters
     // SHALL NOT be specified when subscribing to list resources. Should a query
     // string parameter be specified, servers SHALL ignore them.
-    // #[yaserde(rename = "subscribedResource")]
+    #[yaserde(rename = "subscribedResource")]
     pub subscribed_resource: String,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
-    // #[yaserde(attribute, rename = "href")]
+    #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
 
@@ -195,8 +195,9 @@ impl<T: SEResource> YaSerialize for Notification<T> {
         let yaserde_label = writer
             .get_start_event_name()
             .unwrap_or_else(|| "Notification".to_string());
-        let struct_start_event =
-            XmlEventW::start_element(yaserde_label.as_ref()).ns("", "urn:ieee:std:2030.5:ns");
+        let struct_start_event = XmlEventW::start_element(yaserde_label.as_ref())
+            .ns("", "urn:ieee:std:2030.5:ns")
+            .attr("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
         let struct_start_event = if let Some(ref value) = self.href {
             struct_start_event.attr("href", value)
         } else {
@@ -308,14 +309,6 @@ impl<T: SEResource> YaSerialize for Notification<T> {
         } else {
             unreachable!()
         }
-    }
-}
-
-impl<T: SEResource> YaDeserialize for Notification<T> {
-    fn deserialize<R: std::io::Read>(
-        reader: &mut yaserde::de::Deserializer<R>,
-    ) -> Result<Self, String> {
-        todo!()
     }
 }
 
