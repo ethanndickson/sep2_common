@@ -1,9 +1,5 @@
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
-use xml::attribute::OwnedAttribute;
-use xml::namespace::Namespace;
 use xsd_parser::generator::validator::Validate;
-use yaserde::YaDeserialize;
-use yaserde::YaSerialize;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
@@ -225,51 +221,26 @@ impl SEResponse for PriceResponse {}
 impl SEResource for PriceResponse {}
 impl Validate for PriceResponse {}
 
-#[derive(Default, PartialEq, Debug)]
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseList<T: SEResponse> {
-    // #[yaserde(rename = "Response")]
+    #[yaserde(rename = "Response")]
     pub response: Vec<T>,
 
     // The number specifying "all" of the items in the list. Required on a
     // response to a GET, ignored otherwise.
-    // #[yaserde(attribute, rename = "all")]
+    #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
     // Indicates the number of items in this page of results.
-    // #[yaserde(attribute, rename = "results")]
+    #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
-    // #[yaserde(attribute, rename = "href")]
+    #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
-
-impl<T: SEResponse> YaSerialize for ResponseList<T> {
-    fn serialize<W: std::io::Write>(
-        &self,
-        writer: &mut yaserde::ser::Serializer<W>,
-    ) -> Result<(), String> {
-        todo!()
-    }
-
-    fn serialize_attributes(
-        &self,
-        attributes: Vec<OwnedAttribute>,
-        namespace: Namespace,
-    ) -> Result<(Vec<OwnedAttribute>, Namespace), String> {
-        todo!()
-    }
-}
-
-impl<T: SEResponse> YaDeserialize for ResponseList<T> {
-    fn deserialize<R: std::io::Read>(
-        reader: &mut yaserde::de::Deserializer<R>,
-    ) -> Result<Self, String> {
-        todo!()
-    }
-}
-
 impl<T: SEResponse> SEList for ResponseList<T> {}
 impl<T: SEResponse> SEResource for ResponseList<T> {}
 impl<T: SEResponse> Validate for ResponseList<T> {}

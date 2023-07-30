@@ -1,18 +1,7 @@
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
-use std::borrow::Cow;
-use xml::attribute::OwnedAttribute;
-use xml::name::OwnedName;
-use xml::namespace::Namespace;
-use xml::reader::XmlEvent as XmlEventR;
-use xml::writer::XmlEvent as XmlEventW;
-use xml::EventReader;
 use xsd_parser::generator::validator::Validate;
-use yaserde::ser::Serializer;
-use yaserde::YaDeserialize;
-use yaserde::YaSerialize;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
-use crate::config::INNER_CFG;
 // TODO Ethan: Temporary import all
 use crate::packages::primitives::*;
 
@@ -148,7 +137,8 @@ pub struct SubscriptionList {
 impl SEList for SubscriptionList {}
 impl SEResource for SubscriptionList {}
 impl Validate for SubscriptionList {}
-#[derive(Default, PartialEq, Debug, YaDeserialize)]
+
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Notification<T: SEResource> {
     // The new location of the resource, if moved. This attribute SHALL be a
@@ -187,229 +177,31 @@ pub struct Notification<T: SEResource> {
     pub href: Option<String>,
 }
 
-impl<T: SEResource> YaSerialize for Notification<T> {
-    fn serialize<W: std::io::Write>(&self, writer: &mut Serializer<W>) -> Result<(), String> {
-        let child_attr = vec![];
-        let child_attr_ns = Namespace::empty();
-
-        let yaserde_label = writer
-            .get_start_event_name()
-            .unwrap_or_else(|| "Notification".to_string());
-        let struct_start_event = XmlEventW::start_element(yaserde_label.as_ref())
-            .ns("", "urn:ieee:std:2030.5:ns")
-            .attr("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-        let struct_start_event = if let Some(ref value) = self.href {
-            struct_start_event.attr("href", value)
-        } else {
-            struct_start_event
-        };
-        let event: XmlEventW = struct_start_event.into();
-        match event {
-            XmlEventW::StartElement {
-                name,
-                attributes,
-                namespace,
-            } => {
-                let mut attributes: Vec<OwnedAttribute> = attributes
-                    .into_owned()
-                    .to_vec()
-                    .iter()
-                    .map(|k| k.to_owned())
-                    .collect();
-                attributes.extend(child_attr);
-                let all_attributes = attributes.iter().map(|ca| ca.borrow()).collect();
-                let mut all_namespaces = namespace.into_owned();
-                all_namespaces.extend(&child_attr_ns);
-                writer
-                    .write(XmlEventW::StartElement {
-                        name,
-                        attributes: Cow::Owned(all_attributes),
-                        namespace: Cow::Owned(all_namespaces),
-                    })
-                    .map_err(|e| e.to_string())?;
-            }
-            _ => unreachable!(),
-        }
-        if let Some(ref item) = self.new_resource_uri {
-            writer
-                .write(XmlEventW::start_element("newResourceURI"))
-                .map_err(|e| e.to_string())?;
-            let value = item.to_string();
-            let data_event = XmlEventW::characters(&value);
-            writer.write(data_event).map_err(|e| e.to_string())?;
-            writer
-                .write(XmlEventW::end_element())
-                .map_err(|e| e.to_string())?;
-        }
-        if let Some(ref item) = &self.resource {
-            genericize_resource(
-                &yaserde::ser::to_string_with_config(item, &INNER_CFG)?,
-                writer,
-            )?;
-        }
-        {
-            let start_event = XmlEventW::start_element("subscriptionURI");
-            writer.write(start_event).map_err(|e| e.to_string())?;
-            let value = self.subscription_uri.to_string();
-            let data_event = XmlEventW::characters(&value);
-            writer.write(data_event).map_err(|e| e.to_string())?;
-            writer
-                .write(XmlEventW::end_element())
-                .map_err(|e| e.to_string())?;
-        }
-        {
-            let start_event = XmlEventW::start_element("subscribedResource");
-            writer.write(start_event).map_err(|e| e.to_string())?;
-            let value = self.subscribed_resource.to_string();
-            let data_event = XmlEventW::characters(&value);
-            writer.write(data_event).map_err(|e| e.to_string())?;
-            writer
-                .write(XmlEventW::end_element())
-                .map_err(|e| e.to_string())?;
-        }
-        writer
-            .write(XmlEventW::end_element())
-            .map_err(|e| e.to_string())?;
-
-        Ok(())
-    }
-
-    fn serialize_attributes(
-        &self,
-        mut source_attributes: Vec<OwnedAttribute>,
-        mut source_namespace: Namespace,
-    ) -> Result<(Vec<OwnedAttribute>, Namespace), String> {
-        let child_attr: Vec<OwnedAttribute> = vec![];
-        let child_attr_ns = Namespace::empty();
-        let struct_start_event = XmlEventW::start_element("temp").ns("", "urn:ieee:std:2030.5:ns");
-        let struct_start_event = if let Some(ref value) = self.href {
-            struct_start_event.attr("href", value)
-        } else {
-            struct_start_event
-        };
-        let event: XmlEventW = struct_start_event.into();
-
-        if let XmlEventW::StartElement {
-            attributes,
-            namespace,
-            ..
-        } = event
-        {
-            source_namespace.extend(&namespace.into_owned());
-            source_namespace.extend(&child_attr_ns);
-            let a: Vec<OwnedAttribute> = attributes
-                .into_owned()
-                .to_vec()
-                .iter()
-                .map(|k| k.to_owned())
-                .collect();
-            source_attributes.extend(a);
-            source_attributes.extend(child_attr);
-            Ok((source_attributes, source_namespace))
-        } else {
-            unreachable!()
-        }
-    }
-}
-
 impl<T: SEResource> SESubscriptionBase for Notification<T> {}
 impl<T: SEResource> SEResource for Notification<T> {}
 impl<T: SEResource> Validate for Notification<T> {}
 
-#[derive(Default, PartialEq, Debug)]
+#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct NotificationList<T: SEResource> {
-    // #[yaserde(rename = "Notification")]
+    #[yaserde(rename = "Notification")]
     pub notification: Vec<Notification<T>>,
 
     // The number specifying "all" of the items in the list. Required on a
     // response to a GET, ignored otherwise.
-    // #[yaserde(attribute, rename = "all")]
+    #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
     // Indicates the number of items in this page of results.
-    // #[yaserde(attribute, rename = "results")]
+    #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
-    // #[yaserde(attribute, rename = "href")]
+    #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
-}
-
-impl<T: SEResource> YaSerialize for NotificationList<T> {
-    fn serialize<W: std::io::Write>(&self, writer: &mut Serializer<W>) -> Result<(), String> {
-        todo!()
-    }
-
-    fn serialize_attributes(
-        &self,
-        attributes: Vec<OwnedAttribute>,
-        namespace: Namespace,
-    ) -> Result<(Vec<OwnedAttribute>, Namespace), String> {
-        todo!()
-    }
-}
-
-impl<T: SEResource> YaDeserialize for NotificationList<T> {
-    fn deserialize<R: std::io::Read>(
-        reader: &mut yaserde::de::Deserializer<R>,
-    ) -> Result<Self, String> {
-        todo!()
-    }
 }
 
 impl<T: SEResource> SEList for NotificationList<T> {}
 impl<T: SEResource> SEResource for NotificationList<T> {}
 impl<T: SEResource> Validate for NotificationList<T> {}
-
-fn genericize_resource<W: std::io::Write>(
-    xml: &str,
-    writer: &mut Serializer<W>,
-) -> Result<(), String> {
-    let parser = EventReader::new(xml.as_bytes());
-    let mut depth = 0;
-    for event in parser {
-        match event {
-            Ok(XmlEventR::StartElement {
-                name, attributes, ..
-            }) if depth == 0 => {
-                let mut new_attr = vec![OwnedAttribute {
-                    name: OwnedName::local("xsi:type"),
-                    value: name.local_name,
-                }];
-                new_attr.extend(attributes);
-                let all_attr = new_attr.iter().map(|ca| ca.borrow()).collect();
-                writer
-                    .write(XmlEventW::StartElement {
-                        name: "Resource".into(),
-                        attributes: Cow::Owned(all_attr),
-                        namespace: Cow::Owned(Namespace::empty()),
-                    })
-                    .map_err(|e| e.to_string())?;
-                depth += 1;
-            }
-            event @ Ok(XmlEventR::StartElement { .. }) => {
-                writer
-                    .write(event.unwrap().as_writer_event().unwrap())
-                    .map_err(|e| e.to_string())?;
-                depth += 1
-            }
-            event @ Ok(XmlEventR::EndElement { .. }) => {
-                let event = event.unwrap();
-                let mut event = event.as_writer_event().unwrap();
-                if depth == 1 {
-                    event = XmlEventW::end_element().name("Resource").into();
-                }
-                writer.write(event).map_err(|e| e.to_string())?;
-                depth -= 1;
-            }
-            Ok(XmlEventR::StartDocument { .. } | XmlEventR::EndDocument) => (),
-            Ok(event) => writer
-                .write(event.as_writer_event().unwrap())
-                .map_err(|e| e.to_string())?,
-            Err(e) => return Err(e.to_string()),
-        }
-    }
-
-    Ok(())
-}
