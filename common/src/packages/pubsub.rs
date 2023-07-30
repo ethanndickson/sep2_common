@@ -140,6 +140,7 @@ impl Validate for SubscriptionList {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[yaserde(namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance")]
 pub struct Notification<T: SEResource> {
     // The new location of the resource, if moved. This attribute SHALL be a
     // fully-qualified absolute URI, not a relative reference.
@@ -183,6 +184,7 @@ impl<T: SEResource> Validate for Notification<T> {}
 
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[yaserde(namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance")]
 pub struct NotificationList<T: SEResource> {
     #[yaserde(rename = "Notification")]
     pub notification: Vec<Notification<T>>,
