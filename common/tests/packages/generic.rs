@@ -35,6 +35,7 @@ fn notification_example() {
         subscribed_resource: "/upt/0/mr/4/r".to_owned(),
         href: None,
     };
+    let out = to_string_with_config(&orig, &YASERDE_CFG).unwrap();
     let expected = r#"<Notification xmlns="urn:ieee:std:2030.5:ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Resource xsi:type="Reading">
     <timePeriod>
@@ -43,10 +44,10 @@ fn notification_example() {
     </timePeriod>
     <value>1001</value>
   </Resource>
+  <status>0</status>
   <subscriptionURI>/dev/8/sub/5</subscriptionURI>
   <subscribedResource>/upt/0/mr/4/r</subscribedResource>
 </Notification>"#;
-    let out = to_string_with_config(&orig, &YASERDE_CFG).unwrap();
     assert_eq!(expected, out);
     let new: Notification<Reading> = from_str(&expected).unwrap();
     assert_eq!(orig, new);

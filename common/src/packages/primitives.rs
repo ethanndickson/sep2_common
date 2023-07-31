@@ -1,5 +1,4 @@
 use core::fmt;
-use num_bigint::BigUint;
 use std::str::FromStr;
 
 use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
@@ -89,10 +88,10 @@ pub struct Int48(pub i64);
 impl Validate for Int48 {
     fn validate(&self) -> Result<(), String> {
         if self.0 > "140737488355328".parse::<i64>().unwrap() {
-            return Err(format!("MaxInclusive validation error: invalid value of 0! \nExpected: 0 <= 140737488355328.\nActual: 0 == {}", self.0));
+            return Err(format!("MaxInclusive validation error: invalid value! \nExpected: 0 <= 140737488355328.\nActual: 0 == {}", self.0));
         }
         if self.0 < "-140737488355328".parse::<i64>().unwrap() {
-            return Err(format!("MinInclusive validation error: invalid value of 0! \nExpected: 0 >= -140737488355328.\nActual: 0 == {}", self.0));
+            return Err(format!("MinInclusive validation error: invalid value! \nExpected: 0 >= -140737488355328.\nActual: 0 == {}", self.0));
         }
         Ok(())
     }
@@ -195,8 +194,13 @@ pub struct HexBinary48(pub Uint64);
 
 impl Validate for HexBinary48 {
     fn validate(&self) -> Result<(), String> {
-        // TODO: Validate value is 48 bits
-        todo!()
+        let HexBinary48(a) = self;
+        let Uint64(a) = a;
+        if a > &281474976710656 {
+            Err(format!("Validation error: invalid value! \nExpected: 0 <= 281474976710656.\nActual: 0 == {}", a))
+        } else {
+            Ok(())
+        }
     }
 }
 
@@ -273,14 +277,19 @@ impl FromStr for HexBinary128 {
 }
 
 #[derive(Default, PartialEq, Debug, UtilsDefaultSerde)]
-pub struct HexBinary160(BigUint);
+pub struct HexBinary160(pub [u8; 20]);
 
 impl Validate for HexBinary160 {}
 
 impl fmt::Display for HexBinary160 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let HexBinary160(a) = self;
-        write!(f, "{:#042x?}", a)
+        let a = a
+            .iter()
+            .map(|byte| format!("{:02X}", byte))
+            .collect::<Vec<String>>()
+            .join("");
+        write!(f, "{a}")
     }
 }
 
@@ -288,7 +297,55 @@ impl FromStr for HexBinary160 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        todo!()
+        if s.len() % 2 != 0 {
+            return Err("Hex string must be even".to_owned());
+        }
+        let mut out: [u8; 20] = [0; 20];
+        let s = format!("{:0>40}", s);
+        for i in (0..s.len()).step_by(2) {
+            let hex_pair = &s[i..(i + 2)];
+            if let Ok(byte) = u8::from_str_radix(hex_pair, 16) {
+                out[i / 2] = byte;
+            } else {
+                return Err("Invalid Hex String".to_owned());
+            }
+        }
+
+        Ok(HexBinary160(out))
+    }
+}
+
+#[derive(Default, PartialEq, Debug, UtilsDefaultSerde)]
+pub struct LFDI(pub HexBinary160);
+
+impl Validate for LFDI {}
+
+impl fmt::Display for LFDI {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let LFDI(a) = self;
+        let hexstring = format!("{}", a);
+        write!(
+            f,
+            "{}",
+            hexstring
+                .chars()
+                .enumerate()
+                .flat_map(|(i, c)| {
+                    if i > 0 && i % 4 == 0 { Some('-') } else { None }
+                        .into_iter()
+                        .chain(Some(c))
+                })
+                .collect::<String>()
+        )
+    }
+}
+
+impl FromStr for LFDI {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let s = s.replace('-', "");
+        Ok(LFDI(HexBinary160::from_str(&s)?))
     }
 }
 

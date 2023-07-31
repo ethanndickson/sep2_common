@@ -8070,6 +8070,7 @@ impl Validate for Toutype {}
 #[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
 pub enum UnitType {
     #[default]
     kWh = 0,

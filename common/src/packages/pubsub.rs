@@ -148,6 +148,7 @@ pub struct Notification<T: SEResource> {
     pub new_resource_uri: Option<String>,
 
     #[yaserde(rename = "Resource")]
+    #[yaserde(generic)]
     pub resource: Option<T>,
 
     // 0 = Default Status
