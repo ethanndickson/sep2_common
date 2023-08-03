@@ -9,6 +9,7 @@ use hyper::{service::service_fn, Request, Response};
 use hyper::{Body, Method, StatusCode};
 use openssl::ssl::Ssl;
 use tokio::net::TcpListener;
+use tokio::sync::RwLock;
 use tokio_openssl::SslStream;
 
 /// A lightweight IEEE 2030.5 Server accepting a generic HTTP router.
@@ -21,7 +22,7 @@ pub struct ClientNotifServer<H: NotifHandler> {
 #[async_trait]
 pub trait NotifHandler: Send + Sync + 'static {
     /// Default router when server is used to receive notifications
-    async fn request_service(self: Arc<Self>, req: Request<Body>) -> Result<Response<Body>> {
+    async fn request_service(&self, req: Request<Body>) -> Result<Response<Body>> {
         let mut response = Response::new(Body::empty());
         match (req.method(), req.uri().path()) {
             (&Method::POST, uri) => {
@@ -64,13 +65,16 @@ impl<H: NotifHandler> ClientNotifServer<H> {
             let mut stream = Box::pin(stream);
             // Perform TLS handshake
             stream.as_mut().accept().await?;
-            // Create a service maker
+            // Bind connection to service
             let handler = handler.clone();
             tokio::task::spawn(async move {
                 let _ = Http::new()
                     .serve_connection(
                         stream,
-                        service_fn(|req| handler.clone().request_service(req)),
+                        service_fn(move |req| {
+                            let handler = handler.clone();
+                            async move { handler.clone().request_service(req).await }
+                        }),
                     )
                     .await;
             });
