@@ -1,5 +1,3 @@
-use std::env;
-
 use common::{
     config::YASERDE_CFG,
     packages::{
@@ -13,7 +11,6 @@ use yaserde::{de::from_str, ser::to_string_with_config};
 /// resources/Examples/16_06_04_Notification.xml
 #[test]
 fn notification_example() {
-    env::set_var("RUST_BACKTRACE", "full");
     let inner: Reading = Reading {
         local_id: None,
         subscribable: None,
