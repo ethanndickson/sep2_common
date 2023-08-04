@@ -1,16 +1,13 @@
-use common::{
-    config::YASERDE_CFG,
-    packages::{
-        primitives::{Int48, Int64, Uint32, Uint8},
-        pubsub::Notification,
-        xsd::{DateTimeInterval, Reading},
-    },
+use common::packages::{
+    primitives::{Int48, Int64, Uint32, Uint8},
+    pubsub::Notification,
+    xsd::{DateTimeInterval, Reading},
 };
+use common::{config::YASERDE_CFG, serialize, subscription::get_notif_type};
 use yaserde::{de::from_str, ser::to_string_with_config};
 
 /// resources/Examples/16_06_04_Notification.xml
-#[test]
-fn notification_example() {
+pub(crate) fn create_notif_example() -> Notification<Reading> {
     let inner: Reading = Reading {
         local_id: None,
         subscribable: None,
@@ -24,14 +21,19 @@ fn notification_example() {
         value: Some(Int48(1001)),
         href: None,
     };
-    let orig: Notification<Reading> = Notification {
+    Notification {
         new_resource_uri: None,
         resource: Some(inner),
         status: Uint8(0),
         subscription_uri: "/dev/8/sub/5".to_owned(),
         subscribed_resource: "/upt/0/mr/4/r".to_owned(),
         href: None,
-    };
+    }
+}
+
+#[test]
+fn notification_example() {
+    let orig = create_notif_example();
     let out = to_string_with_config(&orig, &YASERDE_CFG).unwrap();
     let expected = r#"<Notification xmlns="urn:ieee:std:2030.5:ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Resource xsi:type="Reading">
@@ -48,4 +50,13 @@ fn notification_example() {
     assert_eq!(expected, out);
     let new: Notification<Reading> = from_str(&expected).unwrap();
     assert_eq!(orig, new);
+}
+
+#[test]
+fn peek_notif_example() {
+    let orig = create_notif_example();
+    let orig = serialize(orig);
+    println!("{orig}");
+    let name = get_notif_type(&orig).unwrap();
+    assert_eq!(name, "Reading");
 }

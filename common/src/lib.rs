@@ -5,7 +5,7 @@ use yaserde::ser::to_string_with_config;
 
 pub mod config;
 pub mod packages;
-pub mod server;
+pub mod subscription;
 pub mod tls;
 
 pub fn serialize<R: SEResource>(resource: R) -> String {
