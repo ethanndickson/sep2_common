@@ -1,3 +1,6 @@
+use anyhow::anyhow;
+use anyhow::Result;
+use xml::EventReader;
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
@@ -177,6 +180,26 @@ pub struct Notification<T: SEResource> {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+pub fn get_notif_type(notif_xml: &str) -> Result<String> {
+    let parser = EventReader::new(notif_xml.as_bytes());
+    for event in parser {
+        match event? {
+            xml::reader::XmlEvent::StartElement {
+                name, attributes, ..
+            } if name.local_name == "Resource" => {
+                return Ok(attributes
+                    .iter()
+                    .find(|a| a.name.local_name == "type")
+                    .ok_or(anyhow!("Notification did not include a type annotation"))?
+                    .value
+                    .clone())
+            }
+            _ => (),
+        }
+    }
+    Err(anyhow!("Notification did not contain an inner resource"))
 }
 
 impl<T: SEResource> SESubscriptionBase for Notification<T> {}

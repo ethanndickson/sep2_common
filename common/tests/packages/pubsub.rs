@@ -1,9 +1,9 @@
 use common::packages::{
     primitives::{Int48, Int64, Uint32, Uint8},
-    pubsub::Notification,
+    pubsub::{get_notif_type, Notification},
     xsd::{DateTimeInterval, Reading},
 };
-use common::{config::YASERDE_CFG, serialize, subscription::get_notif_type};
+use common::{config::YASERDE_CFG, serialize};
 use yaserde::{de::from_str, ser::to_string_with_config};
 
 /// resources/Examples/16_06_04_Notification.xml
