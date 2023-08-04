@@ -55,8 +55,7 @@ fn notification_example() {
 #[test]
 fn peek_notif_example() {
     let orig = create_notif_example();
-    let orig = serialize(orig);
-    println!("{orig}");
+    let orig = serialize(orig).unwrap();
     let name = get_notif_type(&orig).unwrap();
     assert_eq!(name, "Reading");
 }
