@@ -13,7 +13,7 @@ use super::traits::*;
 // containing resource (e.g. TextMessage) to get the most up to date status of
 // the event. Devices can also subscribe to a specific resource instance to get
 // updates when any of its attributes change, including the Status object.
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EventStatus {
     // Field representing the current status type.
@@ -89,7 +89,7 @@ pub struct EventStatus {
 
 impl Validate for EventStatus {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Event {
     // The time at which the Event was created.
@@ -161,7 +161,7 @@ impl Validate for Event {}
 
 // Contains information about the nature of an error if a request could not be
 // completed successfully.
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Error {
     // Contains the number of seconds the client SHOULD wait before retrying the
@@ -182,7 +182,7 @@ pub struct Error {
 
 impl Validate for Error {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RandomizableEvent {
     // Number of seconds boundary inside which a random value must be selected
@@ -268,7 +268,7 @@ impl SERespondableResource for RandomizableEvent {}
 impl SEResource for RandomizableEvent {}
 impl Validate for RandomizableEvent {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Dercontrol {
     #[yaserde(rename = "DERControlBase")]
@@ -364,7 +364,7 @@ impl SERespondableResource for Dercontrol {}
 impl SEResource for Dercontrol {}
 impl Validate for Dercontrol {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TextMessage {
     // Indicates the human-readable name of the publisher of the message
@@ -457,7 +457,7 @@ impl SERespondableResource for TextMessage {}
 impl SEResource for TextMessage {}
 impl Validate for TextMessage {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TimeTariffInterval {
     #[yaserde(rename = "ConsumptionTariffIntervalListLink")]
@@ -552,7 +552,7 @@ impl SERespondableResource for TimeTariffInterval {}
 impl SEResource for TimeTariffInterval {}
 impl Validate for TimeTariffInterval {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EndDeviceControl {
     #[yaserde(rename = "ApplianceLoadReduction")]
@@ -681,7 +681,7 @@ impl SERespondableResource for EndDeviceControl {}
 impl SEResource for EndDeviceControl {}
 impl Validate for EndDeviceControl {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DemandResponseProgram {
     #[yaserde(rename = "ActiveEndDeviceControlListLink")]
@@ -739,7 +739,7 @@ impl SEIdentifiedObject for DemandResponseProgram {}
 impl SEResource for DemandResponseProgram {}
 impl Validate for DemandResponseProgram {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TariffProfile {
     // The currency code indicating the currency for this TariffProfile.
@@ -792,7 +792,7 @@ impl SEIdentifiedObject for TariffProfile {}
 impl SEResource for TariffProfile {}
 impl Validate for TariffProfile {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MessagingProgram {
     #[yaserde(rename = "ActiveTextMessageListLink")]

@@ -8,7 +8,7 @@ use crate::packages::xsd::*;
 
 use super::traits::*;
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercontrolResponse {
     // The createdDateTime field contains the date and time when the
@@ -51,7 +51,7 @@ impl SEResponse for DercontrolResponse {}
 impl SEResource for DercontrolResponse {}
 impl Validate for DercontrolResponse {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FlowReservationResponseResponse {
     // The createdDateTime field contains the date and time when the
@@ -95,7 +95,7 @@ impl SEResource for FlowReservationResponseResponse {}
 impl Validate for FlowReservationResponseResponse {}
 
 // Specifies the value of the TargetReduction applied by the device.
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct AppliedTargetReduction {
     // Enumerated field representing the type of reduction requested.
@@ -109,7 +109,7 @@ pub struct AppliedTargetReduction {
 
 impl Validate for AppliedTargetReduction {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DrResponse {
     #[yaserde(rename = "ApplianceLoadReduction")]
@@ -178,7 +178,7 @@ impl SEResponse for DrResponse {}
 impl SEResource for DrResponse {}
 impl Validate for DrResponse {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PriceResponse {
     // The createdDateTime field contains the date and time when the
@@ -221,7 +221,7 @@ impl SEResponse for PriceResponse {}
 impl SEResource for PriceResponse {}
 impl Validate for PriceResponse {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseList<T: SEResponse> {
     #[yaserde(rename = "Response")]
@@ -245,7 +245,7 @@ impl<T: SEResponse> SEList for ResponseList<T> {}
 impl<T: SEResponse> SEResource for ResponseList<T> {}
 impl<T: SEResponse> Validate for ResponseList<T> {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseSet {
     #[yaserde(rename = "ResponseListLink")]
@@ -274,7 +274,7 @@ impl SEIdentifiedObject for ResponseSet {}
 impl SEResource for ResponseSet {}
 impl Validate for ResponseSet {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseSetList {
     #[yaserde(rename = "ResponseSet")]
@@ -306,7 +306,7 @@ impl SEList for ResponseSetList {}
 impl SEResource for ResponseSetList {}
 impl Validate for ResponseSetList {}
 
-#[derive(Default, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TextResponse {
     // The createdDateTime field contains the date and time when the

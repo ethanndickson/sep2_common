@@ -1,6 +1,6 @@
 use yaserde::{YaDeserialize, YaSerialize};
 
-pub trait SEResource: YaSerialize + YaDeserialize + Default {}
+pub trait SEResource: YaSerialize + YaDeserialize + Default + PartialEq + Clone {}
 pub trait SEResponse: SEResource {}
 pub trait SEIdentifiedObject: SEResource {}
 pub trait SERespondableResource: SEResource {}
