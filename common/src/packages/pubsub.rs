@@ -13,6 +13,7 @@ use super::traits::*;
 // Indicates a condition that must be satisfied for the Notification to be
 // triggered.
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "Condition")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Condition {
     // 0 = Reading value
@@ -32,6 +33,7 @@ pub struct Condition {
 impl Validate for Condition {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "SubscriptionBase")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscriptionBase {
     // The resource for which the subscription applies. Query string parameters
@@ -50,6 +52,7 @@ impl SEResource for SubscriptionBase {}
 impl Validate for SubscriptionBase {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "Subscription")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Subscription {
     #[yaserde(rename = "Condition")]
@@ -110,6 +113,7 @@ impl SEResource for Subscription {}
 impl Validate for Subscription {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "SubscriptionList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscriptionList {
     #[yaserde(rename = "Subscription")]
@@ -142,6 +146,7 @@ impl SEResource for SubscriptionList {}
 impl Validate for SubscriptionList {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "Notification")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[yaserde(namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance")]
 pub struct Notification<T: SEResource> {
@@ -207,6 +212,7 @@ impl<T: SEResource> SEResource for Notification<T> {}
 impl<T: SEResource> Validate for Notification<T> {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "NotificationList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[yaserde(namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance")]
 pub struct NotificationList<T: SEResource> {

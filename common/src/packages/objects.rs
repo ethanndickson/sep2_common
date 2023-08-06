@@ -14,6 +14,7 @@ use super::traits::*;
 // the event. Devices can also subscribe to a specific resource instance to get
 // updates when any of its attributes change, including the Status object.
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "EventStatus")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EventStatus {
     // Field representing the current status type.
@@ -90,6 +91,7 @@ pub struct EventStatus {
 impl Validate for EventStatus {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "Event")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Event {
     // The time at which the Event was created.
@@ -162,6 +164,7 @@ impl Validate for Event {}
 // Contains information about the nature of an error if a request could not be
 // completed successfully.
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "Error")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Error {
     // Contains the number of seconds the client SHOULD wait before retrying the
@@ -183,6 +186,7 @@ pub struct Error {
 impl Validate for Error {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "RandomizableEvent")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RandomizableEvent {
     // Number of seconds boundary inside which a random value must be selected
@@ -269,6 +273,7 @@ impl SEResource for RandomizableEvent {}
 impl Validate for RandomizableEvent {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "DERControl")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Dercontrol {
     #[yaserde(rename = "DERControlBase")]
@@ -365,6 +370,7 @@ impl SEResource for Dercontrol {}
 impl Validate for Dercontrol {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "TextMessage")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TextMessage {
     // Indicates the human-readable name of the publisher of the message
@@ -458,6 +464,7 @@ impl SEResource for TextMessage {}
 impl Validate for TextMessage {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "TimeTariffInterval")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TimeTariffInterval {
     #[yaserde(rename = "ConsumptionTariffIntervalListLink")]
@@ -553,6 +560,7 @@ impl SEResource for TimeTariffInterval {}
 impl Validate for TimeTariffInterval {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "EndDeviceControl")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EndDeviceControl {
     #[yaserde(rename = "ApplianceLoadReduction")]
@@ -682,6 +690,7 @@ impl SEResource for EndDeviceControl {}
 impl Validate for EndDeviceControl {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "DemandResponseProgram")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DemandResponseProgram {
     #[yaserde(rename = "ActiveEndDeviceControlListLink")]
@@ -740,6 +749,7 @@ impl SEResource for DemandResponseProgram {}
 impl Validate for DemandResponseProgram {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "TariffProfile")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TariffProfile {
     // The currency code indicating the currency for this TariffProfile.
@@ -793,6 +803,7 @@ impl SEResource for TariffProfile {}
 impl Validate for TariffProfile {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "MessagingProgram")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MessagingProgram {
     #[yaserde(rename = "ActiveTextMessageListLink")]
@@ -840,6 +851,7 @@ impl SEResource for MessagingProgram {}
 impl Validate for MessagingProgram {}
 
 #[derive(Default, Clone, Copy, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "PrimacyType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
 pub enum PrimacyType {

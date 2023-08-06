@@ -11,6 +11,7 @@ use super::traits::*;
 // A resource is an addressable unit of information, either a collection (List)
 // or instance of an object (identifiedObject, or simply, Resource)
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "Resource")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Resource {
     // A reference to the resource address (URI). Required in a response to a
@@ -23,6 +24,7 @@ impl SEResource for Resource {}
 impl Validate for Resource {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "Response")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Response {
     // The createdDateTime field contains the date and time when the
@@ -66,6 +68,7 @@ impl SEResource for Response {}
 impl Validate for Response {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "List")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct List {
     // The number specifying "all" of the items in the list. Required on a
@@ -89,6 +92,7 @@ impl Validate for List {}
 
 // Links provide a reference, via URI, to another resource.
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "Link")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Link {
     // A URI reference.
@@ -100,6 +104,7 @@ impl SELink for Link {}
 impl Validate for Link {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "ListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ListLink {
     // Indicates the total number of items in the referenced list. This
@@ -118,6 +123,7 @@ impl SELink for ListLink {}
 impl Validate for ListLink {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "IdentifiedObject")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct IdentifiedObject {
     // The global identifier of the object.
@@ -143,6 +149,7 @@ impl SEResource for IdentifiedObject {}
 impl Validate for IdentifiedObject {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "RespondableResource")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RespondableResource {
     // A reference to the response resource address (URI). Required on a
@@ -181,6 +188,7 @@ impl SEResource for RespondableResource {}
 impl Validate for RespondableResource {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "RespondableIdentifiedObject")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RespondableIdentifiedObject {
     // The global identifier of the object.
@@ -233,6 +241,7 @@ impl SEResource for RespondableIdentifiedObject {}
 impl Validate for RespondableIdentifiedObject {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "RespondableSubscribableIdentifiedObject")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RespondableSubscribableIdentifiedObject {
     // The global identifier of the object.
@@ -291,6 +300,7 @@ impl SEResource for RespondableSubscribableIdentifiedObject {}
 impl Validate for RespondableSubscribableIdentifiedObject {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "SubscribableResource")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscribableResource {
     // Indicates whether or not subscriptions are supported for this resource,
@@ -310,6 +320,7 @@ impl SEResource for SubscribableResource {}
 impl Validate for SubscribableResource {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "SubscribableList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscribableList {
     // The number specifying "all" of the items in the list. Required on GET,
@@ -339,6 +350,7 @@ impl SEResource for SubscribableList {}
 impl Validate for SubscribableList {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "SubscribableIdentifiedObject")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscribableIdentifiedObject {
     // The global identifier of the object.
