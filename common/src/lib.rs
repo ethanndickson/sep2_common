@@ -5,6 +5,7 @@ use packages::traits::SEResource;
 use yaserde::de::from_str;
 use yaserde::ser::to_string_with_config;
 pub mod config;
+pub mod examples;
 pub mod packages;
 
 pub fn serialize<R: SEResource>(resource: &R) -> Result<String> {
