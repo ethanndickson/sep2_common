@@ -1,9 +1,12 @@
-use common::packages::{
-    primitives::{Int48, Int64, Uint32, Uint8},
-    pubsub::{get_notif_type, Notification},
-    xsd::{DateTimeInterval, Reading},
-};
 use common::{config::YASERDE_CFG, serialize};
+use common::{
+    examples::NTF_16_06_04,
+    packages::{
+        primitives::{Int48, Int64, Uint32, Uint8},
+        pubsub::{get_notif_type, Notification},
+        xsd::{DateTimeInterval, Reading},
+    },
+};
 use yaserde::{de::from_str, ser::to_string_with_config};
 
 /// resources/Examples/16_06_04_Notification.xml
@@ -25,7 +28,7 @@ pub(crate) fn create_notif_example() -> Notification<Reading> {
         new_resource_uri: None,
         resource: Some(inner),
         status: Uint8(0),
-        subscription_uri: "/dev/8/sub/5".to_owned(),
+        subscription_uri: "/edev/8/sub/5".to_owned(),
         subscribed_resource: "/upt/0/mr/4/r".to_owned(),
         href: None,
     }
@@ -44,12 +47,14 @@ fn notification_example() {
     <value>1001</value>
   </Resource>
   <status>0</status>
-  <subscriptionURI>/dev/8/sub/5</subscriptionURI>
+  <subscriptionURI>/edev/8/sub/5</subscriptionURI>
   <subscribedResource>/upt/0/mr/4/r</subscribedResource>
 </Notification>"#;
     assert_eq!(expected, out);
     let new: Notification<Reading> = from_str(&expected).unwrap();
     assert_eq!(orig, new);
+    let example: Notification<Reading> = from_str(NTF_16_06_04).unwrap();
+    assert_eq!(example, new);
 }
 
 #[test]
