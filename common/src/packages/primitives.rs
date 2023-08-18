@@ -1,5 +1,5 @@
 use core::fmt;
-use std::str::FromStr;
+use std::{ops::Deref, str::FromStr};
 
 use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
 use xsd_parser::generator::validator::Validate;
@@ -19,22 +19,46 @@ use xsd_parser::generator::validator::Validate;
 // pub type Uint128 = u128;
 
 // Unsigned integer, max inclusive 255 (2^8-1)
-#[derive(Default, PartialEq, PartialOrd, Clone, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Uint8(pub u8);
+
+impl Deref for Uint8 {
+    type Target = u8;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
 
 impl Validate for Uint8 {}
 // Unsigned integer, max inclusive 65535 (2^16-1)
-#[derive(Default, PartialEq, PartialOrd, Clone, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Uint16(pub u16);
+
+impl Deref for Uint16 {
+    type Target = u16;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
 
 impl Validate for Uint16 {}
 // Unsigned integer, max inclusive 4294967295 (2^32-1)
-#[derive(Default, PartialEq, PartialOrd, Clone, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Uint32(pub u32);
+
+impl Deref for Uint32 {
+    type Target = u32;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
 
 impl Validate for Uint32 {}
 // Unsigned integer, max inclusive 1099511627775 (2^40-1)
-#[derive(Default, PartialEq, PartialOrd, Clone, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Uint40(pub u64);
 
 impl Validate for Uint40 {
@@ -47,7 +71,7 @@ impl Validate for Uint40 {
 }
 
 // Unsigned integer, max inclusive 281474976710655 (2^48-1)
-#[derive(Default, PartialEq, PartialOrd, Clone, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Uint48(pub u64);
 
 impl Validate for Uint48 {
@@ -60,29 +84,29 @@ impl Validate for Uint48 {
 }
 
 // Unsigned integer, max inclusive 18446744073709551615 (2^64-1)
-#[derive(Default, PartialEq, PartialOrd, Clone, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Uint64(pub u64);
 
 impl Validate for Uint64 {}
 // Signed integer, min -128 max +127
-#[derive(Default, PartialEq, PartialOrd, Clone, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Int8(pub i8);
 
 impl Validate for Int8 {}
 // Signed integer, min -32768 max +32767
-#[derive(Default, PartialEq, PartialOrd, Clone, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Int16(pub i16);
 
 impl Validate for Int16 {}
 // Signed integer, max inclusive 2147483647 (2^31), min inclusive -2147483647
 // (same as xs:int)
-#[derive(Default, PartialEq, PartialOrd, Clone, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Int32(pub i32);
 
 impl Validate for Int32 {}
 // Signed integer, max inclusive 140737488355328 (2^47), min inclusive
 // -140737488355328
-#[derive(Default, PartialEq, PartialOrd, Clone, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Int48(pub i64);
 
 impl Validate for Int48 {
@@ -99,7 +123,7 @@ impl Validate for Int48 {
 
 // Signed integer, max inclusive 9223372036854775807 (2^63), min inclusive
 // -9223372036854775808 (same as xs:long)
-#[derive(Default, PartialEq, PartialOrd, Clone, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Int64(pub i64);
 
 impl Validate for Int64 {}
