@@ -2183,8 +2183,8 @@ fn default_ServiceKind() {
 
 #[test]
 fn default_SFDIType() {
-    let orig = Sfditype::default();
-    let new: Sfditype = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = SFDIType::default();
+    let new: SFDIType = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 

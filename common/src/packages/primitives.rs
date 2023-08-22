@@ -126,6 +126,14 @@ impl Validate for Int48 {
 #[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Int64(pub i64);
 
+impl Deref for Int64 {
+    type Target = i64;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
 impl Validate for Int64 {}
 
 // An 8-bit field encoded as a hex string (2 hex characters). Where applicable,
@@ -304,6 +312,20 @@ impl FromStr for HexBinary128 {
 pub struct HexBinary160(pub [u8; 20]);
 
 impl Validate for HexBinary160 {}
+
+impl Deref for HexBinary160 {
+    type Target = [u8; 20];
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl AsRef<[u8]> for HexBinary160 {
+    fn as_ref(&self) -> &[u8] {
+        &self.0
+    }
+}
 
 impl fmt::Display for HexBinary160 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

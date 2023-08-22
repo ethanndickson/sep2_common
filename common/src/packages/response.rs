@@ -260,7 +260,7 @@ pub struct ResponseSet {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]

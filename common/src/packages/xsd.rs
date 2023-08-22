@@ -161,7 +161,7 @@ pub struct AbstractDevice {
     // Short form of device identifier, WITH the checksum digit. See the
     // Security section for additional details.
     #[yaserde(rename = "sFDI")]
-    pub s_fdi: Sfditype,
+    pub s_fdi: SFDIType,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -312,7 +312,7 @@ pub struct EndDevice {
     // Short form of device identifier, WITH the checksum digit. See the
     // Security section for additional details.
     #[yaserde(rename = "sFDI")]
-    pub s_fdi: Sfditype,
+    pub s_fdi: SFDIType,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -456,7 +456,7 @@ pub struct SelfDevice {
     // Short form of device identifier, WITH the checksum digit. See the
     // Security section for additional details.
     #[yaserde(rename = "sFDI")]
-    pub s_fdi: Sfditype,
+    pub s_fdi: SFDIType,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -504,7 +504,7 @@ impl Validate for Temperature {}
 pub struct FunctionSetAssignments {
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -2250,7 +2250,7 @@ impl Validate for TargetReduction {}
 pub struct MeterReadingBase {
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -2290,7 +2290,7 @@ pub struct MeterReading {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -2505,7 +2505,7 @@ pub struct ReadingSetBase {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -2539,7 +2539,7 @@ pub struct ReadingSet {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -2731,7 +2731,7 @@ pub struct UsagePointBase {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -2781,7 +2781,7 @@ pub struct UsagePoint {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -3036,7 +3036,7 @@ pub struct RateComponent {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -3318,7 +3318,7 @@ pub struct BillingMeterReadingBase {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -3435,7 +3435,7 @@ pub struct BillingReadingSet {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -3565,7 +3565,7 @@ pub struct CustomerAccount {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -3670,7 +3670,7 @@ pub struct CustomerAgreement {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -3736,7 +3736,7 @@ pub struct HistoricalReading {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -3797,7 +3797,7 @@ pub struct ProjectionReading {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -3858,7 +3858,7 @@ pub struct TargetReading {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -3929,7 +3929,7 @@ pub struct ServiceSupplier {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -4073,7 +4073,7 @@ pub struct CreditRegister {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -4182,7 +4182,7 @@ pub struct Prepayment {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -4486,7 +4486,7 @@ pub struct FlowReservationRequest {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -4571,7 +4571,7 @@ pub struct FlowReservationResponse {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -4737,7 +4737,7 @@ pub struct DefaultDERControl {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -5664,7 +5664,7 @@ pub struct Dercurve {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -5798,7 +5798,7 @@ pub struct Derprogram {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -8051,7 +8051,7 @@ pub enum DeviceCategoryTypeFlags {
 pub type DstRuleType = HexBinary32;
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "DstRuleType")]
+#[yaserde(rename = "FlowDirectionType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
 pub enum FlowDirectionType {
@@ -8241,7 +8241,7 @@ pub enum ServiceKind {
 
 impl Validate for ServiceKind {}
 
-pub type Sfditype = Uint40;
+pub type SFDIType = Uint40;
 
 // TODO Ethan: Newtype for validation
 pub type SignedPerCent = Int16;
@@ -8440,7 +8440,7 @@ pub struct MirrorMeterReading {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -8501,7 +8501,7 @@ pub struct MirrorReadingSet {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -8556,7 +8556,7 @@ pub struct MirrorUsagePoint {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]

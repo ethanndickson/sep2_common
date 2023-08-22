@@ -63,7 +63,7 @@ pub struct EventStatus {
     // with TextMessage, since multiple text messages can be active.
     // All other values reserved.
     #[yaserde(rename = "currentStatus")]
-    pub current_status: Uint8,
+    pub current_status: EventStatusType,
 
     // The dateTime attribute will provide a timestamp of when the current
     // status was defined. dateTime MUST be set to the time at which the status
@@ -88,6 +88,18 @@ pub struct EventStatus {
     pub reason: Option<String192>,
 }
 
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum EventStatusType {
+    #[default]
+    Scheduled,
+    Active,
+    Cancelled,
+    CancelledRandom,
+    Superseded,
+}
+
 impl Validate for EventStatus {}
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
@@ -107,7 +119,7 @@ pub struct Event {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -218,7 +230,7 @@ pub struct RandomizableEvent {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -314,7 +326,7 @@ pub struct Dercontrol {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -409,7 +421,7 @@ pub struct TextMessage {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -504,7 +516,7 @@ pub struct TimeTariffInterval {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -634,7 +646,7 @@ pub struct EndDeviceControl {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -727,7 +739,7 @@ pub struct DemandResponseProgram {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -781,7 +793,7 @@ pub struct TariffProfile {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -822,7 +834,7 @@ pub struct MessagingProgram {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]

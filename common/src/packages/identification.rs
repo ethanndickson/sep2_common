@@ -128,7 +128,7 @@ impl Validate for ListLink {}
 pub struct IdentifiedObject {
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -193,7 +193,7 @@ impl Validate for RespondableResource {}
 pub struct RespondableIdentifiedObject {
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -246,7 +246,7 @@ impl Validate for RespondableIdentifiedObject {}
 pub struct RespondableSubscribableIdentifiedObject {
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -355,7 +355,7 @@ impl Validate for SubscribableList {}
 pub struct SubscribableIdentifiedObject {
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]

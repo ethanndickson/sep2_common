@@ -39,7 +39,7 @@ fn complex_serde() {
         randomize_start: Some(OneHourRangeType(Int16(0))),
         creation_time: Int64(0),
         event_status: EventStatus {
-            current_status: Uint8(0),
+            current_status: EventStatusType::default(),
             date_time: Int64(0),
             potentially_superseded: false,
             potentially_superseded_time: Some(Int64(0)),
@@ -49,7 +49,7 @@ fn complex_serde() {
             duration: Uint32(0),
             start: Int64(0),
         },
-        m_rid: HexBinary128(0),
+        mrid: HexBinary128(0),
         description: Some(String32("".to_string())),
         version: Some(Uint16(0)),
         subscribable: Some(SubscribableType::AllSubscriptions),
