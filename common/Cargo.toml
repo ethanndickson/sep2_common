@@ -6,6 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+common-derive = {path = "../common-derive"}
 yaserde = { git = "https://github.com/ethanndickson/yaserde" }
 yaserde_derive = { git = "https://github.com/ethanndickson/yaserde" }
 xsd-types = { git = "https://github.com/ethanndickson/xsd-parser-rs" }

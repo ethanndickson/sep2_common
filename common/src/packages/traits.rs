@@ -1,15 +1,33 @@
 use yaserde::{YaDeserialize, YaSerialize};
 
+use super::{
+    objects::EventStatus,
+    primitives::{HexBinary8, String32},
+    xsd::{DateTimeInterval, Mridtype, SubscribableType, TimeType, VersionType},
+};
+
 pub trait SEResource: YaSerialize + YaDeserialize + Default + PartialEq + Clone {}
 pub trait SEResponse: SEResource {}
 pub trait SEIdentifiedObject: SEResource {}
-pub trait SERespondableResource: SEResource {}
+pub trait SERespondableResource: SEResource {
+    fn reply_to(&self) -> Option<&str>;
+    fn response_required(&self) -> Option<HexBinary8>;
+}
 pub trait SESubscriptionBase: SEResource {}
 pub trait SESubscribableResource: SEResource {}
 pub trait SERespondableIdentifiedObject: SERespondableResource {}
 pub trait SERespondableSubscribableIdentifiedObject: SERespondableResource {}
-pub trait SESubscribableIdentifiedObject: SESubscribableResource {}
-pub trait SEEvent: SERespondableSubscribableIdentifiedObject {}
+pub trait SESubscribableIdentifiedObject: SESubscribableResource {
+    fn mrid(&self) -> &Mridtype;
+    fn description(&self) -> &Option<String32>;
+    fn version(&self) -> Option<VersionType>;
+    fn subscribable(&self) -> Option<SubscribableType>;
+}
+pub trait SEEvent: SERespondableSubscribableIdentifiedObject {
+    fn creation_time(&self) -> TimeType;
+    fn event_status(&self) -> &EventStatus;
+    fn interval(&self) -> &DateTimeInterval;
+}
 pub trait SERandomizableEvent: SEEvent {}
 
 pub trait SELink: YaSerialize + YaDeserialize {}
