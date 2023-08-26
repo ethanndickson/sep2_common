@@ -1,5 +1,6 @@
 use anyhow::anyhow;
 use anyhow::Result;
+use common_derive::{SEList, SEResource, SESubscriptionBase};
 use xml::EventReader;
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 use xsd_parser::generator::validator::Validate;
@@ -32,7 +33,7 @@ pub struct Condition {
 
 impl Validate for Condition {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "SubscriptionBase")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscriptionBase {
@@ -48,10 +49,11 @@ pub struct SubscriptionBase {
     pub href: Option<String>,
 }
 
-impl SEResource for SubscriptionBase {}
 impl Validate for SubscriptionBase {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscriptionBase, SEResource,
+)]
 #[yaserde(rename = "Subscription")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Subscription {
@@ -108,11 +110,9 @@ pub struct Subscription {
     pub href: Option<String>,
 }
 
-impl SESubscriptionBase for Subscription {}
-impl SEResource for Subscription {}
 impl Validate for Subscription {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "SubscriptionList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscriptionList {
@@ -141,11 +141,11 @@ pub struct SubscriptionList {
     pub href: Option<String>,
 }
 
-impl SEList for SubscriptionList {}
-impl SEResource for SubscriptionList {}
 impl Validate for SubscriptionList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscriptionBase, SEResource,
+)]
 #[yaserde(rename = "Notification")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[yaserde(namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance")]
@@ -207,11 +207,9 @@ pub fn get_notif_type(notif_xml: &str) -> Result<String> {
     Err(anyhow!("Notification did not contain an inner resource"))
 }
 
-impl<T: SEResource> SESubscriptionBase for Notification<T> {}
-impl<T: SEResource> SEResource for Notification<T> {}
 impl<T: SEResource> Validate for Notification<T> {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "NotificationList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[yaserde(namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance")]
@@ -234,6 +232,4 @@ pub struct NotificationList<T: SEResource> {
     pub href: Option<String>,
 }
 
-impl<T: SEResource> SEList for NotificationList<T> {}
-impl<T: SEResource> SEResource for NotificationList<T> {}
 impl<T: SEResource> Validate for NotificationList<T> {}

@@ -4,9 +4,12 @@ use syn::{parse_macro_input, DeriveInput};
 
 #[proc_macro_derive(SEResource)]
 pub fn derive_resource(input: TokenStream) -> TokenStream {
-    let DeriveInput { ident, .. } = parse_macro_input!(input);
+    let DeriveInput {
+        ident, generics, ..
+    } = parse_macro_input!(input);
+    let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
     let output = quote! {
-        impl SEResource for #ident {}
+        impl #impl_generics SEResource for #ident #ty_generics #where_clause {}
     };
     output.into()
 }
@@ -57,9 +60,12 @@ pub fn derive_respondable_resource(input: TokenStream) -> TokenStream {
 
 #[proc_macro_derive(SESubscriptionBase)]
 pub fn derive_subscription_base(input: TokenStream) -> TokenStream {
-    let DeriveInput { ident, .. } = parse_macro_input!(input);
+    let DeriveInput {
+        ident, generics, ..
+    } = parse_macro_input!(input);
+    let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
     let output = quote! {
-        impl SESubscriptionBase for #ident {}
+        impl #impl_generics SESubscriptionBase for #ident #ty_generics #where_clause {}
     };
     output.into()
 }
@@ -152,9 +158,12 @@ pub fn derive_list_link(input: TokenStream) -> TokenStream {
 
 #[proc_macro_derive(SEList)]
 pub fn derive_list(input: TokenStream) -> TokenStream {
-    let DeriveInput { ident, .. } = parse_macro_input!(input);
+    let DeriveInput {
+        ident, generics, ..
+    } = parse_macro_input!(input);
+    let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
     let output = quote! {
-        impl SEList for #ident {}
+        impl #impl_generics SEList for #ident #ty_generics #where_clause {}
     };
     output.into()
 }

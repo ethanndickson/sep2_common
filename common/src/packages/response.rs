@@ -1,3 +1,4 @@
+use common_derive::{SEIdentifiedObject, SEList, SEResource, SEResponse};
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
@@ -8,7 +9,7 @@ use crate::packages::xsd::*;
 
 use super::traits::*;
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
 #[yaserde(rename = "DERControlResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercontrolResponse {
@@ -48,11 +49,9 @@ pub struct DercontrolResponse {
     pub href: Option<String>,
 }
 
-impl SEResponse for DercontrolResponse {}
-impl SEResource for DercontrolResponse {}
 impl Validate for DercontrolResponse {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
 #[yaserde(rename = "FlowReservationResponseResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FlowReservationResponseResponse {
@@ -92,8 +91,6 @@ pub struct FlowReservationResponseResponse {
     pub href: Option<String>,
 }
 
-impl SEResponse for FlowReservationResponseResponse {}
-impl SEResource for FlowReservationResponseResponse {}
 impl Validate for FlowReservationResponseResponse {}
 
 // Specifies the value of the TargetReduction applied by the device.
@@ -112,7 +109,7 @@ pub struct AppliedTargetReduction {
 
 impl Validate for AppliedTargetReduction {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
 #[yaserde(rename = "DrResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DrResponse {
@@ -178,11 +175,9 @@ pub struct DrResponse {
     pub href: Option<String>,
 }
 
-impl SEResponse for DrResponse {}
-impl SEResource for DrResponse {}
 impl Validate for DrResponse {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
 #[yaserde(rename = "PriceResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PriceResponse {
@@ -222,11 +217,9 @@ pub struct PriceResponse {
     pub href: Option<String>,
 }
 
-impl SEResponse for PriceResponse {}
-impl SEResource for PriceResponse {}
 impl Validate for PriceResponse {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "ResponseList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseList<T: SEResponse> {
@@ -247,11 +240,12 @@ pub struct ResponseList<T: SEResponse> {
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
-impl<T: SEResponse> SEList for ResponseList<T> {}
-impl<T: SEResponse> SEResource for ResponseList<T> {}
+
 impl<T: SEResponse> Validate for ResponseList<T> {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+)]
 #[yaserde(rename = "ResponseSet")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseSet {
@@ -260,7 +254,7 @@ pub struct ResponseSet {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub mrid: Mridtype,
+    pub m_rid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -277,11 +271,9 @@ pub struct ResponseSet {
     pub href: Option<String>,
 }
 
-impl SEIdentifiedObject for ResponseSet {}
-impl SEResource for ResponseSet {}
 impl Validate for ResponseSet {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "ResponseSetList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseSetList {
@@ -310,11 +302,9 @@ pub struct ResponseSetList {
     pub href: Option<String>,
 }
 
-impl SEList for ResponseSetList {}
-impl SEResource for ResponseSetList {}
 impl Validate for ResponseSetList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
 #[yaserde(rename = "TextResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TextResponse {
@@ -354,6 +344,4 @@ pub struct TextResponse {
     pub href: Option<String>,
 }
 
-impl SEResponse for TextResponse {}
-impl SEResource for TextResponse {}
 impl Validate for TextResponse {}
