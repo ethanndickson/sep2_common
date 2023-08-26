@@ -54,7 +54,7 @@ pub struct Response {
     // field value definitions are defined in Table 27: Response Types by
     // Function Set.
     #[yaserde(rename = "status")]
-    pub status: Option<Uint8>,
+    pub status: Option<ResponseStatus>,
 
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
@@ -65,6 +65,31 @@ pub struct Response {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "status")]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+// Defined in Table 27: Response Types by Function Set
+pub enum ResponseStatus {
+    #[default]
+    EventReceived = 1,
+    EventStarted = 2,
+    EventCompleted = 3,
+    UserOptOut = 4,
+    UserOptIn = 5,
+    EventCancelled = 6,
+    EventSuperseded = 7,
+    EventPartialCompletionOptOut = 8,
+    EventPartialCompletionOptIn = 9,
+    EventCompletedNoUserParticipation = 10,
+    UserAcknowledgedEvent = 11,
+    CannotBeDisplayed = 12,
+    EventAbortedServerEvent = 13,
+    EventAbortedProgramEvent = 14,
+    RejectedControlNotApplicable = 252,
+    RejectedInvalidEvent = 253,
+    RejectedEventReceivedAfterExpiry = 254,
 }
 
 impl Validate for Response {}

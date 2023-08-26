@@ -7,6 +7,7 @@ use yaserde_derive::{YaDeserialize, YaSerialize};
 use crate::packages::primitives::*;
 use crate::packages::xsd::*;
 
+use super::identification::ResponseStatus;
 use super::traits::*;
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
@@ -36,7 +37,7 @@ pub struct DercontrolResponse {
     // field value definitions are defined in Table 27: Response Types by
     // Function Set.
     #[yaserde(rename = "status")]
-    pub status: Option<Uint8>,
+    pub status: Option<ResponseStatus>,
 
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
@@ -78,7 +79,7 @@ pub struct FlowReservationResponseResponse {
     // field value definitions are defined in Table 27: Response Types by
     // Function Set.
     #[yaserde(rename = "status")]
-    pub status: Option<Uint8>,
+    pub status: Option<ResponseStatus>,
 
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
@@ -162,7 +163,7 @@ pub struct DrResponse {
     // field value definitions are defined in Table 27: Response Types by
     // Function Set.
     #[yaserde(rename = "status")]
-    pub status: Option<Uint8>,
+    pub status: Option<ResponseStatus>,
 
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
@@ -204,7 +205,7 @@ pub struct PriceResponse {
     // field value definitions are defined in Table 27: Response Types by
     // Function Set.
     #[yaserde(rename = "status")]
-    pub status: Option<Uint8>,
+    pub status: Option<ResponseStatus>,
 
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
@@ -254,7 +255,7 @@ pub struct ResponseSet {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub m_rid: Mridtype,
+    pub mrid: Mridtype,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -331,7 +332,7 @@ pub struct TextResponse {
     // field value definitions are defined in Table 27: Response Types by
     // Function Set.
     #[yaserde(rename = "status")]
-    pub status: Option<Uint8>,
+    pub status: Option<ResponseStatus>,
 
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
