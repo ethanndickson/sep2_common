@@ -1,5 +1,8 @@
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 // Types should eventually be put in a module corresponding to their package
+use common_derive::SEEvent;
+use common_derive::SERespondableResource;
+use common_derive::SESubscribableIdentifiedObject;
 use std::str::FromStr;
 use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
 use xsd_parser::generator::validator::Validate;
@@ -4540,7 +4543,9 @@ impl SEList for FlowReservationRequestList {}
 impl SEResource for FlowReservationRequestList {}
 impl Validate for FlowReservationRequestList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEEvent, SERespondableResource,
+)]
 #[yaserde(rename = "FlowReservationResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FlowReservationResponse {
@@ -4619,9 +4624,7 @@ pub struct FlowReservationResponse {
     pub href: Option<String>,
 }
 
-impl SEEvent for FlowReservationResponse {}
 impl SERespondableSubscribableIdentifiedObject for FlowReservationResponse {}
-impl SERespondableResource for FlowReservationResponse {}
 impl SEResource for FlowReservationResponse {}
 impl Validate for FlowReservationResponse {}
 
@@ -4665,7 +4668,9 @@ impl SESubscribableResource for FlowReservationResponseList {}
 impl SEResource for FlowReservationResponseList {}
 impl Validate for FlowReservationResponseList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscribableIdentifiedObject,
+)]
 #[yaserde(rename = "DefaultDERControl")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DefaultDERControl {
@@ -4760,7 +4765,6 @@ pub struct DefaultDERControl {
     pub href: Option<String>,
 }
 
-impl SESubscribableIdentifiedObject for DefaultDERControl {}
 impl SESubscribableResource for DefaultDERControl {}
 impl SEResource for DefaultDERControl {}
 impl Validate for DefaultDERControl {}
@@ -5776,7 +5780,9 @@ pub enum DercurveType {
 
 impl Validate for DercurveType {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscribableIdentifiedObject,
+)]
 #[yaserde(rename = "DERProgram")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Derprogram {
@@ -5821,7 +5827,6 @@ pub struct Derprogram {
     pub href: Option<String>,
 }
 
-impl SESubscribableIdentifiedObject for Derprogram {}
 impl SESubscribableResource for Derprogram {}
 impl SEResource for Derprogram {}
 impl Validate for Derprogram {}
@@ -8286,7 +8291,7 @@ impl Validate for SignedRealEnergy {}
 // 2 - Resource supports conditional subscriptions
 // 3 - Resource supports both conditional and non-conditional subscriptions
 // All other values reserved.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[repr(u8)]
 pub enum SubscribableType {
     #[default]
@@ -8302,7 +8307,7 @@ pub type TimeOffsetType = Int32;
 
 pub type TimeType = Int64;
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "TOUType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -8328,7 +8333,7 @@ pub enum Toutype {
 
 impl Validate for Toutype {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "UnitType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -8373,7 +8378,7 @@ pub struct UnitValueType {
 
 impl Validate for UnitValueType {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "UomType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]

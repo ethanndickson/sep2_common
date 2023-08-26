@@ -1,3 +1,5 @@
+use common_derive::SERespondableResource;
+use common_derive::SESubscribableIdentifiedObject;
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
@@ -148,7 +150,7 @@ impl SEIdentifiedObject for IdentifiedObject {}
 impl SEResource for IdentifiedObject {}
 impl Validate for IdentifiedObject {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SERespondableResource)]
 #[yaserde(rename = "RespondableResource")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RespondableResource {
@@ -182,12 +184,11 @@ pub struct RespondableResource {
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
-
-impl SERespondableResource for RespondableResource {}
+// impl SERespondableResource for RespondableResource {}
 impl SEResource for RespondableResource {}
 impl Validate for RespondableResource {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SERespondableResource)]
 #[yaserde(rename = "RespondableIdentifiedObject")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RespondableIdentifiedObject {
@@ -236,11 +237,10 @@ pub struct RespondableIdentifiedObject {
 }
 
 impl SERespondableIdentifiedObject for RespondableIdentifiedObject {}
-impl SERespondableResource for RespondableIdentifiedObject {}
 impl SEResource for RespondableIdentifiedObject {}
 impl Validate for RespondableIdentifiedObject {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SERespondableResource)]
 #[yaserde(rename = "RespondableSubscribableIdentifiedObject")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RespondableSubscribableIdentifiedObject {
@@ -295,7 +295,6 @@ pub struct RespondableSubscribableIdentifiedObject {
 }
 
 impl SERespondableSubscribableIdentifiedObject for RespondableSubscribableIdentifiedObject {}
-impl SERespondableResource for RespondableSubscribableIdentifiedObject {}
 impl SEResource for RespondableSubscribableIdentifiedObject {}
 impl Validate for RespondableSubscribableIdentifiedObject {}
 
@@ -349,7 +348,9 @@ impl SESubscribableResource for SubscribableList {}
 impl SEResource for SubscribableList {}
 impl Validate for SubscribableList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscribableIdentifiedObject,
+)]
 #[yaserde(rename = "SubscribableIdentifiedObject")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscribableIdentifiedObject {
@@ -378,7 +379,6 @@ pub struct SubscribableIdentifiedObject {
     pub href: Option<String>,
 }
 
-impl SESubscribableIdentifiedObject for SubscribableIdentifiedObject {}
 impl SESubscribableResource for SubscribableIdentifiedObject {}
 impl SEResource for SubscribableIdentifiedObject {}
 impl Validate for SubscribableIdentifiedObject {}

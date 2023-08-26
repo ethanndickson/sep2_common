@@ -140,7 +140,7 @@ impl Validate for Int64 {}
 // bit 0, or the least significant bit, goes on the right. Note that hexBinary
 // requires pairs of hex characters, so an odd number of characters requires a
 // leading "0".
-#[derive(Default, PartialEq, Debug, Clone, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct HexBinary8(pub Uint8);
 
 impl Validate for HexBinary8 {}
@@ -167,7 +167,7 @@ impl FromStr for HexBinary8 {
 // applicable, bit 0, or the least significant bit, goes on the right. Note that
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
-#[derive(Default, PartialEq, Debug, Clone, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct HexBinary16(pub Uint16);
 
 impl Validate for HexBinary16 {}
@@ -194,7 +194,7 @@ impl FromStr for HexBinary16 {
 // applicable, bit 0, or the least significant bit, goes on the right. Note that
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
-#[derive(Default, PartialEq, Debug, Clone, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct HexBinary32(pub Uint32);
 
 impl Validate for HexBinary32 {}
@@ -221,7 +221,7 @@ impl FromStr for HexBinary32 {
 // applicable, bit 0, or the least significant bit, goes on the right. Note that
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
-#[derive(Default, PartialEq, Debug, Clone, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct HexBinary48(pub Uint64);
 
 impl Validate for HexBinary48 {
@@ -258,7 +258,7 @@ impl FromStr for HexBinary48 {
 // applicable, bit 0, or the least significant bit, goes on the right. Note that
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
-#[derive(Default, PartialEq, Debug, Clone, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct HexBinary64(pub Uint64);
 
 impl Validate for HexBinary64 {}
@@ -285,7 +285,7 @@ impl FromStr for HexBinary64 {
 // applicable, bit 0, or the least significant bit, goes on the right. Note that
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
-#[derive(Default, PartialEq, Debug, Clone, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
 
 pub struct HexBinary128(pub u128);
 
@@ -308,7 +308,7 @@ impl FromStr for HexBinary128 {
     }
 }
 
-#[derive(Default, PartialEq, Debug, Clone, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct HexBinary160(pub [u8; 20]);
 
 impl Validate for HexBinary160 {}

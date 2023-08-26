@@ -1,3 +1,6 @@
+use common_derive::SEEvent;
+use common_derive::SERespondableResource;
+use common_derive::SESubscribableIdentifiedObject;
 use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
@@ -102,7 +105,9 @@ pub enum EventStatusType {
 
 impl Validate for EventStatus {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEEvent, SERespondableResource,
+)]
 #[yaserde(rename = "Event")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Event {
@@ -167,9 +172,7 @@ pub struct Event {
     pub href: Option<String>,
 }
 
-impl SEEvent for Event {}
 impl SERespondableSubscribableIdentifiedObject for Event {}
-impl SERespondableResource for Event {}
 impl SEResource for Event {}
 impl Validate for Event {}
 
@@ -197,7 +200,9 @@ pub struct Error {
 
 impl Validate for Error {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEEvent, SERespondableResource,
+)]
 #[yaserde(rename = "RandomizableEvent")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RandomizableEvent {
@@ -278,13 +283,13 @@ pub struct RandomizableEvent {
     pub href: Option<String>,
 }
 
-impl SEEvent for RandomizableEvent {}
 impl SERespondableSubscribableIdentifiedObject for RandomizableEvent {}
-impl SERespondableResource for RandomizableEvent {}
 impl SEResource for RandomizableEvent {}
 impl Validate for RandomizableEvent {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEEvent, SERespondableResource,
+)]
 #[yaserde(rename = "DERControl")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Dercontrol {
@@ -375,13 +380,13 @@ pub struct Dercontrol {
 }
 
 impl SERandomizableEvent for Dercontrol {}
-impl SEEvent for Dercontrol {}
 impl SERespondableSubscribableIdentifiedObject for Dercontrol {}
-impl SERespondableResource for Dercontrol {}
 impl SEResource for Dercontrol {}
 impl Validate for Dercontrol {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SERespondableResource, SEEvent,
+)]
 #[yaserde(rename = "TextMessage")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TextMessage {
@@ -469,13 +474,13 @@ pub struct TextMessage {
     pub href: Option<String>,
 }
 
-impl SEEvent for TextMessage {}
 impl SERespondableSubscribableIdentifiedObject for TextMessage {}
-impl SERespondableResource for TextMessage {}
 impl SEResource for TextMessage {}
 impl Validate for TextMessage {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEEvent, SERespondableResource,
+)]
 #[yaserde(rename = "TimeTariffInterval")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TimeTariffInterval {
@@ -565,13 +570,13 @@ pub struct TimeTariffInterval {
 }
 
 impl SERandomizableEvent for TimeTariffInterval {}
-impl SEEvent for TimeTariffInterval {}
 impl SERespondableSubscribableIdentifiedObject for TimeTariffInterval {}
-impl SERespondableResource for TimeTariffInterval {}
 impl SEResource for TimeTariffInterval {}
 impl Validate for TimeTariffInterval {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEEvent, SERespondableResource,
+)]
 #[yaserde(rename = "EndDeviceControl")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EndDeviceControl {
@@ -695,9 +700,7 @@ pub struct EndDeviceControl {
 }
 
 impl SERandomizableEvent for EndDeviceControl {}
-impl SEEvent for EndDeviceControl {}
 impl SERespondableSubscribableIdentifiedObject for EndDeviceControl {}
-impl SERespondableResource for EndDeviceControl {}
 impl SEResource for EndDeviceControl {}
 impl Validate for EndDeviceControl {}
 
@@ -814,7 +817,9 @@ impl SEIdentifiedObject for TariffProfile {}
 impl SEResource for TariffProfile {}
 impl Validate for TariffProfile {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscribableIdentifiedObject,
+)]
 #[yaserde(rename = "MessagingProgram")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MessagingProgram {
@@ -857,7 +862,6 @@ pub struct MessagingProgram {
     pub href: Option<String>,
 }
 
-impl SESubscribableIdentifiedObject for MessagingProgram {}
 impl SESubscribableResource for MessagingProgram {}
 impl SEResource for MessagingProgram {}
 impl Validate for MessagingProgram {}

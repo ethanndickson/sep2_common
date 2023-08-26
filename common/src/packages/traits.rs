@@ -6,7 +6,9 @@ use super::{
     xsd::{DateTimeInterval, Mridtype, SubscribableType, TimeType, VersionType},
 };
 
+// All IEEE 2030.5 top-level types are either a Resource, or a Link to a Resource
 pub trait SEResource: YaSerialize + YaDeserialize + Default + PartialEq + Clone {}
+pub trait SELink: YaSerialize + YaDeserialize + Default + PartialEq + Clone {}
 pub trait SEResponse: SEResource {}
 pub trait SEIdentifiedObject: SEResource {}
 pub trait SERespondableResource: SEResource {
@@ -19,7 +21,7 @@ pub trait SERespondableIdentifiedObject: SERespondableResource {}
 pub trait SERespondableSubscribableIdentifiedObject: SERespondableResource {}
 pub trait SESubscribableIdentifiedObject: SESubscribableResource {
     fn mrid(&self) -> &Mridtype;
-    fn description(&self) -> &Option<String32>;
+    fn description(&self) -> Option<&String32>;
     fn version(&self) -> Option<VersionType>;
     fn subscribable(&self) -> Option<SubscribableType>;
 }
@@ -30,7 +32,6 @@ pub trait SEEvent: SERespondableSubscribableIdentifiedObject {
 }
 pub trait SERandomizableEvent: SEEvent {}
 
-pub trait SELink: YaSerialize + YaDeserialize {}
 pub trait SEListLink: SELink {}
 
 pub trait SEList: SEResource {}
