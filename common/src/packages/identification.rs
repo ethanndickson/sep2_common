@@ -206,6 +206,7 @@ pub struct RespondableResource {
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
+
 impl Validate for RespondableResource {}
 
 #[derive(

@@ -171,7 +171,7 @@ pub struct AbstractDevice {
     // Long form of device identifier. See the Security section for additional
     // details.
     #[yaserde(rename = "lFDI")]
-    pub l_fdi: Option<HexBinary160>,
+    pub lfdi: Option<HexBinary160>,
 
     #[yaserde(rename = "LoadShedAvailabilityListLink")]
     pub load_shed_availability_list_link: Option<LoadShedAvailabilityListLink>,
@@ -185,7 +185,7 @@ pub struct AbstractDevice {
     // Short form of device identifier, WITH the checksum digit. See the
     // Security section for additional details.
     #[yaserde(rename = "sFDI")]
-    pub s_fdi: SFDIType,
+    pub sfdi: SFDIType,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -328,7 +328,7 @@ pub struct EndDevice {
     // Long form of device identifier. See the Security section for additional
     // details.
     #[yaserde(rename = "lFDI")]
-    pub l_fdi: Option<HexBinary160>,
+    pub lfdi: Option<HexBinary160>,
 
     #[yaserde(rename = "LoadShedAvailabilityListLink")]
     pub load_shed_availability_list_link: Option<LoadShedAvailabilityListLink>,
@@ -342,7 +342,7 @@ pub struct EndDevice {
     // Short form of device identifier, WITH the checksum digit. See the
     // Security section for additional details.
     #[yaserde(rename = "sFDI")]
-    pub s_fdi: SFDIType,
+    pub sfdi: SFDIType,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -485,7 +485,7 @@ pub struct SelfDevice {
     // Long form of device identifier. See the Security section for additional
     // details.
     #[yaserde(rename = "lFDI")]
-    pub l_fdi: Option<HexBinary160>,
+    pub lfdi: Option<HexBinary160>,
 
     #[yaserde(rename = "LoadShedAvailabilityListLink")]
     pub load_shed_availability_list_link: Option<LoadShedAvailabilityListLink>,
@@ -499,7 +499,7 @@ pub struct SelfDevice {
     // Short form of device identifier, WITH the checksum digit. See the
     // Security section for additional details.
     #[yaserde(rename = "sFDI")]
-    pub s_fdi: SFDIType,
+    pub sfdi: SFDIType,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -755,7 +755,7 @@ pub struct DeviceInformation {
 
     // Long form device identifier. See the Security section for full details.
     #[yaserde(rename = "lFDI")]
-    pub l_fdi: HexBinary160,
+    pub lfdi: HexBinary160,
 
     // Date/time of manufacture
     #[yaserde(rename = "mfDate")]
@@ -1851,7 +1851,7 @@ pub struct File {
     // This element MUST be set to the LFDI of the device for which this file in
     // targeted.
     #[yaserde(rename = "lFDI")]
-    pub l_fdi: Option<HexBinary160>,
+    pub lfdi: Option<HexBinary160>,
 
     // This element MUST be set to the hardware version for which this file is
     // targeted.
@@ -2816,7 +2816,7 @@ pub struct UsagePointBase {
     // 0 = off
     // 1 = on
     #[yaserde(rename = "status")]
-    pub status: Uint8,
+    pub status: UsagePointStatus,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -2838,6 +2838,16 @@ pub struct UsagePointBase {
 }
 
 impl Validate for UsagePointBase {}
+
+#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "status")]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum UsagePointStatus {
+    #[default]
+    Off,
+    On,
+}
 
 #[derive(
     Default,
@@ -2873,7 +2883,7 @@ pub struct UsagePoint {
     // 0 = off
     // 1 = on
     #[yaserde(rename = "status")]
-    pub status: Uint8,
+    pub status: UsagePointStatus,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -8275,7 +8285,7 @@ impl Validate for RealEnergy {}
 
 pub type RoleFlagsType = HexBinary32;
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ServiceKind")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -8625,7 +8635,7 @@ pub struct MirrorUsagePoint {
     // 0 = off
     // 1 = on
     #[yaserde(rename = "status")]
-    pub status: Uint8,
+    pub status: UsagePointStatus,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
