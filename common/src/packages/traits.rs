@@ -11,12 +11,21 @@ use super::{
 // All IEEE 2030.5 top-level types are either a Resource, or a Link to a Resource
 // Since the spec does not use multiple-inheritance, there is redundancy in the inheritance tree. We may be able to remove this in the future.
 // Each of these traits can be derived provided an attribute with the expected type (as per the specification, not these traits) exists.
+
+/// A top-level IEEE 2030.5 Resource.
+/// An IEEE 2030.5 Server exposes resources.
+/// IEEE 2030.5 Clients retrieve, update, create and delete resources on servers.
 pub trait SEResource: YaSerialize + YaDeserialize + Default + PartialEq + Clone {
     fn href(&self) -> Option<&str>;
 }
+
+/// An IEEE 2030.5 Representation of a link to a resource.
+/// "Links provide a reference, via URI, to another resource."
+/// These are not top-level resources.
 pub trait SELink: YaSerialize + YaDeserialize + Default + PartialEq + Clone {
     fn href(&self) -> &str;
 }
+
 pub trait SEListLink: SELink {
     fn all(&self) -> Option<Uint32>;
 }
@@ -26,46 +35,56 @@ pub trait SEResponse: SEResource {
     fn status(&self) -> Option<ResponseStatus>;
     fn subject(&self) -> &Mridtype;
 }
+
 pub trait SEIdentifiedObject: SEResource {
     fn mrid(&self) -> &Mridtype;
     fn description(&self) -> Option<&String32>;
     fn version(&self) -> Option<VersionType>;
 }
+
 pub trait SERespondableResource: SEResource {
     fn reply_to(&self) -> Option<&str>;
     fn response_required(&self) -> Option<HexBinary8>;
 }
+
 pub trait SESubscriptionBase: SEResource {
     fn subscribed_resource(&self) -> &str;
 }
+
 pub trait SESubscribableResource: SEResource {
     fn subscribable(&self) -> Option<SubscribableType>;
 }
+
 pub trait SERespondableIdentifiedObject: SERespondableResource {
     fn mrid(&self) -> &Mridtype;
     fn description(&self) -> Option<&String32>;
     fn version(&self) -> Option<VersionType>;
 }
+
 pub trait SERespondableSubscribableIdentifiedObject: SERespondableResource {
     fn mrid(&self) -> &Mridtype;
     fn description(&self) -> Option<&String32>;
     fn version(&self) -> Option<VersionType>;
     fn subscribable(&self) -> Option<SubscribableType>;
 }
+
 pub trait SESubscribableIdentifiedObject: SESubscribableResource {
     fn mrid(&self) -> &Mridtype;
     fn description(&self) -> Option<&String32>;
     fn version(&self) -> Option<VersionType>;
 }
+
 pub trait SEEvent: SERespondableSubscribableIdentifiedObject {
     fn creation_time(&self) -> TimeType;
     fn event_status(&self) -> &EventStatus;
     fn interval(&self) -> &DateTimeInterval;
 }
+
 pub trait SERandomizableEvent: SEEvent {
     fn randomize_duration(&self) -> Option<OneHourRangeType>;
     fn randomize_start(&self) -> Option<OneHourRangeType>;
 }
+
 pub trait SEList: SEResource {
     fn all(&self) -> Uint32;
     fn results(&self) -> Uint32;

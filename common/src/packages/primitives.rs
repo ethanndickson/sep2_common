@@ -341,7 +341,7 @@ impl FromStr for HexBinary64 {
 // applicable, bit 0, or the least significant bit, goes on the right. Note that
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
-#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, Hash, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
 
 pub struct HexBinary128(pub u128);
 
