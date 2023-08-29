@@ -916,7 +916,7 @@ pub struct MessagingProgram {
 
 impl Validate for MessagingProgram {}
 
-#[derive(Default, Clone, Copy, PartialEq, Debug, YaSerialize, YaDeserialize)]
+#[derive(Default, Clone, Copy, PartialEq, PartialOrd, Debug, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "PrimacyType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]

@@ -1,3 +1,4 @@
+use std::ops::Deref;
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 // Types should eventually be put in a module corresponding to their package
 use std::str::FromStr;
@@ -8163,6 +8164,14 @@ pub type Mridtype = HexBinary128;
 
 #[derive(Default, PartialEq, Debug, Clone, Copy, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct OneHourRangeType(pub Int16);
+
+impl Deref for OneHourRangeType {
+    type Target = i16;
+
+    fn deref(&self) -> &Self::Target {
+        &*self.0
+    }
+}
 
 impl Validate for OneHourRangeType {
     fn validate(&self) -> Result<(), String> {

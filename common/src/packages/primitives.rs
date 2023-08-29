@@ -61,6 +61,14 @@ impl Validate for Uint32 {}
 #[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Uint40(pub u64);
 
+impl Deref for Uint40 {
+    type Target = u64;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
 impl Validate for Uint40 {
     fn validate(&self) -> Result<(), String> {
         if self.0 > "281474976710655".parse::<u64>().unwrap() {
@@ -73,6 +81,14 @@ impl Validate for Uint40 {
 // Unsigned integer, max inclusive 281474976710655 (2^48-1)
 #[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Uint48(pub u64);
+
+impl Deref for Uint48 {
+    type Target = u64;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
 
 impl Validate for Uint48 {
     fn validate(&self) -> Result<(), String> {
@@ -87,15 +103,39 @@ impl Validate for Uint48 {
 #[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Uint64(pub u64);
 
+impl Deref for Uint64 {
+    type Target = u64;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
 impl Validate for Uint64 {}
 // Signed integer, min -128 max +127
 #[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Int8(pub i8);
 
+impl Deref for Int8 {
+    type Target = i8;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
 impl Validate for Int8 {}
 // Signed integer, min -32768 max +32767
 #[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Int16(pub i16);
+
+impl Deref for Int16 {
+    type Target = i16;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
 
 impl Validate for Int16 {}
 // Signed integer, max inclusive 2147483647 (2^31), min inclusive -2147483647
@@ -103,11 +143,27 @@ impl Validate for Int16 {}
 #[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Int32(pub i32);
 
+impl Deref for Int32 {
+    type Target = i32;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
 impl Validate for Int32 {}
 // Signed integer, max inclusive 140737488355328 (2^47), min inclusive
 // -140737488355328
 #[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Int48(pub i64);
+
+impl Deref for Int48 {
+    type Target = i64;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
 
 impl Validate for Int48 {
     fn validate(&self) -> Result<(), String> {
