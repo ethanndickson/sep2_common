@@ -4,6 +4,10 @@ use super::{
     identification::ResponseStatus,
     objects::EventStatus,
     primitives::{HexBinary16, HexBinary160, HexBinary8, Int48, String32, Uint32},
+    types::{
+        ConsumptionBlockType, DateTimeInterval, DeviceCategoryType, Mridtype, OneHourRangeType,
+        RoleFlagsType, SFDIType, ServiceKind, SubscribableType, TimeType, Toutype, VersionType,
+    },
     // TODO: Temporary import all
     xsd::*,
 };

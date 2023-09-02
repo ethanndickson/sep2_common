@@ -5,6 +5,7 @@ use common::packages::identification::*;
 use common::packages::objects::*;
 use common::packages::pubsub::*;
 use common::packages::response::*;
+use common::packages::types::*;
 use common::packages::xsd::*;
 use yaserde::de::from_str;
 use yaserde::ser::to_string_with_config;
@@ -2125,15 +2126,15 @@ fn default_OneHourRangeType() {
 
 #[test]
 fn default_PENType() {
-    let orig = Pentype::default();
-    let new: Pentype = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = PENType::default();
+    let new: PENType = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
-fn default_PerCent() {
-    let orig = PerCent::default();
-    let new: PerCent = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+fn default_Percent() {
+    let orig = Percent::default();
+    let new: Percent = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
@@ -2146,8 +2147,8 @@ fn default_PhaseCode() {
 
 #[test]
 fn default_PINType() {
-    let orig = Pintype::default();
-    let new: Pintype = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = PINType::default();
+    let new: PINType = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
@@ -2189,9 +2190,9 @@ fn default_SFDIType() {
 }
 
 #[test]
-fn default_SignedPerCent() {
-    let orig = SignedPerCent::default();
-    let new: SignedPerCent =
+fn default_SignedPercent() {
+    let orig = SignedPercent::default();
+    let new: SignedPercent =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }

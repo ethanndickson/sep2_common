@@ -9,6 +9,7 @@ use crate::packages::xsd::*;
 
 use super::identification::ResponseStatus;
 use super::traits::*;
+use super::types::{Mridtype, TimeType, UnitType, VersionType};
 
 #[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
 #[yaserde(rename = "DERControlResponse")]

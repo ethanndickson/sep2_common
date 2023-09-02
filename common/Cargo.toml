@@ -15,6 +15,7 @@ xsd-parser = { git = "https://github.com/ethanndickson/xsd-parser-rs" }
 xml-rs = "0.8.4"
 log = "0.4.19"
 anyhow = "1.0.72"
+bitflags = "2.4.0"
 
 [features]
 default = []

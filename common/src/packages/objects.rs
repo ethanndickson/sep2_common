@@ -12,6 +12,11 @@ use crate::packages::primitives::*;
 use crate::packages::xsd::*;
 
 use super::traits::*;
+use super::types::{
+    CurrencyCode, DateTimeInterval, DeviceCategoryType, LocaleType, Mridtype, OneHourRangeType,
+    Percent, PowerOfTenMultiplierType, PrimacyType, ServiceKind, SubscribableType, TimeType,
+    Toutype, VersionType,
+};
 
 // Current status information relevant to a specific object. The Status object
 // is used to indicate the current status of an Event. Devices can read the
@@ -766,7 +771,7 @@ pub struct DemandResponseProgram {
     // the current value of LoadShedAvailability sheddablePercent is greater
     // than availabilityUpdatePercentChangeThreshold.
     #[yaserde(rename = "availabilityUpdatePercentChangeThreshold")]
-    pub availability_update_percent_change_threshold: Option<PerCent>,
+    pub availability_update_percent_change_threshold: Option<Percent>,
 
     // This attribute allows program providers to specify the requested
     // granularity of updates to LoadShedAvailability sheddablePower. If not
@@ -915,16 +920,3 @@ pub struct MessagingProgram {
 }
 
 impl Validate for MessagingProgram {}
-
-#[derive(Default, Clone, Copy, PartialEq, PartialOrd, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "PrimacyType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-pub enum PrimacyType {
-    #[default]
-    InHomeEnergyManagementSystem = 0,
-    ContractedPremisesServiceProvider = 1,
-    NonContractualServiceProvider = 2,
-}
-
-impl Validate for PrimacyType {}

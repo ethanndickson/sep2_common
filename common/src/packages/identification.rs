@@ -9,9 +9,11 @@ use yaserde_derive::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
 use crate::packages::primitives::*;
-use crate::packages::xsd::*;
 
-use super::traits::*;
+use super::{
+    traits::*,
+    types::{Mridtype, SubscribableType, TimeType, VersionType},
+};
 
 // A resource is an addressable unit of information, either a collection (List)
 // or instance of an object (identifiedObject, or simply, Resource)

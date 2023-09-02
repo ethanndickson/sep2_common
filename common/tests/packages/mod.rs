@@ -4,3 +4,4 @@ mod gen;
 mod objects;
 mod primitives;
 mod pubsub;
+mod types;

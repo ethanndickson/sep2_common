@@ -2,10 +2,13 @@
 use common::config::YASERDE_CFG;
 use common::packages::objects::*;
 use common::packages::primitives::*;
-use common::packages::xsd::{
-    ApplianceLoadReduction, ApplianceLoadReductionType, DateTimeInterval, DeviceCategoryTypeFlags,
-    DutyCycle, Offset, OneHourRangeType, SetPoint, SubscribableType, TargetReduction, UnitType,
+use common::packages::types::Percent;
+use common::packages::types::{
+    ApplianceLoadReductionType, DateTimeInterval, DeviceCategoryType, OneHourRangeType,
+    PrimacyType, SubscribableType, UnitType,
 };
+use common::packages::xsd::{ApplianceLoadReduction, DutyCycle, Offset, SetPoint, TargetReduction};
+
 use yaserde::de::from_str;
 use yaserde::ser::to_string_with_config;
 
@@ -15,7 +18,7 @@ fn complex_serde() {
         appliance_load_reduction: Some(ApplianceLoadReduction {
             _type: ApplianceLoadReductionType::TemporaryApplianceLoadReduction,
         }),
-        device_category: HexBinary32(Uint32(DeviceCategoryTypeFlags::Sauna as u32)),
+        device_category: DeviceCategoryType::Sauna,
         dr_program_mandatory: true,
         duty_cycle: Some(DutyCycle {
             normal_value: Uint8(0),
@@ -24,7 +27,7 @@ fn complex_serde() {
         offset: Some(Offset {
             cooling_offset: Some(Uint8(0)),
             heating_offset: Some(Uint8(0)),
-            load_adjustment_percentage_offset: Some(Uint16(20)),
+            load_adjustment_percentage_offset: Some(Percent::new(20).unwrap()),
         }),
         override_duration: Some(Uint16(20)),
         set_point: Some(SetPoint {
@@ -35,8 +38,8 @@ fn complex_serde() {
             _type: UnitType::Watts,
             value: Uint16(12),
         }),
-        randomize_duration: Some(OneHourRangeType(Int16(0))),
-        randomize_start: Some(OneHourRangeType(Int16(0))),
+        randomize_duration: Some(OneHourRangeType::new(0).unwrap()),
+        randomize_start: Some(OneHourRangeType::new(0).unwrap()),
         creation_time: Int64(0),
         event_status: EventStatus {
             current_status: EventStatusType::default(),

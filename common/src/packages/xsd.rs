@@ -1,8 +1,9 @@
-use std::ops::Deref;
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 // Types should eventually be put in a module corresponding to their package
+use bitflags::bitflags;
 use std::str::FromStr;
-use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
+use xsd_macro_utils::UtilsDefaultSerde;
+use xsd_macro_utils::UtilsTupleIo;
 use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
@@ -10,6 +11,7 @@ use yaserde_derive::{YaDeserialize, YaSerialize};
 use super::traits::*;
 use crate::packages::objects::*;
 use crate::packages::primitives::*;
+use crate::packages::types::*;
 use common_derive::*;
 
 #[derive(
@@ -420,7 +422,7 @@ pub struct Registration {
     // Contains the registration PIN number associated with the device,
     // including the checksum digit.
     #[yaserde(rename = "pIN")]
-    pub p_in: Pintype,
+    pub p_in: PINType,
 
     // The default polling rate for this function set (this resource and all
     // resources below), in seconds. If not specified, a default of 900 seconds
@@ -768,7 +770,7 @@ pub struct DeviceInformation {
 
     // The manufacturer's IANA Enterprise Number.
     #[yaserde(rename = "mfID")]
-    pub mf_id: Pentype,
+    pub mf_id: PENType,
 
     // Manufacturer dependent information related to the manufacture of this
     // device
@@ -926,7 +928,7 @@ pub struct PowerStatus {
 
     // Estimate of remaining battery charge as a percent of full charge.
     #[yaserde(rename = "estimatedChargeRemaining")]
-    pub estimated_charge_remaining: Option<PerCent>,
+    pub estimated_charge_remaining: Option<Percent>,
 
     // Estimated time (in seconds) to total battery charge depletion (under
     // current load)
@@ -1023,7 +1025,7 @@ pub struct Pevinfo {
     // before the time of departure (TCIN). The default value is 100%. The value
     // cannot be set to a value less than the actual state of charge.
     #[yaserde(rename = "targetStateOfCharge")]
-    pub target_state_of_charge: PerCent,
+    pub target_state_of_charge: Percent,
 
     // Time Charge is Needed (TCIN) is the time that the PEV is expected to
     // depart. The value is manually entered using controls and displays in the
@@ -1619,7 +1621,7 @@ pub struct LogEvent {
     // of profileID, functionSet, and logEventCode SHALL have unique meaning
     // within a logEventPEN and are defined by the owner of the PEN.
     #[yaserde(rename = "logEventPEN")]
-    pub log_event_pen: Pentype,
+    pub log_event_pen: PENType,
 
     // The profileID identifies which profile (HA, BA, SE, etc) defines the
     // following event information.
@@ -1862,7 +1864,7 @@ pub struct File {
     // This element MUST be set to the manufacturer's Private Enterprise Number
     // (assigned by IANA).
     #[yaserde(rename = "mfID")]
-    pub mf_id: Pentype,
+    pub mf_id: PENType,
 
     // This element MUST be set to the manufacturer model number for which this
     // file is targeted. The syntax and semantics are left to the manufacturer.
@@ -2180,7 +2182,7 @@ pub struct LoadShedAvailability {
     // Maximum percent of current operating load that is estimated to be
     // sheddable.
     #[yaserde(rename = "sheddablePercent")]
-    pub sheddable_percent: Option<PerCent>,
+    pub sheddable_percent: Option<Percent>,
 
     // Maximum amount of current operating load that is estimated to be
     // sheddable, in Watts.
@@ -2230,7 +2232,7 @@ pub struct Offset {
     // should be subtracted from the normal setting, or if loadShiftForward is
     // true, then the value should be added to the normal setting.
     #[yaserde(rename = "loadAdjustmentPercentageOffset")]
-    pub load_adjustment_percentage_offset: Option<PerCent>,
+    pub load_adjustment_percentage_offset: Option<Percent>,
 }
 
 impl Validate for Offset {}
@@ -5289,12 +5291,12 @@ pub struct Deravailability {
     // Percent of continuous received active power (%setMaxChargeRateW) that is
     // estimated to be available in reserve.
     #[yaserde(rename = "reserveChargePercent")]
-    pub reserve_charge_percent: Option<PerCent>,
+    pub reserve_charge_percent: Option<Percent>,
 
     // Percent of continuous delivered active power (%setMaxW) that is estimated
     // to be available in reserve.
     #[yaserde(rename = "reservePercent")]
-    pub reserve_percent: Option<PerCent>,
+    pub reserve_percent: Option<Percent>,
 
     // Estimated reserve reactive power, in var. Represents the lesser of
     // received or delivered reactive power.
@@ -5502,7 +5504,7 @@ pub struct DercontrolBase {
     // setpoint, in %setMaxChargeRateW if negative value or %setMaxW or
     // %setMaxDischargeRateW if positive value (in hundredths).
     #[yaserde(rename = "opModFixedW")]
-    pub op_mod_fixed_w: Option<SignedPerCent>,
+    pub op_mod_fixed_w: Option<SignedPercent>,
 
     // Specifies a frequency-watt operation. This operation limits active power
     // generation or consumption when the line frequency deviates from nominal
@@ -5641,7 +5643,7 @@ pub struct DercontrolBase {
     // (%setMaxW, in hundredths). This limitation may be met e.g. by reducing PV
     // output or by using excess PV output to charge associated storage.
     #[yaserde(rename = "opModMaxLimW")]
-    pub op_mod_max_lim_w: Option<PerCent>,
+    pub op_mod_max_lim_w: Option<Percent>,
 
     // Target reactive power, in var. This control is likely to be more useful
     // for aggregators, as individual DERs may not be able to maintain a target
@@ -5758,26 +5760,26 @@ pub struct DercontrolList {
 
 impl Validate for DercontrolList {}
 
-pub type DercontrolType = HexBinary32;
-
-#[repr(u32)]
-pub enum DercontrolTypeFlags {
-    ChargeMode = 1,
-    DischargeMode = 2,
-    OpModConnect = 4,
-    OpModEnergize = 8,
-    OpModFixedPFAbsorbW = 16,
-    OpModFixedPFInjectW = 32,
-    OpModFixedVar = 64,
-    OpModFixedW = 128,
-    OpModFreqDroop = 256,
-    OpModFreqWatt = 512,
-    OpModHFRTMayTrip = 1024,
-    OpModHFRTMustTrip = 2048,
-    OpModHVRTMayTrip = 4096,
-    OpModHVRTMomentaryCessation = 8192,
-    OpModHVRTMustTrip = 16384,
-    OpModLFRTMayTrip = 32768,
+bitflags! {
+    #[derive(Default, PartialEq, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+    pub struct DercontrolType: u32 { // HexBinary32
+        const ChargeMode = 1;
+        const DischargeMode = 2;
+        const OpModConnect = 4;
+        const OpModEnergize = 8;
+        const OpModFixedPFAbsorbW = 16;
+        const OpModFixedPFInjectW = 32;
+        const OpModFixedVar = 64;
+        const OpModFixedW = 128;
+        const OpModFreqDroop = 256;
+        const OpModFreqWatt = 512;
+        const OpModHFRTMayTrip = 1024;
+        const OpModHFRTMustTrip = 2048;
+        const OpModHVRTMayTrip = 4096;
+        const OpModHVRTMomentaryCessation = 8192;
+        const OpModHVRTMustTrip = 16384;
+        const OpModLFRTMayTrip = 32768;
+    }
 }
 
 #[derive(
@@ -5849,7 +5851,7 @@ pub struct Dercurve {
     // nominal AC voltage (RMS) adjustment to the voltage curve points for
     // Volt-Var curves.
     #[yaserde(rename = "vRef")]
-    pub v_ref: Option<PerCent>,
+    pub v_ref: Option<Percent>,
 
     // Exponent for X-axis value.
     #[yaserde(rename = "xMultiplier")]
@@ -6368,7 +6370,7 @@ pub struct FixedVar {
     // Specify a signed setpoint for reactive power in % (see 'refType' for
     // context).
     #[yaserde(rename = "value")]
-    pub value: SignedPerCent,
+    pub value: SignedPercent,
 }
 
 impl Validate for FixedVar {}
@@ -6522,7 +6524,7 @@ pub struct StateOfChargeStatusType {
 
     // The value indicating the state.
     #[yaserde(rename = "value")]
-    pub value: PerCent,
+    pub value: Percent,
 }
 
 impl Validate for StateOfChargeStatusType {}
@@ -7943,550 +7945,6 @@ pub struct UsagePointListLink {
 
 impl Validate for UsagePointListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "AccumulationBehaviourType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-pub enum AccumulationBehaviourType {
-    #[default]
-    // (default, if not specified)
-    NotApplicable = 0,
-    // The sum of the previous billing period values. Note: “Cumulative” is commonly used in conjunction with “demand.” Each demand reset causes the maximum demand value for the present billing period (since the last demand reset) to accumulate as an accumulative total of all maximum demands. So instead of “zeroing” the demand register, a demand reset has the affect of adding the present maximum demand to this accumulating total.
-    Cumulative = 3,
-    // The difference between the value at the end of the prescribed interval and the beginning of the interval. This is used for incremental interval data.
-    // Note: One common application would be for load profile data, another use might be to report the number of events within an interval (such as the number of equipment energizations within the specified period of time.)
-    DeltaData = 4,
-    // As if a needle is swung out on the meter face to a value to indicate the current value. (Note: An “indicating” value is typically measured over hundreds of milliseconds or greater, or may imply a “pusher” mechanism to capture a value. Compare this to “instantaneous” which is measured over a shorter period of time.)
-    Indicating = 6,
-    // A form of accumulation which is selective with respect to time.
-    // Note : “Summation” could be considered a specialization of “Bulk Quantity” according to the rules of inheritance where “Summation” selectively accumulates pulses over a timing pattern, and “BulkQuantity” accumulates pulses all of the time.
-    Summation = 9,
-    // Typically measured over the fastest period of time allowed by the definition of the metric (usually milliseconds or tens of milliseconds.) (Note: “Instantaneous” was moved to attribute #3 in 61968-9Ed2 from attribute #1 in 61968-9Ed1.)
-    Instantaneous = 12,
-    // ALL OTHERS RESERVED
-}
-
-impl Validate for AccumulationBehaviourType {}
-
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "ApplianceLoadReductionType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-pub enum ApplianceLoadReductionType {
-    #[default]
-    // Parameter requesting the appliance to respond by providing a moderate load reduction for the duration of a delay period.  Typically referring to a “non-emergency” event in which appliances can continue operating if already in a load consuming period.
-    DelayApplianceLoad = 0,
-    TemporaryApplianceLoadReduction = 1,
-    // 2-255 reserved
-    // * Full definition of how appliances react when receiving each parameter is document in the EPA document - ENERGY STAR® Program Requirements, Product Specification for Residential Refrigerators and Freezers, Eligibility Criteria 5, Draft 2 Version 5.0.
-}
-
-impl Validate for ApplianceLoadReductionType {}
-
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "CommodityType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub enum CommodityType {
-    #[default]
-    NotApplicable = 0, // (default, if not specified)
-    ElectricitySecondaryMetered = 1, // metered value (a premises meter is typically on the low voltage, or secondary, side of a service transformer)
-    ElectricityPrimaryMetered = 2, // metered value (measured on the high voltage, or primary, side of the service transformer)
-    Air = 4,
-    NaturalGas = 7,
-    Propane = 8,
-    PotableWater = 9,
-    Steam = 10,
-    WasteWater = 11,
-    HeatingFluid = 12,
-    CoolingFluid = 13,
-    // All other values reserved
-}
-
-impl Validate for CommodityType {}
-
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "ConsumptionBlockType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-pub enum ConsumptionBlockType {
-    #[default]
-    NotApplicable = 0,
-    Block1 = 1,
-    Block2 = 2,
-    Block3 = 3,
-    Block4 = 4,
-    Block5 = 5,
-    Block6 = 6,
-    Block7 = 7,
-    Block8 = 8,
-    Block9 = 9,
-    Block10 = 10,
-    Block11 = 11,
-    Block12 = 12,
-    Block13 = 13,
-    Block14 = 14,
-    Block15 = 15,
-    Block16 = 16,
-    // 17-255 RESERVED
-}
-
-impl Validate for ConsumptionBlockType {}
-
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "CurrencyCode")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u16)]
-pub enum CurrencyCode {
-    // Follows codes defind in ISO 4217
-    #[default]
-    NotApplicable = 0,
-    AUD = 36,
-    CAD = 124,
-    USD = 840,
-    EUR = 978,
-}
-
-impl Validate for CurrencyCode {}
-
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "DataQualifierType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-pub enum DataQualifierType {
-    #[default]
-    NotApplicable = 0,
-    Average = 2,
-    Maximum = 8,
-    Minimum = 9,
-    Normal = 12,
-    StandardDeviationOfPopulation = 29,
-    StandardDeviationOfSample = 30,
-}
-
-impl Validate for DataQualifierType {}
-
-// Interval of date and time.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "DateTimeInterval")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DateTimeInterval {
-    // Duration of the interval, in seconds.
-    #[yaserde(rename = "duration")]
-    pub duration: Uint32,
-
-    // Date and time of the start of the interval.
-    #[yaserde(rename = "start")]
-    pub start: TimeType,
-}
-
-impl Validate for DateTimeInterval {}
-
-pub type DeviceCategoryType = HexBinary32;
-#[repr(u32)]
-pub enum DeviceCategoryTypeFlags {
-    ProgrammableCommunicatingThermostat = 1,
-    StripHeaters = 2,
-    BaseboardHeaters = 4,
-    WaterHeater = 8,
-    PoolPump = 16,
-    Sauna = 32,
-    HotTub = 64,
-    SmartAppliance = 128,
-    IrrigationPump = 256,
-    ManagedCommercialAndIndustrialLoads = 512,
-    SimpleMiscLoads = 1024,
-    ExteriorLighting = 2048,
-    InteriorLighting = 4096,
-    LoadControlSwitch = 8192,
-    EnergyManagementSystem = 16384,
-    SmartEnergyModule = 65536,
-    ElectricVehicle = 262144,
-    VirutalOrMixedDer = 524288,
-    ReciprocatingEngine = 2097152,
-    PhotovoltaicSystem = 8388608,
-    CombinedPvAndStorage = 16777216,
-    OtherGenerationSystem = 33554432,
-    OtherStorageSystem = 67108864,
-}
-
-// TODO Ethan: How can we make this usable?
-pub type DstRuleType = HexBinary32;
-
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "FlowDirectionType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-pub enum FlowDirectionType {
-    #[default]
-    NotApplicable = 0,
-    Forward = 1,  // delivered to customer
-    Reverse = 19, // received from customer
-}
-
-impl Validate for FlowDirectionType {}
-
-// Specifies a GPS location, expressed in WGS 84 coordinates.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "GPSLocationType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct GpslocationType {
-    // Specifies the latitude from equator. -90 (south) to +90 (north) in
-    // decimal degrees.
-    #[yaserde(rename = "lat")]
-    pub lat: String32,
-
-    // Specifies the longitude from Greenwich Meridian. -180 (west) to +180
-    // (east) in decimal degrees.
-    #[yaserde(rename = "lon")]
-    pub lon: String32,
-}
-
-impl Validate for GpslocationType {}
-
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "KindType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-pub enum KindType {
-    #[default]
-    NotApplicable = 0,
-    Currency = 3,
-    Demand = 8,
-    Energy = 12,
-    Power = 37,
-}
-
-impl Validate for KindType {}
-
-pub type LocaleType = String42;
-
-pub type Mridtype = HexBinary128;
-
-#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct OneHourRangeType(pub Int16);
-
-impl Deref for OneHourRangeType {
-    type Target = i16;
-
-    fn deref(&self) -> &Self::Target {
-        &*self.0
-    }
-}
-
-impl Validate for OneHourRangeType {
-    fn validate(&self) -> Result<(), String> {
-        if self.0 .0 > "3600".parse::<i16>().unwrap() {
-            return Err(format!("MaxInclusive validation error: invalid value of 0! \nExpected: 0 <= 3600.\nActual: 0 == {}", self.0));
-        }
-        if self.0 .0 < "-3600".parse::<i16>().unwrap() {
-            return Err(format!("MinInclusive validation error: invalid value of 0! \nExpected: 0 >= -140737488355328.\nActual: 0 == {}", self.0));
-        }
-        Ok(())
-    }
-}
-
-pub type Pentype = Uint32;
-
-// TODO Ethan: This will need to be a newtype for validation
-pub type PerCent = Uint16;
-// // measured in 1/100ths of a percent (eg. PerCent(102) is 1.02%)
-// #[derive(Debug)]
-// pub struct PerCent(Uint16);
-
-// impl PerCent {
-//     fn new(value: Uint16) -> Result<PerCent, Error> {
-//         if value.0 > 10000 {
-//             Err(Error::from(ErrorKind::InvalidInput))
-//         } else {
-//             Ok(PerCent(value))
-//         }
-//     }
-// }
-
-// impl fmt::Display for PerCent {
-//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-//         write!(f, "{:.2}%", self.0 .0 as f32 / 100.00)
-//     }
-// }
-
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "PhaseCode")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-pub enum PhaseCode {
-    #[default]
-    NotApplicable = 0,
-    PhaseC = 32,  // and S2
-    PhaseCN = 33, // and S2N
-    PhaseCA = 40,
-    PhaseB = 64,
-    PhaseBN = 65,
-    PhaseBC = 66,
-    PhaseA = 128,  // and S1
-    PhaseAN = 129, // and S1N
-    PhaseAB = 132,
-    PhaseABC = 224,
-    // ALL OTHERS RESERVED
-}
-
-impl Validate for PhaseCode {}
-
-// TODO Ethan: newtype for valdiation
-pub type Pintype = Uint32;
-// #[derive(Debug)]
-// pub struct PINType(Uint32);
-
-// impl PINType {
-//     fn new(value: Uint32) -> Result<PINType, Error> {
-//         if value.0 > 999999 {
-//             Err(Error::from(ErrorKind::InvalidInput))
-//         } else {
-//             Ok(PINType(value))
-//         }
-//     }
-// }
-
-// impl fmt::Display for PINType {
-//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-//         let PINType(a) = self;
-//         write!(f, "{}", a)
-//     }
-// }
-
-// TODO Ethan: newtype for validation
-pub type PowerOfTenMultiplierType = Int8;
-
-// #[derive(Debug, Default)]
-// pub struct PowerOfTenMultiplierType(Int8);
-
-// impl PowerOfTenMultiplierType {
-//     fn new(value: Int8) -> Result<PowerOfTenMultiplierType, Error> {
-//         if !(-9..=9).contains(&value.0) {
-//             Err(Error::from(ErrorKind::InvalidInput))
-//         } else {
-//             Ok(PowerOfTenMultiplierType(value))
-//         }
-//     }
-// }
-
-// impl fmt::Display for PowerOfTenMultiplierType {
-//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-//         let PowerOfTenMultiplierType(a) = self;
-//         write!(f, "x {}", a)
-//     }
-// }
-
-// Real electrical energy
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "RealEnergy")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct RealEnergy {
-    // Multiplier for 'unit'.
-    #[yaserde(rename = "multiplier")]
-    pub multiplier: PowerOfTenMultiplierType,
-
-    // Value of the energy in Watt-hours. (uom 72)
-    #[yaserde(rename = "value")]
-    pub value: Uint48,
-}
-
-impl Validate for RealEnergy {}
-
-pub type RoleFlagsType = HexBinary32;
-
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "ServiceKind")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-pub enum ServiceKind {
-    #[default]
-    Electricity = 0,
-    Gas = 1,
-    Water = 2,
-    Time = 3,
-    Pressure = 4,
-    Heat = 5,
-    Cooling = 6,
-}
-
-impl Validate for ServiceKind {}
-
-pub type SFDIType = Uint40;
-
-// TODO Ethan: Newtype for validation
-pub type SignedPerCent = Int16;
-// measured in 1/100ths of a percent (eg. PerCent(102) is 1.02%)
-// #[derive(Debug)]
-// pub struct PerCent(Uint16);
-
-// impl PerCent {
-//     fn new(value: Uint16) -> Result<PerCent, Error> {
-//         if value.0 > 10000 {
-//             Err(Error::from(ErrorKind::InvalidInput))
-//         } else {
-//             Ok(PerCent(value))
-//         }
-//     }
-// }
-
-// impl fmt::Display for PerCent {
-//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-//         write!(f, "{:.2}%", self.0 .0 as f32 / 100.00)
-//     }
-// }
-// Real electrical energy, signed.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "SignedRealEnergy")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct SignedRealEnergy {
-    // Multiplier for 'unit'.
-    #[yaserde(rename = "multiplier")]
-    pub multiplier: PowerOfTenMultiplierType,
-
-    // Value of the energy in Watt-hours. (uom 72)
-    #[yaserde(rename = "value")]
-    pub value: Int48,
-}
-
-impl Validate for SignedRealEnergy {}
-
-// The subscribable values.
-// 0 - Resource does not support subscriptions
-// 1 - Resource supports non-conditional subscriptions
-// 2 - Resource supports conditional subscriptions
-// 3 - Resource supports both conditional and non-conditional subscriptions
-// All other values reserved.
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[repr(u8)]
-pub enum SubscribableType {
-    #[default]
-    NoSubscriptionsSupported = 0,
-    NonConditionalSubscriptions = 1,
-    ConditionalSubscriptions = 2,
-    AllSubscriptions = 3,
-}
-
-impl Validate for SubscribableType {}
-
-pub type TimeOffsetType = Int32;
-
-pub type TimeType = Int64;
-
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "TOUType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-pub enum Toutype {
-    #[default]
-    NotApplicable = 0,
-    TouA = 1,
-    TouB = 2,
-    TouC = 3,
-    TouD = 4,
-    TouE = 5,
-    TouF = 6,
-    TouG = 7,
-    TouH = 8,
-    TouI = 9,
-    TouJ = 10,
-    TouK = 11,
-    TouL = 12,
-    TouM = 13,
-    TouN = 14,
-    TouO = 15,
-}
-
-impl Validate for Toutype {}
-
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "UnitType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-#[allow(non_camel_case_types)]
-pub enum UnitType {
-    #[default]
-    kWh = 0,
-    kW = 1,
-    Watts = 2,
-    CubicMeters = 3,
-    CubicFeet = 4,
-    USGallons = 5,
-    ImperialGallons = 6,
-    BTU = 7,
-    Liters = 8,
-    kPAGauge = 9,
-    kPAAbsolute = 10,
-    Megajoule = 11,
-    Unitless = 12,
-}
-
-impl Validate for UnitType {}
-
-// Type for specification of a specific value, with units and power of ten
-// multiplier.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "UnitValueType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct UnitValueType {
-    // Multiplier for 'unit'.
-    #[yaserde(rename = "multiplier")]
-    pub multiplier: PowerOfTenMultiplierType,
-
-    // Unit in symbol
-    #[yaserde(rename = "unit")]
-    pub unit: UomType,
-
-    // Value in units specified
-    #[yaserde(rename = "value")]
-    pub value: Int32,
-}
-
-impl Validate for UnitValueType {}
-
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "UomType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-pub enum UomType {
-    #[default]
-    NotApplicable = 0,
-    Amperes = 5,
-    Kelvin = 6,
-    DegreesCelsius = 23,
-    Voltage = 29,
-    Joule = 31,
-    Hz = 33,
-    W = 38,
-    MtrCubed = 42,
-    VA = 61,
-    VAr = 63,
-    CosTheta = 65,
-    VSquared = 67,
-    ASquared = 69,
-    VAh = 71,
-    Wh = 72,
-    VArh = 73,
-    Ah = 106,
-    FtCubed = 119,
-    FtCubedPerHour = 122,
-    MCubedPerHour = 125,
-    USGallons = 128,
-    UGGallonsPerHour = 129,
-    ImperialGallons = 130,
-    ImperialGallonsPerHour = 131,
-    BTU = 132,
-    BTUPerHour = 133,
-    Liter = 134,
-    LiterPerHour = 137,
-    PAGauge = 140,
-    PAAbsolute = 155,
-    Therm = 169,
-}
-
-impl Validate for UomType {}
-
-pub type VersionType = Uint16;
-
 #[derive(
     Default,
     PartialEq,
@@ -8697,328 +8155,3 @@ pub struct MirrorUsagePointList {
 }
 
 impl Validate for MirrorUsagePointList {}
-
-// pub type DeviceCapability = DeviceCapability;
-// pub type AbstractDevice = AbstractDevice;
-// pub type DeviceStatus = DeviceStatus;
-// pub type EndDevice = EndDevice;
-// pub type EndDeviceList = EndDeviceList;
-// pub type Registration = Registration;
-// pub type SelfDevice = SelfDevice;
-// pub type Temperature = Temperature;
-// pub type FunctionSetAssignmentsBase = FunctionSetAssignmentsBase;
-// pub type FunctionSetAssignments = FunctionSetAssignments;
-// pub type FunctionSetAssignmentsList = FunctionSetAssignmentsList;
-// pub type Condition = Condition;
-// pub type SubscriptionBase = SubscriptionBase;
-// pub type Subscription = Subscription;
-// pub type SubscriptionList = SubscriptionList;
-// pub type Notification = Notification;
-// pub type NotificationList = NotificationList;
-// pub type DercontrolResponse = DercontrolResponse;
-// pub type FlowReservationResponseResponse = FlowReservationResponseResponse;
-// pub type AppliedTargetReduction = AppliedTargetReduction;
-// pub type DrResponse = DrResponse;
-// pub type PriceResponse = PriceResponse;
-// pub type Response = Response;
-// pub type ResponseList = ResponseList;
-// pub type ResponseSet = ResponseSet;
-// pub type ResponseSetList = ResponseSetList;
-// pub type TextResponse = TextResponse;
-// pub type Time = Time;
-// pub type DeviceInformation = DeviceInformation;
-// pub type Drlccapabilities = Drlccapabilities;
-// pub type SupportedLocale = SupportedLocale;
-// pub type SupportedLocaleList = SupportedLocaleList;
-// pub type PowerStatus = PowerStatus;
-// pub type PowerSourceType = PowerSourceType;
-// pub type Pevinfo = Pevinfo;
-// pub type Ieee802154 = Ieee802154;
-// pub type Ipaddr = Ipaddr;
-// pub type IpaddrList = IpaddrList;
-// pub type Ipinterface = Ipinterface;
-// pub type IpinterfaceList = IpinterfaceList;
-// pub type Llinterface = Llinterface;
-// pub type LlinterfaceList = LlinterfaceList;
-// pub type LoWPAN = LoWPAN;
-// pub type Neighbor = Neighbor;
-// pub type NeighborList = NeighborList;
-// pub type Rplinstance = Rplinstance;
-// pub type RplinstanceList = RplinstanceList;
-// pub type RplsourceRoutes = RplsourceRoutes;
-// pub type RplsourceRoutesList = RplsourceRoutesList;
-// pub type LogEvent = LogEvent;
-// pub type LogEventList = LogEventList;
-// pub type Configuration = Configuration;
-// pub type PowerConfiguration = PowerConfiguration;
-// pub type PriceResponseCfg = PriceResponseCfg;
-// pub type PriceResponseCfgList = PriceResponseCfgList;
-// pub type TimeConfiguration = TimeConfiguration;
-// pub type File = File;
-// pub type FileList = FileList;
-// pub type FileStatus = FileStatus;
-// pub type LoadShedAvailabilityList = LoadShedAvailabilityList;
-// pub type ApplianceLoadReduction = ApplianceLoadReduction;
-// pub type DemandResponseProgram = DemandResponseProgram;
-// pub type DemandResponseProgramList = DemandResponseProgramList;
-// pub type DutyCycle = DutyCycle;
-// pub type EndDeviceControl = EndDeviceControl;
-// pub type EndDeviceControlList = EndDeviceControlList;
-// pub type LoadShedAvailability = LoadShedAvailability;
-// pub type Offset = Offset;
-// pub type SetPoint = SetPoint;
-// pub type TargetReduction = TargetReduction;
-// pub type MeterReading = MeterReading;
-// pub type MeterReadingList = MeterReadingList;
-// pub type Reading = Reading;
-// pub type ReadingList = ReadingList;
-// pub type ReadingSet = ReadingSet;
-// pub type ReadingSetList = ReadingSetList;
-// pub type ReadingType = ReadingType;
-// pub type UsagePoint = UsagePoint;
-// pub type UsagePointList = UsagePointList;
-// pub type ConsumptionTariffInterval = ConsumptionTariffInterval;
-// pub type ConsumptionTariffIntervalList = ConsumptionTariffIntervalList;
-// pub type CostKindType = CostKindType;
-// pub type EnvironmentalCost = EnvironmentalCost;
-// pub type RateComponent = RateComponent;
-// pub type RateComponentList = RateComponentList;
-// pub type TariffProfile = TariffProfile;
-// pub type TariffProfileList = TariffProfileList;
-// pub type TimeTariffInterval = TimeTariffInterval;
-// pub type TimeTariffIntervalList = TimeTariffIntervalList;
-// pub type MessagingProgram = MessagingProgram;
-// pub type MessagingProgramList = MessagingProgramList;
-// pub type PriorityType = PriorityType;
-// pub type TextMessage = TextMessage;
-// pub type TextMessageList = TextMessageList;
-// pub type BillingPeriod = BillingPeriod;
-// pub type BillingPeriodList = BillingPeriodList;
-// pub type BillingMeterReadingBase = BillingMeterReadingBase;
-// pub type BillingReading = BillingReading;
-// pub type BillingReadingList = BillingReadingList;
-// pub type BillingReadingSet = BillingReadingSet;
-// pub type BillingReadingSetList = BillingReadingSetList;
-// pub type Charge = Charge;
-// pub type ChargeKind = ChargeKind;
-// pub type CustomerAccount = CustomerAccount;
-// pub type CustomerAccountList = CustomerAccountList;
-// pub type CustomerAgreement = CustomerAgreement;
-// pub type CustomerAgreementList = CustomerAgreementList;
-// pub type HistoricalReading = HistoricalReading;
-// pub type HistoricalReadingList = HistoricalReadingList;
-// pub type ProjectionReading = ProjectionReading;
-// pub type ProjectionReadingList = ProjectionReadingList;
-// pub type TargetReading = TargetReading;
-// pub type TargetReadingList = TargetReadingList;
-// pub type ServiceSupplier = ServiceSupplier;
-// pub type ServiceSupplierList = ServiceSupplierList;
-// pub type AccountBalance = AccountBalance;
-// pub type AccountingUnit = AccountingUnit;
-// pub type CreditRegister = CreditRegister;
-// pub type CreditRegisterList = CreditRegisterList;
-// pub type Prepayment = Prepayment;
-// pub type PrepaymentList = PrepaymentList;
-// pub type PrepayModeType = PrepayModeType;
-// pub type PrepayOperationStatus = PrepayOperationStatus;
-// pub type ServiceChange = ServiceChange;
-// pub type SupplyInterruptionOverride = SupplyInterruptionOverride;
-// pub type SupplyInterruptionOverrideList = SupplyInterruptionOverrideList;
-// pub type CreditStatusType = CreditStatusType;
-// pub type CreditTypeType = CreditTypeType;
-// pub type CreditTypeChange = CreditTypeChange;
-// pub type ServiceStatusType = ServiceStatusType;
-// pub type RequestStatus = RequestStatus;
-// pub type FlowReservationRequest = FlowReservationRequest;
-// pub type FlowReservationRequestList = FlowReservationRequestList;
-// pub type FlowReservationResponse = FlowReservationResponse;
-// pub type FlowReservationResponseList = FlowReservationResponseList;
-// pub type DefaultDERControl = DefaultDERControl;
-// pub type FreqDroopType = FreqDroopType;
-// pub type Der = Der;
-// pub type Derlist = Derlist;
-// pub type Dersettings = Dersettings;
-// pub type Dertype = Dertype;
-// pub type Deravailability = Deravailability;
-// pub type Dercapability = Dercapability;
-// pub type DercontrolBase = DercontrolBase;
-// pub type Dercontrol = Dercontrol;
-// pub type DercontrolList = DercontrolList;
-// pub type DercontrolType = DercontrolType;
-// pub type Dercurve = Dercurve;
-// pub type CurrentDERProgramLink = CurrentDERProgramLink;
-// pub type DercurveList = DercurveList;
-// pub type CurveData = CurveData;
-// pub type DercurveType = DercurveType;
-// pub type Derprogram = Derprogram;
-// pub type DerprogramList = DerprogramList;
-// pub type Derstatus = Derstatus;
-// pub type DerunitRefType = DerunitRefType;
-// pub type CurrentRMS = CurrentRMS;
-// pub type FixedPointType = FixedPointType;
-// pub type UnsignedFixedPointType = UnsignedFixedPointType;
-// pub type ActivePower = ActivePower;
-// pub type AmpereHour = AmpereHour;
-// pub type ApparentPower = ApparentPower;
-// pub type ReactivePower = ReactivePower;
-// pub type ReactiveSusceptance = ReactiveSusceptance;
-// pub type PowerFactor = PowerFactor;
-// pub type PowerFactorWithExcitation = PowerFactorWithExcitation;
-// pub type FixedVar = FixedVar;
-// pub type WattHour = WattHour;
-// pub type VoltageRMS = VoltageRMS;
-// pub type ConnectStatusType = ConnectStatusType;
-// pub type InverterStatusType = InverterStatusType;
-// pub type LocalControlModeStatusType = LocalControlModeStatusType;
-// pub type ManufacturerStatusType = ManufacturerStatusType;
-// pub type OperationalModeStatusType = OperationalModeStatusType;
-// pub type StateOfChargeStatusType = StateOfChargeStatusType;
-// pub type StorageModeStatusType = StorageModeStatusType;
-// pub type AccountBalanceLink = AccountBalanceLink;
-// pub type ActiveBillingPeriodListLink = ActiveBillingPeriodListLink;
-// pub type ActiveCreditRegisterListLink = ActiveCreditRegisterListLink;
-// pub type ActiveDERControlListLink = ActiveDERControlListLink;
-// pub type ActiveEndDeviceControlListLink = ActiveEndDeviceControlListLink;
-// pub type ActiveFlowReservationListLink = ActiveFlowReservationListLink;
-// pub type ActiveProjectionReadingListLink = ActiveProjectionReadingListLink;
-// pub type ActiveSupplyInterruptionOverrideListLink = ActiveSupplyInterruptionOverrideListLink;
-// pub type ActiveTargetReadingListLink = ActiveTargetReadingListLink;
-// pub type ActiveTextMessageListLink = ActiveTextMessageListLink;
-// pub type ActiveTimeTariffIntervalListLink = ActiveTimeTariffIntervalListLink;
-// pub type AssociatedDERProgramListLink = AssociatedDERProgramListLink;
-// pub type AssociatedUsagePointLink = AssociatedUsagePointLink;
-// pub type BillingPeriodListLink = BillingPeriodListLink;
-// pub type BillingReadingListLink = BillingReadingListLink;
-// pub type BillingReadingSetListLink = BillingReadingSetListLink;
-// pub type ConfigurationLink = ConfigurationLink;
-// pub type ConsumptionTariffIntervalListLink = ConsumptionTariffIntervalListLink;
-// pub type CreditRegisterListLink = CreditRegisterListLink;
-// pub type CustomerAccountLink = CustomerAccountLink;
-// pub type CustomerAccountListLink = CustomerAccountListLink;
-// pub type CustomerAgreementListLink = CustomerAgreementListLink;
-// pub type DemandResponseProgramLink = DemandResponseProgramLink;
-// pub type DemandResponseProgramListLink = DemandResponseProgramListLink;
-// pub type DeravailabilityLink = DeravailabilityLink;
-// pub type DefaultDERControlLink = DefaultDERControlLink;
-// pub type DercapabilityLink = DercapabilityLink;
-// pub type DercontrolListLink = DercontrolListLink;
-// pub type DercurveLink = DercurveLink;
-// pub type DercurveListLink = DercurveListLink;
-// pub type Derlink = Derlink;
-// pub type DerlistLink = DerlistLink;
-// pub type DerprogramLink = DerprogramLink;
-// pub type DerprogramListLink = DerprogramListLink;
-// pub type DersettingsLink = DersettingsLink;
-// pub type DerstatusLink = DerstatusLink;
-// pub type DeviceCapabilityLink = DeviceCapabilityLink;
-// pub type DeviceInformationLink = DeviceInformationLink;
-// pub type DeviceStatusLink = DeviceStatusLink;
-// pub type EndDeviceControlListLink = EndDeviceControlListLink;
-// pub type EndDeviceLink = EndDeviceLink;
-// pub type EndDeviceListLink = EndDeviceListLink;
-// pub type FileLink = FileLink;
-// pub type FileListLink = FileListLink;
-// pub type FileStatusLink = FileStatusLink;
-// pub type FlowReservationRequestListLink = FlowReservationRequestListLink;
-// pub type FlowReservationResponseListLink = FlowReservationResponseListLink;
-// pub type FunctionSetAssignmentsListLink = FunctionSetAssignmentsListLink;
-// pub type HistoricalReadingListLink = HistoricalReadingListLink;
-// pub type IpaddrListLink = IpaddrListLink;
-// pub type IpinterfaceListLink = IpinterfaceListLink;
-// pub type LlinterfaceListLink = LlinterfaceListLink;
-// pub type LoadShedAvailabilityListLink = LoadShedAvailabilityListLink;
-// pub type LogEventListLink = LogEventListLink;
-// pub type MessagingProgramListLink = MessagingProgramListLink;
-// pub type MeterReadingLink = MeterReadingLink;
-// pub type MeterReadingListLink = MeterReadingListLink;
-// pub type MirrorUsagePointListLink = MirrorUsagePointListLink;
-// pub type NeighborListLink = NeighborListLink;
-// pub type NotificationListLink = NotificationListLink;
-// pub type PowerStatusLink = PowerStatusLink;
-// pub type PrepaymentLink = PrepaymentLink;
-// pub type PrepaymentListLink = PrepaymentListLink;
-// pub type PrepayOperationStatusLink = PrepayOperationStatusLink;
-// pub type PriceResponseCfgListLink = PriceResponseCfgListLink;
-// pub type ProjectionReadingListLink = ProjectionReadingListLink;
-// pub type RateComponentLink = RateComponentLink;
-// pub type RateComponentListLink = RateComponentListLink;
-// pub type ReadingLink = ReadingLink;
-// pub type ReadingListLink = ReadingListLink;
-// pub type ReadingSetListLink = ReadingSetListLink;
-// pub type ReadingTypeLink = ReadingTypeLink;
-// pub type RegistrationLink = RegistrationLink;
-// pub type ResponseListLink = ResponseListLink;
-// pub type ResponseSetListLink = ResponseSetListLink;
-// pub type RplinstanceListLink = RplinstanceListLink;
-// pub type RplsourceRoutesListLink = RplsourceRoutesListLink;
-// pub type SelfDeviceLink = SelfDeviceLink;
-// pub type ServiceSupplierLink = ServiceSupplierLink;
-// pub type SubscriptionListLink = SubscriptionListLink;
-// pub type SupplyInterruptionOverrideListLink = SupplyInterruptionOverrideListLink;
-// pub type SupportedLocaleListLink = SupportedLocaleListLink;
-// pub type TargetReadingListLink = TargetReadingListLink;
-// pub type TariffProfileLink = TariffProfileLink;
-// pub type TariffProfileListLink = TariffProfileListLink;
-// pub type TextMessageListLink = TextMessageListLink;
-// pub type TimeLink = TimeLink;
-// pub type TimeTariffIntervalListLink = TimeTariffIntervalListLink;
-// pub type UsagePointLink = UsagePointLink;
-// pub type UsagePointListLink = UsagePointListLink;
-// pub type IdentifiedObject = IdentifiedObject;
-// pub type Link = Link;
-// pub type List = List;
-// pub type ListLink = ListLink;
-// pub type Resource = Resource;
-// pub type RespondableIdentifiedObject = RespondableIdentifiedObject;
-// pub type RespondableResource = RespondableResource;
-// pub type RespondableSubscribableIdentifiedObject = RespondableSubscribableIdentifiedObject;
-// pub type SubscribableIdentifiedObject = SubscribableIdentifiedObject;
-// pub type SubscribableList = SubscribableList;
-// pub type SubscribableResource = SubscribableResource;
-// pub type Error = Error;
-// pub type Event = Event;
-// pub type EventStatus = EventStatus;
-// pub type RandomizableEvent = RandomizableEvent;
-// pub type AccumulationBehaviourType = AccumulationBehaviourType;
-// pub type ApplianceLoadReductionType = ApplianceLoadReductionType;
-// pub type CommodityType = CommodityType;
-// pub type ConsumptionBlockType = ConsumptionBlockType;
-// pub type CurrencyCode = CurrencyCode;
-// pub type DataQualifierType = DataQualifierType;
-// pub type DateTimeInterval = DateTimeInterval;
-// pub type DeviceCategoryType = DeviceCategoryType;
-// pub type DstRuleType = DstRuleType;
-// pub type FlowDirectionType = FlowDirectionType;
-// pub type GpslocationType = GpslocationType;
-// pub type KindType = KindType;
-// pub type LocaleType = LocaleType;
-// pub type Mridtype = Mridtype;
-// pub type OneHourRangeType = OneHourRangeType;
-// pub type Pentype = Pentype;
-// pub type PerCent = PerCent;
-// pub type PhaseCode = PhaseCode;
-// pub type Pintype = Pintype;
-// pub type PowerOfTenMultiplierType = PowerOfTenMultiplierType;
-// pub type PrimacyType = PrimacyType;
-// pub type RealEnergy = RealEnergy;
-// pub type RoleFlagsType = RoleFlagsType;
-// pub type ServiceKind = ServiceKind;
-// pub type Sfditype = Sfditype;
-// pub type SignedPerCent = SignedPerCent;
-// pub type SignedRealEnergy = SignedRealEnergy;
-// pub type TimeOffsetType = TimeOffsetType;
-// pub type TimeType = TimeType;
-// pub type Toutype = Toutype;
-// pub type UnitType = UnitType;
-// pub type UnitValueType = UnitValueType;
-// pub type UomType = UomType;
-// pub type VersionType = VersionType;
-// pub type MirrorMeterReading = MirrorMeterReading;
-// pub type MirrorMeterReadingList = MirrorMeterReadingList;
-// pub type MeterReadingBase = MeterReadingBase;
-// pub type MirrorReadingSet = MirrorReadingSet;
-// pub type MirrorUsagePoint = MirrorUsagePoint;
-// pub type MirrorUsagePointList = MirrorUsagePointList;
-// pub type ReadingBase = ReadingBase;
-// pub type ReadingSetBase = ReadingSetBase;
-// pub type UsagePointBase = UsagePointBase;

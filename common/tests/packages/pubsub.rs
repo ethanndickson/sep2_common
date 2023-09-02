@@ -1,10 +1,11 @@
+use common::packages::types::DateTimeInterval;
 use common::{config::YASERDE_CFG, serialize};
 use common::{
     examples::NTF_16_06_04,
     packages::{
         primitives::{Int48, Int64, Uint32, Uint8},
         pubsub::{get_notif_type, Notification},
-        xsd::{DateTimeInterval, Reading},
+        xsd::Reading,
     },
 };
 use yaserde::{de::from_str, ser::to_string_with_config};
