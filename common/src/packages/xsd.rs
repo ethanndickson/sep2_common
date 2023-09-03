@@ -422,7 +422,7 @@ pub struct Registration {
     // Contains the registration PIN number associated with the device,
     // including the checksum digit.
     #[yaserde(rename = "pIN")]
-    pub p_in: PINType,
+    pub pin: PINType,
 
     // The default polling rate for this function set (this resource and all
     // resources below), in seconds. If not specified, a default of 900 seconds

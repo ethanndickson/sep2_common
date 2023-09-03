@@ -326,7 +326,7 @@ pub struct OneHourRangeType(i16);
 
 impl OneHourRangeType {
     pub fn new(val: i16) -> Option<OneHourRangeType> {
-        if val < -3600 || val > 3600 {
+        if !(-3600..=3600).contains(&val) {
             None
         } else {
             Some(OneHourRangeType(val))
@@ -539,7 +539,7 @@ pub struct SFDIType(u64);
 
 impl SFDIType {
     pub fn new(val: u64) -> Option<SFDIType> {
-        if val > 68_719_476_735 {
+        if val > 1_099_511_627_775 {
             None
         } else {
             Some(SFDIType(val))
@@ -572,7 +572,7 @@ pub struct SignedPercent(i16);
 
 impl SignedPercent {
     pub fn new(val: i16) -> Option<SignedPercent> {
-        if val < -10_000 || val > 10_000 {
+        if !(-10_000..=10_000).contains(&val) {
             None
         } else {
             Some(SignedPercent(val))

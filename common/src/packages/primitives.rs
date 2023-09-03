@@ -1,5 +1,8 @@
 use core::fmt;
-use std::{ops::Deref, str::FromStr};
+use std::{
+    ops::{Deref, Index},
+    str::FromStr,
+};
 
 use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
 use xsd_parser::generator::validator::Validate;
@@ -369,11 +372,11 @@ pub struct HexBinary160(pub [u8; 20]);
 
 impl Validate for HexBinary160 {}
 
-impl Deref for HexBinary160 {
-    type Target = [u8; 20];
+impl Index<usize> for HexBinary160 {
+    type Output = u8;
 
-    fn deref(&self) -> &Self::Target {
-        &self.0
+    fn index(&self, index: usize) -> &Self::Output {
+        &self.0[index]
     }
 }
 
