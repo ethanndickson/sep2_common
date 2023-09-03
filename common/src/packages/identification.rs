@@ -1,9 +1,12 @@
+// File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
+use bitflags::bitflags;
 use common_derive::{
     SEIdentifiedObject, SELink, SEList, SEListLink, SEResource, SERespondableIdentifiedObject,
     SERespondableResource, SERespondableSubscribableIdentifiedObject, SEResponse,
     SESubscribableIdentifiedObject, SESubscribableList, SESubscribableResource,
 };
-// File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
+use std::str::FromStr;
+use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
 use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
@@ -78,20 +81,20 @@ pub enum ResponseStatus {
     EventReceived = 1,
     EventStarted = 2,
     EventCompleted = 3,
-    UserOptOut = 4,
-    UserOptIn = 5,
+    EventOptOut = 4,
+    EventOptIn = 5,
     EventCancelled = 6,
     EventSuperseded = 7,
-    EventPartialCompletionOptOut = 8,
-    EventPartialCompletionOptIn = 9,
+    EventPartialOptOut = 8,
+    EventPartialOptIn = 9,
     EventCompletedNoUserParticipation = 10,
-    UserAcknowledgedEvent = 11,
-    CannotBeDisplayed = 12,
-    EventAbortedServerEvent = 13,
-    EventAbortedProgramEvent = 14,
-    RejectedControlNotApplicable = 252,
-    RejectedInvalidEvent = 253,
-    RejectedEventReceivedAfterExpiry = 254,
+    EventAcknowledge = 11,
+    EventNoDisplay = 12,
+    EventAbortedServer = 13,
+    EventAbortedProgram = 14,
+    EventNotApplicable = 252,
+    EventInvalid = 253,
+    EventExpired = 254,
 }
 
 impl Validate for Response {}
@@ -201,12 +204,21 @@ pub struct RespondableResource {
     // 2 - End user / customer response is required.
     // All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
+    pub response_required: Option<ResponseRequired>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+bitflags! {
+    #[derive(Default, PartialEq, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+    pub struct ResponseRequired: u8 { // HexBinary8
+        const MessageReceived = 0;
+        const SpecificResponse = 1;
+        const ResponseRequired = 2;
+    }
 }
 
 impl Validate for RespondableResource {}
@@ -261,7 +273,7 @@ pub struct RespondableIdentifiedObject {
     // 2 - End user / customer response is required.
     // All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
+    pub response_required: Option<ResponseRequired>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -327,7 +339,7 @@ pub struct RespondableSubscribableIdentifiedObject {
     // 2 - End user / customer response is required.
     // All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
+    pub response_required: Option<ResponseRequired>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.

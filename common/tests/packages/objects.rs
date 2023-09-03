@@ -1,5 +1,6 @@
 #![allow(non_snake_case)]
 use common::config::YASERDE_CFG;
+use common::packages::identification::ResponseRequired;
 use common::packages::objects::*;
 use common::packages::primitives::*;
 use common::packages::types::Percent;
@@ -57,7 +58,7 @@ fn complex_serde() {
         version: Some(Uint16(0)),
         subscribable: Some(SubscribableType::AllSubscriptions),
         reply_to: Some("Test".to_string()),
-        response_required: Some(HexBinary8(Uint8(0))),
+        response_required: Some(ResponseRequired::MessageReceived),
         href: Some("test".to_string()),
     };
     let new: EndDeviceControl =

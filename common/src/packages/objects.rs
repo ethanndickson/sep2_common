@@ -11,6 +11,7 @@ use yaserde_derive::{YaDeserialize, YaSerialize};
 use crate::packages::primitives::*;
 use crate::packages::xsd::*;
 
+use super::identification::ResponseRequired;
 use super::traits::*;
 use super::types::{
     CurrencyCode, DateTimeInterval, DeviceCategoryType, LocaleType, Mridtype, OneHourRangeType,
@@ -180,7 +181,7 @@ pub struct Event {
     // 2 - End user / customer response is required.
     // All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
+    pub response_required: Option<ResponseRequired>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -298,7 +299,7 @@ pub struct RandomizableEvent {
     // 2 - End user / customer response is required.
     // All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
+    pub response_required: Option<ResponseRequired>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -402,7 +403,7 @@ pub struct Dercontrol {
     // 2 - End user / customer response is required.
     // All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
+    pub response_required: Option<ResponseRequired>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -503,7 +504,7 @@ pub struct TextMessage {
     // 2 - End user / customer response is required.
     // All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
+    pub response_required: Option<ResponseRequired>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -606,7 +607,7 @@ pub struct TimeTariffInterval {
     // 2 - End user / customer response is required.
     // All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
+    pub response_required: Option<ResponseRequired>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -743,7 +744,7 @@ pub struct EndDeviceControl {
     // 2 - End user / customer response is required.
     // All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
+    pub response_required: Option<ResponseRequired>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.

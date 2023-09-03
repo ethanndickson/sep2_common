@@ -81,7 +81,7 @@ pub fn derive_respondable_resource(input: TokenStream) -> TokenStream {
                 self.reply_to.as_ref().map(|s| s.as_str())
             }
 
-            fn response_required(&self) -> Option<HexBinary8> {
+            fn response_required(&self) -> Option<ResponseRequired> {
                 self.response_required
             }
         }

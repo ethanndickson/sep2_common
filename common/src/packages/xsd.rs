@@ -8,9 +8,10 @@ use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
-use super::traits::*;
+use crate::packages::identification::*;
 use crate::packages::objects::*;
 use crate::packages::primitives::*;
+use crate::packages::traits::*;
 use crate::packages::types::*;
 use common_derive::*;
 
@@ -4798,7 +4799,7 @@ pub struct FlowReservationResponse {
     // 2 - End user / customer response is required.
     // All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
-    pub response_required: Option<HexBinary8>,
+    pub response_required: Option<ResponseRequired>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.

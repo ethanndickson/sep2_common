@@ -1,9 +1,9 @@
 use yaserde::{YaDeserialize, YaSerialize};
 
 use super::{
-    identification::ResponseStatus,
+    identification::{ResponseRequired, ResponseStatus},
     objects::EventStatus,
-    primitives::{HexBinary16, HexBinary160, HexBinary8, Int48, String32, Uint32},
+    primitives::{HexBinary16, HexBinary160, Int48, String32, Uint32},
     types::{
         ConsumptionBlockType, DateTimeInterval, DeviceCategoryType, Mridtype, OneHourRangeType,
         RoleFlagsType, SFDIType, ServiceKind, SubscribableType, TimeType, Toutype, VersionType,
@@ -48,7 +48,7 @@ pub trait SEIdentifiedObject: SEResource {
 
 pub trait SERespondableResource: SEResource {
     fn reply_to(&self) -> Option<&str>;
-    fn response_required(&self) -> Option<HexBinary8>;
+    fn response_required(&self) -> Option<ResponseRequired>;
 }
 
 pub trait SESubscriptionBase: SEResource {
