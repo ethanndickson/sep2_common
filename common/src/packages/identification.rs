@@ -14,6 +14,7 @@ use yaserde_derive::{YaDeserialize, YaSerialize};
 use crate::packages::primitives::*;
 
 use super::{
+    objects::EventStatusType,
     traits::*,
     types::{Mridtype, SubscribableType, TimeType, VersionType},
 };
@@ -95,6 +96,18 @@ pub enum ResponseStatus {
     EventNotApplicable = 252,
     EventInvalid = 253,
     EventExpired = 254,
+}
+
+impl From<EventStatusType> for ResponseStatus {
+    fn from(value: EventStatusType) -> Self {
+        match value {
+            EventStatusType::Scheduled => todo!(),
+            EventStatusType::Active => todo!(),
+            EventStatusType::Cancelled => todo!(),
+            EventStatusType::CancelledRandom => todo!(),
+            EventStatusType::Superseded => todo!(),
+        }
+    }
 }
 
 impl Validate for Response {}

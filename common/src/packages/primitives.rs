@@ -185,11 +185,9 @@ impl Validate for Int48 {
 #[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Int64(pub i64);
 
-impl Deref for Int64 {
-    type Target = i64;
-
-    fn deref(&self) -> &Self::Target {
-        &self.0
+impl Int64 {
+    pub fn get(&self) -> i64 {
+        self.0
     }
 }
 
