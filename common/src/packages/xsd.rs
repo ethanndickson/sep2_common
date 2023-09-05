@@ -18,6 +18,7 @@ use common_derive::*;
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -69,6 +70,7 @@ impl Validate for FunctionSetAssignmentsBase {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -136,6 +138,7 @@ impl Validate for DeviceCapability {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -205,7 +208,7 @@ pub struct AbstractDevice {
 
 impl Validate for AbstractDevice {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "DeviceStatus")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DeviceStatus {
@@ -259,6 +262,7 @@ impl Validate for DeviceStatus {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -365,6 +369,7 @@ impl Validate for EndDevice {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -409,7 +414,7 @@ pub struct EndDeviceList {
 
 impl Validate for EndDeviceList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "Registration")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Registration {
@@ -443,6 +448,7 @@ impl Validate for Registration {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -520,7 +526,7 @@ pub struct SelfDevice {
 impl Validate for SelfDevice {}
 
 // Specification of a temperature.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "Temperature")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Temperature {
@@ -545,6 +551,7 @@ impl Validate for Temperature {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -615,6 +622,7 @@ impl Validate for FunctionSetAssignments {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -659,7 +667,7 @@ pub struct FunctionSetAssignmentsList {
 
 impl Validate for FunctionSetAssignmentsList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "Time")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Time {
@@ -721,7 +729,7 @@ pub struct Time {
 
 impl Validate for Time {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "DeviceInformation")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DeviceInformation {
@@ -825,7 +833,7 @@ impl Validate for DeviceInformation {}
 // normal operating ranges and limits are, and other similar information, in
 // order to provide better suggestions of applicable programs to receive the
 // maximum benefit.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DRLCCapabilities")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Drlccapabilities {
@@ -864,7 +872,7 @@ pub struct Drlccapabilities {
 
 impl Validate for Drlccapabilities {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "SupportedLocale")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SupportedLocale {
@@ -880,7 +888,7 @@ pub struct SupportedLocale {
 
 impl Validate for SupportedLocale {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "SupportedLocaleList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SupportedLocaleList {
@@ -904,7 +912,7 @@ pub struct SupportedLocaleList {
 
 impl Validate for SupportedLocaleList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "PowerStatus")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PowerStatus {
@@ -966,7 +974,7 @@ pub struct PowerStatus {
 
 impl Validate for PowerStatus {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "PowerSourceType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -984,7 +992,7 @@ impl Validate for PowerSourceType {}
 
 // Contains attributes that can be exposed by PEVs and other devices that have
 // charging requirements.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "PEVInfo")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Pevinfo {
@@ -1044,7 +1052,7 @@ pub struct Pevinfo {
 impl Validate for Pevinfo {}
 
 // Contains 802.15.4 link layer specific attributes.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "IEEE_802_15_4")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Ieee802154 {
@@ -1062,7 +1070,7 @@ pub struct Ieee802154 {
 
 impl Validate for Ieee802154 {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "IPAddr")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Ipaddr {
@@ -1081,7 +1089,7 @@ pub struct Ipaddr {
 
 impl Validate for Ipaddr {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "IPAddrList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct IpaddrList {
@@ -1105,7 +1113,7 @@ pub struct IpaddrList {
 
 impl Validate for IpaddrList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "IPInterface")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Ipinterface {
@@ -1223,7 +1231,7 @@ pub struct Ipinterface {
 
 impl Validate for Ipinterface {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "IPInterfaceList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct IpinterfaceList {
@@ -1254,7 +1262,7 @@ pub struct IpinterfaceList {
 
 impl Validate for IpinterfaceList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "LLInterface")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Llinterface {
@@ -1339,7 +1347,7 @@ pub struct Llinterface {
 
 impl Validate for Llinterface {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "LLInterfaceList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LlinterfaceList {
@@ -1364,7 +1372,7 @@ pub struct LlinterfaceList {
 impl Validate for LlinterfaceList {}
 
 // Contains information specific to 6LoWPAN.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "loWPAN")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LoWPAN {
@@ -1391,7 +1399,7 @@ pub struct LoWPAN {
 
 impl Validate for LoWPAN {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "Neighbor")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Neighbor {
@@ -1415,7 +1423,7 @@ pub struct Neighbor {
 
 impl Validate for Neighbor {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "NeighborList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct NeighborList {
@@ -1439,7 +1447,7 @@ pub struct NeighborList {
 
 impl Validate for NeighborList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "RPLInstance")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Rplinstance {
@@ -1490,7 +1498,7 @@ pub struct Rplinstance {
 
 impl Validate for Rplinstance {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "RPLInstanceList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RplinstanceList {
@@ -1514,7 +1522,7 @@ pub struct RplinstanceList {
 
 impl Validate for RplinstanceList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "RPLSourceRoutes")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RplsourceRoutes {
@@ -1534,7 +1542,7 @@ pub struct RplsourceRoutes {
 
 impl Validate for RplsourceRoutes {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "RPLSourceRoutesList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RplsourceRoutesList {
@@ -1558,7 +1566,7 @@ pub struct RplsourceRoutesList {
 
 impl Validate for RplsourceRoutesList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "LogEvent")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LogEvent {
@@ -1646,6 +1654,7 @@ impl Validate for LogEvent {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -1691,7 +1700,15 @@ pub struct LogEventList {
 impl Validate for LogEventList {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscribableResource, SEResource,
+    Default,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    YaSerialize,
+    YaDeserialize,
+    SESubscribableResource,
+    SEResource,
 )]
 #[yaserde(rename = "Configuration")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -1736,7 +1753,7 @@ pub struct Configuration {
 impl Validate for Configuration {}
 
 // Contains configuration related to the device's power sources
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "PowerConfiguration")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PowerConfiguration {
@@ -1753,7 +1770,7 @@ pub struct PowerConfiguration {
 
 impl Validate for PowerConfiguration {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "PriceResponseCfg")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PriceResponseCfg {
@@ -1780,7 +1797,7 @@ pub struct PriceResponseCfg {
 
 impl Validate for PriceResponseCfg {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "PriceResponseCfgList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PriceResponseCfgList {
@@ -1805,7 +1822,7 @@ pub struct PriceResponseCfgList {
 impl Validate for PriceResponseCfgList {}
 
 // Contains attributes related to the configuration of the time service.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "TimeConfiguration")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TimeConfiguration {
@@ -1831,7 +1848,7 @@ pub struct TimeConfiguration {
 
 impl Validate for TimeConfiguration {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "File")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct File {
@@ -1906,7 +1923,7 @@ pub struct File {
 
 impl Validate for File {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "FileList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FileList {
@@ -1937,7 +1954,7 @@ pub struct FileList {
 
 impl Validate for FileList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "FileStatus")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FileStatus {
@@ -2015,7 +2032,7 @@ pub struct FileStatus {
 
 impl Validate for FileStatus {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "LoadShedAvailabilityList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LoadShedAvailabilityList {
@@ -2049,7 +2066,7 @@ impl Validate for LoadShedAvailabilityList {}
 // The ApplianceLoadReduction object is used by a Demand Response service
 // provider to provide signals for ENERGY STAR compliant appliances. See the
 // definition of ApplianceLoadReductionType for more information.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ApplianceLoadReduction")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ApplianceLoadReduction {
@@ -2063,6 +2080,7 @@ impl Validate for ApplianceLoadReduction {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -2115,7 +2133,7 @@ impl Validate for DemandResponseProgramList {}
 // default time period over which a duty cycle is applied is 30 minutes, meaning
 // a 10% duty cycle would cause a device to be ON for 3 minutes. The “off
 // state” SHALL precede the “on state”.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DutyCycle")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DutyCycle {
@@ -2131,6 +2149,7 @@ impl Validate for DutyCycle {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -2168,7 +2187,7 @@ pub struct EndDeviceControlList {
 
 impl Validate for EndDeviceControlList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "LoadShedAvailability")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LoadShedAvailability {
@@ -2212,7 +2231,7 @@ impl Validate for LoadShedAvailability {}
 // controlling devices at its disposal, and at the conclusion of the event, once
 // again use the Metering function set to determine if the desired load
 // reduction was achieved.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "Offset")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Offset {
@@ -2250,7 +2269,7 @@ impl Validate for Offset {}
 // If a temperature is sent that exceeds the temperature limit boundaries that
 // are programmed into the device, the device SHALL respond by setting the
 // temperature at the limit.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "SetPoint")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SetPoint {
@@ -2273,7 +2292,7 @@ impl Validate for SetPoint {}
 // threshold of some kWh for a 3-hour event. This means that the device/premises
 // would maintain its consumption below the specified limit for the specified
 // period.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "TargetReduction")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TargetReduction {
@@ -2291,6 +2310,7 @@ impl Validate for TargetReduction {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -2326,6 +2346,7 @@ impl Validate for MeterReadingBase {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -2373,6 +2394,7 @@ impl Validate for MeterReading {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -2410,7 +2432,7 @@ pub struct MeterReadingList {
 
 impl Validate for MeterReadingList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "ReadingBase")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReadingBase {
@@ -2461,7 +2483,7 @@ pub struct ReadingBase {
 impl Validate for ReadingBase {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEReadingBase, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEReadingBase, SEResource,
 )]
 #[yaserde(rename = "Reading")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2528,6 +2550,7 @@ impl Validate for Reading {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -2566,7 +2589,7 @@ pub struct ReadingList {
 impl Validate for ReadingList {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "ReadingSetBase")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -2599,6 +2622,7 @@ impl Validate for ReadingSetBase {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -2641,6 +2665,7 @@ impl Validate for ReadingSet {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -2678,7 +2703,7 @@ pub struct ReadingSetList {
 
 impl Validate for ReadingSetList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "ReadingType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReadingType {
@@ -2797,6 +2822,7 @@ impl Validate for ReadingType {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -2843,7 +2869,7 @@ pub struct UsagePointBase {
 
 impl Validate for UsagePointBase {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "status")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -2856,6 +2882,7 @@ pub enum UsagePointStatus {
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -2913,6 +2940,7 @@ impl Validate for UsagePoint {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -2957,7 +2985,7 @@ pub struct UsagePointList {
 
 impl Validate for UsagePointList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "ConsumptionTariffInterval")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ConsumptionTariffInterval {
@@ -2997,7 +3025,7 @@ pub struct ConsumptionTariffInterval {
 
 impl Validate for ConsumptionTariffInterval {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "ConsumptionTariffIntervalList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ConsumptionTariffIntervalList {
@@ -3021,7 +3049,7 @@ pub struct ConsumptionTariffIntervalList {
 
 impl Validate for ConsumptionTariffIntervalList {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "CostKindType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -3046,7 +3074,7 @@ impl Validate for CostKindType {}
 // Implementers and consumers can use this attribute to prioritize operations of
 // their HAN devices (e.g., PEV charging during times of high availability of
 // renewable electricity resources).
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "EnvironmentalCost")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EnvironmentalCost {
@@ -3094,7 +3122,7 @@ pub struct EnvironmentalCost {
 impl Validate for EnvironmentalCost {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "RateComponent")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3168,7 +3196,7 @@ pub struct RateComponent {
 
 impl Validate for RateComponent {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "RateComponentList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RateComponentList {
@@ -3195,6 +3223,7 @@ impl Validate for RateComponentList {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -3242,6 +3271,7 @@ impl Validate for TariffProfileList {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -3282,6 +3312,7 @@ impl Validate for TimeTariffIntervalList {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -3326,7 +3357,7 @@ pub struct MessagingProgramList {
 
 impl Validate for MessagingProgramList {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "PriorityType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -3341,7 +3372,7 @@ pub enum PriorityType {
 
 impl Validate for PriorityType {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "TextMessageList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TextMessageList {
@@ -3371,7 +3402,7 @@ pub struct TextMessageList {
 
 impl Validate for TextMessageList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "BillingPeriod")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingPeriod {
@@ -3402,6 +3433,7 @@ impl Validate for BillingPeriod {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -3442,6 +3474,7 @@ impl Validate for BillingPeriodList {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -3482,7 +3515,7 @@ pub struct BillingMeterReadingBase {
 impl Validate for BillingMeterReadingBase {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEReadingBase, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEReadingBase, SEResource,
 )]
 #[yaserde(rename = "BillingReading")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3536,7 +3569,7 @@ pub struct BillingReading {
 
 impl Validate for BillingReading {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "BillingReadingList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingReadingList {
@@ -3563,6 +3596,7 @@ impl Validate for BillingReadingList {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -3605,6 +3639,7 @@ impl Validate for BillingReadingSet {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -3651,7 +3686,7 @@ impl Validate for BillingReadingSetList {}
 // Charges as desired during a billing period. There can also be any number of
 // Charges associated with different ReadingTypes to distinguish between TOU
 // tiers, consumption blocks, or demand charges.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "Charge")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Charge {
@@ -3670,7 +3705,7 @@ pub struct Charge {
 
 impl Validate for Charge {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ChargeKind")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -3687,7 +3722,7 @@ pub enum ChargeKind {
 impl Validate for ChargeKind {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "CustomerAccount")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3741,6 +3776,7 @@ impl Validate for CustomerAccount {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -3786,7 +3822,7 @@ pub struct CustomerAccountList {
 impl Validate for CustomerAccountList {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "CustomerAgreement")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -3853,6 +3889,7 @@ impl Validate for CustomerAgreement {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -3893,6 +3930,7 @@ impl Validate for CustomerAgreementList {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -3932,7 +3970,7 @@ pub struct HistoricalReading {
 
 impl Validate for HistoricalReading {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "HistoricalReadingList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct HistoricalReadingList {
@@ -3959,6 +3997,7 @@ impl Validate for HistoricalReadingList {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -3998,7 +4037,7 @@ pub struct ProjectionReading {
 
 impl Validate for ProjectionReading {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "ProjectionReadingList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ProjectionReadingList {
@@ -4025,6 +4064,7 @@ impl Validate for ProjectionReadingList {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -4064,7 +4104,7 @@ pub struct TargetReading {
 
 impl Validate for TargetReading {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "TargetReadingList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TargetReadingList {
@@ -4089,7 +4129,7 @@ pub struct TargetReadingList {
 impl Validate for TargetReadingList {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "ServiceSupplier")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4131,7 +4171,7 @@ pub struct ServiceSupplier {
 
 impl Validate for ServiceSupplier {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "ServiceSupplierList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ServiceSupplierList {
@@ -4155,7 +4195,7 @@ pub struct ServiceSupplierList {
 
 impl Validate for ServiceSupplierList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "AccountBalance")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct AccountBalance {
@@ -4196,7 +4236,7 @@ impl Validate for AccountBalance {}
 
 // Unit for accounting; use either 'energyUnit' or 'currencyUnit' to specify the
 // unit for 'value'.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "AccountingUnit")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct AccountingUnit {
@@ -4220,7 +4260,7 @@ pub struct AccountingUnit {
 impl Validate for AccountingUnit {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "CreditRegister")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4272,7 +4312,7 @@ pub struct CreditRegister {
 
 impl Validate for CreditRegister {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "CreditRegisterList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CreditRegisterList {
@@ -4297,7 +4337,7 @@ pub struct CreditRegisterList {
 impl Validate for CreditRegisterList {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "Prepayment")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4382,6 +4422,7 @@ impl Validate for Prepayment {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -4426,7 +4467,7 @@ pub struct PrepaymentList {
 
 impl Validate for PrepaymentList {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "PrepayModeType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -4441,7 +4482,7 @@ pub enum PrepayModeType {
 
 impl Validate for PrepayModeType {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "PrepayOperationStatus")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PrepayOperationStatus {
@@ -4474,7 +4515,7 @@ pub struct PrepayOperationStatus {
 impl Validate for PrepayOperationStatus {}
 
 // Specifies a change to the service status.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ServiceChange")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ServiceChange {
@@ -4489,7 +4530,7 @@ pub struct ServiceChange {
 
 impl Validate for ServiceChange {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "SupplyInterruptionOverride")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SupplyInterruptionOverride {
@@ -4510,7 +4551,7 @@ pub struct SupplyInterruptionOverride {
 
 impl Validate for SupplyInterruptionOverride {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "SupplyInterruptionOverrideList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SupplyInterruptionOverrideList {
@@ -4534,7 +4575,7 @@ pub struct SupplyInterruptionOverrideList {
 
 impl Validate for SupplyInterruptionOverrideList {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "CreditStatusType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -4549,7 +4590,7 @@ pub enum CreditStatusType {
 
 impl Validate for CreditStatusType {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "CreditTypeType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -4565,7 +4606,7 @@ pub enum CreditTypeType {
 impl Validate for CreditTypeType {}
 
 // Specifies a change to the credit type.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "CreditTypeChange")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CreditTypeChange {
@@ -4580,7 +4621,7 @@ pub struct CreditTypeChange {
 
 impl Validate for CreditTypeChange {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ServiceStatusType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -4599,7 +4640,7 @@ impl Validate for ServiceStatusType {}
 
 // The RequestStatus object is used to indicate the current status of a Flow
 // Reservation Request.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "RequestStatus")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RequestStatus {
@@ -4620,7 +4661,7 @@ pub struct RequestStatus {
 impl Validate for RequestStatus {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "FlowReservationRequest")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -4686,7 +4727,7 @@ pub struct FlowReservationRequest {
 
 impl Validate for FlowReservationRequest {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "FlowReservationRequestList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FlowReservationRequestList {
@@ -4720,6 +4761,7 @@ impl Validate for FlowReservationRequestList {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -4812,6 +4854,7 @@ impl Validate for FlowReservationResponse {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -4859,6 +4902,7 @@ impl Validate for FlowReservationResponseList {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -4964,7 +5008,7 @@ pub struct DefaultDERControl {
 impl Validate for DefaultDERControl {}
 
 // Type for Frequency-Droop (Frequency-Watt) operation.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "FreqDroopType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FreqDroopType {
@@ -5001,7 +5045,15 @@ pub struct FreqDroopType {
 impl Validate for FreqDroopType {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscribableResource, SEResource,
+    Default,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    YaSerialize,
+    YaDeserialize,
+    SESubscribableResource,
+    SEResource,
 )]
 #[yaserde(rename = "DER")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5041,7 +5093,7 @@ pub struct Der {
 
 impl Validate for Der {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "DERList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Derlist {
@@ -5073,7 +5125,15 @@ pub struct Derlist {
 impl Validate for Derlist {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscribableResource, SEResource,
+    Default,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    YaSerialize,
+    YaDeserialize,
+    SESubscribableResource,
+    SEResource,
 )]
 #[yaserde(rename = "DERSettings")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5244,7 +5304,7 @@ pub struct Dersettings {
 
 impl Validate for Dersettings {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DERType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -5270,7 +5330,15 @@ pub enum Dertype {
 impl Validate for Dertype {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscribableResource, SEResource,
+    Default,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    YaSerialize,
+    YaDeserialize,
+    SESubscribableResource,
+    SEResource,
 )]
 #[yaserde(rename = "DERAvailability")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5322,7 +5390,7 @@ pub struct Deravailability {
 
 impl Validate for Deravailability {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "DERCapability")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Dercapability {
@@ -5460,7 +5528,7 @@ pub struct Dercapability {
 impl Validate for Dercapability {}
 
 // Distributed Energy Resource (DER) control values.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DERControlBase")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercontrolBase {
@@ -5724,6 +5792,7 @@ impl Validate for DercontrolBase {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -5762,7 +5831,7 @@ pub struct DercontrolList {
 impl Validate for DercontrolList {}
 
 bitflags! {
-    #[derive(Default, PartialEq, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
     pub struct DercontrolType: u32 { // HexBinary32
         const ChargeMode = 1;
         const DischargeMode = 2;
@@ -5784,7 +5853,7 @@ bitflags! {
 }
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "DERCurve")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -5887,7 +5956,7 @@ pub struct Dercurve {
 
 impl Validate for Dercurve {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "CurrentDERProgramLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CurrentDERProgramLink {
@@ -5898,7 +5967,7 @@ pub struct CurrentDERProgramLink {
 
 impl Validate for CurrentDERProgramLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "DERCurveList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercurveList {
@@ -5923,7 +5992,7 @@ pub struct DercurveList {
 impl Validate for DercurveList {}
 
 // Data point values for defining a curve or schedule
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "CurveData")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CurveData {
@@ -5950,7 +6019,7 @@ pub struct CurveData {
 
 impl Validate for CurveData {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DERCurveType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -5978,6 +6047,7 @@ impl Validate for DercurveType {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -6035,6 +6105,7 @@ impl Validate for Derprogram {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -6080,7 +6151,15 @@ pub struct DerprogramList {
 impl Validate for DerprogramList {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscribableResource, SEResource,
+    Default,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    YaSerialize,
+    YaDeserialize,
+    SESubscribableResource,
+    SEResource,
 )]
 #[yaserde(rename = "DERStatus")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6159,7 +6238,7 @@ pub struct Derstatus {
 
 impl Validate for Derstatus {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DERUnitRefType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -6180,7 +6259,7 @@ pub enum DerunitRefType {
 impl Validate for DerunitRefType {}
 
 // Average flow of charge through a conductor.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "CurrentRMS")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CurrentRMS {
@@ -6197,7 +6276,7 @@ impl Validate for CurrentRMS {}
 
 // Abstract type for specifying a fixed-point value without a given unit of
 // measure.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "FixedPointType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FixedPointType {
@@ -6214,7 +6293,7 @@ impl Validate for FixedPointType {}
 
 // Abstract type for specifying an unsigned fixed-point value without a given
 // unit of measure.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "UnsignedFixedPointType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct UnsignedFixedPointType {
@@ -6233,7 +6312,7 @@ impl Validate for UnsignedFixedPointType {}
 // voltage, RMS current, and cos(theta) where theta is the phase angle of
 // current relative to voltage. It is the primary measure of the rate of flow of
 // energy.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ActivePower")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ActivePower {
@@ -6249,7 +6328,7 @@ pub struct ActivePower {
 impl Validate for ActivePower {}
 
 // Available electric charge
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "AmpereHour")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct AmpereHour {
@@ -6266,7 +6345,7 @@ impl Validate for AmpereHour {}
 
 // The apparent power S (in VA) is the product of root mean square (RMS) voltage
 // and RMS current.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ApparentPower")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ApparentPower {
@@ -6284,7 +6363,7 @@ impl Validate for ApparentPower {}
 // The reactive power Q (in var) is the product of root mean square (RMS)
 // voltage, RMS current, and sin(theta) where theta is the phase angle of
 // current relative to voltage.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ReactivePower")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReactivePower {
@@ -6300,7 +6379,7 @@ pub struct ReactivePower {
 impl Validate for ReactivePower {}
 
 // Reactive susceptance
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ReactiveSusceptance")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReactiveSusceptance {
@@ -6317,7 +6396,7 @@ impl Validate for ReactiveSusceptance {}
 
 // Specifies a setpoint for Displacement Power Factor, the ratio between
 // apparent and active powers at the fundamental frequency (e.g. 60 Hz).
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "PowerFactor")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PowerFactor {
@@ -6337,7 +6416,7 @@ impl Validate for PowerFactor {}
 // Specifies a setpoint for Displacement Power Factor, the ratio between
 // apparent and active powers at the fundamental frequency (e.g. 60 Hz) and
 // includes an excitation flag.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "PowerFactorWithExcitation")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PowerFactorWithExcitation {
@@ -6360,7 +6439,7 @@ pub struct PowerFactorWithExcitation {
 impl Validate for PowerFactorWithExcitation {}
 
 // Specifies a signed setpoint for reactive power.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "FixedVar")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FixedVar {
@@ -6377,7 +6456,7 @@ pub struct FixedVar {
 impl Validate for FixedVar {}
 
 // Active (real) energy
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "WattHour")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct WattHour {
@@ -6393,7 +6472,7 @@ pub struct WattHour {
 impl Validate for WattHour {}
 
 // Average electric potential difference between two points.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "VoltageRMS")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct VoltageRMS {
@@ -6415,7 +6494,7 @@ impl Validate for VoltageRMS {}
 // 3 - Test
 // 4 - Fault / Error
 // All other values reserved.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ConnectStatusType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ConnectStatusType {
@@ -6443,7 +6522,7 @@ impl Validate for ConnectStatusType {}
 // 9 - test mode
 // 10 - as defined in manufacturer status
 // All other values reserved.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "InverterStatusType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct InverterStatusType {
@@ -6462,7 +6541,7 @@ impl Validate for InverterStatusType {}
 // 0 – local control
 // 1 – remote control
 // All other values reserved.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "LocalControlModeStatusType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LocalControlModeStatusType {
@@ -6478,7 +6557,7 @@ pub struct LocalControlModeStatusType {
 impl Validate for LocalControlModeStatusType {}
 
 // DER ManufacturerStatus/value: String data type
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ManufacturerStatusType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ManufacturerStatusType {
@@ -6499,7 +6578,7 @@ impl Validate for ManufacturerStatusType {}
 // 2 - Operational mode
 // 3 - Test mode
 // All other values reserved.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "OperationalModeStatusType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct OperationalModeStatusType {
@@ -6515,7 +6594,7 @@ pub struct OperationalModeStatusType {
 impl Validate for OperationalModeStatusType {}
 
 // DER StateOfChargeStatus value: Percent data type
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "StateOfChargeStatusType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct StateOfChargeStatusType {
@@ -6535,7 +6614,7 @@ impl Validate for StateOfChargeStatusType {}
 // 1 – storage discharging
 // 2 – storage holding
 // All other values reserved.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "StorageModeStatusType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct StorageModeStatusType {
@@ -6550,7 +6629,7 @@ pub struct StorageModeStatusType {
 
 impl Validate for StorageModeStatusType {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "AccountBalanceLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct AccountBalanceLink {
@@ -6561,7 +6640,7 @@ pub struct AccountBalanceLink {
 
 impl Validate for AccountBalanceLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ActiveBillingPeriodListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ActiveBillingPeriodListLink {
@@ -6579,7 +6658,7 @@ pub struct ActiveBillingPeriodListLink {
 
 impl Validate for ActiveBillingPeriodListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ActiveCreditRegisterListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ActiveCreditRegisterListLink {
@@ -6597,7 +6676,7 @@ pub struct ActiveCreditRegisterListLink {
 
 impl Validate for ActiveCreditRegisterListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ActiveDERControlListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ActiveDERControlListLink {
@@ -6615,7 +6694,7 @@ pub struct ActiveDERControlListLink {
 
 impl Validate for ActiveDERControlListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ActiveEndDeviceControlListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ActiveEndDeviceControlListLink {
@@ -6633,7 +6712,7 @@ pub struct ActiveEndDeviceControlListLink {
 
 impl Validate for ActiveEndDeviceControlListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ActiveFlowReservationListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ActiveFlowReservationListLink {
@@ -6651,7 +6730,7 @@ pub struct ActiveFlowReservationListLink {
 
 impl Validate for ActiveFlowReservationListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ActiveProjectionReadingListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ActiveProjectionReadingListLink {
@@ -6669,7 +6748,7 @@ pub struct ActiveProjectionReadingListLink {
 
 impl Validate for ActiveProjectionReadingListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ActiveSupplyInterruptionOverrideListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ActiveSupplyInterruptionOverrideListLink {
@@ -6687,7 +6766,7 @@ pub struct ActiveSupplyInterruptionOverrideListLink {
 
 impl Validate for ActiveSupplyInterruptionOverrideListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ActiveTargetReadingListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ActiveTargetReadingListLink {
@@ -6705,7 +6784,7 @@ pub struct ActiveTargetReadingListLink {
 
 impl Validate for ActiveTargetReadingListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ActiveTextMessageListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ActiveTextMessageListLink {
@@ -6723,7 +6802,7 @@ pub struct ActiveTextMessageListLink {
 
 impl Validate for ActiveTextMessageListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ActiveTimeTariffIntervalListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ActiveTimeTariffIntervalListLink {
@@ -6741,7 +6820,7 @@ pub struct ActiveTimeTariffIntervalListLink {
 
 impl Validate for ActiveTimeTariffIntervalListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "AssociatedDERProgramListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct AssociatedDERProgramListLink {
@@ -6759,7 +6838,7 @@ pub struct AssociatedDERProgramListLink {
 
 impl Validate for AssociatedDERProgramListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "AssociatedUsagePointLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct AssociatedUsagePointLink {
@@ -6770,7 +6849,7 @@ pub struct AssociatedUsagePointLink {
 
 impl Validate for AssociatedUsagePointLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "BillingPeriodListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingPeriodListLink {
@@ -6788,7 +6867,7 @@ pub struct BillingPeriodListLink {
 
 impl Validate for BillingPeriodListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "BillingReadingListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingReadingListLink {
@@ -6806,7 +6885,7 @@ pub struct BillingReadingListLink {
 
 impl Validate for BillingReadingListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "BillingReadingSetListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingReadingSetListLink {
@@ -6824,7 +6903,7 @@ pub struct BillingReadingSetListLink {
 
 impl Validate for BillingReadingSetListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "ConfigurationLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ConfigurationLink {
@@ -6835,7 +6914,7 @@ pub struct ConfigurationLink {
 
 impl Validate for ConfigurationLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ConsumptionTariffIntervalListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ConsumptionTariffIntervalListLink {
@@ -6853,7 +6932,7 @@ pub struct ConsumptionTariffIntervalListLink {
 
 impl Validate for ConsumptionTariffIntervalListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "CreditRegisterListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CreditRegisterListLink {
@@ -6871,7 +6950,7 @@ pub struct CreditRegisterListLink {
 
 impl Validate for CreditRegisterListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "CustomerAccountLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CustomerAccountLink {
@@ -6882,7 +6961,7 @@ pub struct CustomerAccountLink {
 
 impl Validate for CustomerAccountLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "CustomerAccountListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CustomerAccountListLink {
@@ -6900,7 +6979,7 @@ pub struct CustomerAccountListLink {
 
 impl Validate for CustomerAccountListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "CustomerAgreementListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CustomerAgreementListLink {
@@ -6918,7 +6997,7 @@ pub struct CustomerAgreementListLink {
 
 impl Validate for CustomerAgreementListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DemandResponseProgramLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DemandResponseProgramLink {
@@ -6929,7 +7008,7 @@ pub struct DemandResponseProgramLink {
 
 impl Validate for DemandResponseProgramLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "DemandResponseProgramListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DemandResponseProgramListLink {
@@ -6947,7 +7026,7 @@ pub struct DemandResponseProgramListLink {
 
 impl Validate for DemandResponseProgramListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERAvailabilityLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DeravailabilityLink {
@@ -6958,7 +7037,7 @@ pub struct DeravailabilityLink {
 
 impl Validate for DeravailabilityLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DefaultDERControlLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DefaultDERControlLink {
@@ -6969,7 +7048,7 @@ pub struct DefaultDERControlLink {
 
 impl Validate for DefaultDERControlLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERCapabilityLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercapabilityLink {
@@ -6980,7 +7059,7 @@ pub struct DercapabilityLink {
 
 impl Validate for DercapabilityLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "DERControlListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercontrolListLink {
@@ -6998,7 +7077,7 @@ pub struct DercontrolListLink {
 
 impl Validate for DercontrolListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERCurveLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercurveLink {
@@ -7009,7 +7088,7 @@ pub struct DercurveLink {
 
 impl Validate for DercurveLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "DERCurveListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercurveListLink {
@@ -7027,7 +7106,7 @@ pub struct DercurveListLink {
 
 impl Validate for DercurveListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Derlink {
@@ -7038,7 +7117,7 @@ pub struct Derlink {
 
 impl Validate for Derlink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "DERListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DerlistLink {
@@ -7056,7 +7135,7 @@ pub struct DerlistLink {
 
 impl Validate for DerlistLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERProgramLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DerprogramLink {
@@ -7067,7 +7146,7 @@ pub struct DerprogramLink {
 
 impl Validate for DerprogramLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "DERProgramListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DerprogramListLink {
@@ -7085,7 +7164,7 @@ pub struct DerprogramListLink {
 
 impl Validate for DerprogramListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERSettingsLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DersettingsLink {
@@ -7096,7 +7175,7 @@ pub struct DersettingsLink {
 
 impl Validate for DersettingsLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERStatusLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DerstatusLink {
@@ -7107,7 +7186,7 @@ pub struct DerstatusLink {
 
 impl Validate for DerstatusLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DeviceCapabilityLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DeviceCapabilityLink {
@@ -7118,7 +7197,7 @@ pub struct DeviceCapabilityLink {
 
 impl Validate for DeviceCapabilityLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DeviceInformationLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DeviceInformationLink {
@@ -7129,7 +7208,7 @@ pub struct DeviceInformationLink {
 
 impl Validate for DeviceInformationLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DeviceStatusLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DeviceStatusLink {
@@ -7140,7 +7219,7 @@ pub struct DeviceStatusLink {
 
 impl Validate for DeviceStatusLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "EndDeviceControlListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EndDeviceControlListLink {
@@ -7158,7 +7237,7 @@ pub struct EndDeviceControlListLink {
 
 impl Validate for EndDeviceControlListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "EndDeviceLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EndDeviceLink {
@@ -7169,7 +7248,7 @@ pub struct EndDeviceLink {
 
 impl Validate for EndDeviceLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "EndDeviceListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EndDeviceListLink {
@@ -7187,7 +7266,7 @@ pub struct EndDeviceListLink {
 
 impl Validate for EndDeviceListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "FileLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FileLink {
@@ -7198,7 +7277,7 @@ pub struct FileLink {
 
 impl Validate for FileLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "FileListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FileListLink {
@@ -7216,7 +7295,7 @@ pub struct FileListLink {
 
 impl Validate for FileListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "FileStatusLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FileStatusLink {
@@ -7227,7 +7306,7 @@ pub struct FileStatusLink {
 
 impl Validate for FileStatusLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "FlowReservationRequestListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FlowReservationRequestListLink {
@@ -7245,7 +7324,7 @@ pub struct FlowReservationRequestListLink {
 
 impl Validate for FlowReservationRequestListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "FlowReservationResponseListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FlowReservationResponseListLink {
@@ -7263,7 +7342,7 @@ pub struct FlowReservationResponseListLink {
 
 impl Validate for FlowReservationResponseListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "FunctionSetAssignmentsListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FunctionSetAssignmentsListLink {
@@ -7281,7 +7360,7 @@ pub struct FunctionSetAssignmentsListLink {
 
 impl Validate for FunctionSetAssignmentsListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "HistoricalReadingListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct HistoricalReadingListLink {
@@ -7299,7 +7378,7 @@ pub struct HistoricalReadingListLink {
 
 impl Validate for HistoricalReadingListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "IPAddrListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct IpaddrListLink {
@@ -7317,7 +7396,7 @@ pub struct IpaddrListLink {
 
 impl Validate for IpaddrListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "IPInterfaceListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct IpinterfaceListLink {
@@ -7335,7 +7414,7 @@ pub struct IpinterfaceListLink {
 
 impl Validate for IpinterfaceListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "LLInterfaceListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LlinterfaceListLink {
@@ -7353,7 +7432,7 @@ pub struct LlinterfaceListLink {
 
 impl Validate for LlinterfaceListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "LoadShedAvailabilityListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LoadShedAvailabilityListLink {
@@ -7371,7 +7450,7 @@ pub struct LoadShedAvailabilityListLink {
 
 impl Validate for LoadShedAvailabilityListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "LogEventListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LogEventListLink {
@@ -7389,7 +7468,7 @@ pub struct LogEventListLink {
 
 impl Validate for LogEventListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "MessagingProgramListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MessagingProgramListLink {
@@ -7407,7 +7486,7 @@ pub struct MessagingProgramListLink {
 
 impl Validate for MessagingProgramListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "MeterReadingLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MeterReadingLink {
@@ -7418,7 +7497,7 @@ pub struct MeterReadingLink {
 
 impl Validate for MeterReadingLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "MeterReadingListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MeterReadingListLink {
@@ -7436,7 +7515,7 @@ pub struct MeterReadingListLink {
 
 impl Validate for MeterReadingListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "MirrorUsagePointListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MirrorUsagePointListLink {
@@ -7454,7 +7533,7 @@ pub struct MirrorUsagePointListLink {
 
 impl Validate for MirrorUsagePointListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "NeighborListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct NeighborListLink {
@@ -7472,7 +7551,7 @@ pub struct NeighborListLink {
 
 impl Validate for NeighborListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "NotificationListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct NotificationListLink {
@@ -7490,7 +7569,7 @@ pub struct NotificationListLink {
 
 impl Validate for NotificationListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "PowerStatusLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PowerStatusLink {
@@ -7501,7 +7580,7 @@ pub struct PowerStatusLink {
 
 impl Validate for PowerStatusLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "PrepaymentLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PrepaymentLink {
@@ -7512,7 +7591,7 @@ pub struct PrepaymentLink {
 
 impl Validate for PrepaymentLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "PrepaymentListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PrepaymentListLink {
@@ -7530,7 +7609,7 @@ pub struct PrepaymentListLink {
 
 impl Validate for PrepaymentListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "PrepayOperationStatusLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PrepayOperationStatusLink {
@@ -7541,7 +7620,7 @@ pub struct PrepayOperationStatusLink {
 
 impl Validate for PrepayOperationStatusLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "PriceResponseCfgListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PriceResponseCfgListLink {
@@ -7559,7 +7638,7 @@ pub struct PriceResponseCfgListLink {
 
 impl Validate for PriceResponseCfgListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ProjectionReadingListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ProjectionReadingListLink {
@@ -7577,7 +7656,7 @@ pub struct ProjectionReadingListLink {
 
 impl Validate for ProjectionReadingListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "RateComponentLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RateComponentLink {
@@ -7588,7 +7667,7 @@ pub struct RateComponentLink {
 
 impl Validate for RateComponentLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "RateComponentListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RateComponentListLink {
@@ -7606,7 +7685,7 @@ pub struct RateComponentListLink {
 
 impl Validate for RateComponentListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "ReadingLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReadingLink {
@@ -7617,7 +7696,7 @@ pub struct ReadingLink {
 
 impl Validate for ReadingLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ReadingListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReadingListLink {
@@ -7635,7 +7714,7 @@ pub struct ReadingListLink {
 
 impl Validate for ReadingListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ReadingSetListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReadingSetListLink {
@@ -7653,7 +7732,7 @@ pub struct ReadingSetListLink {
 
 impl Validate for ReadingSetListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "ReadingTypeLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReadingTypeLink {
@@ -7664,7 +7743,7 @@ pub struct ReadingTypeLink {
 
 impl Validate for ReadingTypeLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "RegistrationLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RegistrationLink {
@@ -7675,7 +7754,7 @@ pub struct RegistrationLink {
 
 impl Validate for RegistrationLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ResponseListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseListLink {
@@ -7693,7 +7772,7 @@ pub struct ResponseListLink {
 
 impl Validate for ResponseListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ResponseSetListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseSetListLink {
@@ -7711,7 +7790,7 @@ pub struct ResponseSetListLink {
 
 impl Validate for ResponseSetListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "RPLInstanceListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RplinstanceListLink {
@@ -7729,7 +7808,7 @@ pub struct RplinstanceListLink {
 
 impl Validate for RplinstanceListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "RPLSourceRoutesListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RplsourceRoutesListLink {
@@ -7747,7 +7826,7 @@ pub struct RplsourceRoutesListLink {
 
 impl Validate for RplsourceRoutesListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "SelfDeviceLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SelfDeviceLink {
@@ -7758,7 +7837,7 @@ pub struct SelfDeviceLink {
 
 impl Validate for SelfDeviceLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "ServiceSupplierLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ServiceSupplierLink {
@@ -7769,7 +7848,7 @@ pub struct ServiceSupplierLink {
 
 impl Validate for ServiceSupplierLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "SubscriptionListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscriptionListLink {
@@ -7787,7 +7866,7 @@ pub struct SubscriptionListLink {
 
 impl Validate for SubscriptionListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "SupplyInterruptionOverrideListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SupplyInterruptionOverrideListLink {
@@ -7805,7 +7884,7 @@ pub struct SupplyInterruptionOverrideListLink {
 
 impl Validate for SupplyInterruptionOverrideListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "SupportedLocaleListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SupportedLocaleListLink {
@@ -7823,7 +7902,7 @@ pub struct SupportedLocaleListLink {
 
 impl Validate for SupportedLocaleListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "TargetReadingListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TargetReadingListLink {
@@ -7841,7 +7920,7 @@ pub struct TargetReadingListLink {
 
 impl Validate for TargetReadingListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "TariffProfileLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TariffProfileLink {
@@ -7852,7 +7931,7 @@ pub struct TariffProfileLink {
 
 impl Validate for TariffProfileLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "TariffProfileListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TariffProfileListLink {
@@ -7870,7 +7949,7 @@ pub struct TariffProfileListLink {
 
 impl Validate for TariffProfileListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "TextMessageListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TextMessageListLink {
@@ -7888,7 +7967,7 @@ pub struct TextMessageListLink {
 
 impl Validate for TextMessageListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "TimeLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TimeLink {
@@ -7899,7 +7978,7 @@ pub struct TimeLink {
 
 impl Validate for TimeLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "TimeTariffIntervalListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TimeTariffIntervalListLink {
@@ -7917,7 +7996,7 @@ pub struct TimeTariffIntervalListLink {
 
 impl Validate for TimeTariffIntervalListLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "UsagePointLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct UsagePointLink {
@@ -7928,7 +8007,7 @@ pub struct UsagePointLink {
 
 impl Validate for UsagePointLink {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "UsagePointListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct UsagePointListLink {
@@ -7949,6 +8028,7 @@ impl Validate for UsagePointListLink {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -7998,7 +8078,7 @@ pub struct MirrorMeterReading {
 
 impl Validate for MirrorMeterReading {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "MirrorMeterReadingList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MirrorMeterReadingList {
@@ -8025,6 +8105,7 @@ impl Validate for MirrorMeterReadingList {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -8067,6 +8148,7 @@ impl Validate for MirrorReadingSet {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -8126,7 +8208,7 @@ pub struct MirrorUsagePoint {
 
 impl Validate for MirrorUsagePoint {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "MirrorUsagePointList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MirrorUsagePointList {

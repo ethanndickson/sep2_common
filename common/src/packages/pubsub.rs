@@ -13,7 +13,7 @@ use super::traits::*;
 
 // Indicates a condition that must be satisfied for the Notification to be
 // triggered.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "Condition")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Condition {
@@ -33,7 +33,7 @@ pub struct Condition {
 
 impl Validate for Condition {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "SubscriptionBase")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscriptionBase {
@@ -52,7 +52,7 @@ pub struct SubscriptionBase {
 impl Validate for SubscriptionBase {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscriptionBase, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SESubscriptionBase, SEResource,
 )]
 #[yaserde(rename = "Subscription")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -112,7 +112,7 @@ pub struct Subscription {
 
 impl Validate for Subscription {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "SubscriptionList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscriptionList {
@@ -144,7 +144,7 @@ pub struct SubscriptionList {
 impl Validate for SubscriptionList {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscriptionBase, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SESubscriptionBase, SEResource,
 )]
 #[yaserde(rename = "Notification")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -209,7 +209,7 @@ pub fn get_notif_type(notif_xml: &str) -> Result<String> {
 
 impl<T: SEResource> Validate for Notification<T> {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "NotificationList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[yaserde(namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance")]

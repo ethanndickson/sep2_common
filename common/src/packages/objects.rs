@@ -24,7 +24,7 @@ use super::types::{
 // containing resource (e.g. TextMessage) to get the most up to date status of
 // the event. Devices can also subscribe to a specific resource instance to get
 // updates when any of its attributes change, including the Status object.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "EventStatus")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EventStatus {
@@ -99,7 +99,7 @@ pub struct EventStatus {
     pub reason: Option<String192>,
 }
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
 pub enum EventStatusType {
@@ -116,6 +116,7 @@ impl Validate for EventStatus {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -193,7 +194,7 @@ impl Validate for Event {}
 
 // Contains information about the nature of an error if a request could not be
 // completed successfully.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "Error")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Error {
@@ -218,6 +219,7 @@ impl Validate for Error {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -312,6 +314,7 @@ impl Validate for RandomizableEvent {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -416,6 +419,7 @@ impl Validate for Dercontrol {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -517,6 +521,7 @@ impl Validate for TextMessage {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -620,6 +625,7 @@ impl Validate for TimeTariffInterval {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -755,7 +761,7 @@ pub struct EndDeviceControl {
 impl Validate for EndDeviceControl {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "DemandResponseProgram")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -814,7 +820,7 @@ pub struct DemandResponseProgram {
 impl Validate for DemandResponseProgram {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "TariffProfile")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -870,6 +876,7 @@ impl Validate for TariffProfile {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,

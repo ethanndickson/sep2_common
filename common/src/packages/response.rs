@@ -11,7 +11,9 @@ use super::identification::ResponseStatus;
 use super::traits::*;
 use super::types::{Mridtype, TimeType, UnitType, VersionType};
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
+#[derive(
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,
+)]
 #[yaserde(rename = "DERControlResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DercontrolResponse {
@@ -53,7 +55,9 @@ pub struct DercontrolResponse {
 
 impl Validate for DercontrolResponse {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
+#[derive(
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,
+)]
 #[yaserde(rename = "FlowReservationResponseResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FlowReservationResponseResponse {
@@ -96,7 +100,7 @@ pub struct FlowReservationResponseResponse {
 impl Validate for FlowReservationResponseResponse {}
 
 // Specifies the value of the TargetReduction applied by the device.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "AppliedTargetReduction")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct AppliedTargetReduction {
@@ -111,7 +115,9 @@ pub struct AppliedTargetReduction {
 
 impl Validate for AppliedTargetReduction {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
+#[derive(
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,
+)]
 #[yaserde(rename = "DrResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DrResponse {
@@ -179,7 +185,9 @@ pub struct DrResponse {
 
 impl Validate for DrResponse {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
+#[derive(
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,
+)]
 #[yaserde(rename = "PriceResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PriceResponse {
@@ -221,7 +229,7 @@ pub struct PriceResponse {
 
 impl Validate for PriceResponse {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "ResponseList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseList<T: SEResponse> {
@@ -246,7 +254,7 @@ pub struct ResponseList<T: SEResponse> {
 impl<T: SEResponse> Validate for ResponseList<T> {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "ResponseSet")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -275,7 +283,7 @@ pub struct ResponseSet {
 
 impl Validate for ResponseSet {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "ResponseSetList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseSetList {
@@ -306,7 +314,9 @@ pub struct ResponseSetList {
 
 impl Validate for ResponseSetList {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
+#[derive(
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,
+)]
 #[yaserde(rename = "TextResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TextResponse {

@@ -21,7 +21,7 @@ use super::{
 
 // A resource is an addressable unit of information, either a collection (List)
 // or instance of an object (identifiedObject, or simply, Resource)
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "Resource")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Resource {
@@ -33,7 +33,9 @@ pub struct Resource {
 
 impl Validate for Resource {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource)]
+#[derive(
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,
+)]
 #[yaserde(rename = "Response")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Response {
@@ -72,7 +74,7 @@ pub struct Response {
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "status")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -112,7 +114,7 @@ impl From<EventStatusType> for ResponseStatus {
 
 impl Validate for Response {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "List")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct List {
@@ -139,7 +141,7 @@ pub struct List {
 impl Validate for List {}
 
 // Links provide a reference, via URI, to another resource.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "Link")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Link {
@@ -150,7 +152,7 @@ pub struct Link {
 
 impl Validate for Link {}
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ListLink {
@@ -168,7 +170,7 @@ pub struct ListLink {
 impl Validate for ListLink {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "IdentifiedObject")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -194,7 +196,15 @@ pub struct IdentifiedObject {
 impl Validate for IdentifiedObject {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SERespondableResource, SEResource,
+    Default,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    YaSerialize,
+    YaDeserialize,
+    SERespondableResource,
+    SEResource,
 )]
 #[yaserde(rename = "RespondableResource")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -231,7 +241,7 @@ pub struct RespondableResource {
 }
 
 bitflags! {
-    #[derive(Default, PartialEq, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
     pub struct ResponseRequired: u8 { // HexBinary8
         const MessageReceived = 0;
         const SpecificResponse = 1;
@@ -244,6 +254,7 @@ impl Validate for RespondableResource {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -304,6 +315,7 @@ impl Validate for RespondableIdentifiedObject {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -368,7 +380,15 @@ pub struct RespondableSubscribableIdentifiedObject {
 impl Validate for RespondableSubscribableIdentifiedObject {}
 
 #[derive(
-    Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize, SESubscribableResource, SEResource,
+    Default,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    YaSerialize,
+    YaDeserialize,
+    SESubscribableResource,
+    SEResource,
 )]
 #[yaserde(rename = "SubscribableResource")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -390,6 +410,7 @@ impl Validate for SubscribableResource {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,
@@ -427,6 +448,7 @@ impl Validate for SubscribableList {}
 #[derive(
     Default,
     PartialEq,
+    Eq,
     Debug,
     Clone,
     YaSerialize,

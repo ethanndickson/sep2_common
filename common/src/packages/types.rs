@@ -12,7 +12,7 @@ use super::primitives::{
     HexBinary128, Int32, Int48, Int64, String32, String42, Uint16, Uint32, Uint48,
 };
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "AccumulationBehaviourType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -37,7 +37,7 @@ pub enum AccumulationBehaviourType {
 
 impl Validate for AccumulationBehaviourType {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ApplianceLoadReductionType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -53,7 +53,7 @@ pub enum ApplianceLoadReductionType {
 
 impl Validate for ApplianceLoadReductionType {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "CommodityType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub enum CommodityType {
@@ -74,7 +74,7 @@ pub enum CommodityType {
 
 impl Validate for CommodityType {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ConsumptionBlockType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -106,7 +106,7 @@ impl Validate for ConsumptionBlockType {}
 /// An exhaustive list is currently out of scope for this project
 pub type CurrencyCode = Uint16;
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DataQualifierType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -124,7 +124,7 @@ pub enum DataQualifierType {
 impl Validate for DataQualifierType {}
 
 // Interval of date and time.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DateTimeInterval")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DateTimeInterval {
@@ -140,7 +140,7 @@ pub struct DateTimeInterval {
 impl Validate for DateTimeInterval {}
 
 bitflags! {
-    #[derive(Default, PartialEq, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
     pub struct DeviceCategoryType: u32 { // HexBinary32
         const ProgrammableCommunicatingThermostat = 1;
         const StripHeaters = 2;
@@ -167,7 +167,7 @@ bitflags! {
     }
 }
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct DstRuleType(u32);
 
 impl DstRuleType {
@@ -268,7 +268,7 @@ impl DstRuleType {
     }
 }
 
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "FlowDirectionType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -282,7 +282,7 @@ pub enum FlowDirectionType {
 impl Validate for FlowDirectionType {}
 
 // Specifies a GPS location, expressed in WGS 84 coordinates.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "GPSLocationType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct GpslocationType {
@@ -299,7 +299,7 @@ pub struct GpslocationType {
 
 impl Validate for GpslocationType {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "KindType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -321,7 +321,7 @@ pub type LocaleType = String42;
 pub type Mridtype = HexBinary128;
 
 /// A signed time offset, typically applied to a Time value, expressed in seconds, with range −3600 to 3600
-#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct OneHourRangeType(i16);
 
 impl OneHourRangeType {
@@ -359,7 +359,7 @@ impl Display for OneHourRangeType {
 pub type PENType = Uint32;
 
 /// Used for percentages, specified in hundredths of a percent, 0 to 10 000. (10 000 = 100%)
-#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct Percent(u16);
 
 impl Percent {
@@ -391,7 +391,7 @@ impl Display for Percent {
     }
 }
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "PhaseCode")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -414,7 +414,7 @@ pub enum PhaseCode {
 impl Validate for PhaseCode {}
 
 /// Six digit unsigned decimal integer (0 to 999999).
-#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct PINType(u32);
 
 impl PINType {
@@ -447,7 +447,7 @@ impl Display for PINType {
 }
 
 /// For many variants there is no Internal System of Units designated prefix, and as such the number is used as a name instead.
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "PowerOfTenMultiplierType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(i8)]
@@ -474,7 +474,9 @@ pub enum PowerOfTenMultiplierType {
     Giga = 9,
 }
 
-#[derive(Default, Clone, Copy, PartialEq, PartialOrd, Debug, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Debug, YaSerialize, YaDeserialize,
+)]
 #[yaserde(rename = "PrimacyType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -488,7 +490,7 @@ pub enum PrimacyType {
 impl Validate for PrimacyType {}
 
 // Real electrical energy
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "RealEnergy")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RealEnergy {
@@ -504,7 +506,7 @@ pub struct RealEnergy {
 impl Validate for RealEnergy {}
 
 bitflags! {
-    #[derive(Default, PartialEq, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
     pub struct RoleFlagsType: u16 { // HexBinary16
         const IsMirror = 1;
         const IsPremiseAggregationPoint = 2;
@@ -516,7 +518,7 @@ bitflags! {
     }
 }
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ServiceKind")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -534,7 +536,7 @@ pub enum ServiceKind {
 impl Validate for ServiceKind {}
 
 /// Unsigned integer, maximum inclusive 687194767359, which is 2^36 - 1 (68,719,476,735), with added check digit.
-#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct SFDIType(u64);
 
 impl SFDIType {
@@ -567,7 +569,7 @@ impl Display for SFDIType {
 }
 
 /// Used for signed percentages, specified in hundredths of a percent, −10 000 to 10 000. (10 000 = 100%)
-#[derive(Default, PartialEq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct SignedPercent(i16);
 
 impl SignedPercent {
@@ -599,7 +601,7 @@ impl Display for SignedPercent {
 }
 
 // Real electrical energy, signed.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "SignedRealEnergy")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SignedRealEnergy {
@@ -620,7 +622,7 @@ impl Validate for SignedRealEnergy {}
 // 2 - Resource supports conditional subscriptions
 // 3 - Resource supports both conditional and non-conditional subscriptions
 // All other values reserved.
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[repr(u8)]
 pub enum SubscribableType {
     #[default]
@@ -636,7 +638,7 @@ pub type TimeOffsetType = Int32;
 
 pub type TimeType = Int64;
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "TOUType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -662,7 +664,7 @@ pub enum Toutype {
 
 impl Validate for Toutype {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "UnitType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -688,7 +690,7 @@ impl Validate for UnitType {}
 
 // Type for specification of a specific value, with units and power of ten
 // multiplier.
-#[derive(Default, PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "UnitValueType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct UnitValueType {
@@ -707,7 +709,7 @@ pub struct UnitValueType {
 
 impl Validate for UnitValueType {}
 
-#[derive(Default, PartialEq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "UomType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
