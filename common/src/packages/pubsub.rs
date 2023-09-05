@@ -110,6 +110,19 @@ pub struct Subscription {
     pub href: Option<String>,
 }
 
+impl PartialOrd for Subscription {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Subscription {
+    // Primary Key - href (ascending)
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.href.cmp(&other.href)
+    }
+}
+
 impl Validate for Subscription {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
@@ -185,6 +198,19 @@ pub struct Notification<T: SEResource> {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl<T: SEResource> PartialOrd for Notification<T> {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl<T: SEResource> Ord for Notification<T> {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - href (ascending)
+        self.href.cmp(&other.href)
+    }
 }
 
 pub fn get_notif_type(notif_xml: &str) -> Result<String> {

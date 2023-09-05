@@ -414,6 +414,29 @@ pub struct Dercontrol {
     pub href: Option<String>,
 }
 
+impl PartialOrd for Dercontrol {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Dercontrol {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - primacy (ascending)
+        match self.interval.start.cmp(&other.interval.start) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - creationTime (descending)
+        match self.creation_time.cmp(&other.creation_time).reverse() {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Tertiary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for Dercontrol {}
 
 #[derive(
@@ -514,6 +537,29 @@ pub struct TextMessage {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for TextMessage {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for TextMessage {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - mRID (ascending)
+        match self.interval.start.cmp(&other.interval.start) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - createdDateTime (descending)
+        match self.creation_time.cmp(&other.creation_time).reverse() {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Tertiary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
 }
 
 impl Validate for TextMessage {}
@@ -618,6 +664,29 @@ pub struct TimeTariffInterval {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for TimeTariffInterval {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for TimeTariffInterval {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - interval.start (ascending)
+        match self.interval.start.cmp(&other.interval.start) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - creationTime (descending)
+        match self.creation_time.cmp(&other.creation_time).reverse() {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Tertiary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
 }
 
 impl Validate for TimeTariffInterval {}
@@ -758,6 +827,29 @@ pub struct EndDeviceControl {
     pub href: Option<String>,
 }
 
+impl PartialOrd for EndDeviceControl {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for EndDeviceControl {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primar Key - interval.start (ascending)
+        match self.interval.start.cmp(&other.interval.start) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - creationTime (descending)
+        match self.creation_time.cmp(&other.creation_time).reverse() {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Tertiary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for EndDeviceControl {}
 
 #[derive(
@@ -817,6 +909,24 @@ pub struct DemandResponseProgram {
     pub href: Option<String>,
 }
 
+impl PartialOrd for DemandResponseProgram {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for DemandResponseProgram {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - Primacy (ascending)
+        match self.primacy.cmp(&other.primacy) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for DemandResponseProgram {}
 
 #[derive(
@@ -869,6 +979,19 @@ pub struct TariffProfile {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for TariffProfile {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for TariffProfile {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
 }
 
 impl Validate for TariffProfile {}
@@ -925,6 +1048,19 @@ pub struct MessagingProgram {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for MessagingProgram {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for MessagingProgram {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid)
+    }
 }
 
 impl Validate for MessagingProgram {}

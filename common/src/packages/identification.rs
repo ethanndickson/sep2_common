@@ -74,6 +74,29 @@ pub struct Response {
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
+
+impl PartialOrd for Response {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Response {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - createdDateTime (descending)
+        match self
+            .created_date_time
+            .cmp(&other.created_date_time)
+            .reverse()
+        {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - endDeviceLFDI (ascending)
+        self.end_device_lfdi.cmp(&other.end_device_lfdi)
+    }
+}
+
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "status")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]

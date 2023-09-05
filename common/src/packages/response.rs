@@ -281,6 +281,19 @@ pub struct ResponseSet {
     pub href: Option<String>,
 }
 
+impl PartialOrd for ResponseSet {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for ResponseSet {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for ResponseSet {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]

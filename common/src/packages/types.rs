@@ -74,7 +74,9 @@ pub enum CommodityType {
 
 impl Validate for CommodityType {}
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
 #[yaserde(rename = "ConsumptionBlockType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -536,7 +538,7 @@ pub enum ServiceKind {
 impl Validate for ServiceKind {}
 
 /// Unsigned integer, maximum inclusive 687194767359, which is 2^36 - 1 (68,719,476,735), with added check digit.
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct SFDIType(u64);
 
 impl SFDIType {
@@ -638,7 +640,9 @@ pub type TimeOffsetType = Int32;
 
 pub type TimeType = Int64;
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
 #[yaserde(rename = "TOUType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]

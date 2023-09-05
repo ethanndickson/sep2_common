@@ -19,14 +19,14 @@ use super::{
 /// A top-level IEEE 2030.5 Resource.
 /// An IEEE 2030.5 Server exposes resources.
 /// IEEE 2030.5 Clients retrieve, update, create and delete resources on servers.
-pub trait SEResource: YaSerialize + YaDeserialize + Default + PartialEq + Clone {
+pub trait SEResource: YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone {
     fn href(&self) -> Option<&str>;
 }
 
 /// An IEEE 2030.5 Representation of a link to a resource.
 /// "Links provide a reference, via URI, to another resource."
 /// These are not top-level resources.
-pub trait SELink: YaSerialize + YaDeserialize + Default + PartialEq + Clone {
+pub trait SELink: YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone {
     fn href(&self) -> &str;
 }
 

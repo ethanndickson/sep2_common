@@ -364,6 +364,29 @@ pub struct EndDevice {
     pub href: Option<String>,
 }
 
+impl PartialOrd for EndDevice {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for EndDevice {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - changedTime (descending)
+        match self.changed_time.cmp(&other.changed_time).reverse() {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - SFDI (ascending)
+        match self.sfdi.cmp(&other.sfdi) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Tertiary Key - href (ascending)
+        self.href.cmp(&other.href)
+    }
+}
+
 impl Validate for EndDevice {}
 
 #[derive(
@@ -615,6 +638,19 @@ pub struct FunctionSetAssignments {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for FunctionSetAssignments {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for FunctionSetAssignments {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
 }
 
 impl Validate for FunctionSetAssignments {}
@@ -1087,6 +1123,19 @@ pub struct Ipaddr {
     pub href: Option<String>,
 }
 
+impl PartialOrd for Ipaddr {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Ipaddr {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - address (ascending)
+        self.address.cmp(&other.address)
+    }
+}
+
 impl Validate for Ipaddr {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
@@ -1229,6 +1278,19 @@ pub struct Ipinterface {
     pub href: Option<String>,
 }
 
+impl PartialOrd for Ipinterface {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Ipinterface {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - ifIndex (ascending)
+        self.if_index.cmp(&other.if_index)
+    }
+}
+
 impl Validate for Ipinterface {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
@@ -1343,6 +1405,19 @@ pub struct Llinterface {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for Llinterface {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Llinterface {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - EUI64 (ascending)
+        self.eui64.cmp(&other.eui64)
+    }
 }
 
 impl Validate for Llinterface {}
@@ -1496,6 +1571,24 @@ pub struct Rplinstance {
     pub href: Option<String>,
 }
 
+impl PartialOrd for Rplinstance {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Rplinstance {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - DODAGid (ascending)
+        match self.doda_gid.cmp(&other.doda_gid) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - RPLInstanceID (ascending)
+        self.rpl_instance_id.cmp(&other.rpl_instance_id)
+    }
+}
+
 impl Validate for Rplinstance {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
@@ -1538,6 +1631,24 @@ pub struct RplsourceRoutes {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for RplsourceRoutes {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for RplsourceRoutes {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - SourceRoute (ascending)
+        match self.source_route.cmp(&other.source_route) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - DestAddress (ascending)
+        self.dest_address.cmp(&other.dest_address)
+    }
 }
 
 impl Validate for RplsourceRoutes {}
@@ -1647,6 +1758,28 @@ pub struct LogEvent {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for LogEvent {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for LogEvent {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - createdDateTime (descending)
+        match self
+            .created_date_time
+            .cmp(&other.created_date_time)
+            .reverse()
+        {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - LogEventID (descending)
+        self.log_event_id.cmp(&other.log_event_id).reverse()
+    }
 }
 
 impl Validate for LogEvent {}
@@ -1919,6 +2052,34 @@ pub struct File {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for File {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for File {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - mfID (ascending)
+        match self.mf_id.cmp(&other.mf_id) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mfModel (ascending)
+        match self.mf_model.cmp(&other.mf_model) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Tertiary Key -- mfVer (descending)
+        match self.mf_ver.cmp(&other.mf_ver).reverse() {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Quaternary Key - href (ascending)
+        self.href.cmp(&other.href)
+    }
 }
 
 impl Validate for File {}
@@ -2215,6 +2376,19 @@ pub struct LoadShedAvailability {
     pub href: Option<String>,
 }
 
+impl PartialOrd for LoadShedAvailability {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for LoadShedAvailability {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - href (ascending)
+        self.href.cmp(&other.href).reverse()
+    }
+}
+
 impl Validate for LoadShedAvailability {}
 
 // If a temperature offset is sent that causes the heating or cooling
@@ -2389,6 +2563,19 @@ pub struct MeterReading {
     pub href: Option<String>,
 }
 
+impl PartialOrd for MeterReading {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for MeterReading {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for MeterReading {}
 
 #[derive(
@@ -2545,6 +2732,29 @@ pub struct Reading {
     pub href: Option<String>,
 }
 
+impl PartialOrd for Reading {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Reading {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - localID (ascending)
+        match self.local_id.cmp(&other.local_id) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - consumptionBlock (ascending)
+        match self.consumption_block.cmp(&other.consumption_block) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Tertiary Key - touTier (ascending)
+        self.tou_tier.cmp(&other.tou_tier)
+    }
+}
+
 impl Validate for Reading {}
 
 #[derive(
@@ -2658,6 +2868,29 @@ pub struct ReadingSet {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for ReadingSet {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for ReadingSet {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - timePeriod.start (descending)
+        match self
+            .time_period
+            .start
+            .cmp(&other.time_period.start)
+            .reverse()
+        {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
 }
 
 impl Validate for ReadingSet {}
@@ -2935,6 +3168,19 @@ pub struct UsagePoint {
     pub href: Option<String>,
 }
 
+impl PartialOrd for UsagePoint {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for UsagePoint {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for UsagePoint {}
 
 #[derive(
@@ -3021,6 +3267,19 @@ pub struct ConsumptionTariffInterval {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for ConsumptionTariffInterval {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for ConsumptionTariffInterval {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - startValue (ascending)
+        self.start_value.cmp(&other.start_value)
+    }
 }
 
 impl Validate for ConsumptionTariffInterval {}
@@ -3192,6 +3451,19 @@ pub struct RateComponent {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for RateComponent {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for RateComponent {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
 }
 
 impl Validate for RateComponent {}
@@ -3428,6 +3700,24 @@ pub struct BillingPeriod {
     pub href: Option<String>,
 }
 
+impl PartialOrd for BillingPeriod {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for BillingPeriod {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - customerName (ascending)
+        match self.interval.start.cmp(&other.interval.start).reverse() {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mRID (descending)
+        self.href.cmp(&other.href)
+    }
+}
+
 impl Validate for BillingPeriod {}
 
 #[derive(
@@ -3567,6 +3857,32 @@ pub struct BillingReading {
     pub href: Option<String>,
 }
 
+impl PartialOrd for BillingReading {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for BillingReading {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - timePeriod.start (ascending)
+        match self.time_period.as_ref().zip(other.time_period.as_ref()) {
+            Some((self_start, other_start)) => match self_start.start.cmp(&other_start.start) {
+                std::cmp::Ordering::Equal => {}
+                ord => return ord,
+            },
+            _ => {} // Handle the case where either or both time_period fields are None
+        }
+        // Secondary Key - consumptionBlock (ascending)
+        match self.consumption_block.cmp(&other.consumption_block) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Tertiary Key - touTier (ascending)
+        self.tou_tier.cmp(&other.tou_tier)
+    }
+}
+
 impl Validate for BillingReading {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
@@ -3632,6 +3948,29 @@ pub struct BillingReadingSet {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for BillingReadingSet {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for BillingReadingSet {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - timePeriod.start (descending)
+        match self
+            .time_period
+            .start
+            .cmp(&other.time_period.start)
+            .reverse()
+        {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
 }
 
 impl Validate for BillingReadingSet {}
@@ -3771,6 +4110,24 @@ pub struct CustomerAccount {
     pub href: Option<String>,
 }
 
+impl PartialOrd for CustomerAccount {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for CustomerAccount {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - customerName (ascending)
+        match self.customer_name.cmp(&other.customer_name) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for CustomerAccount {}
 
 #[derive(
@@ -3884,6 +4241,24 @@ pub struct CustomerAgreement {
     pub href: Option<String>,
 }
 
+impl PartialOrd for CustomerAgreement {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for CustomerAgreement {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - serviceLocation (ascending)
+        match self.service_location.cmp(&other.service_location) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for CustomerAgreement {}
 
 #[derive(
@@ -3968,6 +4343,24 @@ pub struct HistoricalReading {
     pub href: Option<String>,
 }
 
+impl PartialOrd for HistoricalReading {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for HistoricalReading {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - description (ascending)
+        match self.description.cmp(&other.description) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for HistoricalReading {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
@@ -4035,6 +4428,24 @@ pub struct ProjectionReading {
     pub href: Option<String>,
 }
 
+impl PartialOrd for ProjectionReading {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for ProjectionReading {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - description (ascending)
+        match self.description.cmp(&other.description) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for ProjectionReading {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
@@ -4100,6 +4511,24 @@ pub struct TargetReading {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for TargetReading {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for TargetReading {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - description (ascending)
+        match self.description.cmp(&other.description) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
 }
 
 impl Validate for TargetReading {}
@@ -4310,6 +4739,24 @@ pub struct CreditRegister {
     pub href: Option<String>,
 }
 
+impl PartialOrd for CreditRegister {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for CreditRegister {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - effectiveTime (descending)
+        match self.effective_time.cmp(&other.effective_time).reverse() {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for CreditRegister {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
@@ -4415,6 +4862,19 @@ pub struct Prepayment {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for Prepayment {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Prepayment {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
 }
 
 impl Validate for Prepayment {}
@@ -4547,6 +5007,24 @@ pub struct SupplyInterruptionOverride {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for SupplyInterruptionOverride {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for SupplyInterruptionOverride {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - interval.start (ascending)
+        match self.interval.start.cmp(&other.interval.start) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - interval.duration (ascending)
+        self.interval.duration.cmp(&other.interval.duration)
+    }
 }
 
 impl Validate for SupplyInterruptionOverride {}
@@ -4725,6 +5203,33 @@ pub struct FlowReservationRequest {
     pub href: Option<String>,
 }
 
+impl PartialOrd for FlowReservationRequest {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for FlowReservationRequest {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - interval.start (ascending)
+        match self
+            .interval_requested
+            .start
+            .cmp(&other.interval_requested.start)
+        {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - creationTime (descending)
+        match self.creation_time.cmp(&other.creation_time).reverse() {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Tertiary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for FlowReservationRequest {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
@@ -4847,6 +5352,29 @@ pub struct FlowReservationResponse {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for FlowReservationResponse {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for FlowReservationResponse {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - interval.start (ascending)
+        match self.interval.start.cmp(&other.interval.start) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - creationTime (descending)
+        match self.creation_time.cmp(&other.creation_time).reverse() {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Tertiary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
 }
 
 impl Validate for FlowReservationResponse {}
@@ -5089,6 +5617,19 @@ pub struct Der {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for Der {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Der {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - href (ascending)
+        self.href.cmp(&other.href)
+    }
 }
 
 impl Validate for Der {}
@@ -5954,6 +6495,24 @@ pub struct Dercurve {
     pub href: Option<String>,
 }
 
+impl PartialOrd for Dercurve {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Dercurve {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - creationTime (descending)
+        match self.creation_time.cmp(&other.creation_time).reverse() {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
 impl Validate for Dercurve {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
@@ -6098,6 +6657,24 @@ pub struct Derprogram {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for Derprogram {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Derprogram {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - primacy (ascending)
+        match self.primacy.cmp(&other.primacy) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
 }
 
 impl Validate for Derprogram {}
@@ -8204,6 +8781,19 @@ pub struct MirrorUsagePoint {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+impl PartialOrd for MirrorUsagePoint {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for MirrorUsagePoint {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
 }
 
 impl Validate for MirrorUsagePoint {}

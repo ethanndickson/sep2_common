@@ -244,7 +244,7 @@ impl FromStr for HexBinary8 {
 // applicable, bit 0, or the least significant bit, goes on the right. Note that
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct HexBinary16(pub Uint16);
 
 impl Validate for HexBinary16 {}
@@ -335,7 +335,7 @@ impl FromStr for HexBinary48 {
 // applicable, bit 0, or the least significant bit, goes on the right. Note that
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct HexBinary64(pub Uint64);
 
 impl Validate for HexBinary64 {}
@@ -362,7 +362,7 @@ impl FromStr for HexBinary64 {
 // applicable, bit 0, or the least significant bit, goes on the right. Note that
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
-#[derive(Default, Hash, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, UtilsDefaultSerde)]
 
 pub struct HexBinary128(pub u128);
 
@@ -385,7 +385,7 @@ impl FromStr for HexBinary128 {
     }
 }
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, UtilsDefaultSerde)]
 pub struct HexBinary160(pub [u8; 20]);
 
 impl Validate for HexBinary160 {}
@@ -476,7 +476,9 @@ impl FromStr for LFDI {
 // implementations SHALL reduce the length of strings using multi-byte
 // characters so that the string may be stored using "maxLength" octets in the
 // given encoding.
-#[derive(Default, PartialEq, Eq, Debug, Clone, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(
+    Default, PartialEq, Eq, PartialOrd, Ord, Debug, Clone, UtilsTupleIo, UtilsDefaultSerde,
+)]
 pub struct String6(pub String);
 
 impl Validate for String6 {
@@ -495,7 +497,9 @@ impl Validate for String6 {
 // implementations SHALL reduce the length of strings using multi-byte
 // characters so that the string may be stored using "maxLength" octets in the
 // given encoding.
-#[derive(Default, PartialEq, Eq, Debug, Clone, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(
+    Default, PartialEq, Eq, PartialOrd, Ord, Debug, Clone, UtilsTupleIo, UtilsDefaultSerde,
+)]
 pub struct String16(pub String);
 
 impl Validate for String16 {
@@ -533,7 +537,9 @@ impl Validate for String20 {
 // implementations SHALL reduce the length of strings using multi-byte
 // characters so that the string may be stored using "maxLength" octets in the
 // given encoding.
-#[derive(Default, PartialEq, Eq, Debug, Clone, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, UtilsTupleIo, UtilsDefaultSerde,
+)]
 pub struct String32(pub String);
 
 impl Validate for String32 {
@@ -552,7 +558,9 @@ impl Validate for String32 {
 // implementations SHALL reduce the length of strings using multi-byte
 // characters so that the string may be stored using "maxLength" octets in the
 // given encoding.
-#[derive(Default, PartialEq, Eq, Debug, Clone, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, UtilsTupleIo, UtilsDefaultSerde,
+)]
 pub struct String42(pub String);
 
 impl Validate for String42 {
