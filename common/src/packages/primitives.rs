@@ -51,11 +51,9 @@ impl Validate for Uint16 {}
 #[derive(Default, PartialEq, PartialOrd, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
 pub struct Uint32(pub u32);
 
-impl Deref for Uint32 {
-    type Target = u32;
-
-    fn deref(&self) -> &Self::Target {
-        &self.0
+impl Uint32 {
+    pub fn get(&self) -> u32 {
+        self.0
     }
 }
 
