@@ -116,6 +116,11 @@ impl Validate for Response {}
 #[yaserde(rename = "List")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct List {
+    // This field is OOS since it is different in every child type
+    // but is required for our SEList trait implementation
+    #[yaserde(skip_serializing = true)]
+    pub contents: Vec<String>,
+
     // The number specifying "all" of the items in the list. Required on a
     // response to a GET, ignored otherwise.
     #[yaserde(attribute, rename = "all")]

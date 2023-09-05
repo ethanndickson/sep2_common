@@ -90,8 +90,13 @@ pub trait SERandomizableEvent: SEEvent {
 }
 
 pub trait SEList: SEResource {
+    type Inner; // :Ord;
     fn all(&self) -> Uint32;
+    fn all_mut(&mut self) -> &mut Uint32;
     fn results(&self) -> Uint32;
+    fn results_mut(&mut self) -> &mut Uint32;
+    fn list_as_slice(&self) -> &[Self::Inner];
+    fn list_mut(&mut self) -> &mut Vec<Self::Inner>;
 }
 
 pub trait SESubscribableList: SESubscribableResource {

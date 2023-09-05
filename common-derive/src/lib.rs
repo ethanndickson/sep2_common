@@ -1,6 +1,9 @@
+use list::extract_list;
 use proc_macro::{self, TokenStream};
 use quote::quote;
 use syn::{parse_macro_input, DeriveInput};
+
+mod list;
 
 #[proc_macro_derive(SEResource)]
 pub fn derive_resource(input: TokenStream) -> TokenStream {
@@ -8,33 +11,33 @@ pub fn derive_resource(input: TokenStream) -> TokenStream {
         ident, generics, ..
     } = parse_macro_input!(input);
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
-    let output = quote! {
+    quote! {
         impl #impl_generics SEResource for #ident #ty_generics #where_clause {
             fn href(&self) -> Option<&str> {
                 self.href.as_ref().map(|s| s.as_str())
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SELink)]
 pub fn derive_link(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SELink for #ident {
             fn href(&self) -> &str {
                 self.href.as_str()
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SEResponse)]
 pub fn derive_response(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SEResponse for #ident {
             fn created_date_time(&self) -> Option<TimeType> {
                 self.created_date_time
@@ -49,14 +52,14 @@ pub fn derive_response(input: TokenStream) -> TokenStream {
                 &self.subject
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SEIdentifiedObject)]
 pub fn derive_identified_object(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SEIdentifiedObject for #ident {
             fn mrid(&self) -> &Mridtype {
                 &self.mrid
@@ -68,14 +71,14 @@ pub fn derive_identified_object(input: TokenStream) -> TokenStream {
                 self.version
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SERespondableResource)]
 pub fn derive_respondable_resource(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SERespondableResource for #ident {
             fn reply_to(&self) -> Option<&str> {
                 self.reply_to.as_ref().map(|s| s.as_str())
@@ -85,8 +88,8 @@ pub fn derive_respondable_resource(input: TokenStream) -> TokenStream {
                 self.response_required
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SESubscriptionBase)]
@@ -95,33 +98,33 @@ pub fn derive_subscription_base(input: TokenStream) -> TokenStream {
         ident, generics, ..
     } = parse_macro_input!(input);
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
-    let output = quote! {
+    quote! {
         impl #impl_generics SESubscriptionBase for #ident #ty_generics #where_clause {
             fn subscribed_resource(&self) -> &str {
                 self.subscribed_resource.as_ref()
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SESubscribableResource)]
 pub fn derive_subscribable_resource(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SESubscribableResource for #ident {
             fn subscribable(&self) -> Option<SubscribableType> {
                 self.subscribable
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SERespondableIdentifiedObject)]
 pub fn derive_respondable_identified_object(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SERespondableIdentifiedObject for #ident {
             fn mrid(&self) -> &Mridtype {
                 &self.mrid
@@ -133,14 +136,14 @@ pub fn derive_respondable_identified_object(input: TokenStream) -> TokenStream {
                 self.version
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SERespondableSubscribableIdentifiedObject)]
 pub fn derive_respondable_subscribable_identified_object(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SERespondableSubscribableIdentifiedObject for #ident {
             fn mrid(&self) -> &Mridtype {
                 &self.mrid
@@ -155,14 +158,14 @@ pub fn derive_respondable_subscribable_identified_object(input: TokenStream) -> 
                 self.subscribable
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SESubscribableIdentifiedObject)]
 pub fn derive_subscribable_identified_object(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SESubscribableIdentifiedObject for #ident {
             fn mrid(&self) -> &Mridtype {
                 &self.mrid
@@ -174,14 +177,14 @@ pub fn derive_subscribable_identified_object(input: TokenStream) -> TokenStream 
                 self.version
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SEEvent)]
 pub fn derive_event(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SEEvent for #ident {
             fn creation_time(&self) -> TimeType {
                 self.creation_time
@@ -193,14 +196,14 @@ pub fn derive_event(input: TokenStream) -> TokenStream {
                 &self.interval
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SERandomizableEvent)]
 pub fn derive_randomizable_event(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SERandomizableEvent for #ident {
             fn randomize_duration(&self) -> Option<OneHourRangeType> {
                 self.randomize_duration
@@ -209,46 +212,74 @@ pub fn derive_randomizable_event(input: TokenStream) -> TokenStream {
                 self.randomize_start
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SEListLink)]
 pub fn derive_list_link(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SEListLink for #ident {
             fn all(&self) -> Option<Uint32> {
                 self.all
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SEList)]
 pub fn derive_list(input: TokenStream) -> TokenStream {
     let DeriveInput {
-        ident, generics, ..
+        ident,
+        generics,
+        data,
+        ..
     } = parse_macro_input!(input);
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
-    let output = quote! {
-        impl #impl_generics SEList for #ident #ty_generics #where_clause {
-            fn all(&self) -> Uint32 {
-                self.all
-            }
-            fn results(&self) -> Uint32 {
-                self.results
+    let inner = extract_list(&data);
+    if let Some((field, inner)) = inner {
+        quote! {
+            impl #impl_generics SEList for #ident #ty_generics #where_clause {
+                type Inner = #inner;
+
+                fn all(&self) -> Uint32 {
+                    self.all
+                }
+
+                fn all_mut(&mut self) -> &mut Uint32 {
+                    &mut self.all
+                }
+
+                fn results(&self) -> Uint32 {
+                    self.results
+                }
+
+                fn results_mut(&mut self) -> &mut Uint32 {
+                    &mut self.results
+                }
+
+                fn list_as_slice(&self) -> &[Self::Inner] {
+                    self.#field.as_slice()
+                }
+
+                fn list_mut(&mut self) -> &mut Vec<Self::Inner> {
+                    &mut self.#field
+                }
+
             }
         }
-    };
-    output.into()
+        .into()
+    } else {
+        quote! { compile_error!("List resources require their first field to be a Vec" )}.into()
+    }
 }
 
 #[proc_macro_derive(SESubscribableList)]
 pub fn derive_subscribable_list(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SESubscribableList for #ident {
             fn all(&self) -> Uint32 {
                 self.all
@@ -257,14 +288,14 @@ pub fn derive_subscribable_list(input: TokenStream) -> TokenStream {
                 self.results
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SEFunctionSetAssignmentsBase)]
 pub fn derive_fsa_base(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SEFunctionSetAssignmentsBase for #ident {
             fn customer_account_list_link(&self) -> Option<&CustomerAccountListLink> {
                 self.customer_account_list_link.as_ref()
@@ -297,14 +328,14 @@ pub fn derive_fsa_base(input: TokenStream) -> TokenStream {
                 self.usage_point_list_link.as_ref()
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SEAbstractDevice)]
 pub fn derive_abstract_device(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SEAbstractDevice for #ident {
             fn configuration_link(&self) -> Option<&ConfigurationLink> {
                 self.configuration_link.as_ref()
@@ -346,23 +377,23 @@ pub fn derive_abstract_device(input: TokenStream) -> TokenStream {
                 self.subscribable.as_ref()
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SEMeterReadingBase)]
 pub fn derive_meter_reading_base(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SEMeterReadingBase for #ident {}
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SEReadingBase)]
 pub fn derive_reading_base(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SEReadingBase for #ident {
             fn consumption_block(&self) -> Option<ConsumptionBlockType> {
                 self.consumption_block
@@ -380,27 +411,27 @@ pub fn derive_reading_base(input: TokenStream) -> TokenStream {
                 self.value
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SEReadingSetBase)]
 pub fn derive_reading_set_base(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SEReadingSetBase for #ident {
             fn time_period(&self) -> &DateTimeInterval {
                 &self.time_period
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SEUsagePointBase)]
 pub fn derive_usage_point_base(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SEUsagePointBase for #ident {
             fn role_flags(&self) -> RoleFlagsType {
                 self.role_flags
@@ -409,14 +440,14 @@ pub fn derive_usage_point_base(input: TokenStream) -> TokenStream {
                 self.service_category_kind
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
 
 #[proc_macro_derive(SEBillingMeterReadingBase)]
 pub fn derive_billing_meter_reading_base(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
-    let output = quote! {
+    quote! {
         impl SEBillingMeterReadingBase for #ident {
             fn billing_reading_set_list_link(&self) -> Option<&BillingReadingSetListLink> {
                 self.billing_reading_set_list_link.as_ref()
@@ -425,6 +456,6 @@ pub fn derive_billing_meter_reading_base(input: TokenStream) -> TokenStream {
                 self.reading_type_link.as_ref()
             }
         }
-    };
-    output.into()
+    }
+    .into()
 }
