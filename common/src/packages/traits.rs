@@ -97,6 +97,18 @@ pub trait SEList: SEResource {
     fn results_mut(&mut self) -> &mut Uint32;
     fn list_as_slice(&self) -> &[Self::Inner];
     fn list_mut(&mut self) -> &mut Vec<Self::Inner>;
+
+    /// Add an item to the contained list, maintaining invariants
+    fn push(&mut self, item: Self::Inner) {
+        self.list_mut().push(item);
+        self.list_mut().sort();
+        *self.all_mut() = Uint32(self.all().get() + 1);
+    }
+    // Remove an item from the contained list, maintaining invariants
+    fn remove(&mut self, idx: usize) -> Self::Inner {
+        *self.all_mut() = Uint32(self.all().get() - 1);
+        self.list_mut().remove(idx)
+    }
 }
 
 pub trait SESubscribableList: SESubscribableResource {
