@@ -8,10 +8,8 @@ pub fn extract_list(data: &Data) -> Option<(Ident, Type)> {
                 if let Type::Path(vec_typepath) = &field.ty {
                     if let Some(segment) = vec_typepath.path.segments.first() {
                         if let PathArguments::AngleBracketed(args) = &segment.arguments {
-                            if let Some(inner) = args.args.first() {
-                                if let GenericArgument::Type(out_type) = inner {
-                                    return Some((ident, out_type.clone()));
-                                }
+                            if let Some(GenericArgument::Type(out_type)) = args.args.first() {
+                                return Some((ident, out_type.clone()));
                             }
                         }
                     }

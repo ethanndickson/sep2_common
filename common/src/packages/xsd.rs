@@ -3874,12 +3874,13 @@ impl PartialOrd for BillingReading {
 impl Ord for BillingReading {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // Primary Key - timePeriod.start (ascending)
-        match self.time_period.as_ref().zip(other.time_period.as_ref()) {
-            Some((self_start, other_start)) => match self_start.start.cmp(&other_start.start) {
+        if let Some((self_start, other_start)) =
+            self.time_period.as_ref().zip(other.time_period.as_ref())
+        {
+            match self_start.start.cmp(&other_start.start) {
                 std::cmp::Ordering::Equal => {}
                 ord => return ord,
-            },
-            _ => {} // Handle the case where either or both time_period fields are None
+            }
         }
         // Secondary Key - consumptionBlock (ascending)
         match self.consumption_block.cmp(&other.consumption_block) {
