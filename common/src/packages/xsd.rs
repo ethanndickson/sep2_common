@@ -742,7 +742,7 @@ pub struct Time {
     // 7 - time intentionally uncoordinated
     // All other values are reserved for future use.
     #[yaserde(rename = "quality")]
-    pub quality: Uint8,
+    pub quality: TimeQuality,
 
     // Local time zone offset from currentTime. Does not include any daylight
     // savings time offsets. For American time zones, a negative tzOffset SHALL
@@ -764,6 +764,18 @@ pub struct Time {
 }
 
 impl Validate for Time {}
+
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum TimeQuality {
+    #[default]
+    ExternalAuth = 3,
+    LevelThree = 4,
+    ManualOrLevelFour = 5,
+    LevelFive = 6,
+    IntentUncoordinated = 7,
+}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "DeviceInformation")]
@@ -1724,7 +1736,7 @@ pub struct LogEvent {
     // 19 Security
     // All other values are reserved.
     #[yaserde(rename = "functionSet")]
-    pub function_set: Uint8,
+    pub function_set: FunctionSets,
 
     // An 8 bit unsigned integer. logEventCodes are scoped to a profile and a
     // function set. If the profile is IEEE 2030.5, the logEventCode is defined
@@ -1756,7 +1768,7 @@ pub struct LogEvent {
     // 4 Building Automation
     // All other values are reserved.
     #[yaserde(rename = "profileID")]
-    pub profile_id: Uint8,
+    pub profile_id: ProfileID,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -1787,6 +1799,45 @@ impl Ord for LogEvent {
 }
 
 impl Validate for LogEvent {}
+
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum FunctionSets {
+    #[default]
+    General = 0,
+    PubSub = 1,
+    EndDevice = 2,
+    FSA = 3,
+    Response = 4,
+    DRLC = 5,
+    Metering = 6,
+    Pricing = 7,
+    Messaging = 8,
+    Billing = 9,
+    Prepayment = 10,
+    DER = 11,
+    Time = 12,
+    SoftwareDownload = 13,
+    DeviceInformation = 14,
+    PowerStatus = 15,
+    NetworkStatus = 16,
+    LogEventList = 17,
+    Configuration = 18,
+    Security = 19,
+}
+
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum ProfileID {
+    #[default]
+    NonSpecific = 0,
+    VendorDefined = 1,
+    IEEE20305 = 2,
+    HomeAutomation = 3,
+    BuildingAutomation = 4,
+}
 
 #[derive(
     Default,
@@ -5152,7 +5203,16 @@ pub struct RequestStatus {
     // 1 = Cancelled
     // All other values reserved.
     #[yaserde(rename = "requestStatus")]
-    pub request_status: Uint8,
+    pub request_status: RequestStatusType,
+}
+
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum RequestStatusType {
+    #[default]
+    Requested = 0,
+    Cancelled = 1,
 }
 
 impl Validate for RequestStatus {}
@@ -7133,7 +7193,18 @@ pub struct ConnectStatusType {
 
     // The value indicating the state.
     #[yaserde(rename = "value")]
-    pub value: HexBinary8,
+    pub value: ConnectStatusValue,
+}
+
+bitflags! {
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+    pub struct ConnectStatusValue: u8 { // HexBinary8
+        const Connected = 0;
+        const Available = 1;
+        const Operating = 2;
+        const Test = 3;
+        const Error = 4;
+    }
 }
 
 impl Validate for ConnectStatusType {}
@@ -7161,10 +7232,28 @@ pub struct InverterStatusType {
 
     // The value indicating the state.
     #[yaserde(rename = "value")]
-    pub value: Uint8,
+    pub value: InverterStatusValue,
 }
 
 impl Validate for InverterStatusType {}
+
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum InverterStatusValue {
+    #[default]
+    NotApplicable = 0,
+    Off = 1,
+    SleepingOrLowPower = 2,
+    StartingUpOrNoProduction = 3,
+    TrackingMPPTPP = 4,
+    ForcedPowerReduction = 5,
+    ShuttingDown = 6,
+    FaultsExist = 7,
+    Standby = 8,
+    TestMode = 9,
+    ManufacturerStatus = 10,
+}
 
 // DER LocalControlModeStatus/value:
 // 0 – local control
@@ -7217,10 +7306,21 @@ pub struct OperationalModeStatusType {
 
     // The value indicating the state.
     #[yaserde(rename = "value")]
-    pub value: Uint8,
+    pub value: OperationalModeStatusValue,
 }
 
 impl Validate for OperationalModeStatusType {}
+
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum OperationalModeStatusValue {
+    #[default]
+    NotApplicable = 0,
+    Off = 1,
+    Operational = 2,
+    Test = 3,
+}
 
 // DER StateOfChargeStatus value: Percent data type
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
@@ -7253,7 +7353,17 @@ pub struct StorageModeStatusType {
 
     // The value indicating the state.
     #[yaserde(rename = "value")]
-    pub value: Uint8,
+    pub value: StorageModeStatusValue,
+}
+
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum StorageModeStatusValue {
+    #[default]
+    StorageCharging = 0,
+    StorageDischarging = 1,
+    StorageHolding = 2,
 }
 
 impl Validate for StorageModeStatusType {}

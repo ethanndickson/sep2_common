@@ -126,11 +126,11 @@ pub enum ResponseStatus {
 impl From<EventStatusType> for ResponseStatus {
     fn from(value: EventStatusType) -> Self {
         match value {
-            EventStatusType::Scheduled => todo!(),
-            EventStatusType::Active => todo!(),
-            EventStatusType::Cancelled => todo!(),
-            EventStatusType::CancelledRandom => todo!(),
-            EventStatusType::Superseded => todo!(),
+            EventStatusType::Scheduled => Self::EventReceived, // TODO:  Maybe
+            EventStatusType::Active => Self::EventStarted,
+            EventStatusType::Cancelled => Self::EventCancelled,
+            EventStatusType::CancelledRandom => Self::EventCancelled,
+            EventStatusType::Superseded => Self::EventSuperseded,
         }
     }
 }
