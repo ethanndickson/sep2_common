@@ -518,7 +518,9 @@ impl Validate for String16 {
 // implementations SHALL reduce the length of strings using multi-byte
 // characters so that the string may be stored using "maxLength" octets in the
 // given encoding.
-#[derive(Default, PartialEq, Eq, Debug, Clone, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, UtilsTupleIo, UtilsDefaultSerde,
+)]
 pub struct String20(pub String);
 
 impl Validate for String20 {

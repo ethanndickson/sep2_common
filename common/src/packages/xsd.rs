@@ -908,7 +908,9 @@ pub struct Drlccapabilities {
 
 impl Validate for Drlccapabilities {}
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, YaSerialize, YaDeserialize, SEResource,
+)]
 #[yaserde(rename = "SupportedLocale")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SupportedLocale {
@@ -1474,7 +1476,9 @@ pub struct LoWPAN {
 
 impl Validate for LoWPAN {}
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, YaSerialize, YaDeserialize, SEResource,
+)]
 #[yaserde(rename = "Neighbor")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Neighbor {
@@ -1903,7 +1907,9 @@ pub struct PowerConfiguration {
 
 impl Validate for PowerConfiguration {}
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, YaSerialize, YaDeserialize, SEResource,
+)]
 #[yaserde(rename = "PriceResponseCfg")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct PriceResponseCfg {
@@ -2936,7 +2942,9 @@ pub struct ReadingSetList {
 
 impl Validate for ReadingSetList {}
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, YaSerialize, YaDeserialize, SEResource,
+)]
 #[yaserde(rename = "ReadingType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReadingType {
@@ -4558,7 +4566,17 @@ pub struct TargetReadingList {
 impl Validate for TargetReadingList {}
 
 #[derive(
-    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
+    Default,
+    PartialEq,
+    PartialOrd,
+    Eq,
+    Ord,
+    Debug,
+    Clone,
+    YaSerialize,
+    YaDeserialize,
+    SEIdentifiedObject,
+    SEResource,
 )]
 #[yaserde(rename = "ServiceSupplier")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -6326,6 +6344,39 @@ pub struct DercontrolBase {
     // 1/100 sec.
     #[yaserde(rename = "rampTms")]
     pub ramp_tms: Option<Uint16>,
+}
+
+impl DercontrolBase {
+    pub fn same_target(&self, other: &Self) -> bool {
+        self.op_mod_connect.is_some() == other.op_mod_connect.is_some()
+            && self.op_mod_energize.is_some() == other.op_mod_energize.is_some()
+            && self.op_mod_fixed_pf_absorb_w.is_some() == other.op_mod_fixed_pf_absorb_w.is_some()
+            && self.op_mod_fixed_pf_inject_w.is_some() == other.op_mod_fixed_pf_inject_w.is_some()
+            && self.op_mod_fixed_var.is_some() == other.op_mod_fixed_var.is_some()
+            && self.op_mod_fixed_w.is_some() == other.op_mod_fixed_w.is_some()
+            && self.op_mod_freq_droop.is_some() == other.op_mod_freq_droop.is_some()
+            && self.op_mod_freq_watt.is_some() == other.op_mod_freq_watt.is_some()
+            && self.op_mod_hfrt_may_trip.is_some() == other.op_mod_hfrt_may_trip.is_some()
+            && self.op_mod_hfrt_must_trip.is_some() == other.op_mod_hfrt_must_trip.is_some()
+            && self.op_mod_hvrt_may_trip.is_some() == other.op_mod_hvrt_may_trip.is_some()
+            && self.op_mod_hvrt_momentary_cessation.is_some()
+                == other.op_mod_hvrt_momentary_cessation.is_some()
+            && self.op_mod_hvrt_must_trip.is_some() == other.op_mod_hvrt_must_trip.is_some()
+            && self.op_mod_lfrt_may_trip.is_some() == other.op_mod_lfrt_may_trip.is_some()
+            && self.op_mod_lfrt_must_trip.is_some() == other.op_mod_lfrt_must_trip.is_some()
+            && self.op_mod_lvrt_may_trip.is_some() == other.op_mod_lvrt_may_trip.is_some()
+            && self.op_mod_lvrt_momentary_cessation.is_some()
+                == other.op_mod_lvrt_momentary_cessation.is_some()
+            && self.op_mod_lvrt_must_trip.is_some() == other.op_mod_lvrt_must_trip.is_some()
+            && self.op_mod_max_lim_w.is_some() == other.op_mod_max_lim_w.is_some()
+            && self.op_mod_target_var.is_some() == other.op_mod_target_var.is_some()
+            && self.op_mod_target_w.is_some() == other.op_mod_target_w.is_some()
+            && self.op_mod_volt_var.is_some() == other.op_mod_volt_var.is_some()
+            && self.op_mod_volt_watt.is_some() == other.op_mod_volt_watt.is_some()
+            && self.op_mod_watt_pf.is_some() == other.op_mod_watt_pf.is_some()
+            && self.op_mod_watt_var.is_some() == other.op_mod_watt_var.is_some()
+            && self.ramp_tms.is_some() == other.ramp_tms.is_some()
+    }
 }
 
 impl Validate for DercontrolBase {}
@@ -8233,7 +8284,9 @@ pub struct ProjectionReadingListLink {
 
 impl Validate for ProjectionReadingListLink {}
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, YaSerialize, YaDeserialize, SELink,
+)]
 #[yaserde(rename = "RateComponentLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RateComponentLink {
@@ -8605,7 +8658,9 @@ impl Validate for UsagePointListLink {}
 #[derive(
     Default,
     PartialEq,
+    PartialOrd,
     Eq,
+    Ord,
     Debug,
     Clone,
     YaSerialize,
@@ -8682,7 +8737,9 @@ impl Validate for MirrorMeterReadingList {}
 #[derive(
     Default,
     PartialEq,
+    PartialOrd,
     Eq,
+    Ord,
     Debug,
     Clone,
     YaSerialize,

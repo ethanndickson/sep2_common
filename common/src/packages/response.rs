@@ -232,7 +232,7 @@ impl Validate for PriceResponse {}
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "ResponseList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct ResponseList<T: SEResponse> {
+pub struct ResponseList<T: SEResponse + Ord> {
     #[yaserde(rename = "Response")]
     pub response: Vec<T>,
 
@@ -251,7 +251,7 @@ pub struct ResponseList<T: SEResponse> {
     pub href: Option<String>,
 }
 
-impl<T: SEResponse> Validate for ResponseList<T> {}
+impl<T: SEResponse + Ord> Validate for ResponseList<T> {}
 
 #[derive(
     Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,

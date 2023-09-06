@@ -12,7 +12,9 @@ use super::primitives::{
     HexBinary128, Int32, Int48, Int64, String32, String42, Uint16, Uint32, Uint48,
 };
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
 #[yaserde(rename = "AccumulationBehaviourType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -53,7 +55,9 @@ pub enum ApplianceLoadReductionType {
 
 impl Validate for ApplianceLoadReductionType {}
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
 #[yaserde(rename = "CommodityType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub enum CommodityType {
@@ -108,7 +112,9 @@ impl Validate for ConsumptionBlockType {}
 /// An exhaustive list is currently out of scope for this project
 pub type CurrencyCode = Uint16;
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
 #[yaserde(rename = "DataQualifierType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -126,7 +132,7 @@ pub enum DataQualifierType {
 impl Validate for DataQualifierType {}
 
 // Interval of date and time.
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DateTimeInterval")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DateTimeInterval {
@@ -270,7 +276,7 @@ impl DstRuleType {
     }
 }
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "FlowDirectionType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -301,7 +307,9 @@ pub struct GpslocationType {
 
 impl Validate for GpslocationType {}
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
 #[yaserde(rename = "KindType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -393,7 +401,9 @@ impl Display for Percent {
     }
 }
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
 #[yaserde(rename = "PhaseCode")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
@@ -449,7 +459,9 @@ impl Display for PINType {
 }
 
 /// For many variants there is no Internal System of Units designated prefix, and as such the number is used as a name instead.
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
 #[yaserde(rename = "PowerOfTenMultiplierType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(i8)]
@@ -694,7 +706,7 @@ impl Validate for UnitType {}
 
 // Type for specification of a specific value, with units and power of ten
 // multiplier.
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "UnitValueType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct UnitValueType {
@@ -713,7 +725,9 @@ pub struct UnitValueType {
 
 impl Validate for UnitValueType {}
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
 #[yaserde(rename = "UomType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]

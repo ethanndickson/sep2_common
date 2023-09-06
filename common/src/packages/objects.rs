@@ -99,7 +99,7 @@ pub struct EventStatus {
     pub reason: Option<String192>,
 }
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
 pub enum EventStatusType {

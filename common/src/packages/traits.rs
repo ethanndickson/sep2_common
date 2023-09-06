@@ -90,7 +90,7 @@ pub trait SERandomizableEvent: SEEvent {
 }
 
 pub trait SEList: SEResource {
-    type Inner;
+    type Inner: Ord;
     fn all(&self) -> Uint32;
     fn all_mut(&mut self) -> &mut Uint32;
     fn results(&self) -> Uint32;

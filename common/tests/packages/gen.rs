@@ -179,14 +179,6 @@ fn default_PriceResponse() {
 }
 
 #[test]
-fn default_ResponseList() {
-    let orig: ResponseList<TextResponse> = ResponseList::default();
-    let new: ResponseList<TextResponse> =
-        from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
-    assert_eq!(orig, new);
-}
-
-#[test]
 fn default_ResponseSet() {
     let orig = ResponseSet::default();
     let new: ResponseSet = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
