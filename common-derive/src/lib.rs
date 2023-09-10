@@ -355,7 +355,7 @@ pub fn derive_abstract_device(input: TokenStream) -> TokenStream {
             fn file_status_link(&self) -> Option<&FileStatusLink> {
                 self.file_status_link.as_ref()
             }
-            fn ip_interface_list_link(&self) -> Option<&IpinterfaceListLink> {
+            fn ip_interface_list_link(&self) -> Option<&IPInterfaceListLink> {
                 self.ip_interface_list_link.as_ref()
             }
             fn lfdi(&self) -> Option<&HexBinary160> {

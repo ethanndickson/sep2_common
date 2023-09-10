@@ -263,29 +263,29 @@ fn default_PEVInfo() {
 
 #[test]
 fn default_IPAddr() {
-    let orig = Ipaddr::default();
-    let new: Ipaddr = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = IPAddr::default();
+    let new: IPAddr = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_IPAddrList() {
-    let orig = IpaddrList::default();
-    let new: IpaddrList = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = IPAddrList::default();
+    let new: IPAddrList = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_IPInterface() {
-    let orig = Ipinterface::default();
-    let new: Ipinterface = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = IPInterface::default();
+    let new: IPInterface = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_IPInterfaceList() {
-    let orig = IpinterfaceList::default();
-    let new: IpinterfaceList =
+    let orig = IPInterfaceList::default();
+    let new: IPInterfaceList =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
@@ -1670,16 +1670,16 @@ fn default_HistoricalReadingListLink() {
 
 #[test]
 fn default_IPAddrListLink() {
-    let orig = IpaddrListLink::default();
-    let new: IpaddrListLink =
+    let orig = IPAddrListLink::default();
+    let new: IPAddrListLink =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_IPInterfaceListLink() {
-    let orig = IpinterfaceListLink::default();
-    let new: IpinterfaceListLink =
+    let orig = IPInterfaceListLink::default();
+    let new: IPInterfaceListLink =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }

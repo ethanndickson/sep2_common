@@ -173,7 +173,7 @@ pub struct AbstractDevice {
     pub file_status_link: Option<FileStatusLink>,
 
     #[yaserde(rename = "IPInterfaceListLink")]
-    pub ip_interface_list_link: Option<IpinterfaceListLink>,
+    pub ip_interface_list_link: Option<IPInterfaceListLink>,
 
     // Long form of device identifier. See the Security section for additional
     // details.
@@ -331,7 +331,7 @@ pub struct EndDevice {
     pub file_status_link: Option<FileStatusLink>,
 
     #[yaserde(rename = "IPInterfaceListLink")]
-    pub ip_interface_list_link: Option<IpinterfaceListLink>,
+    pub ip_interface_list_link: Option<IPInterfaceListLink>,
 
     // Long form of device identifier. See the Security section for additional
     // details.
@@ -513,7 +513,7 @@ pub struct SelfDevice {
     pub file_status_link: Option<FileStatusLink>,
 
     #[yaserde(rename = "IPInterfaceListLink")]
-    pub ip_interface_list_link: Option<IpinterfaceListLink>,
+    pub ip_interface_list_link: Option<IPInterfaceListLink>,
 
     // Long form of device identifier. See the Security section for additional
     // details.
@@ -1123,7 +1123,7 @@ impl Validate for Ieee802154 {}
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "IPAddr")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Ipaddr {
+pub struct IPAddr {
     // An IP address value.
     #[yaserde(rename = "address")]
     pub address: HexBinary128,
@@ -1137,27 +1137,27 @@ pub struct Ipaddr {
     pub href: Option<String>,
 }
 
-impl PartialOrd for Ipaddr {
+impl PartialOrd for IPAddr {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl Ord for Ipaddr {
+impl Ord for IPAddr {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // Primary Key - address (ascending)
         self.address.cmp(&other.address)
     }
 }
 
-impl Validate for Ipaddr {}
+impl Validate for IPAddr {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "IPAddrList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct IpaddrList {
+pub struct IPAddrList {
     #[yaserde(rename = "IPAddr")]
-    pub ip_addr: Vec<Ipaddr>,
+    pub ip_addr: Vec<IPAddr>,
 
     // The number specifying "all" of the items in the list. Required on a
     // response to a GET, ignored otherwise.
@@ -1174,12 +1174,12 @@ pub struct IpaddrList {
     pub href: Option<String>,
 }
 
-impl Validate for IpaddrList {}
+impl Validate for IPAddrList {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "IPInterface")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Ipinterface {
+pub struct IPInterface {
     // Use rules from [RFC 2863].
     #[yaserde(rename = "ifDescr")]
     pub if_descr: Option<String192>,
@@ -1273,7 +1273,7 @@ pub struct Ipinterface {
     pub if_type: Option<Uint16>,
 
     #[yaserde(rename = "IPAddrListLink")]
-    pub ip_addr_list_link: Option<IpaddrListLink>,
+    pub ip_addr_list_link: Option<IPAddrListLink>,
 
     // Similar to ifLastChange in [RFC 2863].
     #[yaserde(rename = "lastResetTime")]
@@ -1292,27 +1292,27 @@ pub struct Ipinterface {
     pub href: Option<String>,
 }
 
-impl PartialOrd for Ipinterface {
+impl PartialOrd for IPInterface {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl Ord for Ipinterface {
+impl Ord for IPInterface {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // Primary Key - ifIndex (ascending)
         self.if_index.cmp(&other.if_index)
     }
 }
 
-impl Validate for Ipinterface {}
+impl Validate for IPInterface {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "IPInterfaceList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct IpinterfaceList {
+pub struct IPInterfaceList {
     #[yaserde(rename = "IPInterface")]
-    pub ip_interface: Vec<Ipinterface>,
+    pub ip_interface: Vec<IPInterface>,
 
     // The default polling rate for this function set (this resource and all
     // resources below), in seconds. If not specified, a default of 900 seconds
@@ -1336,7 +1336,7 @@ pub struct IpinterfaceList {
     pub href: Option<String>,
 }
 
-impl Validate for IpinterfaceList {}
+impl Validate for IPInterfaceList {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "LLInterface")]
@@ -8120,7 +8120,7 @@ impl Validate for HistoricalReadingListLink {}
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "IPAddrListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct IpaddrListLink {
+pub struct IPAddrListLink {
     // Indicates the total number of items in the referenced list. This
     // attribute SHALL be present if the href is a local or relative URI. This
     // attribute SHOULD NOT be present if the href is a remote or absolute URI,
@@ -8133,12 +8133,12 @@ pub struct IpaddrListLink {
     pub href: String,
 }
 
-impl Validate for IpaddrListLink {}
+impl Validate for IPAddrListLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "IPInterfaceListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct IpinterfaceListLink {
+pub struct IPInterfaceListLink {
     // Indicates the total number of items in the referenced list. This
     // attribute SHALL be present if the href is a local or relative URI. This
     // attribute SHOULD NOT be present if the href is a remote or absolute URI,
@@ -8151,7 +8151,7 @@ pub struct IpinterfaceListLink {
     pub href: String,
 }
 
-impl Validate for IpinterfaceListLink {}
+impl Validate for IPInterfaceListLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "LLInterfaceListLink")]

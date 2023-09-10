@@ -136,7 +136,7 @@ pub trait SEAbstractDevice: SESubscribableResource {
     fn device_information_link(&self) -> Option<&DeviceInformationLink>;
     fn device_status_link(&self) -> Option<&DeviceStatusLink>;
     fn file_status_link(&self) -> Option<&FileStatusLink>;
-    fn ip_interface_list_link(&self) -> Option<&IpinterfaceListLink>;
+    fn ip_interface_list_link(&self) -> Option<&IPInterfaceListLink>;
     fn lfdi(&self) -> Option<&HexBinary160>;
     fn load_shed_availability_list_link(&self) -> Option<&LoadShedAvailabilityListLink>;
     fn log_event_list_link(&self) -> Option<&LogEventListLink>;
