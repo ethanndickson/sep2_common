@@ -303,7 +303,7 @@ pub fn derive_fsa_base(input: TokenStream) -> TokenStream {
             fn demand_response_program_list_link(&self) -> Option<&DemandResponseProgramListLink> {
                 self.demand_response_program_list_link.as_ref()
             }
-            fn der_program_list_link(&self) -> Option<&DerprogramListLink> {
+            fn der_program_list_link(&self) -> Option<&DERProgramListLink> {
                 self.der_program_list_link.as_ref()
             }
             fn file_list_link(&self) -> Option<&FileListLink> {
@@ -340,7 +340,7 @@ pub fn derive_abstract_device(input: TokenStream) -> TokenStream {
             fn configuration_link(&self) -> Option<&ConfigurationLink> {
                 self.configuration_link.as_ref()
             }
-            fn der_list_link(&self) -> Option<&DerlistLink> {
+            fn der_list_link(&self) -> Option<&DERListLink> {
                 self.der_list_link.as_ref()
             }
             fn device_category(&self) -> Option<DeviceCategoryType> {

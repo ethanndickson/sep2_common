@@ -7,19 +7,9 @@ use std::{
 use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
 use xsd_parser::generator::validator::Validate;
 
-// Can we switch to type aliases?
-// pub type Int8 = i8;
-// pub type Uint8 = u8;
-// pub type Int16 = i16;
-// pub type Uint16 = u16;
-// pub type Int32 = i32;
-// pub type Uint32 = u32;
-// pub type Int48 = i64;
-// pub type Int64 = i64;
-// pub type Uint48 = u64;
-// pub type Uint64 = u64;
-// pub type Uint40 = Uint64;
-// pub type Uint128 = u128;
+// We purposefully don't use type aliases, as our procedural macros cannot determine whether a type is a primitive using an alias to it
+// This means types that are just primitive aliases cannot be used without these primitive newtypes.
+// We require newtypes for non-standard integer types regardless.
 
 // Unsigned integer, max inclusive 255 (2^8-1)
 #[derive(

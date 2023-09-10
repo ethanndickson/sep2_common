@@ -141,8 +141,8 @@ fn default_NotificationList() {
 
 #[test]
 fn default_DERControlResponse() {
-    let orig = DercontrolResponse::default();
-    let new: DercontrolResponse =
+    let orig = DERControlResponse::default();
+    let new: DERControlResponse =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
@@ -996,76 +996,76 @@ fn default_FreqDroopType() {
 
 #[test]
 fn default_DER() {
-    let orig = Der::default();
-    let new: Der = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = DER::default();
+    let new: DER = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERList() {
-    let orig = Derlist::default();
-    let new: Derlist = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = DERList::default();
+    let new: DERList = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERSettings() {
-    let orig = Dersettings::default();
-    let new: Dersettings = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = DERSettings::default();
+    let new: DERSettings = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERType() {
-    let orig = Dertype::default();
-    let new: Dertype = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = DERType::default();
+    let new: DERType = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERAvailability() {
-    let orig = Deravailability::default();
-    let new: Deravailability =
+    let orig = DERAvailability::default();
+    let new: DERAvailability =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERCapability() {
-    let orig = Dercapability::default();
-    let new: Dercapability =
+    let orig = DERCapability::default();
+    let new: DERCapability =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERControlBase() {
-    let orig = DercontrolBase::default();
-    let new: DercontrolBase =
+    let orig = DERControlBase::default();
+    let new: DERControlBase =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERControlList() {
-    let orig = DercontrolList::default();
-    let new: DercontrolList =
+    let orig = DERControlList::default();
+    let new: DERControlList =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERControlType() {
-    let orig = DercontrolType::default();
-    let new: DercontrolType =
+    let orig = DERControlType::default();
+    let new: DERControlType =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERCurve() {
-    let orig = Dercurve::default();
-    let new: Dercurve = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = DERCurve::default();
+    let new: DERCurve = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
@@ -1079,8 +1079,8 @@ fn default_CurrentDERProgramLink() {
 
 #[test]
 fn default_DERCurveList() {
-    let orig = DercurveList::default();
-    let new: DercurveList = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = DERCurveList::default();
+    let new: DERCurveList = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
@@ -1093,37 +1093,37 @@ fn default_CurveData() {
 
 #[test]
 fn default_DERCurveType() {
-    let orig = DercurveType::default();
-    let new: DercurveType = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = DERCurveType::default();
+    let new: DERCurveType = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERProgram() {
-    let orig = Derprogram::default();
-    let new: Derprogram = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = DERProgram::default();
+    let new: DERProgram = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERProgramList() {
-    let orig = DerprogramList::default();
-    let new: DerprogramList =
+    let orig = DERProgramList::default();
+    let new: DERProgramList =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERStatus() {
-    let orig = Derstatus::default();
-    let new: Derstatus = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = DERStatus::default();
+    let new: DERStatus = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERUnitRefType() {
-    let orig = DerunitRefType::default();
-    let new: DerunitRefType =
+    let orig = DERUnitRefType::default();
+    let new: DERUnitRefType =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
@@ -1475,8 +1475,8 @@ fn default_DemandResponseProgramListLink() {
 
 #[test]
 fn default_DERAvailabilityLink() {
-    let orig = DeravailabilityLink::default();
-    let new: DeravailabilityLink =
+    let orig = DERAvailabilityLink::default();
+    let new: DERAvailabilityLink =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
@@ -1491,77 +1491,77 @@ fn default_DefaultDERControlLink() {
 
 #[test]
 fn default_DERCapabilityLink() {
-    let orig = DercapabilityLink::default();
-    let new: DercapabilityLink =
+    let orig = DERCapabilityLink::default();
+    let new: DERCapabilityLink =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERControlListLink() {
-    let orig = DercontrolListLink::default();
-    let new: DercontrolListLink =
+    let orig = DERControlListLink::default();
+    let new: DERControlListLink =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERCurveLink() {
-    let orig = DercurveLink::default();
-    let new: DercurveLink = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = DERCurveLink::default();
+    let new: DERCurveLink = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERCurveListLink() {
-    let orig = DercurveListLink::default();
-    let new: DercurveListLink =
+    let orig = DERCurveListLink::default();
+    let new: DERCurveListLink =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERLink() {
-    let orig = Derlink::default();
-    let new: Derlink = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = DERLink::default();
+    let new: DERLink = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERListLink() {
-    let orig = DerlistLink::default();
-    let new: DerlistLink = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = DERListLink::default();
+    let new: DERListLink = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERProgramLink() {
-    let orig = DerprogramLink::default();
-    let new: DerprogramLink =
+    let orig = DERProgramLink::default();
+    let new: DERProgramLink =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERProgramListLink() {
-    let orig = DerprogramListLink::default();
-    let new: DerprogramListLink =
+    let orig = DERProgramListLink::default();
+    let new: DERProgramListLink =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERSettingsLink() {
-    let orig = DersettingsLink::default();
-    let new: DersettingsLink =
+    let orig = DERSettingsLink::default();
+    let new: DERSettingsLink =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERStatusLink() {
-    let orig = DerstatusLink::default();
-    let new: DerstatusLink =
+    let orig = DERStatusLink::default();
+    let new: DERStatusLink =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }

@@ -119,7 +119,7 @@ pub trait SESubscribableList: SESubscribableResource {
 pub trait SEFunctionSetAssignmentsBase: SEResource {
     fn customer_account_list_link(&self) -> Option<&CustomerAccountListLink>;
     fn demand_response_program_list_link(&self) -> Option<&DemandResponseProgramListLink>;
-    fn der_program_list_link(&self) -> Option<&DerprogramListLink>;
+    fn der_program_list_link(&self) -> Option<&DERProgramListLink>;
     fn file_list_link(&self) -> Option<&FileListLink>;
     fn messaging_program_list_link(&self) -> Option<&MessagingProgramListLink>;
     fn prepayment_list_link(&self) -> Option<&PrepaymentListLink>;
@@ -131,7 +131,7 @@ pub trait SEFunctionSetAssignmentsBase: SEResource {
 
 pub trait SEAbstractDevice: SESubscribableResource {
     fn configuration_link(&self) -> Option<&ConfigurationLink>;
-    fn der_list_link(&self) -> Option<&DerlistLink>;
+    fn der_list_link(&self) -> Option<&DERListLink>;
     fn device_category(&self) -> Option<DeviceCategoryType>;
     fn device_information_link(&self) -> Option<&DeviceInformationLink>;
     fn device_status_link(&self) -> Option<&DeviceStatusLink>;

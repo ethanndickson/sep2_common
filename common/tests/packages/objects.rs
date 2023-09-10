@@ -97,9 +97,9 @@ fn default_RandomizableEvent() {
 
 #[test]
 fn default_DERControl() {
-    let orig = Dercontrol::default();
+    let orig = DERControl::default();
     println!("{}", &to_string_with_config(&orig, &YASERDE_CFG).unwrap());
-    let new: Dercontrol = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: DERControl = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 

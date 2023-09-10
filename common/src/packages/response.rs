@@ -16,7 +16,7 @@ use super::types::{Mridtype, TimeType, UnitType, VersionType};
 )]
 #[yaserde(rename = "DERControlResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DercontrolResponse {
+pub struct DERControlResponse {
     // The createdDateTime field contains the date and time when the
     // acknowledgement/status occurred in the client. The client will provide
     // the timestamp to ensure the proper time is captured in case the response
@@ -53,7 +53,7 @@ pub struct DercontrolResponse {
     pub href: Option<String>,
 }
 
-impl Validate for DercontrolResponse {}
+impl Validate for DERControlResponse {}
 
 #[derive(
     Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,

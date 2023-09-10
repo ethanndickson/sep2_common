@@ -369,9 +369,9 @@ impl Validate for RandomizableEvent {}
 )]
 #[yaserde(rename = "DERControl")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Dercontrol {
+pub struct DERControl {
     #[yaserde(rename = "DERControlBase")]
-    pub der_control_base: DercontrolBase,
+    pub der_control_base: DERControlBase,
 
     // Specifies the bitmap indicating the categories of devices that SHOULD
     // respond. Devices SHOULD ignore events that do not indicate their device
@@ -456,13 +456,13 @@ pub struct Dercontrol {
     pub href: Option<String>,
 }
 
-impl PartialOrd for Dercontrol {
+impl PartialOrd for DERControl {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl Ord for Dercontrol {
+impl Ord for DERControl {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // Primary Key - primacy (ascending)
         match self.interval.start.cmp(&other.interval.start) {
@@ -479,7 +479,7 @@ impl Ord for Dercontrol {
     }
 }
 
-impl Validate for Dercontrol {}
+impl Validate for DERControl {}
 
 #[derive(
     Default,

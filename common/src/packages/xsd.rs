@@ -36,7 +36,7 @@ pub struct FunctionSetAssignmentsBase {
     pub demand_response_program_list_link: Option<DemandResponseProgramListLink>,
 
     #[yaserde(rename = "DERProgramListLink")]
-    pub der_program_list_link: Option<DerprogramListLink>,
+    pub der_program_list_link: Option<DERProgramListLink>,
 
     #[yaserde(rename = "FileListLink")]
     pub file_list_link: Option<FileListLink>,
@@ -104,7 +104,7 @@ pub struct DeviceCapability {
     pub demand_response_program_list_link: Option<DemandResponseProgramListLink>,
 
     #[yaserde(rename = "DERProgramListLink")]
-    pub der_program_list_link: Option<DerprogramListLink>,
+    pub der_program_list_link: Option<DERProgramListLink>,
 
     #[yaserde(rename = "FileListLink")]
     pub file_list_link: Option<FileListLink>,
@@ -154,7 +154,7 @@ pub struct AbstractDevice {
     pub configuration_link: Option<ConfigurationLink>,
 
     #[yaserde(rename = "DERListLink")]
-    pub der_list_link: Option<DerlistLink>,
+    pub der_list_link: Option<DERListLink>,
 
     // This field is for use in devices that can adjust energy usage (e.g.,
     // demand response, distributed energy resources). For devices that do not
@@ -312,7 +312,7 @@ pub struct EndDevice {
     pub configuration_link: Option<ConfigurationLink>,
 
     #[yaserde(rename = "DERListLink")]
-    pub der_list_link: Option<DerlistLink>,
+    pub der_list_link: Option<DERListLink>,
 
     // This field is for use in devices that can adjust energy usage (e.g.,
     // demand response, distributed energy resources). For devices that do not
@@ -494,7 +494,7 @@ pub struct SelfDevice {
     pub configuration_link: Option<ConfigurationLink>,
 
     #[yaserde(rename = "DERListLink")]
-    pub der_list_link: Option<DerlistLink>,
+    pub der_list_link: Option<DERListLink>,
 
     // This field is for use in devices that can adjust energy usage (e.g.,
     // demand response, distributed energy resources). For devices that do not
@@ -611,7 +611,7 @@ pub struct FunctionSetAssignments {
     pub demand_response_program_list_link: Option<DemandResponseProgramListLink>,
 
     #[yaserde(rename = "DERProgramListLink")]
-    pub der_program_list_link: Option<DerprogramListLink>,
+    pub der_program_list_link: Option<DERProgramListLink>,
 
     #[yaserde(rename = "FileListLink")]
     pub file_list_link: Option<FileListLink>,
@@ -5522,7 +5522,7 @@ impl Validate for FlowReservationResponseList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DefaultDERControl {
     #[yaserde(rename = "DERControlBase")]
-    pub der_control_base: DercontrolBase,
+    pub der_control_base: DERControlBase,
 
     // Enter service delay, in hundredths of a second. When present, this value
     // SHALL update the value of the corresponding setting
@@ -5664,7 +5664,7 @@ impl Validate for FreqDroopType {}
 )]
 #[yaserde(rename = "DER")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Der {
+pub struct DER {
     #[yaserde(rename = "AssociatedDERProgramListLink")]
     pub associated_der_program_list_link: Option<AssociatedDERProgramListLink>,
 
@@ -5675,16 +5675,16 @@ pub struct Der {
     pub current_der_program_link: Option<CurrentDERProgramLink>,
 
     #[yaserde(rename = "DERAvailabilityLink")]
-    pub der_availability_link: Option<DeravailabilityLink>,
+    pub der_availability_link: Option<DERAvailabilityLink>,
 
     #[yaserde(rename = "DERCapabilityLink")]
-    pub der_capability_link: Option<DercapabilityLink>,
+    pub der_capability_link: Option<DERCapabilityLink>,
 
     #[yaserde(rename = "DERSettingsLink")]
-    pub der_settings_link: Option<DersettingsLink>,
+    pub der_settings_link: Option<DERSettingsLink>,
 
     #[yaserde(rename = "DERStatusLink")]
-    pub der_status_link: Option<DerstatusLink>,
+    pub der_status_link: Option<DERStatusLink>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -5698,27 +5698,27 @@ pub struct Der {
     pub href: Option<String>,
 }
 
-impl PartialOrd for Der {
+impl PartialOrd for DER {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl Ord for Der {
+impl Ord for DER {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // Primary Key - href (ascending)
         self.href.cmp(&other.href)
     }
 }
 
-impl Validate for Der {}
+impl Validate for DER {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "DERList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Derlist {
+pub struct DERList {
     #[yaserde(rename = "DER")]
-    pub der: Vec<Der>,
+    pub der: Vec<DER>,
 
     // The default polling rate for this function set (this resource and all
     // resources below), in seconds. If not specified, a default of 900 seconds
@@ -5742,7 +5742,7 @@ pub struct Derlist {
     pub href: Option<String>,
 }
 
-impl Validate for Derlist {}
+impl Validate for DERList {}
 
 #[derive(
     Default,
@@ -5757,13 +5757,13 @@ impl Validate for Derlist {}
 )]
 #[yaserde(rename = "DERSettings")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Dersettings {
+pub struct DERSettings {
     // Bitmap indicating the DER Controls enabled on the device. See
     // DERControlType for values. If a control is supported (see
     // DERCapability::modesSupported), but not enabled, the control will not be
     // executed if encountered.
     #[yaserde(rename = "modesEnabled")]
-    pub modes_enabled: Option<DercontrolType>,
+    pub modes_enabled: Option<DERControlType>,
 
     // Enter service delay, in hundredths of a second.
     #[yaserde(rename = "setESDelay")]
@@ -5922,13 +5922,13 @@ pub struct Dersettings {
     pub href: Option<String>,
 }
 
-impl Validate for Dersettings {}
+impl Validate for DERSettings {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DERType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
-pub enum Dertype {
+pub enum DERType {
     // Not applicable / Unknown
     #[default]
     Unknown = 0,
@@ -5947,7 +5947,7 @@ pub enum Dertype {
     // ALL OTHERS RESERVED
 }
 
-impl Validate for Dertype {}
+impl Validate for DERType {}
 
 #[derive(
     Default,
@@ -5962,7 +5962,7 @@ impl Validate for Dertype {}
 )]
 #[yaserde(rename = "DERAvailability")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Deravailability {
+pub struct DERAvailability {
     // Indicates number of seconds the DER will be able to deliver active power
     // at the reservePercent level.
     #[yaserde(rename = "availabilityDuration")]
@@ -6008,16 +6008,16 @@ pub struct Deravailability {
     pub href: Option<String>,
 }
 
-impl Validate for Deravailability {}
+impl Validate for DERAvailability {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "DERCapability")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Dercapability {
+pub struct DERCapability {
     // Bitmap indicating the DER Controls implemented by the device. See
     // DERControlType for values.
     #[yaserde(rename = "modesSupported")]
-    pub modes_supported: DercontrolType,
+    pub modes_supported: DERControlType,
 
     // Abnormal operating performance category as defined by IEEE 1547-2018. One
     // of:
@@ -6137,7 +6137,7 @@ pub struct Dercapability {
 
     // Type of DER; see DERType object
     #[yaserde(rename = "type")]
-    pub _type: Dertype,
+    pub _type: DERType,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -6145,13 +6145,13 @@ pub struct Dercapability {
     pub href: Option<String>,
 }
 
-impl Validate for Dercapability {}
+impl Validate for DERCapability {}
 
 // Distributed Energy Resource (DER) control values.
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DERControlBase")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DercontrolBase {
+pub struct DERControlBase {
     // Set DER as connected (true) or disconnected (false). Used in conjunction
     // with ramp rate when re-connecting. Implies galvanic isolation.
     #[yaserde(rename = "opModConnect")]
@@ -6209,7 +6209,7 @@ pub struct DercontrolBase {
     // specifies a frequency in Hz. The y value specifies a corresponding active
     // power output in %setMaxW.
     #[yaserde(rename = "opModFreqWatt")]
-    pub op_mod_freq_watt: Option<DercurveLink>,
+    pub op_mod_freq_watt: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 1. The High Frequency Ride-Through
     // (HFRT) function is specified by one or two duration-frequency curves that
@@ -6220,7 +6220,7 @@ pub struct DercontrolBase {
     // frequency in seconds). The y value of each pair specifies a frequency, in
     // Hz. This control specifies the "may trip" region.
     #[yaserde(rename = "opModHFRTMayTrip")]
-    pub op_mod_hfrt_may_trip: Option<DercurveLink>,
+    pub op_mod_hfrt_may_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 2. The High Frequency Ride-Through
     // (HFRT) function is specified by a duration-frequency curve that defines
@@ -6231,7 +6231,7 @@ pub struct DercontrolBase {
     // frequency in seconds). The y value of each pair specifies a frequency, in
     // Hz. This control specifies the "must trip" region.
     #[yaserde(rename = "opModHFRTMustTrip")]
-    pub op_mod_hfrt_must_trip: Option<DercurveLink>,
+    pub op_mod_hfrt_must_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 3. The High Voltage Ride-Through
     // (HVRT) function is specified by one, two, or three duration-volt curves
@@ -6243,7 +6243,7 @@ pub struct DercontrolBase {
     // percentage voltage, defined as ((locally measured voltage - setVRefOfs /
     // setVRef). This control specifies the "may trip" region.
     #[yaserde(rename = "opModHVRTMayTrip")]
-    pub op_mod_hvrt_may_trip: Option<DercurveLink>,
+    pub op_mod_hvrt_may_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 4. The High Voltage Ride-Through
     // (HVRT) function is specified by duration-volt curves that define the
@@ -6255,7 +6255,7 @@ pub struct DercontrolBase {
     // voltage, defined as ((locally measured voltage - setVRefOfs) / setVRef).
     // This control specifies the "momentary cessation" region.
     #[yaserde(rename = "opModHVRTMomentaryCessation")]
-    pub op_mod_hvrt_momentary_cessation: Option<DercurveLink>,
+    pub op_mod_hvrt_momentary_cessation: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 5. The High Voltage Ride-Through
     // (HVRT) function is specified by duration-volt curves that define the
@@ -6267,7 +6267,7 @@ pub struct DercontrolBase {
     // voltage, defined as ((locally measured voltage - setVRefOfs) / setVRef).
     // This control specifies the "must trip" region.
     #[yaserde(rename = "opModHVRTMustTrip")]
-    pub op_mod_hvrt_must_trip: Option<DercurveLink>,
+    pub op_mod_hvrt_must_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 6. The Low Frequency Ride-Through
     // (LFRT) function is specified by one or two duration-frequency curves that
@@ -6278,7 +6278,7 @@ pub struct DercontrolBase {
     // frequency in seconds). The y value of each pair specifies a frequency, in
     // Hz. This control specifies the "may trip" region.
     #[yaserde(rename = "opModLFRTMayTrip")]
-    pub op_mod_lfrt_may_trip: Option<DercurveLink>,
+    pub op_mod_lfrt_may_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 7. The Low Frequency Ride-Through
     // (LFRT) function is specified by a duration-frequency curve that defines
@@ -6289,7 +6289,7 @@ pub struct DercontrolBase {
     // frequency in seconds). The y value of each pair specifies a frequency, in
     // Hz. This control specifies the "must trip" region.
     #[yaserde(rename = "opModLFRTMustTrip")]
-    pub op_mod_lfrt_must_trip: Option<DercurveLink>,
+    pub op_mod_lfrt_must_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 8. The Low Voltage Ride-Through
     // (LVRT) function is specified by one, two, or three duration-volt curves
@@ -6301,7 +6301,7 @@ pub struct DercontrolBase {
     // percent voltage, defined as ((locally measured voltage - setVRefOfs) /
     // setVRef). This control specifies the "may trip" region.
     #[yaserde(rename = "opModLVRTMayTrip")]
-    pub op_mod_lvrt_may_trip: Option<DercurveLink>,
+    pub op_mod_lvrt_may_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 9. The Low Voltage Ride-Through
     // (LVRT) function is specified by duration-volt curves that define the
@@ -6313,7 +6313,7 @@ pub struct DercontrolBase {
     // voltage, defined as ((locally measured voltage - setVRefOfs) / setVRef).
     // This control specifies the "momentary cessation" region.
     #[yaserde(rename = "opModLVRTMomentaryCessation")]
-    pub op_mod_lvrt_momentary_cessation: Option<DercurveLink>,
+    pub op_mod_lvrt_momentary_cessation: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 10. The Low Voltage Ride-Through
     // (LVRT) function is specified by duration-volt curves that define the
@@ -6325,7 +6325,7 @@ pub struct DercontrolBase {
     // voltage, defined as ((locally measured voltage - setVRefOfs) / setVRef).
     // This control specifies the "must trip" region.
     #[yaserde(rename = "opModLVRTMustTrip")]
-    pub op_mod_lvrt_must_trip: Option<DercurveLink>,
+    pub op_mod_lvrt_must_trip: Option<DERCurveLink>,
 
     // The opModMaxLimW function sets the maximum active power generation level
     // at the electrical coupling point as a percentage of set capacity
@@ -6359,7 +6359,7 @@ pub struct DercontrolBase {
     // determined by yRefType and must be one of %setMaxW, %setMaxVar, or
     // %statVarAvail.
     #[yaserde(rename = "opModVoltVar")]
-    pub op_mod_volt_var: Option<DercurveLink>,
+    pub op_mod_volt_var: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 12. The Volt-Watt reduces active
     // power output as a function of measured voltage. The Volt-Watt curve is
@@ -6371,7 +6371,7 @@ pub struct DercontrolBase {
     // percentage (0 - 100). The meaning of the y value is determined by
     // yRefType and must be one of %setMaxW or %statWAvail.
     #[yaserde(rename = "opModVoltWatt")]
-    pub op_mod_volt_watt: Option<DercurveLink>,
+    pub op_mod_volt_watt: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 13. The Watt-PF function varies
     // Power Factor (PF) as a function of delivered active power. The Watt-PF
@@ -6386,7 +6386,7 @@ pub struct DercontrolBase {
     // (e.g. opModFixedPFInjectW) the control resulting in least var magnitude
     // SHOULD take precedence.
     #[yaserde(rename = "opModWattPF")]
-    pub op_mod_watt_pf: Option<DercurveLink>,
+    pub op_mod_watt_pf: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 14. The Watt-Var function varies
     // vars as a function of delivered active power. The Watt-Var curve is
@@ -6397,7 +6397,7 @@ pub struct DercontrolBase {
     // meaning of the y value is determined by yRefType and must be one of
     // %setMaxW, %setMaxVar, or %statVarAvail.
     #[yaserde(rename = "opModWattVar")]
-    pub op_mod_watt_var: Option<DercurveLink>,
+    pub op_mod_watt_var: Option<DERCurveLink>,
 
     // Requested ramp time, in hundredths of a second, for the device to
     // transition from the current DERControl mode setting(s) to the new mode
@@ -6407,7 +6407,7 @@ pub struct DercontrolBase {
     pub ramp_tms: Option<Uint16>,
 }
 
-impl DercontrolBase {
+impl DERControlBase {
     pub fn same_target(&self, other: &Self) -> bool {
         self.op_mod_connect.is_some() == other.op_mod_connect.is_some()
             && self.op_mod_energize.is_some() == other.op_mod_energize.is_some()
@@ -6440,7 +6440,7 @@ impl DercontrolBase {
     }
 }
 
-impl Validate for DercontrolBase {}
+impl Validate for DERControlBase {}
 
 #[derive(
     Default,
@@ -6456,9 +6456,9 @@ impl Validate for DercontrolBase {}
 )]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[yaserde(rename = "DERControlList")]
-pub struct DercontrolList {
+pub struct DERControlList {
     #[yaserde(rename = "DERControl")]
-    pub der_control: Vec<Dercontrol>,
+    pub der_control: Vec<DERControl>,
 
     // The number specifying "all" of the items in the list. Required on GET,
     // ignored otherwise.
@@ -6481,11 +6481,11 @@ pub struct DercontrolList {
     pub href: Option<String>,
 }
 
-impl Validate for DercontrolList {}
+impl Validate for DERControlList {}
 
 bitflags! {
     #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-    pub struct DercontrolType: u32 { // HexBinary32
+    pub struct DERControlType: u32 { // HexBinary32
         const ChargeMode = 1;
         const DischargeMode = 2;
         const OpModConnect = 4;
@@ -6510,7 +6510,7 @@ bitflags! {
 )]
 #[yaserde(rename = "DERCurve")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Dercurve {
+pub struct DERCurve {
     // If the curveType is opModVoltVar, then this field MAY be present. If the
     // curveType is not opModVoltVar, then this field SHALL NOT be present.
     // Enable/disable autonomous vRef adjustment. When enabled, the Volt-Var
@@ -6540,7 +6540,7 @@ pub struct Dercurve {
 
     // Specifies the associated curve-based control mode.
     #[yaserde(rename = "curveType")]
-    pub curve_type: DercurveType,
+    pub curve_type: DERCurveType,
 
     // Open loop response time, the time to ramp up to 90% of the new target in
     // response to the change in voltage, in hundredths of a second. Resolution
@@ -6586,7 +6586,7 @@ pub struct Dercurve {
 
     // The Y-axis units context.
     #[yaserde(rename = "yRefType")]
-    pub y_ref_type: DerunitRefType,
+    pub y_ref_type: DERUnitRefType,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -6607,13 +6607,13 @@ pub struct Dercurve {
     pub href: Option<String>,
 }
 
-impl PartialOrd for Dercurve {
+impl PartialOrd for DERCurve {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl Ord for Dercurve {
+impl Ord for DERCurve {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // Primary Key - creationTime (descending)
         match self.creation_time.cmp(&other.creation_time).reverse() {
@@ -6625,7 +6625,7 @@ impl Ord for Dercurve {
     }
 }
 
-impl Validate for Dercurve {}
+impl Validate for DERCurve {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "CurrentDERProgramLink")]
@@ -6641,9 +6641,9 @@ impl Validate for CurrentDERProgramLink {}
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "DERCurveList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DercurveList {
+pub struct DERCurveList {
     #[yaserde(rename = "DERCurve")]
-    pub der_curve: Vec<Dercurve>,
+    pub der_curve: Vec<DERCurve>,
 
     // The number specifying "all" of the items in the list. Required on a
     // response to a GET, ignored otherwise.
@@ -6660,7 +6660,7 @@ pub struct DercurveList {
     pub href: Option<String>,
 }
 
-impl Validate for DercurveList {}
+impl Validate for DERCurveList {}
 
 // Data point values for defining a curve or schedule
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
@@ -6694,7 +6694,7 @@ impl Validate for CurveData {}
 #[yaserde(rename = "DERCurveType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
-pub enum DercurveType {
+pub enum DERCurveType {
     #[default]
     OpModFreqWatt = 0, // (Frequency-Watt Curve Mode)
     OpModHfrtmayTrip = 1,  // (High Frequency Ride Through, May Trip Mode)
@@ -6713,7 +6713,7 @@ pub enum DercurveType {
     OpModWattVar = 14,     // (Watt-Var Mode)
 }
 
-impl Validate for DercurveType {}
+impl Validate for DERCurveType {}
 
 #[derive(
     Default,
@@ -6729,7 +6729,7 @@ impl Validate for DercurveType {}
 )]
 #[yaserde(rename = "DERProgram")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Derprogram {
+pub struct DERProgram {
     #[yaserde(rename = "ActiveDERControlListLink")]
     pub active_der_control_list_link: Option<ActiveDERControlListLink>,
 
@@ -6737,10 +6737,10 @@ pub struct Derprogram {
     pub default_der_control_link: Option<DefaultDERControlLink>,
 
     #[yaserde(rename = "DERControlListLink")]
-    pub der_control_list_link: Option<DercontrolListLink>,
+    pub der_control_list_link: Option<DERControlListLink>,
 
     #[yaserde(rename = "DERCurveListLink")]
-    pub der_curve_list_link: Option<DercurveListLink>,
+    pub der_curve_list_link: Option<DERCurveListLink>,
 
     // Indicates the relative primacy of the provider of this Program.
     #[yaserde(rename = "primacy")]
@@ -6771,13 +6771,13 @@ pub struct Derprogram {
     pub href: Option<String>,
 }
 
-impl PartialOrd for Derprogram {
+impl PartialOrd for DERProgram {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl Ord for Derprogram {
+impl Ord for DERProgram {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // Primary Key - primacy (ascending)
         match self.primacy.cmp(&other.primacy) {
@@ -6789,7 +6789,7 @@ impl Ord for Derprogram {
     }
 }
 
-impl Validate for Derprogram {}
+impl Validate for DERProgram {}
 
 #[derive(
     Default,
@@ -6805,9 +6805,9 @@ impl Validate for Derprogram {}
 )]
 #[yaserde(rename = "DERProgramList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DerprogramList {
+pub struct DERProgramList {
     #[yaserde(rename = "DERProgram")]
-    pub der_program: Vec<Derprogram>,
+    pub der_program: Vec<DERProgram>,
 
     // The default polling rate for this function set (this resource and all
     // resources below), in seconds. If not specified, a default of 900 seconds
@@ -6837,7 +6837,7 @@ pub struct DerprogramList {
     pub href: Option<String>,
 }
 
-impl Validate for DerprogramList {}
+impl Validate for DERProgramList {}
 
 #[derive(
     Default,
@@ -6852,7 +6852,7 @@ impl Validate for DerprogramList {}
 )]
 #[yaserde(rename = "DERStatus")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Derstatus {
+pub struct DERStatus {
     // Bitmap indicating the status of DER alarms (see DER LogEvents for more
     // details).
     // 0 - DER_FAULT_OVER_CURRENT
@@ -6925,13 +6925,13 @@ pub struct Derstatus {
     pub href: Option<String>,
 }
 
-impl Validate for Derstatus {}
+impl Validate for DERStatus {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DERUnitRefType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
-pub enum DerunitRefType {
+pub enum DERUnitRefType {
     // Specifies context for interpreting percent values:
     #[default]
     NotApplicable = 0,
@@ -6945,7 +6945,7 @@ pub enum DerunitRefType {
     // 8-255 Reserved
 }
 
-impl Validate for DerunitRefType {}
+impl Validate for DERUnitRefType {}
 
 // Average flow of charge through a conductor.
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
@@ -7134,7 +7134,7 @@ impl Validate for PowerFactorWithExcitation {}
 pub struct FixedVar {
     // Indicates whether to interpret 'value' as %setMaxVar or %statVarAvail.
     #[yaserde(rename = "refType")]
-    pub ref_type: DerunitRefType,
+    pub ref_type: DERUnitRefType,
 
     // Specify a signed setpoint for reactive power in % (see 'refType' for
     // context).
@@ -7768,13 +7768,13 @@ impl Validate for DemandResponseProgramListLink {}
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERAvailabilityLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DeravailabilityLink {
+pub struct DERAvailabilityLink {
     // A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
 }
 
-impl Validate for DeravailabilityLink {}
+impl Validate for DERAvailabilityLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DefaultDERControlLink")]
@@ -7790,18 +7790,18 @@ impl Validate for DefaultDERControlLink {}
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERCapabilityLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DercapabilityLink {
+pub struct DERCapabilityLink {
     // A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
 }
 
-impl Validate for DercapabilityLink {}
+impl Validate for DERCapabilityLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "DERControlListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DercontrolListLink {
+pub struct DERControlListLink {
     // Indicates the total number of items in the referenced list. This
     // attribute SHALL be present if the href is a local or relative URI. This
     // attribute SHOULD NOT be present if the href is a remote or absolute URI,
@@ -7814,23 +7814,23 @@ pub struct DercontrolListLink {
     pub href: String,
 }
 
-impl Validate for DercontrolListLink {}
+impl Validate for DERControlListLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERCurveLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DercurveLink {
+pub struct DERCurveLink {
     // A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
 }
 
-impl Validate for DercurveLink {}
+impl Validate for DERCurveLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "DERCurveListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DercurveListLink {
+pub struct DERCurveListLink {
     // Indicates the total number of items in the referenced list. This
     // attribute SHALL be present if the href is a local or relative URI. This
     // attribute SHOULD NOT be present if the href is a remote or absolute URI,
@@ -7843,23 +7843,23 @@ pub struct DercurveListLink {
     pub href: String,
 }
 
-impl Validate for DercurveListLink {}
+impl Validate for DERCurveListLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Derlink {
+pub struct DERLink {
     // A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
 }
 
-impl Validate for Derlink {}
+impl Validate for DERLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "DERListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DerlistLink {
+pub struct DERListLink {
     // Indicates the total number of items in the referenced list. This
     // attribute SHALL be present if the href is a local or relative URI. This
     // attribute SHOULD NOT be present if the href is a remote or absolute URI,
@@ -7872,23 +7872,23 @@ pub struct DerlistLink {
     pub href: String,
 }
 
-impl Validate for DerlistLink {}
+impl Validate for DERListLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERProgramLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DerprogramLink {
+pub struct DERProgramLink {
     // A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
 }
 
-impl Validate for DerprogramLink {}
+impl Validate for DERProgramLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "DERProgramListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DerprogramListLink {
+pub struct DERProgramListLink {
     // Indicates the total number of items in the referenced list. This
     // attribute SHALL be present if the href is a local or relative URI. This
     // attribute SHOULD NOT be present if the href is a remote or absolute URI,
@@ -7901,29 +7901,29 @@ pub struct DerprogramListLink {
     pub href: String,
 }
 
-impl Validate for DerprogramListLink {}
+impl Validate for DERProgramListLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERSettingsLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DersettingsLink {
+pub struct DERSettingsLink {
     // A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
 }
 
-impl Validate for DersettingsLink {}
+impl Validate for DERSettingsLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DERStatusLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct DerstatusLink {
+pub struct DERStatusLink {
     // A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
 }
 
-impl Validate for DerstatusLink {}
+impl Validate for DERStatusLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
 #[yaserde(rename = "DeviceCapabilityLink")]
