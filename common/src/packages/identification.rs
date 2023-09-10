@@ -101,7 +101,8 @@ impl Ord for Response {
 #[yaserde(rename = "status")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
-// Defined in Table 27: Response Types by Function Set
+/// Defined in Table 27: Response Types by Function Set
+/// Can be created from a [`EventStatusType`] for the purpose of reading Event resources
 pub enum ResponseStatus {
     #[default]
     EventReceived = 1,
