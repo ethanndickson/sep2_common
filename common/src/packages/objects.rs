@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use common_derive::{
     SEEvent, SEIdentifiedObject, SERandomizableEvent, SEResource, SERespondableResource,
     SERespondableSubscribableIdentifiedObject, SESubscribableIdentifiedObject,
@@ -211,9 +213,49 @@ pub struct Error {
     // 4 - Maximum request frequency exceeded
     // All other values reserved
     #[yaserde(rename = "reasonCode")]
-    pub reason_code: Uint16,
+    pub reason_code: ErrorReason,
 }
 
+impl Display for Error {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self.max_retry_duration {
+            Some(d) => write!(
+                f,
+                "Request Error - Max Retry Duration: {} - Reason: {}",
+                d, self.reason_code
+            ),
+            None => write!(f, "Request Error - Reason: {}", self.reason_code),
+        }
+    }
+}
+
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u16)]
+pub enum ErrorReason {
+    #[default]
+    InvalidRequestFormat = 0,
+    InvalidRequestValues = 1,
+    ResourceLimitReached = 2,
+    SubscriptionNotSupported = 3,
+    MaximumRequestFrequency = 4,
+}
+
+impl Display for ErrorReason {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ErrorReason::InvalidRequestFormat => write!(f, "Invalid request format"),
+            ErrorReason::InvalidRequestValues => {
+                write!(f, "Invalid request values (e.g. invalid threshold values)")
+            }
+            ErrorReason::ResourceLimitReached => write!(f, "Resource limit reached"),
+            ErrorReason::SubscriptionNotSupported => {
+                write!(f, "Conditional subscription field not supported")
+            }
+            ErrorReason::MaximumRequestFrequency => write!(f, "Maximum request frequency exceeded"),
+        }
+    }
+}
 impl Validate for Error {}
 
 #[derive(
