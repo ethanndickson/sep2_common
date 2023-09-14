@@ -6,9 +6,8 @@ use common_derive::{
     SESubscribableIdentifiedObject, SESubscribableList, SESubscribableResource,
 };
 use std::str::FromStr;
-use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
 use xsd_parser::generator::validator::Validate;
-use yaserde_derive::{YaDeserialize, YaSerialize};
+use yaserde_derive::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
 use crate::packages::primitives::*;
@@ -265,7 +264,7 @@ pub struct RespondableResource {
 }
 
 bitflags! {
-    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
     pub struct ResponseRequired: u8 { // HexBinary8
         const MessageReceived = 0;
         const SpecificResponse = 1;

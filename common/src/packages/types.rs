@@ -4,9 +4,10 @@ use std::fmt::Display;
 use anyhow::anyhow;
 use bitflags::bitflags;
 use std::str::FromStr;
-use xsd_macro_utils::{UtilsDefaultSerde, UtilsTupleIo};
 use xsd_parser::generator::validator::Validate;
-use yaserde_derive::{YaDeserialize, YaSerialize};
+use yaserde_derive::{
+    DefaultYaSerde, HexBinaryYaSerde, PrimitiveYaSerde, YaDeserialize, YaSerialize,
+};
 
 use super::primitives::{
     HexBinary128, Int32, Int48, Int64, String32, String42, Uint16, Uint32, Uint48,
@@ -148,7 +149,7 @@ pub struct DateTimeInterval {
 impl Validate for DateTimeInterval {}
 
 bitflags! {
-    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
     pub struct DeviceCategoryType: u32 { // HexBinary32
         const ProgrammableCommunicatingThermostat = 1;
         const StripHeaters = 2;
@@ -175,7 +176,7 @@ bitflags! {
     }
 }
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsTupleIo, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, PrimitiveYaSerde)]
 pub struct DstRuleType(u32);
 
 impl DstRuleType {
@@ -331,7 +332,7 @@ pub type LocaleType = String42;
 pub type Mridtype = HexBinary128;
 
 /// A signed time offset, typically applied to a Time value, expressed in seconds, with range −3600 to 3600
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct OneHourRangeType(i16);
 
 impl OneHourRangeType {
@@ -369,7 +370,7 @@ impl Display for OneHourRangeType {
 pub type PENType = Uint32;
 
 /// Used for percentages, specified in hundredths of a percent, 0 to 10 000. (10 000 = 100%)
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct Percent(u16);
 
 impl Percent {
@@ -426,7 +427,7 @@ pub enum PhaseCode {
 impl Validate for PhaseCode {}
 
 /// Six digit unsigned decimal integer (0 to 999999).
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct PINType(u32);
 
 impl PINType {
@@ -520,7 +521,7 @@ pub struct RealEnergy {
 impl Validate for RealEnergy {}
 
 bitflags! {
-    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
     pub struct RoleFlagsType: u16 { // HexBinary16
         const IsMirror = 1;
         const IsPremiseAggregationPoint = 2;
@@ -550,7 +551,7 @@ pub enum ServiceKind {
 impl Validate for ServiceKind {}
 
 /// Unsigned integer, maximum inclusive 687194767359, which is 2^36 - 1 (68,719,476,735), with added check digit.
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct SFDIType(u64);
 
 impl SFDIType {
@@ -583,7 +584,7 @@ impl Display for SFDIType {
 }
 
 /// Used for signed percentages, specified in hundredths of a percent, −10 000 to 10 000. (10 000 = 100%)
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, UtilsDefaultSerde)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct SignedPercent(i16);
 
 impl SignedPercent {

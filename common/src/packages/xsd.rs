@@ -2,10 +2,8 @@
 // Types should eventually be put in a module corresponding to their package
 use bitflags::bitflags;
 use std::str::FromStr;
-use xsd_macro_utils::UtilsDefaultSerde;
-use xsd_macro_utils::UtilsTupleIo;
 use xsd_parser::generator::validator::Validate;
-use yaserde_derive::{YaDeserialize, YaSerialize};
+use yaserde_derive::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
 use crate::packages::identification::*;
@@ -6484,7 +6482,7 @@ pub struct DERControlList {
 impl Validate for DERControlList {}
 
 bitflags! {
-    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
     pub struct DERControlType: u32 { // HexBinary32
         const ChargeMode = 1;
         const DischargeMode = 2;
@@ -7197,7 +7195,7 @@ pub struct ConnectStatusType {
 }
 
 bitflags! {
-    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, UtilsTupleIo, UtilsDefaultSerde)]
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
     pub struct ConnectStatusValue: u8 { // HexBinary8
         const Connected = 0;
         const Available = 1;
