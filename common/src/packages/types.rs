@@ -329,7 +329,8 @@ impl Validate for KindType {}
 /// An exhaustive list is currently out of scope for this project
 pub type LocaleType = String42;
 
-pub type Mridtype = HexBinary128;
+/// A Master Resource Identifier
+pub type MRIDType = HexBinary128;
 
 /// A signed time offset, typically applied to a Time value, expressed in seconds, with range −3600 to 3600
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]

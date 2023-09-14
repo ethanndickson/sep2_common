@@ -5,7 +5,7 @@ use super::{
     objects::EventStatus,
     primitives::{HexBinary16, HexBinary160, Int48, String32, Uint32},
     types::{
-        ConsumptionBlockType, DateTimeInterval, DeviceCategoryType, Mridtype, OneHourRangeType,
+        ConsumptionBlockType, DateTimeInterval, DeviceCategoryType, MRIDType, OneHourRangeType,
         RoleFlagsType, SFDIType, ServiceKind, SubscribableType, TimeType, Toutype, VersionType,
     },
     // TODO: Temporary import all
@@ -49,14 +49,14 @@ pub trait SEResponse: SEResource {
     fn created_date_time(&self) -> Option<TimeType>;
     fn end_device_lfdi(&self) -> &HexBinary160;
     fn status(&self) -> Option<ResponseStatus>;
-    fn subject(&self) -> &Mridtype;
+    fn subject(&self) -> &MRIDType;
 }
 
 /// Implemented by all types whose base type is [`IdentifiedObject`]
 ///
 /// [`IdentifiedObject`]: super::identification::IdentifiedObject
 pub trait SEIdentifiedObject: SEResource {
-    fn mrid(&self) -> &Mridtype;
+    fn mrid(&self) -> &MRIDType;
     fn description(&self) -> Option<&String32>;
     fn version(&self) -> Option<VersionType>;
 }
@@ -87,7 +87,7 @@ pub trait SESubscribableResource: SEResource {
 ///
 /// [`RespondableIdentifiedObject`]: super::identification::RespondableIdentifiedObject
 pub trait SERespondableIdentifiedObject: SERespondableResource {
-    fn mrid(&self) -> &Mridtype;
+    fn mrid(&self) -> &MRIDType;
     fn description(&self) -> Option<&String32>;
     fn version(&self) -> Option<VersionType>;
 }
@@ -96,7 +96,7 @@ pub trait SERespondableIdentifiedObject: SERespondableResource {
 ///
 /// [`RespondableSubscribableIdentifiedObject`]: super::identification::RespondableSubscribableIdentifiedObject
 pub trait SERespondableSubscribableIdentifiedObject: SERespondableResource {
-    fn mrid(&self) -> &Mridtype;
+    fn mrid(&self) -> &MRIDType;
     fn description(&self) -> Option<&String32>;
     fn version(&self) -> Option<VersionType>;
     fn subscribable(&self) -> Option<SubscribableType>;
@@ -106,7 +106,7 @@ pub trait SERespondableSubscribableIdentifiedObject: SERespondableResource {
 ///
 /// [`SubscribableIdentifiedObject`]: super::identification::SubscribableIdentifiedObject
 pub trait SESubscribableIdentifiedObject: SESubscribableResource {
-    fn mrid(&self) -> &Mridtype;
+    fn mrid(&self) -> &MRIDType;
     fn description(&self) -> Option<&String32>;
     fn version(&self) -> Option<VersionType>;
 }

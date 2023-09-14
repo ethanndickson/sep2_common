@@ -217,8 +217,8 @@ fn default_DeviceInformation() {
 
 #[test]
 fn default_DRLCCapabilities() {
-    let orig = Drlccapabilities::default();
-    let new: Drlccapabilities =
+    let orig = DRLCCapabilities::default();
+    let new: DRLCCapabilities =
         from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
@@ -2103,8 +2103,8 @@ fn default_LocaleType() {
 
 #[test]
 fn default_mRIDType() {
-    let orig = Mridtype::default();
-    let new: Mridtype = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let orig = MRIDType::default();
+    let new: MRIDType = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 

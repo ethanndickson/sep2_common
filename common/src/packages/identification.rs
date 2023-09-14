@@ -14,7 +14,7 @@ use crate::packages::primitives::*;
 use super::{
     objects::EventStatusType,
     traits::*,
-    types::{Mridtype, SubscribableType, TimeType, VersionType},
+    types::{MRIDType, SubscribableType, TimeType, VersionType},
 };
 
 // A resource is an addressable unit of information, either a collection (List)
@@ -65,7 +65,7 @@ pub struct Response {
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
     #[yaserde(rename = "subject")]
-    pub subject: Mridtype,
+    pub subject: MRIDType,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -199,7 +199,7 @@ impl Validate for ListLink {}
 pub struct IdentifiedObject {
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub mrid: Mridtype,
+    pub mrid: MRIDType,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -290,7 +290,7 @@ impl Validate for RespondableResource {}
 pub struct RespondableIdentifiedObject {
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub mrid: Mridtype,
+    pub mrid: MRIDType,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -351,7 +351,7 @@ impl Validate for RespondableIdentifiedObject {}
 pub struct RespondableSubscribableIdentifiedObject {
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub mrid: Mridtype,
+    pub mrid: MRIDType,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -484,7 +484,7 @@ impl Validate for SubscribableList {}
 pub struct SubscribableIdentifiedObject {
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub mrid: Mridtype,
+    pub mrid: MRIDType,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]

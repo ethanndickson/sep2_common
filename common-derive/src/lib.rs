@@ -48,7 +48,7 @@ pub fn derive_response(input: TokenStream) -> TokenStream {
             fn status(&self) -> Option<ResponseStatus> {
                 self.status
             }
-            fn subject(&self) -> &Mridtype {
+            fn subject(&self) -> &MRIDType {
                 &self.subject
             }
         }
@@ -61,7 +61,7 @@ pub fn derive_identified_object(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
         impl SEIdentifiedObject for #ident {
-            fn mrid(&self) -> &Mridtype {
+            fn mrid(&self) -> &MRIDType {
                 &self.mrid
             }
             fn description(&self) -> Option<&String32> {
@@ -126,7 +126,7 @@ pub fn derive_respondable_identified_object(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
         impl SERespondableIdentifiedObject for #ident {
-            fn mrid(&self) -> &Mridtype {
+            fn mrid(&self) -> &MRIDType {
                 &self.mrid
             }
             fn description(&self) -> Option<&String32> {
@@ -145,7 +145,7 @@ pub fn derive_respondable_subscribable_identified_object(input: TokenStream) -> 
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
         impl SERespondableSubscribableIdentifiedObject for #ident {
-            fn mrid(&self) -> &Mridtype {
+            fn mrid(&self) -> &MRIDType {
                 &self.mrid
             }
             fn description(&self) -> Option<&String32> {
@@ -167,7 +167,7 @@ pub fn derive_subscribable_identified_object(input: TokenStream) -> TokenStream 
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
         impl SESubscribableIdentifiedObject for #ident {
-            fn mrid(&self) -> &Mridtype {
+            fn mrid(&self) -> &MRIDType {
                 &self.mrid
             }
             fn description(&self) -> Option<&String32> {

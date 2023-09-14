@@ -8,7 +8,7 @@ use crate::packages::xsd::*;
 
 use super::identification::ResponseStatus;
 use super::traits::*;
-use super::types::{Mridtype, TimeType, UnitType, VersionType};
+use super::types::{MRIDType, TimeType, UnitType, VersionType};
 
 #[derive(
     Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,
@@ -44,7 +44,7 @@ pub struct DERControlResponse {
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
     #[yaserde(rename = "subject")]
-    pub subject: Mridtype,
+    pub subject: MRIDType,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -88,7 +88,7 @@ pub struct FlowReservationResponseResponse {
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
     #[yaserde(rename = "subject")]
-    pub subject: Mridtype,
+    pub subject: MRIDType,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -174,7 +174,7 @@ pub struct DrResponse {
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
     #[yaserde(rename = "subject")]
-    pub subject: Mridtype,
+    pub subject: MRIDType,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -218,7 +218,7 @@ pub struct PriceResponse {
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
     #[yaserde(rename = "subject")]
-    pub subject: Mridtype,
+    pub subject: MRIDType,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -263,7 +263,7 @@ pub struct ResponseSet {
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
-    pub mrid: Mridtype,
+    pub mrid: MRIDType,
 
     // The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
@@ -360,7 +360,7 @@ pub struct TextResponse {
     // The subject field provides a method to match the response with the
     // originating event. It is populated with the mRID of the original object.
     #[yaserde(rename = "subject")]
-    pub subject: Mridtype,
+    pub subject: MRIDType,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
