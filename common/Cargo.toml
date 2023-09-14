@@ -9,9 +9,6 @@ edition = "2021"
 common-derive = {path = "../common-derive"}
 yaserde = { git = "https://github.com/ethanndickson/yaserde" }
 yaserde_derive = { git = "https://github.com/ethanndickson/yaserde" }
-xsd-types = { git = "https://github.com/ethanndickson/xsd-parser-rs" }
-xsd-macro-utils = { git = "https://github.com/ethanndickson/xsd-parser-rs" }
-xsd-parser = { git = "https://github.com/ethanndickson/xsd-parser-rs" }
 xml-rs = "0.8.4"
 log = "0.4.19"
 anyhow = "1.0.72"

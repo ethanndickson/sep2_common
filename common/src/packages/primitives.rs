@@ -4,8 +4,9 @@ use std::{
     str::FromStr,
 };
 
-use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{DefaultYaSerde, PrimitiveYaSerde};
+
+use super::traits::Validate;
 
 // We purposefully don't use type aliases, as our procedural macros cannot determine whether a type is a primitive using an alias to it
 // This means types that are just primitive aliases cannot be used without these primitive newtypes.

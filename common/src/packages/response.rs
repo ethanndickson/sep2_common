@@ -1,6 +1,5 @@
 use common_derive::{SEIdentifiedObject, SEList, SEResource, SEResponse};
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
-use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all

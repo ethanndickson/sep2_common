@@ -22,7 +22,9 @@ use super::{
 /// Implemented by all types whose base type is [`Resource`]
 ///
 /// [`Resource`]: super::identification::Resource
-pub trait SEResource: YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone {
+pub trait SEResource:
+    YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone + Validate
+{
     fn href(&self) -> Option<&str>;
 }
 
@@ -219,4 +221,11 @@ pub trait SEUsagePointBase: SEIdentifiedObject {
 pub trait SEBillingMeterReadingBase: SEMeterReadingBase {
     fn billing_reading_set_list_link(&self) -> Option<&BillingReadingSetListLink>;
     fn reading_type_link(&self) -> Option<&ReadingTypeLink>;
+}
+
+/// A trait that may be used in future to check invariants on IEEE 2030.5 data types
+pub trait Validate {
+    fn validate(&self) -> Result<(), String> {
+        Ok(())
+    }
 }

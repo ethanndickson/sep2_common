@@ -6,7 +6,6 @@ use common_derive::{
     SESubscribableIdentifiedObject, SESubscribableList, SESubscribableResource,
 };
 use std::str::FromStr;
-use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all

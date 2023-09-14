@@ -4,13 +4,13 @@ use std::fmt::Display;
 use anyhow::anyhow;
 use bitflags::bitflags;
 use std::str::FromStr;
-use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{
     DefaultYaSerde, HexBinaryYaSerde, PrimitiveYaSerde, YaDeserialize, YaSerialize,
 };
 
-use super::primitives::{
-    HexBinary128, Int32, Int48, Int64, String32, String42, Uint16, Uint32, Uint48,
+use super::{
+    primitives::{HexBinary128, Int32, Int48, Int64, String32, String42, Uint16, Uint32, Uint48},
+    traits::Validate,
 };
 
 #[derive(

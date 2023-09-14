@@ -5,7 +5,6 @@ use common_derive::{
     SERespondableSubscribableIdentifiedObject, SESubscribableIdentifiedObject,
     SESubscribableResource,
 };
-use xsd_parser::generator::validator::Validate;
 use yaserde_derive::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
