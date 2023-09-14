@@ -1,4 +1,5 @@
 use anyhow::anyhow;
+use anyhow::bail;
 use anyhow::Result;
 use common_derive::{SEList, SEResource, SESubscriptionBase};
 use xml::EventReader;
@@ -229,7 +230,7 @@ pub fn get_notif_type(notif_xml: &str) -> Result<String> {
             _ => (),
         }
     }
-    Err(anyhow!("Notification did not contain an inner resource"))
+    bail!("Notification did not contain an inner resource")
 }
 
 impl<T: SEResource> Validate for Notification<T> {}

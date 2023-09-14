@@ -187,15 +187,13 @@ impl Validate for Int64 {}
 // requires pairs of hex characters, so an odd number of characters requires a
 // leading "0".
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
-pub struct HexBinary8(pub Uint8);
+pub struct HexBinary8(pub u8);
 
 impl Validate for HexBinary8 {}
 
 impl fmt::Display for HexBinary8 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let HexBinary8(a) = self;
-        let Uint8(a) = a;
-        write!(f, "{:#04x?}", a)
+        write!(f, "{:#04x?}", self.0)
     }
 }
 
@@ -203,9 +201,9 @@ impl FromStr for HexBinary8 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(HexBinary8(Uint8(
+        Ok(HexBinary8(
             u8::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary8")?,
-        )))
+        ))
     }
 }
 
@@ -214,15 +212,13 @@ impl FromStr for HexBinary8 {
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
 #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
-pub struct HexBinary16(pub Uint16);
+pub struct HexBinary16(pub u16);
 
 impl Validate for HexBinary16 {}
 
 impl fmt::Display for HexBinary16 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let HexBinary16(a) = self;
-        let Uint16(a) = a;
-        write!(f, "{:#06x?}", a)
+        write!(f, "{:#06x?}", self.0)
     }
 }
 
@@ -230,9 +226,9 @@ impl FromStr for HexBinary16 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(HexBinary16(Uint16(
+        Ok(HexBinary16(
             u16::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary16")?,
-        )))
+        ))
     }
 }
 
@@ -241,15 +237,13 @@ impl FromStr for HexBinary16 {
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
-pub struct HexBinary32(pub Uint32);
+pub struct HexBinary32(pub u32);
 
 impl Validate for HexBinary32 {}
 
 impl fmt::Display for HexBinary32 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let HexBinary32(a) = self;
-        let Uint32(a) = a;
-        write!(f, "{:#010x?}", a)
+        write!(f, "{:#010x?}", self.0)
     }
 }
 
@@ -257,9 +251,9 @@ impl FromStr for HexBinary32 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(HexBinary32(Uint32(
+        Ok(HexBinary32(
             u32::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary32")?,
-        )))
+        ))
     }
 }
 
@@ -268,12 +262,11 @@ impl FromStr for HexBinary32 {
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
-pub struct HexBinary48(pub Uint64);
+pub struct HexBinary48(pub u64);
 
 impl Validate for HexBinary48 {
     fn validate(&self) -> Result<(), String> {
-        let HexBinary48(a) = self;
-        let Uint64(a) = a;
+        let a = &self.0;
         if a > &281474976710656 {
             Err(format!("Validation error: invalid value! \nExpected: 0 <= 281474976710656.\nActual: 0 == {}", a))
         } else {
@@ -284,8 +277,7 @@ impl Validate for HexBinary48 {
 
 impl fmt::Display for HexBinary48 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let HexBinary48(a) = self;
-        let Uint64(a) = a;
+        let a = &self.0;
         write!(f, "{:#014x?}", a)
     }
 }
@@ -294,9 +286,9 @@ impl FromStr for HexBinary48 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(HexBinary48(Uint64(
+        Ok(HexBinary48(
             u64::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary48")?,
-        )))
+        ))
     }
 }
 
@@ -305,14 +297,13 @@ impl FromStr for HexBinary48 {
 // hexBinary requires pairs of hex characters, so an odd number of characters
 // requires a leading "0".
 #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
-pub struct HexBinary64(pub Uint64);
+pub struct HexBinary64(pub u64);
 
 impl Validate for HexBinary64 {}
 
 impl fmt::Display for HexBinary64 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let HexBinary64(a) = self;
-        let Uint64(a) = a;
+        let a = &self.0;
         write!(f, "{:#018x?}", a)
     }
 }
@@ -321,9 +312,9 @@ impl FromStr for HexBinary64 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(HexBinary64(Uint64(
+        Ok(HexBinary64(
             u64::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary48")?,
-        )))
+        ))
     }
 }
 
@@ -339,8 +330,7 @@ impl Validate for HexBinary128 {}
 
 impl fmt::Display for HexBinary128 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let HexBinary128(a) = self;
-        write!(f, "{:#034x?}", a)
+        write!(f, "{:#034x?}", self.0)
     }
 }
 
@@ -375,8 +365,8 @@ impl AsRef<[u8]> for HexBinary160 {
 
 impl fmt::Display for HexBinary160 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let HexBinary160(a) = self;
-        let a = a
+        let a = self
+            .0
             .iter()
             .map(|byte| format!("{:02X}", byte))
             .collect::<Vec<String>>()
@@ -414,8 +404,7 @@ impl Validate for LFDI {}
 
 impl fmt::Display for LFDI {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let LFDI(a) = self;
-        let hexstring = format!("{}", a);
+        let hexstring = format!("{}", self.0);
         write!(
             f,
             "{}",
