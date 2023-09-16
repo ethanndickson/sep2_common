@@ -1,6 +1,6 @@
 use yaserde::{YaDeserialize, YaSerialize};
 
-use super::{
+use crate::packages::{
     identification::{ResponseRequired, ResponseStatus},
     objects::EventStatus,
     primitives::{HexBinary16, HexBinary160, Int48, String32, Uint32},

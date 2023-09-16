@@ -8,8 +8,8 @@ use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 use crate::packages::identification::*;
 use crate::packages::objects::*;
 use crate::packages::primitives::*;
-use crate::packages::traits::*;
 use crate::packages::types::*;
+use crate::traits::*;
 use common_derive::*;
 
 #[derive(

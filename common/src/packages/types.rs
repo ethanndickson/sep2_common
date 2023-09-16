@@ -6,9 +6,10 @@ use bitflags::bitflags;
 use std::str::FromStr;
 use yaserde::{DefaultYaSerde, HexBinaryYaSerde, PrimitiveYaSerde, YaDeserialize, YaSerialize};
 
-use super::{
-    primitives::{HexBinary128, Int32, Int48, Int64, String32, String42, Uint16, Uint32, Uint48},
-    traits::Validate,
+use crate::traits::Validate;
+
+use super::primitives::{
+    HexBinary128, Int32, Int48, Int64, String32, String42, Uint16, Uint32, Uint48,
 };
 
 #[derive(

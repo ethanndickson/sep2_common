@@ -9,7 +9,7 @@ use yaserde::{YaDeserialize, YaSerialize};
 // TODO Ethan: Temporary import all
 use crate::packages::primitives::*;
 
-use super::traits::*;
+use crate::traits::*;
 
 // Indicates a condition that must be satisfied for the Notification to be
 // triggered.

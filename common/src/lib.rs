@@ -1,12 +1,13 @@
 use anyhow::{anyhow, Result};
 use config::YASERDE_CFG;
 use log::debug;
-use packages::traits::SEResource;
+use traits::SEResource;
 use yaserde::de::from_str;
 use yaserde::ser::to_string_with_config;
 pub mod config;
 pub mod examples;
 pub mod packages;
+pub mod traits;
 
 pub fn serialize<R: SEResource>(resource: &R) -> Result<String> {
     debug!("Serialize: {}", R::name());

@@ -9,13 +9,12 @@ use std::str::FromStr;
 use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
-use crate::packages::primitives::*;
-
 use super::{
     objects::EventStatusType,
-    traits::*,
     types::{MRIDType, SubscribableType, TimeType, VersionType},
 };
+use crate::packages::primitives::*;
+use crate::traits::*;
 
 // A resource is an addressable unit of information, either a collection (List)
 // or instance of an object (identifiedObject, or simply, Resource)

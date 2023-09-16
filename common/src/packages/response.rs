@@ -5,9 +5,9 @@ use yaserde::{YaDeserialize, YaSerialize};
 // TODO Ethan: Temporary import all
 use crate::packages::primitives::*;
 use crate::packages::xsd::*;
+use crate::traits::*;
 
 use super::identification::ResponseStatus;
-use super::traits::*;
 use super::types::{MRIDType, TimeType, UnitType, VersionType};
 
 #[derive(

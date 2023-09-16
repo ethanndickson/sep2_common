@@ -11,9 +11,9 @@ use yaserde::{YaDeserialize, YaSerialize};
 
 use crate::packages::primitives::*;
 use crate::packages::xsd::*;
+use crate::traits::*;
 
 use super::identification::ResponseRequired;
-use super::traits::*;
 use super::types::{
     CurrencyCode, DateTimeInterval, DeviceCategoryType, LocaleType, MRIDType, OneHourRangeType,
     Percent, PowerOfTenMultiplierType, PrimacyType, ServiceKind, SubscribableType, TimeType,
