@@ -804,7 +804,7 @@ pub struct DeviceInformation {
     // 19 - Flow Reservation
     // 20 - DER Control
     #[yaserde(rename = "functionsImplemented")]
-    pub functions_implemented: Option<HexBinary64>,
+    pub functions_implemented: Option<FunctionSetsImplemented>,
 
     // GPS location of this device.
     #[yaserde(rename = "gpsLocation")]
@@ -871,6 +871,33 @@ pub struct DeviceInformation {
     pub href: Option<String>,
 }
 
+bitflags! {
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
+    pub struct FunctionSetsImplemented: u64 { // HexBinary64 (for some reason)
+        const DeviceCapability = 1;
+        const SelfDeviceResource = 2;
+        const EndDeviceResource = 4;
+        const FunctionSetAssignments = 8;
+        const SubscriptionNotificationMechanism = 16;
+        const Response = 32;
+        const Time = 64;
+        const DeviceInformation = 128;
+        const PowerStatus = 256;
+        const NetworkStatus = 512;
+        const LogEvent = 1024;
+        const ConfigurationResource = 2048;
+        const SoftwareDownload = 4096;
+        const DRLC = 8192;
+        const Metering = 16384;
+        const Pricing = 32768;
+        const Messaging = 65536;
+        const Billing = 131072;
+        const Prepayment = 262144;
+        const FlowReservation = 524288;
+        const DERControl = 1048576;
+    }
+}
+
 impl Validate for DeviceInformation {}
 
 // Contains information about the static capabilities of the device, to allow
@@ -912,7 +939,31 @@ pub struct DRLCCapabilities {
     // 20 - Appliance load reduction
     // 21-31 - Reserved
     #[yaserde(rename = "optionsImplemented")]
-    pub options_implemented: HexBinary32,
+    pub options_implemented: DRLCOptions,
+}
+
+bitflags! {
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
+    pub struct DRLCOptions: u32 { // HexBinary32
+        const TargetReductionKwh = 1;
+        const TargetReductionKw = 2;
+        const TargetReductionWatts = 4;
+        const TargetReductionCubicMeters = 8;
+        const TargetReductionCubicFeet = 16;
+        const TargetReductionUsGallons = 32;
+        const TargetReductionImperialGallons = 64;
+        const TargetReductionBtus = 128;
+        const TargetReductionLiters = 256;
+        const TargetReductionKpaGauge = 512;
+        const TargetReductionKpaAbsolute = 1024;
+        const TargetReductionMegaJoule = 2048;
+        const TargetReductionUnitless = 4096;
+        const TemperatureSetPoint = 65536;
+        const TemperatureOffset = 131072;
+        const DutyCycle = 262144;
+        const LoadAdjustmentPercentage = 524288;
+        const ApplianceLoadReduction = 1048576;
+    }
 }
 
 impl Validate for DRLCCapabilities {}
@@ -6481,6 +6532,64 @@ pub struct DERControlList {
 impl Validate for DERControlList {}
 
 bitflags! {
+    // Control modes supported by the DER.  Bit positions SHALL be defined as follows:
+    //
+    // 0 - Charge mode
+    //
+    // 1 - Discharge mode
+    //
+    // 2 - opModConnect (Connect / Disconnect - implies galvanic isolation)
+    //
+    // 3 - opModEnergize (Energize / De-Energize)
+    //
+    // 4 - opModFixedPFAbsorbW (Fixed Power Factor Setpoint when absorbing active power)
+    //
+    // 5 - opModFixedPFInjectW (Fixed Power Factor Setpoint when injecting active power)
+    //
+    // 6 - opModFixedVar (Reactive Power Setpoint)
+    //
+    // 7 - opModFixedW (Charge / Discharge Setpoint)
+    //
+    // 8 - opModFreqDroop (Frequency-Watt Parameterized Mode)
+    //
+    // 9 - opModFreqWatt (Frequency-Watt Curve Mode)
+    //
+    // 10 - opModHFRTMayTrip (High Frequency Ride Through, May Trip Mode)
+    //
+    // 11 - opModHFRTMustTrip (High Frequency Ride Through, Must Trip Mode)
+    //
+    // 12 - opModHVRTMayTrip (High Voltage Ride Through, May Trip Mode)
+    //
+    // 13 - opModHVRTMomentaryCessation (High Voltage Ride Through, Momentary Cessation Mode)
+    //
+    // 14 - opModHVRTMustTrip (High Voltage Ride Through, Must Trip Mode)
+    //
+    // 15 - opModLFRTMayTrip (Low Frequency Ride Through, May Trip Mode)
+    //
+    // 16 - opModLFRTMustTrip (Low Frequency Ride Through, Must Trip Mode)
+    //
+    // 17 - opModLVRTMayTrip (Low Voltage Ride Through, May Trip Mode)
+    //
+    // 18 - opModLVRTMomentaryCessation (Low Voltage Ride Through, Momentary Cessation Mode)
+    //
+    // 19 - opModLVRTMustTrip (Low Voltage Ride Through, Must Trip Mode)
+    //
+    // 20 - opModMaxLimW (Maximum Active Power)
+    //
+    // 21 - opModTargetVar (Target Reactive Power)
+    //
+    // 22 - opModTargetW (Target Active Power)
+    //
+    // 23 - opModVoltVar (Volt-Var Mode)
+    //
+    // 24 - opModVoltWatt (Volt-Watt Mode)
+    //
+    // 25 - opModWattPF (Watt-PowerFactor Mode)
+    //
+    // 26 - opModWattVar (Watt-Var Mode)
+    //
+    // All other values reserved.
+    //
     #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
     pub struct DERControlType: u32 { // HexBinary32
         const ChargeMode = 1;
@@ -6499,6 +6608,17 @@ bitflags! {
         const OpModHVRTMomentaryCessation = 8192;
         const OpModHVRTMustTrip = 16384;
         const OpModLFRTMayTrip = 32768;
+        const OpModLFRTMustTrip = 65536;
+        const OpModLVRTMayTrip = 131072;
+        const OpModLVRTMomentaryCessation = 262144;
+        const OpModLVRTMustTrip = 524288;
+        const OpModMaxLimW = 1048576;
+        const OpModTargetVar = 2097152;
+        const OpModTargetW = 4194304;
+        const OpModVoltVar = 8388608;
+        const OpModVoltWatt = 16777216;
+        const OpModWattPF = 33554432;
+        const OpModWattVar = 67108864;
     }
 }
 
@@ -6865,7 +6985,7 @@ pub struct DERStatus {
     // 10 - DER_FAULT_PHASE_ROTATION
     // 11-31 - Reserved
     #[yaserde(rename = "alarmStatus")]
-    pub alarm_status: Option<HexBinary32>,
+    pub alarm_status: Option<DERAlarmStatus>,
 
     // Connect/status value for generator DER.
     // See ConnectStatusType for values.
@@ -6920,6 +7040,23 @@ pub struct DERStatus {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+bitflags! {
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
+    pub struct DERAlarmStatus: u32 { // HexBinary32
+        const DER_FAULT_OVER_CURRENT = 1;
+        const DER_FAULT_OVER_VOLTAGE = 2;
+        const DER_FAULT_UNDER_VOLTAGE = 4;
+        const DER_FAULT_OVER_FREQUENCY = 8;
+        const DER_FAULT_UNDER_FREQUENCY = 16;
+        const DER_FAULT_VOLTAGE_IMBALANCE = 32;
+        const DER_FAULT_CURRENT_IMBALANCE = 64;
+        const DER_FAULT_EMERGENCY_LOCAL = 128;
+        const DER_FAULT_EMERGENCY_REMOTE = 256;
+        const DER_FAULT_LOW_POWER_INPUT = 512;
+        const DER_FAULT_PHASE_ROTATION = 1024;
+    }
 }
 
 impl Validate for DERStatus {}
@@ -7196,11 +7333,11 @@ pub struct ConnectStatusType {
 bitflags! {
     #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
     pub struct ConnectStatusValue: u8 { // HexBinary8
-        const Connected = 0;
-        const Available = 1;
-        const Operating = 2;
-        const Test = 3;
-        const Error = 4;
+        const Connected = 1;
+        const Available = 2;
+        const Operating = 4;
+        const Test = 8;
+        const Error = 16;
     }
 }
 

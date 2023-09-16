@@ -263,9 +263,9 @@ pub struct RespondableResource {
 bitflags! {
     #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
     pub struct ResponseRequired: u8 { // HexBinary8
-        const MessageReceived = 0;
-        const SpecificResponse = 1;
-        const ResponseRequired = 2;
+        const MessageReceived = 1;
+        const SpecificResponse = 2;
+        const ResponseRequired = 4;
     }
 }
 

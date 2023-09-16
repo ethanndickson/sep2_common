@@ -164,14 +164,15 @@ bitflags! {
         const InteriorLighting = 4096;
         const LoadControlSwitch = 8192;
         const EnergyManagementSystem = 16384;
-        const SmartEnergyModule = 65536;
-        const ElectricVehicle = 262144;
-        const VirutalOrMixedDer = 524288;
-        const ReciprocatingEngine = 2097152;
-        const PhotovoltaicSystem = 8388608;
-        const CombinedPvAndStorage = 16777216;
-        const OtherGenerationSystem = 33554432;
-        const OtherStorageSystem = 67108864;
+        const SmartEnergyModule = 32768;
+        const ElectricVehicle = 65536;
+        const EVSE = 131072;
+        const VirutalOrMixedDer = 262144;
+        const ReciprocatingEngine = 524288;
+        const PhotovoltaicSystem = 2097152;
+        const CombinedPvAndStorage = 8388608;
+        const OtherGenerationSystem = 16777216;
+        const OtherStorageSystem = 33554432;
     }
 }
 

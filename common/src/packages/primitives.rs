@@ -345,7 +345,7 @@ impl FromStr for HexBinary128 {
 }
 
 #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
-pub struct HexBinary160(pub [u8; 20]);
+pub struct HexBinary160(pub [u8; 20]); // TODO: Can this use a Cow?
 
 impl Validate for HexBinary160 {}
 
