@@ -7,8 +7,7 @@ edition = "2021"
 
 [dependencies]
 common-derive = {path = "../common-derive"}
-yaserde = { git = "https://github.com/ethanndickson/yaserde" }
-yaserde_derive = { git = "https://github.com/ethanndickson/yaserde" }
+yaserde = { git = "https://github.com/ethanndickson/yaserde", features = ["yaserde_derive"]}
 xml-rs = "0.8.4"
 log = "0.4.19"
 anyhow = "1.0.72"

@@ -4,9 +4,7 @@ use std::fmt::Display;
 use anyhow::anyhow;
 use bitflags::bitflags;
 use std::str::FromStr;
-use yaserde_derive::{
-    DefaultYaSerde, HexBinaryYaSerde, PrimitiveYaSerde, YaDeserialize, YaSerialize,
-};
+use yaserde::{DefaultYaSerde, HexBinaryYaSerde, PrimitiveYaSerde, YaDeserialize, YaSerialize};
 
 use super::{
     primitives::{HexBinary128, Int32, Int48, Int64, String32, String42, Uint16, Uint32, Uint48},

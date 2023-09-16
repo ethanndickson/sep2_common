@@ -4,7 +4,7 @@ use std::{
     str::FromStr,
 };
 
-use yaserde_derive::{DefaultYaSerde, PrimitiveYaSerde};
+use yaserde::{DefaultYaSerde, PrimitiveYaSerde};
 
 use super::traits::Validate;
 

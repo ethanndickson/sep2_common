@@ -6,7 +6,7 @@ use common_derive::{
     SESubscribableIdentifiedObject, SESubscribableList, SESubscribableResource,
 };
 use std::str::FromStr;
-use yaserde_derive::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
+use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
 use crate::packages::primitives::*;
@@ -142,7 +142,6 @@ impl Validate for Response {}
 pub struct List {
     // This field is OOS since it is different in every child type
     // but is required for our SEList trait implementation
-    #[yaserde(skip_serializing = true)]
     pub contents: Vec<String>,
 
     // The number specifying "all" of the items in the list. Required on a

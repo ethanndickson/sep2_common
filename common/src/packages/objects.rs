@@ -5,7 +5,7 @@ use common_derive::{
     SERespondableSubscribableIdentifiedObject, SESubscribableIdentifiedObject,
     SESubscribableResource,
 };
-use yaserde_derive::{YaDeserialize, YaSerialize};
+use yaserde::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
 

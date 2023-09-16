@@ -2,7 +2,7 @@
 // Types should eventually be put in a module corresponding to their package
 use bitflags::bitflags;
 use std::str::FromStr;
-use yaserde_derive::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
+use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
 use crate::packages::identification::*;
