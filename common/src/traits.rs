@@ -21,7 +21,7 @@ use crate::packages::{
 /// IEEE 2030.5 Clients retrieve, update, create and delete resources on servers.
 /// Implemented by all types whose base type is [`Resource`]
 ///
-/// [`Resource`]: super::identification::Resource
+/// [`Resource`]: super::packages::identification::Resource
 pub trait SEResource:
     YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone + Validate
 {
@@ -33,7 +33,7 @@ pub trait SEResource:
 /// These are not top-level resources.
 /// Implemented by all types whose base type is [`Link`]
 ///
-/// [`Link`]: super::identification::Link
+/// [`Link`]: super::packages::identification::Link
 pub trait SELink: YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone {
     fn href(&self) -> &str;
 }
@@ -44,7 +44,7 @@ pub trait SEListLink: SELink {
 
 /// Implemented by all types whose base type is [`Response`]
 ///
-/// [`Response`]: super::identification::Response
+/// [`Response`]: super::packages::identification::Response
 pub trait SEResponse: SEResource {
     fn created_date_time(&self) -> Option<TimeType>;
     fn end_device_lfdi(&self) -> &HexBinary160;
@@ -54,7 +54,7 @@ pub trait SEResponse: SEResource {
 
 /// Implemented by all types whose base type is [`IdentifiedObject`]
 ///
-/// [`IdentifiedObject`]: super::identification::IdentifiedObject
+/// [`IdentifiedObject`]: super::packages::identification::IdentifiedObject
 pub trait SEIdentifiedObject: SEResource {
     fn mrid(&self) -> &MRIDType;
     fn description(&self) -> Option<&String32>;
@@ -63,7 +63,7 @@ pub trait SEIdentifiedObject: SEResource {
 
 /// Implemented by all types whose base type is [`RespondableResource`]
 ///
-/// [`RespondableResource`]: super::identification::RespondableResource
+/// [`RespondableResource`]: super::packages::identification::RespondableResource
 pub trait SERespondableResource: SEResource {
     fn reply_to(&self) -> Option<&str>;
     fn response_required(&self) -> Option<ResponseRequired>;
@@ -71,21 +71,21 @@ pub trait SERespondableResource: SEResource {
 
 /// Implemented by all types whose base type is [`SubscriptionBase`]
 ///
-/// [`SubscriptionBase`]: super::pubsub::SubscriptionBase
+/// [`SubscriptionBase`]: super::packages::pubsub::SubscriptionBase
 pub trait SESubscriptionBase: SEResource {
     fn subscribed_resource(&self) -> &str;
 }
 
 /// Implemented by all types whose base type is [`SubscribableResource`]
 ///
-/// [`SubscribableResource`]: super::identification::SubscribableResource
+/// [`SubscribableResource`]: super::packages::identification::SubscribableResource
 pub trait SESubscribableResource: SEResource {
     fn subscribable(&self) -> Option<SubscribableType>;
 }
 
 /// Implemented by all types whose base type is [`RespondableIdentifiedObject`]
 ///
-/// [`RespondableIdentifiedObject`]: super::identification::RespondableIdentifiedObject
+/// [`RespondableIdentifiedObject`]: super::packages::identification::RespondableIdentifiedObject
 pub trait SERespondableIdentifiedObject: SERespondableResource {
     fn mrid(&self) -> &MRIDType;
     fn description(&self) -> Option<&String32>;
@@ -94,7 +94,7 @@ pub trait SERespondableIdentifiedObject: SERespondableResource {
 
 /// Implemented by all types whose base type is [`RespondableSubscribableIdentifiedObject`]
 ///
-/// [`RespondableSubscribableIdentifiedObject`]: super::identification::RespondableSubscribableIdentifiedObject
+/// [`RespondableSubscribableIdentifiedObject`]: super::packages::identification::RespondableSubscribableIdentifiedObject
 pub trait SERespondableSubscribableIdentifiedObject: SERespondableResource {
     fn mrid(&self) -> &MRIDType;
     fn description(&self) -> Option<&String32>;
@@ -104,7 +104,7 @@ pub trait SERespondableSubscribableIdentifiedObject: SERespondableResource {
 
 /// Implemented by all types whose base type is [`SubscribableIdentifiedObject`]
 ///
-/// [`SubscribableIdentifiedObject`]: super::identification::SubscribableIdentifiedObject
+/// [`SubscribableIdentifiedObject`]: super::packages::identification::SubscribableIdentifiedObject
 pub trait SESubscribableIdentifiedObject: SESubscribableResource {
     fn mrid(&self) -> &MRIDType;
     fn description(&self) -> Option<&String32>;
@@ -113,7 +113,7 @@ pub trait SESubscribableIdentifiedObject: SESubscribableResource {
 
 /// Implemented by all types whose base type is [`Event`]
 ///
-/// [`Event`]: super::objects::Event
+/// [`Event`]: super::packages::objects::Event
 pub trait SEEvent: SERespondableSubscribableIdentifiedObject {
     fn creation_time(&self) -> TimeType;
     fn event_status(&self) -> &EventStatus;
@@ -122,7 +122,7 @@ pub trait SEEvent: SERespondableSubscribableIdentifiedObject {
 
 /// Implemented by all types whose base type is [`RandomizableEvent`]
 ///
-/// [`RandomizableEvent`]: super::objects::RandomizableEvent
+/// [`RandomizableEvent`]: super::packages::objects::RandomizableEvent
 pub trait SERandomizableEvent: SEEvent {
     fn randomize_duration(&self) -> Option<OneHourRangeType>;
     fn randomize_start(&self) -> Option<OneHourRangeType>;
@@ -130,7 +130,7 @@ pub trait SERandomizableEvent: SEEvent {
 
 /// Implemented by all types whose base type is [`List`]
 ///
-/// [`List`]: super::identification::List
+/// [`List`]: super::packages::identification::List
 pub trait SEList: SEResource {
     type Inner: Ord;
     fn all(&self) -> Uint32;
@@ -155,7 +155,7 @@ pub trait SEList: SEResource {
 
 /// Implemented by all types whose base type is [`SubscribableList`]
 ///
-/// [`SubscribableList`]: super::identification::SubscribableList
+/// [`SubscribableList`]: super::packages::identification::SubscribableList
 pub trait SESubscribableList: SESubscribableResource {
     fn all(&self) -> Uint32;
     fn results(&self) -> Uint32;
