@@ -125,17 +125,7 @@ pub fn derive_subscribable_resource(input: TokenStream) -> TokenStream {
 pub fn derive_respondable_identified_object(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
-        impl SERespondableIdentifiedObject for #ident {
-            fn mrid(&self) -> &MRIDType {
-                &self.mrid
-            }
-            fn description(&self) -> Option<&String32> {
-                self.description.as_ref()
-            }
-            fn version(&self) -> Option<VersionType> {
-                self.version
-            }
-        }
+        impl SERespondableIdentifiedObject for #ident {}
     }
     .into()
 }
@@ -144,20 +134,7 @@ pub fn derive_respondable_identified_object(input: TokenStream) -> TokenStream {
 pub fn derive_respondable_subscribable_identified_object(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
-        impl SERespondableSubscribableIdentifiedObject for #ident {
-            fn mrid(&self) -> &MRIDType {
-                &self.mrid
-            }
-            fn description(&self) -> Option<&String32> {
-                self.description.as_ref()
-            }
-            fn version(&self) -> Option<VersionType> {
-                self.version
-            }
-            fn subscribable(&self) -> Option<SubscribableType> {
-                self.subscribable
-            }
-        }
+        impl SERespondableSubscribableIdentifiedObject for #ident {}
     }
     .into()
 }
@@ -166,17 +143,7 @@ pub fn derive_respondable_subscribable_identified_object(input: TokenStream) -> 
 pub fn derive_subscribable_identified_object(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
-        impl SESubscribableIdentifiedObject for #ident {
-            fn mrid(&self) -> &MRIDType {
-                &self.mrid
-            }
-            fn description(&self) -> Option<&String32> {
-                self.description.as_ref()
-            }
-            fn version(&self) -> Option<VersionType> {
-                self.version
-            }
-        }
+        impl SESubscribableIdentifiedObject for #ident {}
     }
     .into()
 }
@@ -280,14 +247,7 @@ pub fn derive_list(input: TokenStream) -> TokenStream {
 pub fn derive_subscribable_list(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
-        impl SESubscribableList for #ident {
-            fn all(&self) -> Uint32 {
-                self.all
-            }
-            fn results(&self) -> Uint32 {
-                self.results
-            }
-        }
+        impl SESubscribableList for #ident {}
     }
     .into()
 }
@@ -372,9 +332,6 @@ pub fn derive_abstract_device(input: TokenStream) -> TokenStream {
             }
             fn sfdi(&self) -> SFDIType {
                 self.sfdi
-            }
-            fn subscribable(&self) -> Option<&SubscribableType> {
-                self.subscribable.as_ref()
             }
         }
     }

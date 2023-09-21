@@ -13,7 +13,7 @@ use crate::packages::{
 };
 
 // All IEEE 2030.5 top-level types are either a Resource, or a Link to a Resource
-// Since the spec does not use multiple-inheritance, there is redundancy in the inheritance tree. We may be able to remove this in the future.
+// Since the spec does not use multiple-inheritance, there is redundancy in the inheritance tree. We have this removed this redundancy for clarity & usability.
 // Each of these traits can be derived provided an attribute with the expected type (as per the specification, not these traits) exists.
 
 /// A top-level IEEE 2030.5 Resource.
@@ -34,7 +34,9 @@ pub trait SEResource:
 /// Implemented by all types whose base type is [`Link`]
 ///
 /// [`Link`]: super::packages::identification::Link
-pub trait SELink: YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone {
+pub trait SELink:
+    YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone + Validate
+{
     fn href(&self) -> &str;
 }
 
@@ -86,30 +88,20 @@ pub trait SESubscribableResource: SEResource {
 /// Implemented by all types whose base type is [`RespondableIdentifiedObject`]
 ///
 /// [`RespondableIdentifiedObject`]: super::packages::identification::RespondableIdentifiedObject
-pub trait SERespondableIdentifiedObject: SERespondableResource {
-    fn mrid(&self) -> &MRIDType;
-    fn description(&self) -> Option<&String32>;
-    fn version(&self) -> Option<VersionType>;
-}
+pub trait SERespondableIdentifiedObject: SERespondableResource + SEIdentifiedObject {}
 
 /// Implemented by all types whose base type is [`RespondableSubscribableIdentifiedObject`]
 ///
 /// [`RespondableSubscribableIdentifiedObject`]: super::packages::identification::RespondableSubscribableIdentifiedObject
-pub trait SERespondableSubscribableIdentifiedObject: SERespondableResource {
-    fn mrid(&self) -> &MRIDType;
-    fn description(&self) -> Option<&String32>;
-    fn version(&self) -> Option<VersionType>;
-    fn subscribable(&self) -> Option<SubscribableType>;
+pub trait SERespondableSubscribableIdentifiedObject:
+    SERespondableResource + SESubscribableResource + SEIdentifiedObject
+{
 }
 
 /// Implemented by all types whose base type is [`SubscribableIdentifiedObject`]
 ///
 /// [`SubscribableIdentifiedObject`]: super::packages::identification::SubscribableIdentifiedObject
-pub trait SESubscribableIdentifiedObject: SESubscribableResource {
-    fn mrid(&self) -> &MRIDType;
-    fn description(&self) -> Option<&String32>;
-    fn version(&self) -> Option<VersionType>;
-}
+pub trait SESubscribableIdentifiedObject: SESubscribableResource + SEIdentifiedObject {}
 
 /// Implemented by all types whose base type is [`Event`]
 ///
@@ -156,10 +148,7 @@ pub trait SEList: SEResource {
 /// Implemented by all types whose base type is [`SubscribableList`]
 ///
 /// [`SubscribableList`]: super::packages::identification::SubscribableList
-pub trait SESubscribableList: SESubscribableResource {
-    fn all(&self) -> Uint32;
-    fn results(&self) -> Uint32;
-}
+pub trait SESubscribableList: SESubscribableResource + SEList {}
 
 /// Implemented by all types whose base type is [`FunctionSetAssignmentsBase`]
 pub trait SEFunctionSetAssignmentsBase: SEResource {
@@ -189,7 +178,6 @@ pub trait SEAbstractDevice: SESubscribableResource {
     fn log_event_list_link(&self) -> Option<&LogEventListLink>;
     fn power_status_link(&self) -> Option<&PowerStatusLink>;
     fn sfdi(&self) -> SFDIType;
-    fn subscribable(&self) -> Option<&SubscribableType>;
 }
 
 /// Implemented by all types whose base type is [`MeterReadingBase`]

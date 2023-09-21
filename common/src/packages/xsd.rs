@@ -395,6 +395,7 @@ impl Validate for EndDevice {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -661,6 +662,7 @@ impl Validate for FunctionSetAssignments {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -1896,6 +1898,7 @@ pub enum ProfileID {
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -2352,6 +2355,7 @@ impl Validate for ApplianceLoadReduction {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -2421,6 +2425,7 @@ impl Validate for DutyCycle {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -2692,6 +2697,7 @@ impl Validate for MeterReading {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -2871,6 +2877,7 @@ impl Validate for Reading {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -3009,6 +3016,7 @@ impl Validate for ReadingSet {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -3299,6 +3307,7 @@ impl Validate for UsagePoint {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -3608,6 +3617,7 @@ impl Validate for RateComponentList {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -3656,6 +3666,7 @@ impl Validate for TariffProfileList {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -3697,6 +3708,7 @@ impl Validate for TimeTariffIntervalList {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -3836,6 +3848,7 @@ impl Validate for BillingPeriod {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -4092,6 +4105,7 @@ impl Validate for BillingReadingSet {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -4247,6 +4261,7 @@ impl Validate for CustomerAccount {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -4378,6 +4393,7 @@ impl Validate for CustomerAgreement {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -5006,6 +5022,7 @@ impl Validate for Prepayment {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -5400,6 +5417,8 @@ impl Validate for FlowReservationRequestList {}
     YaDeserialize,
     SEEvent,
     SERespondableSubscribableIdentifiedObject,
+    SEIdentifiedObject,
+    SESubscribableResource,
     SERespondableResource,
     SEResource,
 )]
@@ -5515,6 +5534,7 @@ impl Validate for FlowReservationResponse {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -5563,6 +5583,7 @@ impl Validate for FlowReservationResponseList {}
     YaSerialize,
     YaDeserialize,
     SESubscribableIdentifiedObject,
+    SEIdentifiedObject,
     SESubscribableResource,
     SEResource,
 )]
@@ -6499,6 +6520,7 @@ impl Validate for DERControlBase {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
@@ -6841,6 +6863,7 @@ impl Validate for DERCurveType {}
     YaSerialize,
     YaDeserialize,
     SESubscribableIdentifiedObject,
+    SEIdentifiedObject,
     SESubscribableResource,
     SEResource,
 )]
@@ -6917,6 +6940,7 @@ impl Validate for DERProgram {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]

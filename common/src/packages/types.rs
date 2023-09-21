@@ -284,8 +284,10 @@ impl DstRuleType {
 pub enum FlowDirectionType {
     #[default]
     NotApplicable = 0,
-    Forward = 1,  // delivered to customer
-    Reverse = 19, // received from customer
+    // Delivered to customer
+    Forward = 1,
+    // Received from customer
+    Reverse = 19,
 }
 
 impl Validate for FlowDirectionType {}
@@ -386,6 +388,7 @@ impl Percent {
         self.0
     }
 }
+
 impl FromStr for Percent {
     type Err = anyhow::Error;
 
@@ -771,4 +774,5 @@ pub enum UomType {
 
 impl Validate for UomType {}
 
+/// Version SHALL indicate a distinct identifier for each revision of an IdentifiedObject. If not specified, a default version of "0" (initial version) SHALL be assumed. Upon modification of any IdentifiedObject, the mRID SHALL remain the same, but the version SHALL be incremented. Servers MAY NOT modify objects that they did not create, unless they were notified of the change from the entity controlling the object's PEN.
 pub type VersionType = Uint16;

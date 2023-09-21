@@ -114,6 +114,7 @@ pub enum EventStatusType {
 
 impl Validate for EventStatus {}
 
+// An Event indicates information that applies to a particular period of time. Events SHALL be executed relative to the time of the server, as described in the Time function set section 11.1.
 #[derive(
     Default,
     PartialEq,
@@ -124,6 +125,8 @@ impl Validate for EventStatus {}
     YaDeserialize,
     SEEvent,
     SERespondableSubscribableIdentifiedObject,
+    SEIdentifiedObject,
+    SESubscribableResource,
     SERespondableResource,
     SEResource,
 )]
@@ -257,6 +260,8 @@ impl Display for ErrorReason {
 }
 impl Validate for Error {}
 
+// An Event that can indicate time ranges over which the start time
+// and duration SHALL be randomized.
 #[derive(
     Default,
     PartialEq,
@@ -267,6 +272,8 @@ impl Validate for Error {}
     YaDeserialize,
     SEEvent,
     SERespondableSubscribableIdentifiedObject,
+    SEIdentifiedObject,
+    SESubscribableResource,
     SERespondableResource,
     SEResource,
 )]
@@ -352,6 +359,7 @@ pub struct RandomizableEvent {
 
 impl Validate for RandomizableEvent {}
 
+// Distributed Energy Resource (DER) time/event-based control.
 #[derive(
     Default,
     PartialEq,
@@ -363,6 +371,8 @@ impl Validate for RandomizableEvent {}
     SERandomizableEvent,
     SEEvent,
     SERespondableSubscribableIdentifiedObject,
+    SEIdentifiedObject,
+    SESubscribableResource,
     SERespondableResource,
     SEResource,
 )]
@@ -480,6 +490,7 @@ impl Ord for DERControl {
 
 impl Validate for DERControl {}
 
+// Text message such as a notification.
 #[derive(
     Default,
     PartialEq,
@@ -490,6 +501,8 @@ impl Validate for DERControl {}
     YaDeserialize,
     SEEvent,
     SERespondableSubscribableIdentifiedObject,
+    SEIdentifiedObject,
+    SESubscribableResource,
     SERespondableResource,
     SEResource,
 )]
@@ -605,6 +618,9 @@ impl Ord for TextMessage {
 
 impl Validate for TextMessage {}
 
+// Describes the time-differentiated portion of the RateComponent,
+// if applicable, and provides the ability to specify multiple time intervals,
+// each with its own consumption-based components and other attributes.
 #[derive(
     Default,
     PartialEq,
@@ -616,6 +632,8 @@ impl Validate for TextMessage {}
     SERandomizableEvent,
     SEEvent,
     SERespondableSubscribableIdentifiedObject,
+    SEIdentifiedObject,
+    SESubscribableResource,
     SERespondableResource,
     SEResource,
 )]
@@ -732,6 +750,7 @@ impl Ord for TimeTariffInterval {
 
 impl Validate for TimeTariffInterval {}
 
+// Instructs an EndDevice to perform a specified action.
 #[derive(
     Default,
     PartialEq,
@@ -743,6 +762,8 @@ impl Validate for TimeTariffInterval {}
     SERandomizableEvent,
     SEEvent,
     SERespondableSubscribableIdentifiedObject,
+    SEIdentifiedObject,
+    SESubscribableResource,
     SERespondableResource,
     SEResource,
 )]
@@ -970,6 +991,9 @@ impl Ord for DemandResponseProgram {
 
 impl Validate for DemandResponseProgram {}
 
+// A schedule of charges; structure that allows the definition
+// of tariff structures such as step (block) and time of use (tier)
+// when used in conjunction with TimeTariffInterval and ConsumptionTariffInterval.
 #[derive(
     Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
@@ -1037,6 +1061,7 @@ impl Ord for TariffProfile {
 
 impl Validate for TariffProfile {}
 
+// Provides a container for collections of text messages.
 #[derive(
     Default,
     PartialEq,
@@ -1046,6 +1071,7 @@ impl Validate for TariffProfile {}
     YaSerialize,
     YaDeserialize,
     SESubscribableIdentifiedObject,
+    SEIdentifiedObject,
     SESubscribableResource,
     SEResource,
 )]

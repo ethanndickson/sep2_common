@@ -30,6 +30,8 @@ pub struct Resource {
 
 impl Validate for Resource {}
 
+// The Response object is the generic response data
+// repository which is extended for specific function sets.
 #[derive(
     Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,
 )]
@@ -135,6 +137,7 @@ impl From<EventStatusType> for ResponseStatus {
 
 impl Validate for Response {}
 
+// Container to hold a collection of object instances or references.
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "List")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -172,6 +175,7 @@ pub struct Link {
 
 impl Validate for Link {}
 
+// ListLinks provide a reference, via URI, to a List.
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
 #[yaserde(rename = "ListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -189,6 +193,7 @@ pub struct ListLink {
 }
 impl Validate for ListLink {}
 
+// This is a root class to provide common naming attributes for all classes needing naming attributes
 #[derive(
     Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
@@ -215,6 +220,7 @@ pub struct IdentifiedObject {
 }
 impl Validate for IdentifiedObject {}
 
+// A Resource to which a Response can be requested.
 #[derive(
     Default,
     PartialEq,
@@ -271,6 +277,7 @@ bitflags! {
 
 impl Validate for RespondableResource {}
 
+// An IdentifiedObject to which a Response can be requested.
 #[derive(
     Default,
     PartialEq,
@@ -280,6 +287,7 @@ impl Validate for RespondableResource {}
     YaSerialize,
     YaDeserialize,
     SERespondableIdentifiedObject,
+    SEIdentifiedObject,
     SERespondableResource,
     SEResource,
 )]
@@ -332,6 +340,7 @@ pub struct RespondableIdentifiedObject {
 
 impl Validate for RespondableIdentifiedObject {}
 
+// An IdentifiedObject to which a Response can be requested.
 #[derive(
     Default,
     PartialEq,
@@ -341,6 +350,8 @@ impl Validate for RespondableIdentifiedObject {}
     YaSerialize,
     YaDeserialize,
     SERespondableSubscribableIdentifiedObject,
+    SESubscribableResource,
+    SEIdentifiedObject,
     SERespondableResource,
     SEResource,
 )]
@@ -399,6 +410,7 @@ pub struct RespondableSubscribableIdentifiedObject {
 
 impl Validate for RespondableSubscribableIdentifiedObject {}
 
+// A Resource to which a Subscription can be requested.
 #[derive(
     Default,
     PartialEq,
@@ -427,6 +439,7 @@ pub struct SubscribableResource {
 
 impl Validate for SubscribableResource {}
 
+// A List to which a Subscription can be requested.
 #[derive(
     Default,
     PartialEq,
@@ -436,12 +449,17 @@ impl Validate for SubscribableResource {}
     YaSerialize,
     YaDeserialize,
     SESubscribableList,
+    SEList,
     SESubscribableResource,
     SEResource,
 )]
 #[yaserde(rename = "SubscribableList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscribableList {
+    // This field is OOS since it is different in every child type
+    // but is required for our SEList trait implementation
+    pub contents: Vec<String>,
+
     // The number specifying "all" of the items in the list. Required on GET,
     // ignored otherwise.
     #[yaserde(attribute, rename = "all")]
@@ -465,6 +483,7 @@ pub struct SubscribableList {
 
 impl Validate for SubscribableList {}
 
+// An IdentifiedObject to which a Response can be requested.
 #[derive(
     Default,
     PartialEq,
@@ -474,6 +493,7 @@ impl Validate for SubscribableList {}
     YaSerialize,
     YaDeserialize,
     SESubscribableIdentifiedObject,
+    SEIdentifiedObject,
     SESubscribableResource,
     SEResource,
 )]
