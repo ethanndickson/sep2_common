@@ -1,5 +1,4 @@
 #![allow(non_snake_case)]
-use common::config::YASERDE_CFG;
 use common::packages::identification::ResponseRequired;
 use common::packages::objects::*;
 use common::packages::primitives::*;
@@ -11,7 +10,7 @@ use common::packages::types::{
 use common::packages::xsd::{ApplianceLoadReduction, DutyCycle, Offset, SetPoint, TargetReduction};
 
 use yaserde::de::from_str;
-use yaserde::ser::to_string_with_config;
+use yaserde::ser::to_string;
 
 #[test]
 fn complex_serde() {
@@ -61,98 +60,91 @@ fn complex_serde() {
         response_required: Some(ResponseRequired::MessageReceived),
         href: Some("test".to_string()),
     };
-    let new: EndDeviceControl =
-        from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: EndDeviceControl = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_EventStatus() {
     let orig = EventStatus::default();
-    let new: EventStatus = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: EventStatus = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_Event() {
     let orig = Event::default();
-    let new: Event = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: Event = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_Error() {
     let orig = Error::default();
-    let new: Error = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: Error = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_RandomizableEvent() {
     let orig = RandomizableEvent::default();
-    let new: RandomizableEvent =
-        from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: RandomizableEvent = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DERControl() {
     let orig = DERControl::default();
-    println!("{}", &to_string_with_config(&orig, &YASERDE_CFG).unwrap());
-    let new: DERControl = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    println!("{}", &to_string(&orig).unwrap());
+    let new: DERControl = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_TextMessage() {
     let orig = TextMessage::default();
-    let new: TextMessage = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: TextMessage = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_TimeTariffInterval() {
     let orig = TimeTariffInterval::default();
-    let new: TimeTariffInterval =
-        from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: TimeTariffInterval = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_EndDeviceControl() {
     let orig = EndDeviceControl::default();
-    let new: EndDeviceControl =
-        from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: EndDeviceControl = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_DemandResponseProgram() {
     let orig = DemandResponseProgram::default();
-    let new: DemandResponseProgram =
-        from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: DemandResponseProgram = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_TariffProfile() {
     let orig = TariffProfile::default();
-    let new: TariffProfile =
-        from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: TariffProfile = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_MessagingProgram() {
     let orig = MessagingProgram::default();
-    let new: MessagingProgram =
-        from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: MessagingProgram = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_PrimacyType() {
     let orig = PrimacyType::default();
-    let new: PrimacyType = from_str(&to_string_with_config(&orig, &YASERDE_CFG).unwrap()).unwrap();
+    let new: PrimacyType = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }

@@ -1,5 +1,5 @@
 use common::packages::types::DateTimeInterval;
-use common::{config::YASERDE_CFG, serialize};
+use common::serialize;
 use common::{
     examples::NTF_16_06_04,
     packages::{
@@ -8,7 +8,7 @@ use common::{
         xsd::Reading,
     },
 };
-use yaserde::{de::from_str, ser::to_string_with_config};
+use yaserde::{de::from_str, ser::to_string};
 
 /// resources/Examples/16_06_04_Notification.xml
 pub(crate) fn create_notif_example() -> Notification<Reading> {
@@ -38,7 +38,7 @@ pub(crate) fn create_notif_example() -> Notification<Reading> {
 #[test]
 fn notification_example() {
     let orig = create_notif_example();
-    let out = to_string_with_config(&orig, &YASERDE_CFG).unwrap();
+    let out = to_string(&orig).unwrap();
     let expected = r#"<Notification xmlns="urn:ieee:std:2030.5:ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Resource xsi:type="Reading">
     <timePeriod>
