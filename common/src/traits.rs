@@ -1,3 +1,5 @@
+use std::panic::RefUnwindSafe;
+
 use yaserde::{YaDeserialize, YaSerialize};
 
 use crate::packages::{
@@ -21,9 +23,12 @@ use crate::packages::{
 /// IEEE 2030.5 Clients retrieve, update, create and delete resources on servers.
 /// Implemented by all types whose base type is [`Resource`]
 ///
+/// The `RefUnwindSafe` auto-trait bound is to gracefully handle our XML library (xml-rs) unavoidably panicking and performing a stack unwind.
+/// There is no reason for any Resource to use interior mutability, thus this bound is reasonable.
+///
 /// [`Resource`]: super::packages::identification::Resource
 pub trait SEResource:
-    YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone + Validate
+    YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone + Validate + RefUnwindSafe
 {
     fn href(&self) -> Option<&str>;
 }
