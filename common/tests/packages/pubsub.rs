@@ -1,6 +1,6 @@
-use common::packages::types::DateTimeInterval;
-use common::serialize;
-use common::{
+use sep2_common::packages::types::DateTimeInterval;
+use sep2_common::serialize;
+use sep2_common::{
     examples::NTF_16_06_04,
     packages::{
         primitives::{Int48, Int64, Uint32, Uint8},

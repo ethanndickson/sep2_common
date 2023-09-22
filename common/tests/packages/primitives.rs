@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 use std::str::FromStr;
 
-use common::packages::primitives::*;
+use sep2_common::packages::primitives::*;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
 

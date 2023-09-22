@@ -1,4 +1,4 @@
-use common::packages::types::DstRuleType;
+use sep2_common::packages::types::DstRuleType;
 
 #[test]
 fn basic_dstruletype() {

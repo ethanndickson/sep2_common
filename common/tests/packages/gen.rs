@@ -1,11 +1,11 @@
 #![allow(non_snake_case)]
 // TODO Ethan: Temporary import all
-use common::packages::identification::*;
-use common::packages::objects::*;
-use common::packages::pubsub::*;
-use common::packages::response::*;
-use common::packages::types::*;
-use common::packages::xsd::*;
+use sep2_common::packages::identification::*;
+use sep2_common::packages::objects::*;
+use sep2_common::packages::pubsub::*;
+use sep2_common::packages::response::*;
+use sep2_common::packages::types::*;
+use sep2_common::packages::xsd::*;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
 

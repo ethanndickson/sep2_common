@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 // TODO Ethan: Temporary import all
-use common::packages::identification::*;
+use sep2_common::packages::identification::*;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
 

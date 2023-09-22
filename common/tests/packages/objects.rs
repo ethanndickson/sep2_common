@@ -1,13 +1,15 @@
 #![allow(non_snake_case)]
-use common::packages::identification::ResponseRequired;
-use common::packages::objects::*;
-use common::packages::primitives::*;
-use common::packages::types::Percent;
-use common::packages::types::{
+use sep2_common::packages::identification::ResponseRequired;
+use sep2_common::packages::objects::*;
+use sep2_common::packages::primitives::*;
+use sep2_common::packages::types::Percent;
+use sep2_common::packages::types::{
     ApplianceLoadReductionType, DateTimeInterval, DeviceCategoryType, OneHourRangeType,
     PrimacyType, SubscribableType, UnitType,
 };
-use common::packages::xsd::{ApplianceLoadReduction, DutyCycle, Offset, SetPoint, TargetReduction};
+use sep2_common::packages::xsd::{
+    ApplianceLoadReduction, DutyCycle, Offset, SetPoint, TargetReduction,
+};
 
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
