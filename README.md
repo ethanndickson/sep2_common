@@ -13,6 +13,8 @@
 - [x] Rust enums for all applicable integer types.
 - [x] [Bitflags](https://github.dev/bitflags/bitflags) for all `HexBinary\d+` bitmaps
 - [x] Rust Traits for all re-used IEEE 2030.5 base types
+  - [x] Common Interface for manipulating List Resources
 - [x] Rust Procedural Macros to derive these traits on the appropriate types. 
 - [x] [De]?serialising sanity tests (auto-generated)
+- [x] All Function Set List Ordering
 - [ ] Correctness / Spec Adherence Tests 
