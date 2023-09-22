@@ -4,14 +4,14 @@ use yaserde::{YaDeserialize, YaSerialize};
 
 use crate::packages::{
     identification::{ResponseRequired, ResponseStatus},
+    // TODO: Temporary import all
+    links::*,
     objects::EventStatus,
     primitives::{HexBinary16, HexBinary160, Int48, String32, Uint32},
     types::{
         ConsumptionBlockType, DateTimeInterval, DeviceCategoryType, MRIDType, OneHourRangeType,
         RoleFlagsType, SFDIType, ServiceKind, SubscribableType, TimeType, Toutype, VersionType,
     },
-    // TODO: Temporary import all
-    xsd::*,
 };
 
 // All IEEE 2030.5 top-level types are either a Resource, or a Link to a Resource

@@ -1,7 +1,10 @@
 pub mod identification;
+pub mod links;
+pub mod metering;
+pub mod mirror_metering;
 pub mod objects;
+pub mod pricing;
 pub mod primitives;
 pub mod pubsub;
 pub mod response;
 pub mod types;
-pub mod xsd;

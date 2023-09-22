@@ -1,10 +1,10 @@
-use common_derive::{SEIdentifiedObject, SEList, SEResource, SEResponse};
+use sep2_common_derive::{SEIdentifiedObject, SEList, SEResource, SEResponse};
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 use yaserde::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
+use crate::packages::links::*;
 use crate::packages::primitives::*;
-use crate::packages::xsd::*;
 use crate::traits::*;
 
 use super::identification::ResponseStatus;

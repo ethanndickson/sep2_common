@@ -1,6 +1,6 @@
 // File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 use bitflags::bitflags;
-use common_derive::{
+use sep2_common_derive::{
     SEIdentifiedObject, SELink, SEList, SEListLink, SEResource, SERespondableIdentifiedObject,
     SERespondableResource, SERespondableSubscribableIdentifiedObject, SEResponse,
     SESubscribableIdentifiedObject, SESubscribableList, SESubscribableResource,
@@ -94,7 +94,6 @@ impl Ord for Response {
 }
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "status")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
 /// Defined in Table 27: Response Types by Function Set

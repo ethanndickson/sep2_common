@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-use common_derive::{
+use sep2_common_derive::{
     SEEvent, SEIdentifiedObject, SERandomizableEvent, SEResource, SERespondableResource,
     SERespondableSubscribableIdentifiedObject, SESubscribableIdentifiedObject,
     SESubscribableResource,
@@ -9,15 +9,14 @@ use yaserde::{YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
 
+use crate::packages::links::*;
 use crate::packages::primitives::*;
-use crate::packages::xsd::*;
 use crate::traits::*;
 
 use super::identification::ResponseRequired;
 use super::types::{
-    CurrencyCode, DateTimeInterval, DeviceCategoryType, LocaleType, MRIDType, OneHourRangeType,
-    Percent, PowerOfTenMultiplierType, PrimacyType, ServiceKind, SubscribableType, TimeType,
-    Toutype, VersionType,
+    DateTimeInterval, DeviceCategoryType, LocaleType, MRIDType, OneHourRangeType, Percent,
+    PrimacyType, SubscribableType, TimeType, Toutype, VersionType,
 };
 
 // Current status information relevant to a specific object. The Status object
@@ -990,76 +989,6 @@ impl Ord for DemandResponseProgram {
 }
 
 impl Validate for DemandResponseProgram {}
-
-// A schedule of charges; structure that allows the definition
-// of tariff structures such as step (block) and time of use (tier)
-// when used in conjunction with TimeTariffInterval and ConsumptionTariffInterval.
-#[derive(
-    Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
-)]
-#[yaserde(rename = "TariffProfile")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct TariffProfile {
-    // The currency code indicating the currency for this TariffProfile.
-    #[yaserde(rename = "currency")]
-    pub currency: Option<CurrencyCode>,
-
-    // Indicates the power of ten multiplier for the price attribute.
-    #[yaserde(rename = "pricePowerOfTenMultiplier")]
-    pub price_power_of_ten_multiplier: Option<PowerOfTenMultiplierType>,
-
-    // Indicates the relative primacy of the provider of this program.
-    #[yaserde(rename = "primacy")]
-    pub primacy: PrimacyType,
-
-    // The rate code for this tariff profile. Provided by the Pricing service
-    // provider per its internal business needs and practices and provides a
-    // method to identify the specific rate code for the TariffProfile instance.
-    // This would typically not be communicated to the user except to facilitate
-    // troubleshooting due to its service provider-specific technical nature.
-    #[yaserde(rename = "rateCode")]
-    pub rate_code: Option<String20>,
-
-    #[yaserde(rename = "RateComponentListLink")]
-    pub rate_component_list_link: Option<RateComponentListLink>,
-
-    // The kind of service provided by this usage point.
-    #[yaserde(rename = "serviceCategoryKind")]
-    pub service_category_kind: ServiceKind,
-
-    // The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    // The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    // Contains the version number of the object. See the type definition for
-    // details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
-
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
-    #[yaserde(attribute, rename = "href")]
-    pub href: Option<String>,
-}
-
-impl PartialOrd for TariffProfile {
-    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-        Some(self.cmp(other))
-    }
-}
-
-impl Ord for TariffProfile {
-    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        // Primary Key - mRID (descending)
-        self.mrid.cmp(&other.mrid).reverse()
-    }
-}
-
-impl Validate for TariffProfile {}
 
 // Provides a container for collections of text messages.
 #[derive(

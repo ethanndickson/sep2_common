@@ -1,11 +1,37 @@
 #![allow(non_snake_case)]
 // TODO Ethan: Temporary import all
 use sep2_common::packages::identification::*;
+use sep2_common::packages::links::*;
+use sep2_common::packages::metering::MeterReading;
+use sep2_common::packages::metering::MeterReadingList;
+use sep2_common::packages::metering::Reading;
+use sep2_common::packages::metering::ReadingList;
+use sep2_common::packages::metering::ReadingSet;
+use sep2_common::packages::metering::ReadingSetList;
+use sep2_common::packages::metering::ReadingType;
+use sep2_common::packages::metering::UsagePoint;
+use sep2_common::packages::metering::UsagePointList;
+use sep2_common::packages::mirror_metering::MeterReadingBase;
+use sep2_common::packages::mirror_metering::MirrorMeterReading;
+use sep2_common::packages::mirror_metering::MirrorMeterReadingList;
+use sep2_common::packages::mirror_metering::MirrorReadingSet;
+use sep2_common::packages::mirror_metering::MirrorUsagePoint;
+use sep2_common::packages::mirror_metering::MirrorUsagePointList;
+use sep2_common::packages::mirror_metering::ReadingBase;
+use sep2_common::packages::mirror_metering::ReadingSetBase;
+use sep2_common::packages::mirror_metering::UsagePointBase;
 use sep2_common::packages::objects::*;
+use sep2_common::packages::pricing::ConsumptionTariffInterval;
+use sep2_common::packages::pricing::ConsumptionTariffIntervalList;
+use sep2_common::packages::pricing::CostKindType;
+use sep2_common::packages::pricing::EnvironmentalCost;
+use sep2_common::packages::pricing::RateComponent;
+use sep2_common::packages::pricing::RateComponentList;
+use sep2_common::packages::pricing::TariffProfileList;
+use sep2_common::packages::pricing::TimeTariffIntervalList;
 use sep2_common::packages::pubsub::*;
 use sep2_common::packages::response::*;
 use sep2_common::packages::types::*;
-use sep2_common::packages::xsd::*;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
 

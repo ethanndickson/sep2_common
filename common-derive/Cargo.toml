@@ -1,5 +1,5 @@
 [package]
-name = "common-derive"
+name = "sep2_common_derive"
 version = "0.1.0"
 edition = "2021"
 

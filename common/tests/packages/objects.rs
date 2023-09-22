@@ -1,14 +1,15 @@
 #![allow(non_snake_case)]
 use sep2_common::packages::identification::ResponseRequired;
+use sep2_common::packages::links::{
+    ApplianceLoadReduction, DutyCycle, Offset, SetPoint, TargetReduction,
+};
 use sep2_common::packages::objects::*;
+use sep2_common::packages::pricing::TariffProfile;
 use sep2_common::packages::primitives::*;
 use sep2_common::packages::types::Percent;
 use sep2_common::packages::types::{
     ApplianceLoadReductionType, DateTimeInterval, DeviceCategoryType, OneHourRangeType,
     PrimacyType, SubscribableType, UnitType,
-};
-use sep2_common::packages::xsd::{
-    ApplianceLoadReduction, DutyCycle, Offset, SetPoint, TargetReduction,
 };
 
 use yaserde::de::from_str;

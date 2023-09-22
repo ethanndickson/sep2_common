@@ -1,3 +1,4 @@
+use sep2_common::packages::metering::Reading;
 use sep2_common::packages::types::DateTimeInterval;
 use sep2_common::serialize;
 use sep2_common::{
@@ -5,7 +6,6 @@ use sep2_common::{
     packages::{
         primitives::{Int48, Int64, Uint32, Uint8},
         pubsub::{get_notif_type, Notification},
-        xsd::Reading,
     },
 };
 use yaserde::{de::from_str, ser::to_string};

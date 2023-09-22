@@ -5,6 +5,7 @@ use traits::SEResource;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
 pub mod examples;
+pub mod object;
 pub mod packages;
 pub mod traits;
 
