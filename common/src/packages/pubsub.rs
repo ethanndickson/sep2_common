@@ -64,7 +64,7 @@ pub struct Subscription {
     // 1 - application/sep-exi
     // 2-255 - reserved
     #[yaserde(rename = "encoding")]
-    pub encoding: Uint8,
+    pub encoding: HTTPEncoding,
 
     // Contains the preferred schema and extensibility level indication such as
     // "+S1"
@@ -108,6 +108,17 @@ pub struct Subscription {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum HTTPEncoding {
+    #[default]
+    SEPXML = 0,
+    SEPEXI = 1,
 }
 
 impl PartialOrd for Subscription {

@@ -228,7 +228,7 @@ pub struct DeviceStatus {
     // 6 - kW ramping
     // 7 - kVar ramping
     #[yaserde(rename = "opState")]
-    pub op_state: Option<Uint8>,
+    pub op_state: Option<OpStatus>,
 
     // Total time device has operated: re-settable: Accumulated time in seconds
     // since the last time the counter was reset.
@@ -255,6 +255,25 @@ pub struct DeviceStatus {
 }
 
 impl Validate for DeviceStatus {}
+
+#[allow(non_camel_case_types)]
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum OpStatus {
+    #[default]
+    // Or Unknown
+    NotApplicable = 0,
+    NotOperating = 1,
+    Operating = 2,
+    StartingUp = 3,
+    ShuttingDown = 4,
+    AtDisconnectLevel = 5,
+    kWRamping = 6,
+    kVarRamping = 7,
+}
 
 #[derive(
     Default,
@@ -1023,7 +1042,7 @@ pub struct PowerStatus {
     // 3 = depleted (0% charge remaining)
     // 4 = not applicable (mains powered only)
     #[yaserde(rename = "batteryStatus")]
-    pub battery_status: Uint8,
+    pub battery_status: BatteryStatus,
 
     // The time at which the reported values were recorded.
     #[yaserde(rename = "changedTime")]
@@ -1070,6 +1089,24 @@ pub struct PowerStatus {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum BatteryStatus {
+    #[default]
+    Unknown = 0,
+    // More than LowChargeThreshold remaining
+    Normal = 1,
+    // Less than LowChargeThreshold remaining
+    Low = 2,
+    // 0% charge remaining
+    Depleted = 3,
+    // Mains Powered Only
+    NotApplicable = 4,
 }
 
 impl Validate for PowerStatus {}
@@ -2279,7 +2316,7 @@ pub struct FileStatus {
     // through an image activation)
     // 9-255 - Reserved for future use.
     #[yaserde(rename = "status")]
-    pub status: Uint8,
+    pub status: FileStatusType,
 
     // This element MUST be set to the time at which file status transitioned to
     // the value indicated in the status element.
@@ -2297,6 +2334,37 @@ pub struct FileStatus {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+#[derive(
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum FileStatusType {
+    // No load operation in progress
+    #[default]
+    NotLoading = 0,
+    // File load in progress (first request for file content has been issued
+    // by LD)
+    LoadInProgress = 1,
+    // File load failed
+    LoadFailed = 2,
+    // File loaded successfully (full content of file has been received by
+    // the LD), signature verification in progress
+    LoadSuccessful = 3,
+    // File signature verification failed
+    VerificationFailed = 4,
+    // File signature verified, waiting to activate file.
+    VerficaitionSuccess = 5,
+    // File activation failed
+    ActivationFaild = 6,
+    // File activation in progress
+    ActivationInProgress = 7,
+    // File activated successfully (this state may not be reached/persisted
+    // through an image activation)
+    ActivationSuccess = 8,
+    // 9-255 - Reserved for future use.
 }
 
 impl Validate for FileStatus {}
@@ -6096,7 +6164,7 @@ pub struct DERCapability {
     // 3 - Category III
     // All other values reserved.
     #[yaserde(rename = "rtgAbnormalCategory")]
-    pub rtg_abnormal_category: Option<Uint8>,
+    pub rtg_abnormal_category: Option<AbnormalCategory>,
 
     // Maximum continuous AC current capability of the DER, in Amperes (RMS).
     #[yaserde(rename = "rtgMaxA")]
@@ -6175,7 +6243,7 @@ pub struct DERCapability {
     // 2 - Category B
     // All other values reserved.
     #[yaserde(rename = "rtgNormalCategory")]
-    pub rtg_normal_category: Option<Uint8>,
+    pub rtg_normal_category: Option<NormalCategory>,
 
     // Specified over-excited power factor.
     #[yaserde(rename = "rtgOverExcitedPF")]
@@ -6212,6 +6280,27 @@ pub struct DERCapability {
     // GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+}
+
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum AbnormalCategory {
+    #[default]
+    NotSpecified = 0,
+    CategoryOne = 1,
+    CategoryTwo = 2,
+    CategoryThree = 3,
+}
+
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum NormalCategory {
+    #[default]
+    NotSpecified = 0,
+    CategoryA = 1,
+    CategoryB = 2,
 }
 
 impl Validate for DERCapability {}

@@ -653,8 +653,11 @@ pub enum SubscribableType {
 
 impl Validate for SubscribableType {}
 
+/// A signed time offset, typically applied to a Time value, expressed in seconds.
 pub type TimeOffsetType = Int32;
 
+/// Time is a signed 64-bit value representing the number of seconds since 0 hours,
+/// 0 minutes, 0 seconds, on 1 January 1970, in UTC, not counting leap seconds.
 pub type TimeType = Int64;
 
 #[derive(
