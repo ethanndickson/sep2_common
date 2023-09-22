@@ -9,10 +9,7 @@ use std::str::FromStr;
 use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all
-use super::{
-    objects::EventStatusType,
-    types::{MRIDType, SubscribableType, TimeType, VersionType},
-};
+use super::types::{MRIDType, SubscribableType, TimeType, VersionType};
 use crate::packages::primitives::*;
 use crate::traits::*;
 
@@ -121,18 +118,6 @@ pub enum ResponseStatus {
     EventNotApplicable = 252,
     EventInvalid = 253,
     EventExpired = 254,
-}
-
-impl From<EventStatusType> for ResponseStatus {
-    fn from(value: EventStatusType) -> Self {
-        match value {
-            EventStatusType::Scheduled => Self::EventReceived, // TODO:  Maybe
-            EventStatusType::Active => Self::EventStarted,
-            EventStatusType::Cancelled => Self::EventCancelled,
-            EventStatusType::CancelledRandom => Self::EventCancelled,
-            EventStatusType::Superseded => Self::EventSuperseded,
-        }
-    }
 }
 
 impl Validate for Response {}
