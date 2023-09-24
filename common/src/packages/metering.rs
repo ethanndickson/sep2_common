@@ -13,13 +13,12 @@ use super::{
         MeterReadingListLink, RateComponentListLink, ReadingLink, ReadingListLink,
         ReadingSetListLink, ReadingTypeLink,
     },
-    mirror_metering::UsagePointStatus,
     primitives::{HexBinary16, HexBinary160, Int48, String32, Uint32, Uint48, Uint8},
     types::{
         AccumulationBehaviourType, CommodityType, ConsumptionBlockType, DataQualifierType,
         DateTimeInterval, FlowDirectionType, KindType, MRIDType, PhaseCode,
         PowerOfTenMultiplierType, RoleFlagsType, ServiceKind, SubscribableType, Toutype,
-        UnitValueType, UomType, VersionType,
+        UnitValueType, UomType, UsagePointStatus, VersionType,
     },
 };
 

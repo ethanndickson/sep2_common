@@ -1,21 +1,26 @@
 use crate::traits::{
-    SEIdentifiedObject, SEList, SEResource, SESubscribableList, SESubscribableResource, Validate,
+    SEEvent, SEIdentifiedObject, SEList, SERandomizableEvent, SEResource, SERespondableResource,
+    SERespondableSubscribableIdentifiedObject, SESubscribableList, SESubscribableResource,
+    Validate,
 };
 use sep2_common_derive::{
-    SEIdentifiedObject, SEList, SEResource, SESubscribableList, SESubscribableResource,
+    SEEvent, SEIdentifiedObject, SEList, SERandomizableEvent, SEResource, SERespondableResource,
+    SERespondableSubscribableIdentifiedObject, SESubscribableList, SESubscribableResource,
 };
 use yaserde::{YaDeserialize, YaSerialize};
 
 use super::{
+    identification::ResponseRequired,
     links::{
-        ActiveTimeTariffIntervalListLink, RateComponentListLink, ReadingTypeLink,
-        TimeTariffIntervalListLink,
+        ActiveTimeTariffIntervalListLink, ConsumptionTariffIntervalListLink, RateComponentListLink,
+        ReadingTypeLink, TimeTariffIntervalListLink,
     },
-    objects::TimeTariffInterval,
+    objects::EventStatus,
     primitives::{Int32, String20, String32, Uint32, Uint48, Uint8},
     types::{
-        ConsumptionBlockType, CurrencyCode, MRIDType, PowerOfTenMultiplierType, PrimacyType,
-        RoleFlagsType, ServiceKind, SubscribableType, UnitValueType, VersionType,
+        ConsumptionBlockType, CurrencyCode, DateTimeInterval, MRIDType, OneHourRangeType,
+        PowerOfTenMultiplierType, PrimacyType, RoleFlagsType, ServiceKind, SubscribableType,
+        TimeType, Toutype, UnitValueType, VersionType,
     },
 };
 
@@ -279,6 +284,138 @@ pub struct RateComponentList {
 }
 
 impl Validate for RateComponentList {}
+
+// Describes the time-differentiated portion of the RateComponent,
+// if applicable, and provides the ability to specify multiple time intervals,
+// each with its own consumption-based components and other attributes.
+#[derive(
+    Default,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    YaSerialize,
+    YaDeserialize,
+    SERandomizableEvent,
+    SEEvent,
+    SERespondableSubscribableIdentifiedObject,
+    SEIdentifiedObject,
+    SESubscribableResource,
+    SERespondableResource,
+    SEResource,
+)]
+#[yaserde(rename = "TimeTariffInterval")]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+pub struct TimeTariffInterval {
+    #[yaserde(rename = "ConsumptionTariffIntervalListLink")]
+    pub consumption_tariff_interval_list_link: Option<ConsumptionTariffIntervalListLink>,
+
+    // Indicates the time of use tier related to the reading. If not specified,
+    // is assumed to be "0 - N/A".
+    #[yaserde(rename = "touTier")]
+    pub tou_tier: Toutype,
+
+    // Number of seconds boundary inside which a random value must be selected
+    // to be applied to the associated interval duration, to avoid sudden
+    // synchronized demand changes. If related to price level changes, sign may
+    // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
+    // default.
+    #[yaserde(rename = "randomizeDuration")]
+    pub randomize_duration: Option<OneHourRangeType>,
+
+    // Number of seconds boundary inside which a random value must be selected
+    // to be applied to the associated interval start time, to avoid sudden
+    // synchronized demand changes. If related to price level changes, sign may
+    // be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
+    // default.
+    #[yaserde(rename = "randomizeStart")]
+    pub randomize_start: Option<OneHourRangeType>,
+
+    // The time at which the Event was created.
+    #[yaserde(rename = "creationTime")]
+    pub creation_time: TimeType,
+
+    #[yaserde(rename = "EventStatus")]
+    pub event_status: EventStatus,
+
+    // The period during which the Event applies.
+    #[yaserde(rename = "interval")]
+    pub interval: DateTimeInterval,
+
+    // The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    // The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    // Contains the version number of the object. See the type definition for
+    // details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
+    // Indicates whether or not subscriptions are supported for this resource,
+    // and whether or not conditional (thresholds) are supported. If not
+    // specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
+
+    // A reference to the response resource address (URI). Required on a
+    // response to a GET if responseRequired is "true".
+    #[yaserde(attribute, rename = "replyTo")]
+    pub reply_to: Option<String>,
+
+    // Indicates whether or not a response is required upon receipt, creation or
+    // update of this resource. Responses shall be posted to the collection
+    // specified in "replyTo".
+    // If the resource has a deviceCategory field, devices that match one or
+    // more of the device types indicated in deviceCategory SHALL respond
+    // according to the rules listed below. If the category does not match, the
+    // device SHALL NOT respond. If the resource does not have a deviceCategory
+    // field, a device receiving the resource SHALL respond according to the
+    // rules listed below.
+    // Value encoded as hex according to the following bit assignments, any
+    // combination is possible.
+    // See Table 27 for the list of appropriate Response status codes to be sent
+    // for these purposes.
+    // 0 - End device shall indicate that message was received
+    // 1 - End device shall indicate specific response.
+    // 2 - End user / customer response is required.
+    // All other values reserved.
+    #[yaserde(attribute, rename = "responseRequired")]
+    pub response_required: Option<ResponseRequired>,
+
+    // A reference to the resource address (URI). Required in a response to a
+    // GET, ignored otherwise.
+    #[yaserde(attribute, rename = "href")]
+    pub href: Option<String>,
+}
+
+impl PartialOrd for TimeTariffInterval {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for TimeTariffInterval {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // Primary Key - interval.start (ascending)
+        match self.interval.start.cmp(&other.interval.start) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Secondary Key - creationTime (descending)
+        match self.creation_time.cmp(&other.creation_time).reverse() {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        // Tertiary Key - mRID (descending)
+        self.mrid.cmp(&other.mrid).reverse()
+    }
+}
+
+impl Validate for TimeTariffInterval {}
 
 #[derive(
     Default,

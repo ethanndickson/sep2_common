@@ -1,14 +1,17 @@
 use sep2_common_derive::{SEIdentifiedObject, SEList, SEResource, SEResponse};
-// File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 use yaserde::{YaDeserialize, YaSerialize};
 
-// TODO Ethan: Temporary import all
-use crate::packages::links::*;
-use crate::packages::primitives::*;
-use crate::traits::*;
-
 use super::identification::ResponseStatus;
-use super::types::{MRIDType, TimeType, UnitType, VersionType};
+use super::links::ResponseListLink;
+use super::primitives::{HexBinary160, String32, Uint16, Uint32};
+use super::types::{MRIDType, TimeType, VersionType};
+use crate::traits::{SEIdentifiedObject, SEList, SEResource, SEResponse, Validate};
+
+#[cfg(feature = "drlc")]
+use super::{
+    drlc::{ApplianceLoadReduction, DutyCycle, Offset, SetPoint},
+    types::UnitType,
+};
 
 #[derive(
     Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,
@@ -54,6 +57,7 @@ pub struct DERControlResponse {
 
 impl Validate for DERControlResponse {}
 
+#[cfg(feature = "flow_reservation")]
 #[derive(
     Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,
 )]
@@ -96,8 +100,10 @@ pub struct FlowReservationResponseResponse {
     pub href: Option<String>,
 }
 
+#[cfg(feature = "flow_reservation")]
 impl Validate for FlowReservationResponseResponse {}
 
+#[cfg(feature = "drlc")]
 // Specifies the value of the TargetReduction applied by the device.
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "AppliedTargetReduction")]
@@ -112,8 +118,10 @@ pub struct AppliedTargetReduction {
     pub value: Uint16,
 }
 
+#[cfg(feature = "drlc")]
 impl Validate for AppliedTargetReduction {}
 
+#[cfg(feature = "drlc")]
 #[derive(
     Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,
 )]
@@ -182,6 +190,7 @@ pub struct DrResponse {
     pub href: Option<String>,
 }
 
+#[cfg(feature = "drlc")]
 impl Validate for DrResponse {}
 
 #[derive(

@@ -4,6 +4,7 @@ use anyhow::{anyhow, bail, Result};
 use traits::SEResource;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
+#[cfg(feature = "examples")]
 pub mod examples;
 pub mod object;
 pub mod packages;

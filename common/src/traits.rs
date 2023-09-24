@@ -4,8 +4,13 @@ use yaserde::{YaDeserialize, YaSerialize};
 
 use crate::packages::{
     identification::{ResponseRequired, ResponseStatus},
-    // TODO: Temporary import all
-    links::*,
+    links::{
+        BillingReadingSetListLink, ConfigurationLink, CustomerAccountListLink, DERListLink,
+        DERProgramListLink, DemandResponseProgramListLink, DeviceInformationLink, DeviceStatusLink,
+        FileListLink, FileStatusLink, IPInterfaceListLink, LoadShedAvailabilityListLink,
+        LogEventListLink, MessagingProgramListLink, PowerStatusLink, PrepaymentListLink,
+        ReadingTypeLink, ResponseSetListLink, TariffProfileListLink, TimeLink, UsagePointListLink,
+    },
     objects::EventStatus,
     primitives::{HexBinary16, HexBinary160, Int48, String32, Uint32},
     types::{
@@ -27,6 +32,7 @@ use crate::packages::{
 /// There is no reason for any Resource to use interior mutability, thus this bound is reasonable.
 ///
 /// [`Resource`]: super::packages::identification::Resource
+#[cfg(feature = "common")]
 pub trait SEResource:
     YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone + Validate + RefUnwindSafe
 {
@@ -39,12 +45,14 @@ pub trait SEResource:
 /// Implemented by all types whose base type is [`Link`]
 ///
 /// [`Link`]: super::packages::identification::Link
+#[cfg(feature = "common")]
 pub trait SELink:
     YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone + Validate
 {
     fn href(&self) -> &str;
 }
 
+#[cfg(feature = "common")]
 pub trait SEListLink: SELink {
     fn all(&self) -> Option<Uint32>;
 }
@@ -52,6 +60,7 @@ pub trait SEListLink: SELink {
 /// Implemented by all types whose base type is [`Response`]
 ///
 /// [`Response`]: super::packages::identification::Response
+#[cfg(feature = "common")]
 pub trait SEResponse: SEResource {
     fn created_date_time(&self) -> Option<TimeType>;
     fn end_device_lfdi(&self) -> &HexBinary160;
@@ -62,6 +71,7 @@ pub trait SEResponse: SEResource {
 /// Implemented by all types whose base type is [`IdentifiedObject`]
 ///
 /// [`IdentifiedObject`]: super::packages::identification::IdentifiedObject
+#[cfg(feature = "common")]
 pub trait SEIdentifiedObject: SEResource {
     fn mrid(&self) -> &MRIDType;
     fn description(&self) -> Option<&String32>;
@@ -71,6 +81,7 @@ pub trait SEIdentifiedObject: SEResource {
 /// Implemented by all types whose base type is [`RespondableResource`]
 ///
 /// [`RespondableResource`]: super::packages::identification::RespondableResource
+#[cfg(feature = "common")]
 pub trait SERespondableResource: SEResource {
     fn reply_to(&self) -> Option<&str>;
     fn response_required(&self) -> Option<ResponseRequired>;
@@ -79,6 +90,7 @@ pub trait SERespondableResource: SEResource {
 /// Implemented by all types whose base type is [`SubscriptionBase`]
 ///
 /// [`SubscriptionBase`]: super::packages::pubsub::SubscriptionBase
+#[cfg(feature = "pubsub")]
 pub trait SESubscriptionBase: SEResource {
     fn subscribed_resource(&self) -> &str;
 }
@@ -86,6 +98,7 @@ pub trait SESubscriptionBase: SEResource {
 /// Implemented by all types whose base type is [`SubscribableResource`]
 ///
 /// [`SubscribableResource`]: super::packages::identification::SubscribableResource
+#[cfg(feature = "common")]
 pub trait SESubscribableResource: SEResource {
     fn subscribable(&self) -> Option<SubscribableType>;
 }
@@ -93,11 +106,13 @@ pub trait SESubscribableResource: SEResource {
 /// Implemented by all types whose base type is [`RespondableIdentifiedObject`]
 ///
 /// [`RespondableIdentifiedObject`]: super::packages::identification::RespondableIdentifiedObject
+#[cfg(feature = "common")]
 pub trait SERespondableIdentifiedObject: SERespondableResource + SEIdentifiedObject {}
 
 /// Implemented by all types whose base type is [`RespondableSubscribableIdentifiedObject`]
 ///
 /// [`RespondableSubscribableIdentifiedObject`]: super::packages::identification::RespondableSubscribableIdentifiedObject
+#[cfg(feature = "common")]
 pub trait SERespondableSubscribableIdentifiedObject:
     SERespondableResource + SESubscribableResource + SEIdentifiedObject
 {
@@ -106,11 +121,13 @@ pub trait SERespondableSubscribableIdentifiedObject:
 /// Implemented by all types whose base type is [`SubscribableIdentifiedObject`]
 ///
 /// [`SubscribableIdentifiedObject`]: super::packages::identification::SubscribableIdentifiedObject
+#[cfg(feature = "common")]
 pub trait SESubscribableIdentifiedObject: SESubscribableResource + SEIdentifiedObject {}
 
 /// Implemented by all types whose base type is [`Event`]
 ///
 /// [`Event`]: super::packages::objects::Event
+#[cfg(feature = "common")]
 pub trait SEEvent: SERespondableSubscribableIdentifiedObject {
     fn creation_time(&self) -> TimeType;
     fn event_status(&self) -> &EventStatus;
@@ -120,6 +137,7 @@ pub trait SEEvent: SERespondableSubscribableIdentifiedObject {
 /// Implemented by all types whose base type is [`RandomizableEvent`]
 ///
 /// [`RandomizableEvent`]: super::packages::objects::RandomizableEvent
+#[cfg(feature = "common")]
 pub trait SERandomizableEvent: SEEvent {
     fn randomize_duration(&self) -> Option<OneHourRangeType>;
     fn randomize_start(&self) -> Option<OneHourRangeType>;
@@ -128,6 +146,7 @@ pub trait SERandomizableEvent: SEEvent {
 /// Implemented by all types whose base type is [`List`]
 ///
 /// [`List`]: super::packages::identification::List
+#[cfg(feature = "common")]
 pub trait SEList: SEResource {
     type Inner: Ord;
     fn all(&self) -> Uint32;
@@ -153,9 +172,11 @@ pub trait SEList: SEResource {
 /// Implemented by all types whose base type is [`SubscribableList`]
 ///
 /// [`SubscribableList`]: super::packages::identification::SubscribableList
+#[cfg(feature = "common")]
 pub trait SESubscribableList: SESubscribableResource + SEList {}
 
 /// Implemented by all types whose base type is [`FunctionSetAssignmentsBase`]
+#[cfg(feature = "fsa")]
 pub trait SEFunctionSetAssignmentsBase: SEResource {
     fn customer_account_list_link(&self) -> Option<&CustomerAccountListLink>;
     fn demand_response_program_list_link(&self) -> Option<&DemandResponseProgramListLink>;
@@ -170,6 +191,7 @@ pub trait SEFunctionSetAssignmentsBase: SEResource {
 }
 
 /// Implemented by all types whose base type is [`AbstractDevice`]
+#[cfg(feature = "edev")]
 pub trait SEAbstractDevice: SESubscribableResource {
     fn configuration_link(&self) -> Option<&ConfigurationLink>;
     fn der_list_link(&self) -> Option<&DERListLink>;
@@ -186,11 +208,13 @@ pub trait SEAbstractDevice: SESubscribableResource {
 }
 
 /// Implemented by all types whose base type is [`MeterReadingBase`]
+#[cfg(feature = "edev")]
 pub trait SEMeterReadingBase: SEIdentifiedObject {
     // Does not extend IdentifiedObject further
 }
 
 /// Implemented by all types whose base type is [`ReadingBase`]
+#[cfg(feature = "metering_mirror")]
 pub trait SEReadingBase: SEResource {
     fn consumption_block(&self) -> Option<ConsumptionBlockType>;
     fn quality_flags(&self) -> Option<HexBinary16>;
@@ -200,17 +224,20 @@ pub trait SEReadingBase: SEResource {
 }
 
 /// Implemented by all types whose base type is [`ReadingSetBase`]
+#[cfg(feature = "metering_mirror")]
 pub trait SEReadingSetBase: SEIdentifiedObject {
     fn time_period(&self) -> &DateTimeInterval;
 }
 
 /// Implemented by all types whose base type is [`UsagePointBase`]
+#[cfg(feature = "metering_mirror")]
 pub trait SEUsagePointBase: SEIdentifiedObject {
     fn role_flags(&self) -> RoleFlagsType;
     fn service_category_kind(&self) -> ServiceKind;
 }
 
 /// Implemented by all types whose base type is [`SEBillingMeterReadingBase`]
+#[cfg(feature = "billing")]
 pub trait SEBillingMeterReadingBase: SEMeterReadingBase {
     fn billing_reading_set_list_link(&self) -> Option<&BillingReadingSetListLink>;
     fn reading_type_link(&self) -> Option<&ReadingTypeLink>;

@@ -15,5 +15,52 @@ bitflags = "2.4.0"
 rand = "0.8.5"
 
 [features]
-default = []
+default = ["common"]
 examples = []
+common = []
+dcap = []
+edev = []
+fsa = []
+pubsub = []
+response = []
+time = []
+di = []
+power_status = []
+network_status = []
+log_events = []
+configuration = []
+software_download = []
+drlc = []
+metering = []
+metering_mirror = []
+pricing = []
+messaging = []
+billing = []
+prepayment = ["metering"]
+flow_reservation = []
+der = []
+all = [
+    "examples",
+    "common",
+    "dcap",
+    "edev",
+    "fsa",
+    "pubsub",
+    "response",
+    "time",
+    "di",
+    "power_status",
+    "network_status",
+    "log_events",
+    "configuration",
+    "software_download",
+    "drlc",
+    "metering",
+    "metering_mirror",
+    "pricing",
+    "messaging",
+    "billing",
+    "prepayment",
+    "flow_reservation",
+    "der",
+]

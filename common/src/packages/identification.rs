@@ -5,7 +5,6 @@ use sep2_common_derive::{
     SERespondableResource, SERespondableSubscribableIdentifiedObject, SEResponse,
     SESubscribableIdentifiedObject, SESubscribableList, SESubscribableResource,
 };
-use std::str::FromStr;
 use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
 // TODO Ethan: Temporary import all

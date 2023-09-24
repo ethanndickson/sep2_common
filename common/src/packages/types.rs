@@ -779,3 +779,14 @@ impl Validate for UomType {}
 
 /// Version SHALL indicate a distinct identifier for each revision of an IdentifiedObject. If not specified, a default version of "0" (initial version) SHALL be assumed. Upon modification of any IdentifiedObject, the mRID SHALL remain the same, but the version SHALL be incremented. Servers MAY NOT modify objects that they did not create, unless they were notified of the change from the entity controlling the object's PEN.
 pub type VersionType = Uint16;
+
+/// Binary Status Enum used in Metering & MirrorMetering
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(rename = "status")]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum UsagePointStatus {
+    #[default]
+    Off,
+    On,
+}

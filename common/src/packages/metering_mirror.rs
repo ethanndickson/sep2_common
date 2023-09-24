@@ -12,7 +12,7 @@ use super::{
     primitives::{HexBinary16, HexBinary160, Int48, String32, Uint32},
     types::{
         ConsumptionBlockType, DateTimeInterval, MRIDType, RoleFlagsType, ServiceKind, TimeType,
-        Toutype, VersionType,
+        Toutype, UsagePointStatus, VersionType,
     },
 };
 
@@ -420,13 +420,3 @@ pub struct UsagePointBase {
 }
 
 impl Validate for UsagePointBase {}
-
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
-#[yaserde(rename = "status")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[repr(u8)]
-pub enum UsagePointStatus {
-    #[default]
-    Off,
-    On,
-}
