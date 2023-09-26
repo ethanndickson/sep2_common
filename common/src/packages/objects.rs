@@ -4,16 +4,20 @@ use sep2_common_derive::{
     SEEvent, SEIdentifiedObject, SEResource, SERespondableResource,
     SERespondableSubscribableIdentifiedObject, SESubscribableResource,
 };
+
+use crate::traits::{
+    SEEvent, SEIdentifiedObject, SEResource, SERespondableResource,
+    SERespondableSubscribableIdentifiedObject, SESubscribableResource, Validate,
+};
+
 use yaserde::{YaDeserialize, YaSerialize};
 
-// TODO Ethan: Temporary import all
-
-use crate::packages::primitives::*;
-use crate::traits::*;
-
-use super::identification::ResponseRequired;
-use super::types::{
-    DateTimeInterval, MRIDType, OneHourRangeType, SubscribableType, TimeType, VersionType,
+use super::{
+    identification::ResponseRequired,
+    primitives::{String192, String32, Uint16},
+    types::{
+        DateTimeInterval, MRIDType, OneHourRangeType, SubscribableType, TimeType, VersionType,
+    },
 };
 
 // Current status information relevant to a specific object. The Status object

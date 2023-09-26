@@ -1,15 +1,10 @@
-use anyhow::anyhow;
-use anyhow::bail;
-use anyhow::Result;
+use crate::traits::{SEList, SEResource, SESubscriptionBase, Validate};
+use anyhow::{anyhow, bail, Result};
 use sep2_common_derive::{SEList, SEResource, SESubscriptionBase};
 use xml::EventReader;
-// File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 use yaserde::{YaDeserialize, YaSerialize};
 
-// TODO Ethan: Temporary import all
-use crate::packages::primitives::*;
-
-use crate::traits::*;
+use super::primitives::{Int48, String16, Uint32, Uint8};
 
 // Indicates a condition that must be satisfied for the Notification to be
 // triggered.

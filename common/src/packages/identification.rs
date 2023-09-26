@@ -1,4 +1,3 @@
-// File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 use bitflags::bitflags;
 use sep2_common_derive::{
     SEIdentifiedObject, SELink, SEList, SEListLink, SEResource, SERespondableIdentifiedObject,
@@ -7,10 +6,16 @@ use sep2_common_derive::{
 };
 use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
-// TODO Ethan: Temporary import all
-use super::types::{MRIDType, SubscribableType, TimeType, VersionType};
-use crate::packages::primitives::*;
-use crate::traits::*;
+use super::{
+    primitives::{HexBinary160, String32, Uint32},
+    types::{MRIDType, SubscribableType, TimeType, VersionType},
+};
+
+use crate::traits::{
+    SEIdentifiedObject, SELink, SEList, SEListLink, SEResource, SERespondableIdentifiedObject,
+    SERespondableResource, SERespondableSubscribableIdentifiedObject, SEResponse,
+    SESubscribableIdentifiedObject, SESubscribableList, SESubscribableResource, Validate,
+};
 
 // A resource is an addressable unit of information, either a collection (List)
 // or instance of an object (identifiedObject, or simply, Resource)

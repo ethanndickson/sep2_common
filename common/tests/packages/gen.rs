@@ -1,35 +1,176 @@
 #![allow(non_snake_case)]
 // TODO Ethan: Temporary import all
-use sep2_common::packages::billing::*;
-use sep2_common::packages::configuration::*;
-use sep2_common::packages::dcap::*;
-use sep2_common::packages::der::*;
-use sep2_common::packages::di::*;
-use sep2_common::packages::drlc::*;
-use sep2_common::packages::edev::*;
-use sep2_common::packages::flow_reservation::FlowReservationRequest;
-use sep2_common::packages::flow_reservation::FlowReservationRequestList;
-use sep2_common::packages::flow_reservation::FlowReservationResponse;
-use sep2_common::packages::flow_reservation::FlowReservationResponseList;
-use sep2_common::packages::flow_reservation::RequestStatus;
-use sep2_common::packages::fsa::*;
-use sep2_common::packages::identification::*;
-use sep2_common::packages::links::*;
-use sep2_common::packages::log_events::*;
-use sep2_common::packages::messaging::*;
-use sep2_common::packages::metering::*;
-use sep2_common::packages::metering_mirror::*;
-use sep2_common::packages::network_status::*;
-use sep2_common::packages::power_status::*;
-use sep2_common::packages::prepayment::*;
-use sep2_common::packages::pricing::*;
-use sep2_common::packages::pubsub::*;
-use sep2_common::packages::response::*;
-use sep2_common::packages::software_download::*;
-use sep2_common::packages::time::*;
-use sep2_common::packages::types::*;
-use yaserde::de::from_str;
-use yaserde::ser::to_string;
+use sep2_common::packages::{
+    billing::*, configuration::*, dcap::*, der::*, di::*, drlc::*, edev::*, flow_reservation::*,
+    fsa::*, identification::*, links::*, log_events::*, messaging::*, metering::*,
+    metering_mirror::*, network_status::*, objects::*, power_status::*, prepayment::*, pricing::*,
+    pubsub::*, response::*, software_download::*, time::*, types::*,
+};
+
+use yaserde::{de::from_str, ser::to_string};
+
+#[test]
+fn default_Resource() {
+    let orig = Resource::default();
+    let new: Resource = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_Response() {
+    let orig = Response::default();
+    let new: Response = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_List() {
+    let orig = List::default();
+    let new: List = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_ListLink() {
+    let orig = ListLink::default();
+    let new: ListLink = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_IdentifiedObject() {
+    let orig = IdentifiedObject::default();
+    let new: IdentifiedObject = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_RespondableResource() {
+    let orig = RespondableResource::default();
+    let new: RespondableResource = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_RespondableIdentifiedObject() {
+    let orig = RespondableIdentifiedObject::default();
+    let new: RespondableIdentifiedObject = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_RespondableSubscribableIdentifiedObject() {
+    let orig = RespondableSubscribableIdentifiedObject::default();
+    let new: RespondableSubscribableIdentifiedObject =
+        from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_SubscribableResource() {
+    let orig = SubscribableResource::default();
+    let new: SubscribableResource = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_SubscribableList() {
+    let orig = SubscribableList::default();
+    let new: SubscribableList = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_SubscribableIdentifiedObject() {
+    let orig = SubscribableIdentifiedObject::default();
+    let new: SubscribableIdentifiedObject = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_EventStatus() {
+    let orig = EventStatus::default();
+    let new: EventStatus = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_Event() {
+    let orig = Event::default();
+    let new: Event = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_Error() {
+    let orig = Error::default();
+    let new: Error = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_RandomizableEvent() {
+    let orig = RandomizableEvent::default();
+    let new: RandomizableEvent = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_DERControl() {
+    let orig = DERControl::default();
+    println!("{}", &to_string(&orig).unwrap());
+    let new: DERControl = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_TextMessage() {
+    let orig = TextMessage::default();
+    let new: TextMessage = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_TimeTariffInterval() {
+    let orig = TimeTariffInterval::default();
+    let new: TimeTariffInterval = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_EndDeviceControl() {
+    let orig = EndDeviceControl::default();
+    let new: EndDeviceControl = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_DemandResponseProgram() {
+    let orig = DemandResponseProgram::default();
+    let new: DemandResponseProgram = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_TariffProfile() {
+    let orig = TariffProfile::default();
+    let new: TariffProfile = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_MessagingProgram() {
+    let orig = MessagingProgram::default();
+    let new: MessagingProgram = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_PrimacyType() {
+    let orig = PrimacyType::default();
+    let new: PrimacyType = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
 
 #[test]
 fn default_DeviceCapability() {
