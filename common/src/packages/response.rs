@@ -3,13 +3,14 @@ use yaserde::{YaDeserialize, YaSerialize};
 
 use super::identification::ResponseStatus;
 use super::links::ResponseListLink;
-use super::primitives::{HexBinary160, String32, Uint16, Uint32};
+use super::primitives::{HexBinary160, String32, Uint32};
 use super::types::{MRIDType, TimeType, VersionType};
 use crate::traits::{SEIdentifiedObject, SEList, SEResource, SEResponse, Validate};
 
 #[cfg(feature = "drlc")]
 use super::{
     drlc::{ApplianceLoadReduction, DutyCycle, Offset, SetPoint},
+    primitives::Uint16,
     types::UnitType,
 };
 

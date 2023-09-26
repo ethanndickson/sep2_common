@@ -6,7 +6,7 @@ pub mod configuration;
 pub mod dcap;
 #[cfg(feature = "der")]
 pub mod der;
-#[cfg(feature = "time")]
+#[cfg(feature = "di")]
 pub mod di;
 #[cfg(feature = "drlc")]
 pub mod drlc;

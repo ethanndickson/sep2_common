@@ -4,19 +4,36 @@ use yaserde::{YaDeserialize, YaSerialize};
 
 use crate::packages::{
     identification::{ResponseRequired, ResponseStatus},
-    links::{
-        BillingReadingSetListLink, ConfigurationLink, CustomerAccountListLink, DERListLink,
-        DERProgramListLink, DemandResponseProgramListLink, DeviceInformationLink, DeviceStatusLink,
-        FileListLink, FileStatusLink, IPInterfaceListLink, LoadShedAvailabilityListLink,
-        LogEventListLink, MessagingProgramListLink, PowerStatusLink, PrepaymentListLink,
-        ReadingTypeLink, ResponseSetListLink, TariffProfileListLink, TimeLink, UsagePointListLink,
-    },
     objects::EventStatus,
-    primitives::{HexBinary16, HexBinary160, Int48, String32, Uint32},
+    primitives::{HexBinary160, String32, Uint32},
     types::{
-        ConsumptionBlockType, DateTimeInterval, DeviceCategoryType, MRIDType, OneHourRangeType,
-        RoleFlagsType, SFDIType, ServiceKind, SubscribableType, TimeType, Toutype, VersionType,
+        DateTimeInterval, MRIDType, OneHourRangeType, SubscribableType, TimeType, VersionType,
     },
+};
+
+#[cfg(feature = "metering_mirror")]
+use crate::packages::{
+    primitives::{HexBinary16, Int48},
+    types::{ConsumptionBlockType, RoleFlagsType, ServiceKind, Toutype},
+};
+
+#[cfg(feature = "billing")]
+use crate::packages::links::{BillingReadingSetListLink, ReadingTypeLink};
+
+#[cfg(feature = "fsa")]
+use crate::packages::links::{
+    CustomerAccountListLink, DERProgramListLink, DemandResponseProgramListLink, FileListLink,
+    MessagingProgramListLink, PrepaymentListLink, ResponseSetListLink, TariffProfileListLink,
+    TimeLink, UsagePointListLink,
+};
+
+#[cfg(feature = "edev")]
+use crate::packages::{
+    links::{
+        ConfigurationLink, DERListLink, DeviceInformationLink, DeviceStatusLink, FileStatusLink,
+        IPInterfaceListLink, LoadShedAvailabilityListLink, LogEventListLink, PowerStatusLink,
+    },
+    types::{DeviceCategoryType, SFDIType},
 };
 
 // All IEEE 2030.5 top-level types are either a Resource, or a Link to a Resource
@@ -208,7 +225,7 @@ pub trait SEAbstractDevice: SESubscribableResource {
 }
 
 /// Implemented by all types whose base type is [`MeterReadingBase`]
-#[cfg(feature = "edev")]
+#[cfg(feature = "metering_mirror")]
 pub trait SEMeterReadingBase: SEIdentifiedObject {
     // Does not extend IdentifiedObject further
 }
