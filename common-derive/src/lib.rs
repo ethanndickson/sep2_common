@@ -21,19 +21,6 @@ pub fn derive_resource(input: TokenStream) -> TokenStream {
     .into()
 }
 
-#[proc_macro_derive(SELink)]
-pub fn derive_link(input: TokenStream) -> TokenStream {
-    let DeriveInput { ident, .. } = parse_macro_input!(input);
-    quote! {
-        impl SELink for #ident {
-            fn href(&self) -> &str {
-                self.href.as_str()
-            }
-        }
-    }
-    .into()
-}
-
 #[proc_macro_derive(SEResponse)]
 pub fn derive_response(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
@@ -177,19 +164,6 @@ pub fn derive_randomizable_event(input: TokenStream) -> TokenStream {
             }
             fn randomize_start(&self) -> Option<OneHourRangeType> {
                 self.randomize_start
-            }
-        }
-    }
-    .into()
-}
-
-#[proc_macro_derive(SEListLink)]
-pub fn derive_list_link(input: TokenStream) -> TokenStream {
-    let DeriveInput { ident, .. } = parse_macro_input!(input);
-    quote! {
-        impl SEListLink for #ident {
-            fn all(&self) -> Option<Uint32> {
-                self.all
             }
         }
     }

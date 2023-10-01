@@ -1,16 +1,16 @@
 use crate::traits::{
-    SEEvent, SEIdentifiedObject, SELink, SEList, SERandomizableEvent, SEResource,
-    SERespondableResource, SERespondableSubscribableIdentifiedObject,
-    SESubscribableIdentifiedObject, SESubscribableList, SESubscribableResource, Validate,
+    SEEvent, SEIdentifiedObject, SEList, SERandomizableEvent, SEResource, SERespondableResource,
+    SERespondableSubscribableIdentifiedObject, SESubscribableIdentifiedObject, SESubscribableList,
+    SESubscribableResource, Validate,
 };
 use sep2_common_derive::{
-    SEEvent, SEIdentifiedObject, SELink, SEList, SERandomizableEvent, SEResource,
-    SERespondableResource, SERespondableSubscribableIdentifiedObject,
-    SESubscribableIdentifiedObject, SESubscribableList, SESubscribableResource,
+    SEEvent, SEIdentifiedObject, SEList, SERandomizableEvent, SEResource, SERespondableResource,
+    SERespondableSubscribableIdentifiedObject, SESubscribableIdentifiedObject, SESubscribableList,
+    SESubscribableResource,
 };
 
 use super::{
-    identification::ResponseRequired,
+    identification::{Link, ResponseRequired},
     links::{
         ActiveDERControlListLink, AssociatedDERProgramListLink, AssociatedUsagePointLink,
         DERAvailabilityLink, DERCapabilityLink, DERControlListLink, DERCurveLink, DERCurveListLink,
@@ -194,7 +194,7 @@ pub struct DER {
     pub associated_usage_point_link: Option<AssociatedUsagePointLink>,
 
     #[yaserde(rename = "CurrentDERProgramLink")]
-    pub current_der_program_link: Option<CurrentDERProgramLink>,
+    pub current_der_program_link: Option<Link<DERProgram>>,
 
     #[yaserde(rename = "DERAvailabilityLink")]
     pub der_availability_link: Option<DERAvailabilityLink>,
@@ -1370,17 +1370,6 @@ impl Ord for DERCurve {
 }
 
 impl Validate for DERCurve {}
-
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
-#[yaserde(rename = "CurrentDERProgramLink")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct CurrentDERProgramLink {
-    // A URI reference.
-    #[yaserde(attribute, rename = "href")]
-    pub href: String,
-}
-
-impl Validate for CurrentDERProgramLink {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "DERCurveList")]

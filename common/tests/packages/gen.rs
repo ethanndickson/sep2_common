@@ -32,8 +32,8 @@ fn default_List() {
 
 #[test]
 fn default_ListLink() {
-    let orig = ListLink::default();
-    let new: ListLink = from_str(&to_string(&orig).unwrap()).unwrap();
+    let orig: ListLink<List> = ListLink::default();
+    let new: ListLink<List> = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
@@ -1139,13 +1139,6 @@ fn default_DERCurve() {
 }
 
 #[test]
-fn default_CurrentDERProgramLink() {
-    let orig = CurrentDERProgramLink::default();
-    let new: CurrentDERProgramLink = from_str(&to_string(&orig).unwrap()).unwrap();
-    assert_eq!(orig, new);
-}
-
-#[test]
 fn default_DERCurveList() {
     let orig = DERCurveList::default();
     let new: DERCurveList = from_str(&to_string(&orig).unwrap()).unwrap();
@@ -1967,8 +1960,8 @@ fn default_UsagePointListLink() {
 
 #[test]
 fn default_Link() {
-    let orig = Link::default();
-    let new: Link = from_str(&to_string(&orig).unwrap()).unwrap();
+    let orig: Link<Resource> = Link::default();
+    let new: Link<Resource> = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 

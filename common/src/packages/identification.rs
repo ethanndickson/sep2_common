@@ -1,8 +1,10 @@
+use std::marker::PhantomData;
+
 use bitflags::bitflags;
 use sep2_common_derive::{
-    SEIdentifiedObject, SELink, SEList, SEListLink, SEResource, SERespondableIdentifiedObject,
-    SERespondableResource, SERespondableSubscribableIdentifiedObject, SEResponse,
-    SESubscribableIdentifiedObject, SESubscribableList, SESubscribableResource,
+    SEIdentifiedObject, SEList, SEResource, SERespondableIdentifiedObject, SERespondableResource,
+    SERespondableSubscribableIdentifiedObject, SEResponse, SESubscribableIdentifiedObject,
+    SESubscribableList, SESubscribableResource,
 };
 use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
@@ -12,9 +14,9 @@ use super::{
 };
 
 use crate::traits::{
-    SEIdentifiedObject, SELink, SEList, SEListLink, SEResource, SERespondableIdentifiedObject,
-    SERespondableResource, SERespondableSubscribableIdentifiedObject, SEResponse,
-    SESubscribableIdentifiedObject, SESubscribableList, SESubscribableResource, Validate,
+    SEIdentifiedObject, SEList, SEResource, SERespondableIdentifiedObject, SERespondableResource,
+    SERespondableSubscribableIdentifiedObject, SEResponse, SESubscribableIdentifiedObject,
+    SESubscribableList, SESubscribableResource, Validate,
 };
 
 // A resource is an addressable unit of information, either a collection (List)
@@ -132,6 +134,7 @@ impl Validate for Response {}
 pub struct List {
     // This field is OOS since it is different in every child type
     // but is required for our SEList trait implementation
+    #[yaserde(skip_serializing)]
     pub contents: Vec<String>,
 
     // The number specifying "all" of the items in the list. Required on a
@@ -152,22 +155,24 @@ pub struct List {
 impl Validate for List {}
 
 // Links provide a reference, via URI, to another resource.
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "Link")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Link {
+pub struct Link<RE: SEResource> {
     // A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
+    #[yaserde(skip_serializing)]
+    link_to: PhantomData<RE>,
 }
 
-impl Validate for Link {}
+impl<RE: SEResource> Validate for Link<RE> {}
 
 // ListLinks provide a reference, via URI, to a List.
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEListLink, SELink)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct ListLink {
+pub struct ListLink<L: SEList> {
     // Indicates the total number of items in the referenced list. This
     // attribute SHALL be present if the href is a local or relative URI. This
     // attribute SHOULD NOT be present if the href is a remote or absolute URI,
@@ -178,8 +183,10 @@ pub struct ListLink {
     // A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
+    #[yaserde(skip_serializing)]
+    link_to: PhantomData<L>,
 }
-impl Validate for ListLink {}
+impl<L: SEList> Validate for ListLink<L> {}
 
 // This is a root class to provide common naming attributes for all classes needing naming attributes
 #[derive(
@@ -446,6 +453,7 @@ impl Validate for SubscribableResource {}
 pub struct SubscribableList {
     // This field is OOS since it is different in every child type
     // but is required for our SEList trait implementation
+    #[yaserde(skip_serializing)]
     pub contents: Vec<String>,
 
     // The number specifying "all" of the items in the list. Required on GET,

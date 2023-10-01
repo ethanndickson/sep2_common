@@ -56,24 +56,6 @@ pub trait SEResource:
     fn href(&self) -> Option<&str>;
 }
 
-/// An IEEE 2030.5 Representation of a link to a resource.
-/// "Links provide a reference, via URI, to another resource."
-/// These are not top-level resources.
-/// Implemented by all types whose base type is [`Link`]
-///
-/// [`Link`]: super::packages::identification::Link
-#[cfg(feature = "common")]
-pub trait SELink:
-    YaSerialize + YaDeserialize + Default + PartialEq + Eq + Clone + Validate
-{
-    fn href(&self) -> &str;
-}
-
-#[cfg(feature = "common")]
-pub trait SEListLink: SELink {
-    fn all(&self) -> Option<Uint32>;
-}
-
 /// Implemented by all types whose base type is [`Response`]
 ///
 /// [`Response`]: super::packages::identification::Response
