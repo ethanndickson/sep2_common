@@ -2,7 +2,7 @@ use crate::traits::{SEList, SEResource, SESubscribableResource, Validate};
 use sep2_common_derive::{SEList, SEResource, SESubscribableResource};
 
 use super::{
-    links::{PriceResponseCfgListLink, RateComponentLink},
+    identification::{Link, ListLink},
     primitives::{Int32, String32, Uint32},
     types::{DstRuleType, LocaleType, SubscribableType, TimeOffsetType, TimeType},
 };
@@ -30,7 +30,7 @@ pub struct Configuration {
     pub power_configuration: Option<PowerConfiguration>,
 
     #[yaserde(rename = "PriceResponseCfgListLink")]
-    pub price_response_cfg_list_link: Option<PriceResponseCfgListLink>,
+    pub price_response_cfg_list_link: Option<ListLink>,
 
     #[yaserde(rename = "TimeConfiguration")]
     pub time_configuration: Option<TimeConfiguration>,
@@ -98,7 +98,7 @@ pub struct PriceResponseCfg {
     pub max_reduction_threshold: Int32,
 
     #[yaserde(rename = "RateComponentLink")]
-    pub rate_component_link: RateComponentLink,
+    pub rate_component_link: Link,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.

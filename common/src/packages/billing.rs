@@ -8,13 +8,7 @@ use sep2_common_derive::{
 };
 
 use super::{
-    links::{
-        ActiveBillingPeriodListLink, ActiveProjectionReadingListLink, ActiveTargetReadingListLink,
-        BillingPeriodListLink, BillingReadingListLink, BillingReadingSetListLink,
-        CustomerAgreementListLink, HistoricalReadingListLink, PrepaymentLink,
-        ProjectionReadingListLink, ReadingTypeLink, ServiceSupplierLink, TargetReadingListLink,
-        TariffProfileLink, UsagePointLink,
-    },
+    identification::{Link, ListLink},
     primitives::{HexBinary16, Int32, Int48, String20, String32, String42, Uint16, Uint32},
     types::{
         ConsumptionBlockType, DateTimeInterval, MRIDType, PowerOfTenMultiplierType,
@@ -128,10 +122,10 @@ impl Validate for BillingPeriodList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingMeterReadingBase {
     #[yaserde(rename = "BillingReadingSetListLink")]
-    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
+    pub billing_reading_set_list_link: Option<ListLink>,
 
     #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: Option<ReadingTypeLink>,
+    pub reading_type_link: Option<Link>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -276,7 +270,7 @@ impl Validate for BillingReadingList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingReadingSet {
     #[yaserde(rename = "BillingReadingListLink")]
-    pub billing_reading_list_link: Option<BillingReadingListLink>,
+    pub billing_reading_list_link: Option<ListLink>,
 
     // Specifies the time range during which the contained readings were taken.
     #[yaserde(rename = "timePeriod")]
@@ -429,7 +423,7 @@ pub struct CustomerAccount {
     pub customer_account: Option<String42>,
 
     #[yaserde(rename = "CustomerAgreementListLink")]
-    pub customer_agreement_list_link: Option<CustomerAgreementListLink>,
+    pub customer_agreement_list_link: Option<ListLink>,
 
     // The name of the customer.
     #[yaserde(rename = "customerName")]
@@ -441,7 +435,7 @@ pub struct CustomerAccount {
     pub price_power_of_ten_multiplier: PowerOfTenMultiplierType,
 
     #[yaserde(rename = "ServiceSupplierLink")]
-    pub service_supplier_link: Option<ServiceSupplierLink>,
+    pub service_supplier_link: Option<Link>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -538,25 +532,25 @@ impl Validate for CustomerAccountList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CustomerAgreement {
     #[yaserde(rename = "ActiveBillingPeriodListLink")]
-    pub active_billing_period_list_link: Option<ActiveBillingPeriodListLink>,
+    pub active_billing_period_list_link: Option<ListLink>,
 
     #[yaserde(rename = "ActiveProjectionReadingListLink")]
-    pub active_projection_reading_list_link: Option<ActiveProjectionReadingListLink>,
+    pub active_projection_reading_list_link: Option<ListLink>,
 
     #[yaserde(rename = "ActiveTargetReadingListLink")]
-    pub active_target_reading_list_link: Option<ActiveTargetReadingListLink>,
+    pub active_target_reading_list_link: Option<ListLink>,
 
     #[yaserde(rename = "BillingPeriodListLink")]
-    pub billing_period_list_link: Option<BillingPeriodListLink>,
+    pub billing_period_list_link: Option<ListLink>,
 
     #[yaserde(rename = "HistoricalReadingListLink")]
-    pub historical_reading_list_link: Option<HistoricalReadingListLink>,
+    pub historical_reading_list_link: Option<ListLink>,
 
     #[yaserde(rename = "PrepaymentLink")]
-    pub prepayment_link: Option<PrepaymentLink>,
+    pub prepayment_link: Option<Link>,
 
     #[yaserde(rename = "ProjectionReadingListLink")]
-    pub projection_reading_list_link: Option<ProjectionReadingListLink>,
+    pub projection_reading_list_link: Option<ListLink>,
 
     // The account number of the service account (if applicable).
     #[yaserde(rename = "serviceAccount")]
@@ -567,13 +561,13 @@ pub struct CustomerAgreement {
     pub service_location: Option<String42>,
 
     #[yaserde(rename = "TargetReadingListLink")]
-    pub target_reading_list_link: Option<TargetReadingListLink>,
+    pub target_reading_list_link: Option<ListLink>,
 
     #[yaserde(rename = "TariffProfileLink")]
-    pub tariff_profile_link: Option<TariffProfileLink>,
+    pub tariff_profile_link: Option<Link>,
 
     #[yaserde(rename = "UsagePointLink")]
-    pub usage_point_link: Option<UsagePointLink>,
+    pub usage_point_link: Option<Link>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -673,10 +667,10 @@ impl Validate for CustomerAgreementList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct HistoricalReading {
     #[yaserde(rename = "BillingReadingSetListLink")]
-    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
+    pub billing_reading_set_list_link: Option<ListLink>,
 
     #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: Option<ReadingTypeLink>,
+    pub reading_type_link: Option<Link>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -758,10 +752,10 @@ impl Validate for HistoricalReadingList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ProjectionReading {
     #[yaserde(rename = "BillingReadingSetListLink")]
-    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
+    pub billing_reading_set_list_link: Option<ListLink>,
 
     #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: Option<ReadingTypeLink>,
+    pub reading_type_link: Option<Link>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -843,10 +837,10 @@ impl Validate for ProjectionReadingList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TargetReading {
     #[yaserde(rename = "BillingReadingSetListLink")]
-    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
+    pub billing_reading_set_list_link: Option<ListLink>,
 
     #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: Option<ReadingTypeLink>,
+    pub reading_type_link: Option<Link>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]

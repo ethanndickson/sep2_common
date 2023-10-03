@@ -10,11 +10,7 @@ use sep2_common_derive::{
 use yaserde::{YaDeserialize, YaSerialize};
 
 use super::{
-    identification::ResponseRequired,
-    links::{
-        ActiveTimeTariffIntervalListLink, ConsumptionTariffIntervalListLink, RateComponentListLink,
-        ReadingTypeLink, TimeTariffIntervalListLink,
-    },
+    identification::{Link, ListLink, ResponseRequired},
     objects::EventStatus,
     primitives::{Int32, String20, String32, Uint32, Uint48, Uint8},
     types::{
@@ -180,7 +176,7 @@ impl Validate for EnvironmentalCost {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RateComponent {
     #[yaserde(rename = "ActiveTimeTariffIntervalListLink")]
-    pub active_time_tariff_interval_list_link: Option<ActiveTimeTariffIntervalListLink>,
+    pub active_time_tariff_interval_list_link: Option<ListLink>,
 
     // Specifies the maximum flow rate (e.g. kW for electricity) for which this
     // RateComponent applies, for the usage point and given rate / tariff.
@@ -218,14 +214,14 @@ pub struct RateComponent {
     // Provides indication of the ReadingType with which this price is
     // associated.
     #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: ReadingTypeLink,
+    pub reading_type_link: Link,
 
     // Specifies the roles that this usage point has been assigned.
     #[yaserde(rename = "roleFlags")]
     pub role_flags: RoleFlagsType,
 
     #[yaserde(rename = "TimeTariffIntervalListLink")]
-    pub time_tariff_interval_list_link: TimeTariffIntervalListLink,
+    pub time_tariff_interval_list_link: ListLink,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -308,7 +304,7 @@ impl Validate for RateComponentList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TimeTariffInterval {
     #[yaserde(rename = "ConsumptionTariffIntervalListLink")]
-    pub consumption_tariff_interval_list_link: Option<ConsumptionTariffIntervalListLink>,
+    pub consumption_tariff_interval_list_link: Option<ListLink>,
 
     // Indicates the time of use tier related to the reading. If not specified,
     // is assumed to be "0 - N/A".
@@ -538,7 +534,7 @@ pub struct TariffProfile {
     pub rate_code: Option<String20>,
 
     #[yaserde(rename = "RateComponentListLink")]
-    pub rate_component_list_link: Option<RateComponentListLink>,
+    pub rate_component_list_link: Option<ListLink>,
 
     // The kind of service provided by this usage point.
     #[yaserde(rename = "serviceCategoryKind")]

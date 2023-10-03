@@ -231,34 +231,34 @@ pub fn derive_fsa_base(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
         impl SEFunctionSetAssignmentsBase for #ident {
-            fn customer_account_list_link(&self) -> Option<&CustomerAccountListLink> {
+            fn customer_account_list_link(&self) -> Option<&ListLink> {
                 self.customer_account_list_link.as_ref()
             }
-            fn demand_response_program_list_link(&self) -> Option<&DemandResponseProgramListLink> {
+            fn demand_response_program_list_link(&self) -> Option<&ListLink> {
                 self.demand_response_program_list_link.as_ref()
             }
-            fn der_program_list_link(&self) -> Option<&DERProgramListLink> {
+            fn der_program_list_link(&self) -> Option<&ListLink> {
                 self.der_program_list_link.as_ref()
             }
-            fn file_list_link(&self) -> Option<&FileListLink> {
+            fn file_list_link(&self) -> Option<&ListLink> {
                 self.file_list_link.as_ref()
             }
-            fn messaging_program_list_link(&self) -> Option<&MessagingProgramListLink> {
+            fn messaging_program_list_link(&self) -> Option<&ListLink> {
                 self.messaging_program_list_link.as_ref()
             }
-            fn prepayment_list_link(&self) -> Option<&PrepaymentListLink> {
+            fn prepayment_list_link(&self) -> Option<&ListLink> {
                 self.prepayment_list_link.as_ref()
             }
-            fn response_set_list_link(&self) -> Option<&ResponseSetListLink> {
+            fn response_set_list_link(&self) -> Option<&ListLink> {
                 self.response_set_list_link.as_ref()
             }
-            fn tariff_profile_list_link(&self) -> Option<&TariffProfileListLink> {
+            fn tariff_profile_list_link(&self) -> Option<&ListLink> {
                 self.tariff_profile_list_link.as_ref()
             }
-            fn time_link(&self) -> Option<&TimeLink> {
+            fn time_link(&self) -> Option<&Link> {
                 self.time_link.as_ref()
             }
-            fn usage_point_list_link(&self) -> Option<&UsagePointListLink> {
+            fn usage_point_list_link(&self) -> Option<&ListLink> {
                 self.usage_point_list_link.as_ref()
             }
         }
@@ -271,37 +271,37 @@ pub fn derive_abstract_device(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
         impl SEAbstractDevice for #ident {
-            fn configuration_link(&self) -> Option<&ConfigurationLink> {
+            fn configuration_link(&self) -> Option<&Link> {
                 self.configuration_link.as_ref()
             }
-            fn der_list_link(&self) -> Option<&DERListLink> {
+            fn der_list_link(&self) -> Option<&ListLink> {
                 self.der_list_link.as_ref()
             }
             fn device_category(&self) -> Option<DeviceCategoryType> {
                 self.device_category
             }
-            fn device_information_link(&self) -> Option<&DeviceInformationLink> {
+            fn device_information_link(&self) -> Option<&Link> {
                 self.device_information_link.as_ref()
             }
-            fn device_status_link(&self) -> Option<&DeviceStatusLink> {
+            fn device_status_link(&self) -> Option<&Link> {
                 self.device_status_link.as_ref()
             }
-            fn file_status_link(&self) -> Option<&FileStatusLink> {
+            fn file_status_link(&self) -> Option<&Link> {
                 self.file_status_link.as_ref()
             }
-            fn ip_interface_list_link(&self) -> Option<&IPInterfaceListLink> {
+            fn ip_interface_list_link(&self) -> Option<&ListLink> {
                 self.ip_interface_list_link.as_ref()
             }
             fn lfdi(&self) -> Option<&HexBinary160> {
                 self.lfdi.as_ref()
             }
-            fn load_shed_availability_list_link(&self) -> Option<&LoadShedAvailabilityListLink> {
+            fn load_shed_availability_list_link(&self) -> Option<&ListLink> {
                 self.load_shed_availability_list_link.as_ref()
             }
-            fn log_event_list_link(&self) -> Option<&LogEventListLink> {
+            fn log_event_list_link(&self) -> Option<&ListLink> {
                 self.log_event_list_link.as_ref()
             }
-            fn power_status_link(&self) -> Option<&PowerStatusLink> {
+            fn power_status_link(&self) -> Option<&Link> {
                 self.power_status_link.as_ref()
             }
             fn sfdi(&self) -> SFDIType {
@@ -380,10 +380,10 @@ pub fn derive_billing_meter_reading_base(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
         impl SEBillingMeterReadingBase for #ident {
-            fn billing_reading_set_list_link(&self) -> Option<&BillingReadingSetListLink> {
+            fn billing_reading_set_list_link(&self) -> Option<&ListLink> {
                 self.billing_reading_set_list_link.as_ref()
             }
-            fn reading_type_link(&self) -> Option<&ReadingTypeLink> {
+            fn reading_type_link(&self) -> Option<&Link> {
                 self.reading_type_link.as_ref()
             }
         }

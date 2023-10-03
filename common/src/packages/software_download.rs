@@ -2,7 +2,7 @@ use crate::traits::{SEList, SEResource, Validate};
 use sep2_common_derive::{SEList, SEResource};
 
 use super::{
-    links::FileLink,
+    identification::Link,
     primitives::{HexBinary16, HexBinary160, String16, String32, Uint16, Uint32, Uint8},
     types::{PENType, TimeType},
 };
@@ -154,7 +154,7 @@ pub struct FileStatus {
     pub activate_time: Option<TimeType>,
 
     #[yaserde(rename = "FileLink")]
-    pub file_link: Option<FileLink>,
+    pub file_link: Option<Link>,
 
     // This element MUST be set to the percentage of the file, indicated by
     // FileLink, that was loaded during the latest load attempt. This value MUST

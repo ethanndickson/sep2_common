@@ -1,5 +1,3 @@
-use std::marker::PhantomData;
-
 use bitflags::bitflags;
 use sep2_common_derive::{
     SEIdentifiedObject, SEList, SEResource, SERespondableIdentifiedObject, SERespondableResource,
@@ -155,24 +153,22 @@ pub struct List {
 impl Validate for List {}
 
 // Links provide a reference, via URI, to another resource.
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, PartialOrd, Ord, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "Link")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Link<RE: SEResource> {
+pub struct Link {
     // A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
-    #[yaserde(skip_serializing)]
-    link_to: PhantomData<RE>,
 }
 
-impl<RE: SEResource> Validate for Link<RE> {}
+impl Validate for Link {}
 
 // ListLinks provide a reference, via URI, to a List.
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, PartialOrd, Ord, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct ListLink<L: SEList> {
+pub struct ListLink {
     // Indicates the total number of items in the referenced list. This
     // attribute SHALL be present if the href is a local or relative URI. This
     // attribute SHOULD NOT be present if the href is a remote or absolute URI,
@@ -183,10 +179,9 @@ pub struct ListLink<L: SEList> {
     // A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
-    #[yaserde(skip_serializing)]
-    link_to: PhantomData<L>,
 }
-impl<L: SEList> Validate for ListLink<L> {}
+
+impl Validate for ListLink {}
 
 // This is a root class to provide common naming attributes for all classes needing naming attributes
 #[derive(

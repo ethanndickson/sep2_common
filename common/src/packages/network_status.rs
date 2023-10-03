@@ -2,10 +2,7 @@ use crate::traits::{SEList, SEResource, Validate};
 use sep2_common_derive::{SEList, SEResource};
 
 use super::{
-    links::{
-        IPAddrListLink, LlinterfaceListLink, NeighborListLink, RplinstanceListLink,
-        RplsourceRoutesListLink,
-    },
+    identification::ListLink,
     primitives::{
         HexBinary128, HexBinary64, HexBinary8, Int64, String16, String192, Uint16, Uint32, Uint8,
     },
@@ -22,7 +19,7 @@ pub struct Ieee802154 {
     pub capability_info: HexBinary8,
 
     #[yaserde(rename = "NeighborListLink")]
-    pub neighbor_list_link: Option<NeighborListLink>,
+    pub neighbor_list_link: Option<ListLink>,
 
     // As defined by IEEE 802.15.4
     #[yaserde(rename = "shortAddress")]
@@ -40,7 +37,7 @@ pub struct IPAddr {
     pub address: HexBinary128,
 
     #[yaserde(rename = "RPLInstanceListLink")]
-    pub rpl_instance_list_link: Option<RplinstanceListLink>,
+    pub rpl_instance_list_link: Option<ListLink>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -184,7 +181,7 @@ pub struct IPInterface {
     pub if_type: Option<Uint16>,
 
     #[yaserde(rename = "IPAddrListLink")]
-    pub ip_addr_list_link: Option<IPAddrListLink>,
+    pub ip_addr_list_link: Option<ListLink>,
 
     // Similar to ifLastChange in [RFC 2863].
     #[yaserde(rename = "lastResetTime")]
@@ -195,7 +192,7 @@ pub struct IPInterface {
     pub last_updated_time: Option<Int64>,
 
     #[yaserde(rename = "LLInterfaceListLink")]
-    pub ll_interface_list_link: Option<LlinterfaceListLink>,
+    pub ll_interface_list_link: Option<ListLink>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -486,7 +483,7 @@ pub struct Rplinstance {
     pub rpl_instance_id: Uint8,
 
     #[yaserde(rename = "RPLSourceRoutesListLink")]
-    pub rpl_source_routes_list_link: Option<RplsourceRoutesListLink>,
+    pub rpl_source_routes_list_link: Option<ListLink>,
 
     // See [RFC 6550].
     #[yaserde(rename = "versionNumber")]

@@ -8,12 +8,7 @@ use sep2_common_derive::{
 use yaserde::{YaDeserialize, YaSerialize};
 
 use super::{
-    links::{
-        ConfigurationLink, DERListLink, DeviceInformationLink, DeviceStatusLink, FileStatusLink,
-        FlowReservationRequestListLink, FlowReservationResponseListLink,
-        FunctionSetAssignmentsListLink, IPInterfaceListLink, LoadShedAvailabilityListLink,
-        LogEventListLink, PowerStatusLink, RegistrationLink, SubscriptionListLink, TimeLink,
-    },
+    identification::{Link, ListLink},
     primitives::{HexBinary160, Int16, Uint16, Uint32, Uint8},
     types::{
         DeviceCategoryType, PINType, PowerOfTenMultiplierType, SFDIType, SubscribableType, TimeType,
@@ -36,10 +31,10 @@ use super::{
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct AbstractDevice {
     #[yaserde(rename = "ConfigurationLink")]
-    pub configuration_link: Option<ConfigurationLink>,
+    pub configuration_link: Option<Link>,
 
     #[yaserde(rename = "DERListLink")]
-    pub der_list_link: Option<DERListLink>,
+    pub der_list_link: Option<ListLink>,
 
     // This field is for use in devices that can adjust energy usage (e.g.,
     // demand response, distributed energy resources). For devices that do not
@@ -49,16 +44,16 @@ pub struct AbstractDevice {
     pub device_category: Option<DeviceCategoryType>,
 
     #[yaserde(rename = "DeviceInformationLink")]
-    pub device_information_link: Option<DeviceInformationLink>,
+    pub device_information_link: Option<Link>,
 
     #[yaserde(rename = "DeviceStatusLink")]
-    pub device_status_link: Option<DeviceStatusLink>,
+    pub device_status_link: Option<Link>,
 
     #[yaserde(rename = "FileStatusLink")]
-    pub file_status_link: Option<FileStatusLink>,
+    pub file_status_link: Option<Link>,
 
     #[yaserde(rename = "IPInterfaceListLink")]
-    pub ip_interface_list_link: Option<IPInterfaceListLink>,
+    pub ip_interface_list_link: Option<ListLink>,
 
     // Long form of device identifier. See the Security section for additional
     // details.
@@ -66,13 +61,13 @@ pub struct AbstractDevice {
     pub lfdi: Option<HexBinary160>,
 
     #[yaserde(rename = "LoadShedAvailabilityListLink")]
-    pub load_shed_availability_list_link: Option<LoadShedAvailabilityListLink>,
+    pub load_shed_availability_list_link: Option<ListLink>,
 
     #[yaserde(rename = "LogEventListLink")]
-    pub log_event_list_link: Option<LogEventListLink>,
+    pub log_event_list_link: Option<ListLink>,
 
     #[yaserde(rename = "PowerStatusLink")]
-    pub power_status_link: Option<PowerStatusLink>,
+    pub power_status_link: Option<Link>,
 
     // Short form of device identifier, WITH the checksum digit. See the
     // Security section for additional details.
@@ -127,7 +122,7 @@ pub struct DeviceStatus {
     pub temperature: Vec<Temperature>,
 
     #[yaserde(rename = "TimeLink")]
-    pub time_link: Option<TimeLink>,
+    pub time_link: Option<Link>,
 
     // The default polling rate for this function set (this resource and all
     // resources below), in seconds. If not specified, a default of 900 seconds
@@ -191,13 +186,13 @@ pub struct EndDevice {
     pub enabled: Option<bool>,
 
     #[yaserde(rename = "FlowReservationRequestListLink")]
-    pub flow_reservation_request_list_link: Option<FlowReservationRequestListLink>,
+    pub flow_reservation_request_list_link: Option<ListLink>,
 
     #[yaserde(rename = "FlowReservationResponseListLink")]
-    pub flow_reservation_response_list_link: Option<FlowReservationResponseListLink>,
+    pub flow_reservation_response_list_link: Option<ListLink>,
 
     #[yaserde(rename = "FunctionSetAssignmentsListLink")]
-    pub function_set_assignments_list_link: Option<FunctionSetAssignmentsListLink>,
+    pub function_set_assignments_list_link: Option<ListLink>,
 
     // POST rate, or how often EndDevice and subordinate resources should be
     // POSTed, in seconds. A client MAY indicate a preferred postRate when
@@ -207,16 +202,16 @@ pub struct EndDevice {
     pub post_rate: Option<Uint32>,
 
     #[yaserde(rename = "RegistrationLink")]
-    pub registration_link: Option<RegistrationLink>,
+    pub registration_link: Option<Link>,
 
     #[yaserde(rename = "SubscriptionListLink")]
-    pub subscription_list_link: Option<SubscriptionListLink>,
+    pub subscription_list_link: Option<ListLink>,
 
     #[yaserde(rename = "ConfigurationLink")]
-    pub configuration_link: Option<ConfigurationLink>,
+    pub configuration_link: Option<Link>,
 
     #[yaserde(rename = "DERListLink")]
-    pub der_list_link: Option<DERListLink>,
+    pub der_list_link: Option<ListLink>,
 
     // This field is for use in devices that can adjust energy usage (e.g.,
     // demand response, distributed energy resources). For devices that do not
@@ -226,16 +221,16 @@ pub struct EndDevice {
     pub device_category: Option<DeviceCategoryType>,
 
     #[yaserde(rename = "DeviceInformationLink")]
-    pub device_information_link: Option<DeviceInformationLink>,
+    pub device_information_link: Option<Link>,
 
     #[yaserde(rename = "DeviceStatusLink")]
-    pub device_status_link: Option<DeviceStatusLink>,
+    pub device_status_link: Option<Link>,
 
     #[yaserde(rename = "FileStatusLink")]
-    pub file_status_link: Option<FileStatusLink>,
+    pub file_status_link: Option<Link>,
 
     #[yaserde(rename = "IPInterfaceListLink")]
-    pub ip_interface_list_link: Option<IPInterfaceListLink>,
+    pub ip_interface_list_link: Option<ListLink>,
 
     // Long form of device identifier. See the Security section for additional
     // details.
@@ -243,13 +238,13 @@ pub struct EndDevice {
     pub lfdi: Option<HexBinary160>,
 
     #[yaserde(rename = "LoadShedAvailabilityListLink")]
-    pub load_shed_availability_list_link: Option<LoadShedAvailabilityListLink>,
+    pub load_shed_availability_list_link: Option<ListLink>,
 
     #[yaserde(rename = "LogEventListLink")]
-    pub log_event_list_link: Option<LogEventListLink>,
+    pub log_event_list_link: Option<ListLink>,
 
     #[yaserde(rename = "PowerStatusLink")]
-    pub power_status_link: Option<PowerStatusLink>,
+    pub power_status_link: Option<Link>,
 
     // Short form of device identifier, WITH the checksum digit. See the
     // Security section for additional details.
@@ -396,10 +391,10 @@ pub struct SelfDevice {
     pub poll_rate: Option<Uint32>,
 
     #[yaserde(rename = "ConfigurationLink")]
-    pub configuration_link: Option<ConfigurationLink>,
+    pub configuration_link: Option<Link>,
 
     #[yaserde(rename = "DERListLink")]
-    pub der_list_link: Option<DERListLink>,
+    pub der_list_link: Option<ListLink>,
 
     // This field is for use in devices that can adjust energy usage (e.g.,
     // demand response, distributed energy resources). For devices that do not
@@ -409,16 +404,16 @@ pub struct SelfDevice {
     pub device_category: Option<DeviceCategoryType>,
 
     #[yaserde(rename = "DeviceInformationLink")]
-    pub device_information_link: Option<DeviceInformationLink>,
+    pub device_information_link: Option<Link>,
 
     #[yaserde(rename = "DeviceStatusLink")]
-    pub device_status_link: Option<DeviceStatusLink>,
+    pub device_status_link: Option<Link>,
 
     #[yaserde(rename = "FileStatusLink")]
-    pub file_status_link: Option<FileStatusLink>,
+    pub file_status_link: Option<Link>,
 
     #[yaserde(rename = "IPInterfaceListLink")]
-    pub ip_interface_list_link: Option<IPInterfaceListLink>,
+    pub ip_interface_list_link: Option<ListLink>,
 
     // Long form of device identifier. See the Security section for additional
     // details.
@@ -426,13 +421,13 @@ pub struct SelfDevice {
     pub lfdi: Option<HexBinary160>,
 
     #[yaserde(rename = "LoadShedAvailabilityListLink")]
-    pub load_shed_availability_list_link: Option<LoadShedAvailabilityListLink>,
+    pub load_shed_availability_list_link: Option<ListLink>,
 
     #[yaserde(rename = "LogEventListLink")]
-    pub log_event_list_link: Option<LogEventListLink>,
+    pub log_event_list_link: Option<ListLink>,
 
     #[yaserde(rename = "PowerStatusLink")]
-    pub power_status_link: Option<PowerStatusLink>,
+    pub power_status_link: Option<Link>,
 
     // Short form of device identifier, WITH the checksum digit. See the
     // Security section for additional details.

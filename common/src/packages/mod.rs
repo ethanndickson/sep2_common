@@ -41,13 +41,8 @@ pub mod software_download;
 #[cfg(feature = "time")]
 pub mod time;
 
-#[cfg(feature = "common")]
 pub mod identification;
-#[cfg(feature = "common")]
 pub mod links;
-#[cfg(feature = "common")]
 pub mod objects;
-#[cfg(feature = "common")]
 pub mod primitives;
-#[cfg(feature = "common")]
 pub mod types;

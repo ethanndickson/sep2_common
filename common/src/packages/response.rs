@@ -1,8 +1,7 @@
 use sep2_common_derive::{SEIdentifiedObject, SEList, SEResource, SEResponse};
 use yaserde::{YaDeserialize, YaSerialize};
 
-use super::identification::ResponseStatus;
-use super::links::ResponseListLink;
+use super::identification::{ListLink, ResponseStatus};
 use super::primitives::{HexBinary160, String32, Uint32};
 use super::types::{MRIDType, TimeType, VersionType};
 use crate::traits::{SEIdentifiedObject, SEList, SEResource, SEResponse, Validate};
@@ -269,7 +268,7 @@ impl<T: SEResponse + Ord> Validate for ResponseList<T> {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseSet {
     #[yaserde(rename = "ResponseListLink")]
-    pub response_list_link: Option<ResponseListLink>,
+    pub response_list_link: Option<ListLink>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]

@@ -4,12 +4,7 @@ use sep2_common_derive::{SEFunctionSetAssignmentsBase, SEResource};
 use yaserde::{YaDeserialize, YaSerialize};
 
 use super::{
-    links::{
-        CustomerAccountListLink, DERProgramListLink, DemandResponseProgramListLink,
-        EndDeviceListLink, FileListLink, MessagingProgramListLink, MirrorUsagePointListLink,
-        PrepaymentListLink, ResponseSetListLink, SelfDeviceLink, TariffProfileListLink, TimeLink,
-        UsagePointListLink,
-    },
+    identification::{Link, ListLink},
     primitives::Uint32,
 };
 
@@ -28,13 +23,13 @@ use super::{
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DeviceCapability {
     #[yaserde(rename = "EndDeviceListLink")]
-    pub end_device_list_link: Option<EndDeviceListLink>,
+    pub end_device_list_link: Option<ListLink>,
 
     #[yaserde(rename = "MirrorUsagePointListLink")]
-    pub mirror_usage_point_list_link: Option<MirrorUsagePointListLink>,
+    pub mirror_usage_point_list_link: Option<ListLink>,
 
     #[yaserde(rename = "SelfDeviceLink")]
-    pub self_device_link: Option<SelfDeviceLink>,
+    pub self_device_link: Option<Link>,
 
     // The default polling rate for this function set (this resource and all
     // resources below), in seconds. If not specified, a default of 900 seconds
@@ -44,34 +39,34 @@ pub struct DeviceCapability {
     pub poll_rate: Option<Uint32>,
 
     #[yaserde(rename = "CustomerAccountListLink")]
-    pub customer_account_list_link: Option<CustomerAccountListLink>,
+    pub customer_account_list_link: Option<ListLink>,
 
     #[yaserde(rename = "DemandResponseProgramListLink")]
-    pub demand_response_program_list_link: Option<DemandResponseProgramListLink>,
+    pub demand_response_program_list_link: Option<ListLink>,
 
     #[yaserde(rename = "DERProgramListLink")]
-    pub der_program_list_link: Option<DERProgramListLink>,
+    pub der_program_list_link: Option<ListLink>,
 
     #[yaserde(rename = "FileListLink")]
-    pub file_list_link: Option<FileListLink>,
+    pub file_list_link: Option<ListLink>,
 
     #[yaserde(rename = "MessagingProgramListLink")]
-    pub messaging_program_list_link: Option<MessagingProgramListLink>,
+    pub messaging_program_list_link: Option<ListLink>,
 
     #[yaserde(rename = "PrepaymentListLink")]
-    pub prepayment_list_link: Option<PrepaymentListLink>,
+    pub prepayment_list_link: Option<ListLink>,
 
     #[yaserde(rename = "ResponseSetListLink")]
-    pub response_set_list_link: Option<ResponseSetListLink>,
+    pub response_set_list_link: Option<ListLink>,
 
     #[yaserde(rename = "TariffProfileListLink")]
-    pub tariff_profile_list_link: Option<TariffProfileListLink>,
+    pub tariff_profile_list_link: Option<ListLink>,
 
     #[yaserde(rename = "TimeLink")]
-    pub time_link: Option<TimeLink>,
+    pub time_link: Option<Link>,
 
     #[yaserde(rename = "UsagePointListLink")]
-    pub usage_point_list_link: Option<UsagePointListLink>,
+    pub usage_point_list_link: Option<ListLink>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
