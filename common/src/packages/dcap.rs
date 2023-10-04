@@ -36,10 +36,10 @@ pub struct DeviceCapability {
     #[yaserde(rename = "SelfDeviceLink")]
     pub self_device_link: Option<SelfDeviceLink>,
 
-    // The default polling rate for this function set (this resource and all
-    // resources below), in seconds. If not specified, a default of 900 seconds
-    // (15 minutes) is used. It is RECOMMENDED a client poll the resources of
-    // this function set every pollRate seconds.
+    /// The default polling rate for this function set (this resource and all
+    /// resources below), in seconds. If not specified, a default of 900 seconds
+    /// (15 minutes) is used. It is RECOMMENDED a client poll the resources of
+    /// this function set every pollRate seconds.
     #[yaserde(attribute, rename = "pollRate")]
     pub poll_rate: Option<Uint32>,
 
@@ -73,8 +73,8 @@ pub struct DeviceCapability {
     #[yaserde(rename = "UsagePointListLink")]
     pub usage_point_list_link: Option<UsagePointListLink>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }

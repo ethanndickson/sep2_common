@@ -17,60 +17,60 @@ use crate::traits::{
     SESubscribableList, SESubscribableResource, Validate,
 };
 
-// A resource is an addressable unit of information, either a collection (List)
-// or instance of an object (identifiedObject, or simply, Resource)
+/// A resource is an addressable unit of information, either a collection (List)
+/// or instance of an object (identifiedObject, or simply, Resource)
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "Resource")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Resource {
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
 
 impl Validate for Resource {}
 
-// The Response object is the generic response data
-// repository which is extended for specific function sets.
+/// The Response object is the generic response data
+/// repository which is extended for specific function sets.
 #[derive(
     Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResponse, SEResource,
 )]
 #[yaserde(rename = "Response")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Response {
-    // The createdDateTime field contains the date and time when the
-    // acknowledgement/status occurred in the client. The client will provide
-    // the timestamp to ensure the proper time is captured in case the response
-    // is delayed in reaching the server (server receipt time would not be the
-    // same as the actual confirmation time). The time reported from the client
-    // should be relative to the time server indicated by the
-    // FunctionSetAssignment that also indicated the event resource; if no
-    // FunctionSetAssignment exists, the time of the server where the event
-    // resource was hosted.
+    /// The createdDateTime field contains the date and time when the
+    /// acknowledgement/status occurred in the client. The client will provide
+    /// the timestamp to ensure the proper time is captured in case the response
+    /// is delayed in reaching the server (server receipt time would not be the
+    /// same as the actual confirmation time). The time reported from the client
+    /// should be relative to the time server indicated by the
+    /// FunctionSetAssignment that also indicated the event resource; if no
+    /// FunctionSetAssignment exists, the time of the server where the event
+    /// resource was hosted.
     #[yaserde(rename = "createdDateTime")]
     pub created_date_time: Option<TimeType>,
 
-    // Contains the LFDI of the device providing the response.
+    /// Contains the LFDI of the device providing the response.
     #[yaserde(rename = "endDeviceLFDI")]
     pub end_device_lfdi: HexBinary160,
 
-    // The status field contains the acknowledgement or status. Each event type
-    // (DRLC, DER, Price, or Text) can return different status information (e.g.
-    // an Acknowledge will be returned for a Price event where a DRLC event can
-    // return Event Received, Event Started, and Event Completed). The Status
-    // field value definitions are defined in Table 27: Response Types by
-    // Function Set.
+    /// The status field contains the acknowledgement or status. Each event type
+    /// (DRLC, DER, Price, or Text) can return different status information (e.g.
+    /// an Acknowledge will be returned for a Price event where a DRLC event can
+    /// return Event Received, Event Started, and Event Completed). The Status
+    /// field value definitions are defined in Table 27: Response Types by
+    /// Function Set.
     #[yaserde(rename = "status")]
     pub status: Option<ResponseStatus>,
 
-    // The subject field provides a method to match the response with the
-    // originating event. It is populated with the mRID of the original object.
+    /// The subject field provides a method to match the response with the
+    /// originating event. It is populated with the mRID of the original object.
     #[yaserde(rename = "subject")]
     pub subject: MRIDType,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -125,91 +125,91 @@ pub enum ResponseStatus {
 
 impl Validate for Response {}
 
-// Container to hold a collection of object instances or references.
+/// Container to hold a collection of object instances or references.
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "List")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct List {
-    // This field is OOS since it is different in every child type
-    // but is required for our SEList trait implementation
+    /// This field is OOS since it is different in every child type
+    /// but is required for our SEList trait implementation
     #[yaserde(skip_serializing)]
     pub contents: Vec<String>,
 
-    // The number specifying "all" of the items in the list. Required on a
-    // response to a GET, ignored otherwise.
+    /// The number specifying "all" of the items in the list. Required on a
+    /// response to a GET, ignored otherwise.
     #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
-    // Indicates the number of items in this page of results.
+    /// Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
 
 impl Validate for List {}
 
-// Links provide a reference, via URI, to another resource.
+/// Links provide a reference, via URI, to another resource.
 #[derive(Default, PartialEq, Eq, PartialOrd, Ord, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "Link")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Link {
-    // A URI reference.
+    /// A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
 }
 
 impl Validate for Link {}
 
-// ListLinks provide a reference, via URI, to a List.
+/// ListLinks provide a reference, via URI, to a List.
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ListLink {
-    // Indicates the total number of items in the referenced list. This
-    // attribute SHALL be present if the href is a local or relative URI. This
-    // attribute SHOULD NOT be present if the href is a remote or absolute URI,
-    // as the server may be unaware of changes to the value.
+    /// Indicates the total number of items in the referenced list. This
+    /// attribute SHALL be present if the href is a local or relative URI. This
+    /// attribute SHOULD NOT be present if the href is a remote or absolute URI,
+    /// as the server may be unaware of changes to the value.
     #[yaserde(attribute, rename = "all")]
     pub all: Option<Uint32>,
 
-    // A URI reference.
+    /// A URI reference.
     #[yaserde(attribute, rename = "href")]
     pub href: String,
 }
 impl Validate for ListLink {}
 
-// This is a root class to provide common naming attributes for all classes needing naming attributes
+/// This is a root class to provide common naming attributes for all classes needing naming attributes
 #[derive(
     Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEIdentifiedObject, SEResource,
 )]
 #[yaserde(rename = "IdentifiedObject")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct IdentifiedObject {
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
 impl Validate for IdentifiedObject {}
 
-// A Resource to which a Response can be requested.
+/// A Resource to which a Response can be requested.
 #[derive(
     Default,
     PartialEq,
@@ -224,33 +224,33 @@ impl Validate for IdentifiedObject {}
 #[yaserde(rename = "RespondableResource")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RespondableResource {
-    // A reference to the response resource address (URI). Required on a
-    // response to a GET if responseRequired is "true".
+    /// A reference to the response resource address (URI). Required on a
+    /// response to a GET if responseRequired is "true".
     #[yaserde(attribute, rename = "replyTo")]
     pub reply_to: Option<String>,
 
-    // Indicates whether or not a response is required upon receipt, creation or
-    // update of this resource. Responses shall be posted to the collection
-    // specified in "replyTo".
-    // If the resource has a deviceCategory field, devices that match one or
-    // more of the device types indicated in deviceCategory SHALL respond
-    // according to the rules listed below. If the category does not match, the
-    // device SHALL NOT respond. If the resource does not have a deviceCategory
-    // field, a device receiving the resource SHALL respond according to the
-    // rules listed below.
-    // Value encoded as hex according to the following bit assignments, any
-    // combination is possible.
-    // See Table 27 for the list of appropriate Response status codes to be sent
-    // for these purposes.
-    // 0 - End device shall indicate that message was received
-    // 1 - End device shall indicate specific response.
-    // 2 - End user / customer response is required.
-    // All other values reserved.
+    /// Indicates whether or not a response is required upon receipt, creation or
+    /// update of this resource. Responses shall be posted to the collection
+    /// specified in "replyTo".
+    /// If the resource has a deviceCategory field, devices that match one or
+    /// more of the device types indicated in deviceCategory SHALL respond
+    /// according to the rules listed below. If the category does not match, the
+    /// device SHALL NOT respond. If the resource does not have a deviceCategory
+    /// field, a device receiving the resource SHALL respond according to the
+    /// rules listed below.
+    /// Value encoded as hex according to the following bit assignments, any
+    /// combination is possible.
+    /// See Table 27 for the list of appropriate Response status codes to be sent
+    /// for these purposes.
+    /// 0 - End device shall indicate that message was received
+    /// 1 - End device shall indicate specific response.
+    /// 2 - End user / customer response is required.
+    /// All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
     pub response_required: Option<ResponseRequired>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -266,7 +266,7 @@ bitflags! {
 
 impl Validate for RespondableResource {}
 
-// An IdentifiedObject to which a Response can be requested.
+/// An IdentifiedObject to which a Response can be requested.
 #[derive(
     Default,
     PartialEq,
@@ -283,53 +283,53 @@ impl Validate for RespondableResource {}
 #[yaserde(rename = "RespondableIdentifiedObject")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RespondableIdentifiedObject {
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // A reference to the response resource address (URI). Required on a
-    // response to a GET if responseRequired is "true".
+    /// A reference to the response resource address (URI). Required on a
+    /// response to a GET if responseRequired is "true".
     #[yaserde(attribute, rename = "replyTo")]
     pub reply_to: Option<String>,
 
-    // Indicates whether or not a response is required upon receipt, creation or
-    // update of this resource. Responses shall be posted to the collection
-    // specified in "replyTo".
-    // If the resource has a deviceCategory field, devices that match one or
-    // more of the device types indicated in deviceCategory SHALL respond
-    // according to the rules listed below. If the category does not match, the
-    // device SHALL NOT respond. If the resource does not have a deviceCategory
-    // field, a device receiving the resource SHALL respond according to the
-    // rules listed below.
-    // Value encoded as hex according to the following bit assignments, any
-    // combination is possible.
-    // See Table 27 for the list of appropriate Response status codes to be sent
-    // for these purposes.
-    // 0 - End device shall indicate that message was received
-    // 1 - End device shall indicate specific response.
-    // 2 - End user / customer response is required.
-    // All other values reserved.
+    /// Indicates whether or not a response is required upon receipt, creation or
+    /// update of this resource. Responses shall be posted to the collection
+    /// specified in "replyTo".
+    /// If the resource has a deviceCategory field, devices that match one or
+    /// more of the device types indicated in deviceCategory SHALL respond
+    /// according to the rules listed below. If the category does not match, the
+    /// device SHALL NOT respond. If the resource does not have a deviceCategory
+    /// field, a device receiving the resource SHALL respond according to the
+    /// rules listed below.
+    /// Value encoded as hex according to the following bit assignments, any
+    /// combination is possible.
+    /// See Table 27 for the list of appropriate Response status codes to be sent
+    /// for these purposes.
+    /// 0 - End device shall indicate that message was received
+    /// 1 - End device shall indicate specific response.
+    /// 2 - End user / customer response is required.
+    /// All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
     pub response_required: Option<ResponseRequired>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
 
 impl Validate for RespondableIdentifiedObject {}
 
-// An IdentifiedObject to which a Response can be requested.
+/// An IdentifiedObject to which a Response can be requested.
 #[derive(
     Default,
     PartialEq,
@@ -347,59 +347,59 @@ impl Validate for RespondableIdentifiedObject {}
 #[yaserde(rename = "RespondableSubscribableIdentifiedObject")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RespondableSubscribableIdentifiedObject {
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
+    /// Indicates whether or not subscriptions are supported for this resource,
+    /// and whether or not conditional (thresholds) are supported. If not
+    /// specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
 
-    // A reference to the response resource address (URI). Required on a
-    // response to a GET if responseRequired is "true".
+    /// A reference to the response resource address (URI). Required on a
+    /// response to a GET if responseRequired is "true".
     #[yaserde(attribute, rename = "replyTo")]
     pub reply_to: Option<String>,
 
-    // Indicates whether or not a response is required upon receipt, creation or
-    // update of this resource. Responses shall be posted to the collection
-    // specified in "replyTo".
-    // If the resource has a deviceCategory field, devices that match one or
-    // more of the device types indicated in deviceCategory SHALL respond
-    // according to the rules listed below. If the category does not match, the
-    // device SHALL NOT respond. If the resource does not have a deviceCategory
-    // field, a device receiving the resource SHALL respond according to the
-    // rules listed below.
-    // Value encoded as hex according to the following bit assignments, any
-    // combination is possible.
-    // See Table 27 for the list of appropriate Response status codes to be sent
-    // for these purposes.
-    // 0 - End device shall indicate that message was received
-    // 1 - End device shall indicate specific response.
-    // 2 - End user / customer response is required.
-    // All other values reserved.
+    /// Indicates whether or not a response is required upon receipt, creation or
+    /// update of this resource. Responses shall be posted to the collection
+    /// specified in "replyTo".
+    /// If the resource has a deviceCategory field, devices that match one or
+    /// more of the device types indicated in deviceCategory SHALL respond
+    /// according to the rules listed below. If the category does not match, the
+    /// device SHALL NOT respond. If the resource does not have a deviceCategory
+    /// field, a device receiving the resource SHALL respond according to the
+    /// rules listed below.
+    /// Value encoded as hex according to the following bit assignments, any
+    /// combination is possible.
+    /// See Table 27 for the list of appropriate Response status codes to be sent
+    /// for these purposes.
+    /// 0 - End device shall indicate that message was received
+    /// 1 - End device shall indicate specific response.
+    /// 2 - End user / customer response is required.
+    /// All other values reserved.
     #[yaserde(attribute, rename = "responseRequired")]
     pub response_required: Option<ResponseRequired>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
 
 impl Validate for RespondableSubscribableIdentifiedObject {}
 
-// A Resource to which a Subscription can be requested.
+/// A Resource to which a Subscription can be requested.
 #[derive(
     Default,
     PartialEq,
@@ -414,21 +414,21 @@ impl Validate for RespondableSubscribableIdentifiedObject {}
 #[yaserde(rename = "SubscribableResource")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscribableResource {
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
+    /// Indicates whether or not subscriptions are supported for this resource,
+    /// and whether or not conditional (thresholds) are supported. If not
+    /// specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
 
 impl Validate for SubscribableResource {}
 
-// A List to which a Subscription can be requested.
+/// A List to which a Subscription can be requested.
 #[derive(
     Default,
     PartialEq,
@@ -445,35 +445,35 @@ impl Validate for SubscribableResource {}
 #[yaserde(rename = "SubscribableList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscribableList {
-    // This field is OOS since it is different in every child type
-    // but is required for our SEList trait implementation
+    /// This field is OOS since it is different in every child type
+    /// but is required for our SEList trait implementation
     #[yaserde(skip_serializing)]
     pub contents: Vec<String>,
 
-    // The number specifying "all" of the items in the list. Required on GET,
-    // ignored otherwise.
+    /// The number specifying "all" of the items in the list. Required on GET,
+    /// ignored otherwise.
     #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
-    // Indicates the number of items in this page of results.
+    /// Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
+    /// Indicates whether or not subscriptions are supported for this resource,
+    /// and whether or not conditional (thresholds) are supported. If not
+    /// specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
 
 impl Validate for SubscribableList {}
 
-// An IdentifiedObject to which a Response can be requested.
+/// An IdentifiedObject to which a Response can be requested.
 #[derive(
     Default,
     PartialEq,
@@ -490,27 +490,27 @@ impl Validate for SubscribableList {}
 #[yaserde(rename = "SubscribableIdentifiedObject")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SubscribableIdentifiedObject {
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
+    /// Indicates whether or not subscriptions are supported for this resource,
+    /// and whether or not conditional (thresholds) are supported. If not
+    /// specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }

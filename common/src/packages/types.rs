@@ -1,8 +1,8 @@
-use std::fmt::Display;
-// File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
-// Types should eventually be put in a module corresponding to their package
+/// File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
+/// Types should eventually be put in a module corresponding to their package
 use anyhow::anyhow;
 use bitflags::bitflags;
+use std::fmt::Display;
 use std::str::FromStr;
 use yaserde::{DefaultYaSerde, HexBinaryYaSerde, PrimitiveYaSerde, YaDeserialize, YaSerialize};
 
@@ -20,19 +20,19 @@ use super::primitives::{
 #[repr(u8)]
 pub enum AccumulationBehaviourType {
     #[default]
-    // (default, if not specified)
+    /// (default, if not specified)
     NotApplicable = 0,
-    // The sum of the previous billing period values. Note: “Cumulative” is commonly used in conjunction with “demand.” Each demand reset causes the maximum demand value for the present billing period (since the last demand reset) to accumulate as an accumulative total of all maximum demands. So instead of “zeroing” the demand register, a demand reset has the affect of adding the present maximum demand to this accumulating total.
+    /// The sum of the previous billing period values. Note: “Cumulative” is commonly used in conjunction with “demand.” Each demand reset causes the maximum demand value for the present billing period (since the last demand reset) to accumulate as an accumulative total of all maximum demands. So instead of “zeroing” the demand register, a demand reset has the affect of adding the present maximum demand to this accumulating total.
     Cumulative = 3,
-    // The difference between the value at the end of the prescribed interval and the beginning of the interval. This is used for incremental interval data.
-    // Note: One common application would be for load profile data, another use might be to report the number of events within an interval (such as the number of equipment energizations within the specified period of time.)
+    /// The difference between the value at the end of the prescribed interval and the beginning of the interval. This is used for incremental interval data.
+    /// Note: One common application would be for load profile data, another use might be to report the number of events within an interval (such as the number of equipment energizations within the specified period of time.)
     DeltaData = 4,
-    // As if a needle is swung out on the meter face to a value to indicate the current value. (Note: An “indicating” value is typically measured over hundreds of milliseconds or greater, or may imply a “pusher” mechanism to capture a value. Compare this to “instantaneous” which is measured over a shorter period of time.)
+    /// As if a needle is swung out on the meter face to a value to indicate the current value. (Note: An “indicating” value is typically measured over hundreds of milliseconds or greater, or may imply a “pusher” mechanism to capture a value. Compare this to “instantaneous” which is measured over a shorter period of time.)
     Indicating = 6,
-    // A form of accumulation which is selective with respect to time.
-    // Note : “Summation” could be considered a specialization of “Bulk Quantity” according to the rules of inheritance where “Summation” selectively accumulates pulses over a timing pattern, and “BulkQuantity” accumulates pulses all of the time.
+    /// A form of accumulation which is selective with respect to time.
+    /// Note : “Summation” could be considered a specialization of “Bulk Quantity” according to the rules of inheritance where “Summation” selectively accumulates pulses over a timing pattern, and “BulkQuantity” accumulates pulses all of the time.
     Summation = 9,
-    // Typically measured over the fastest period of time allowed by the definition of the metric (usually milliseconds or tens of milliseconds.) (Note: “Instantaneous” was moved to attribute #3 in 61968-9Ed2 from attribute #1 in 61968-9Ed1.)
+    /// Typically measured over the fastest period of time allowed by the definition of the metric (usually milliseconds or tens of milliseconds.) (Note: “Instantaneous” was moved to attribute #3 in 61968-9Ed2 from attribute #1 in 61968-9Ed1.)
     Instantaneous = 12,
     // ALL OTHERS RESERVED
 }
@@ -45,9 +45,9 @@ impl Validate for AccumulationBehaviourType {}
 #[repr(u8)]
 pub enum ApplianceLoadReductionType {
     #[default]
-    // Parameter requesting the appliance to respond by providing a moderate load reduction for the duration of a delay period.  Typically referring to a “non-emergency” event in which appliances can continue operating if already in a load consuming period.
+    /// Parameter requesting the appliance to respond by providing a moderate load reduction for the duration of a delay period.  Typically referring to a “non-emergency” event in which appliances can continue operating if already in a load consuming period.
     DelayApplianceLoad = 0,
-    // Parameter requesting the appliance to respond by providing an aggressive load reduction for a short time period.  Typically referring to an “emergency/spinning reserve” event in which an appliance should start shedding load if currently in a load consuming period.
+    /// Parameter requesting the appliance to respond by providing an aggressive load reduction for a short time period.  Typically referring to an “emergency/spinning reserve” event in which an appliance should start shedding load if currently in a load consuming period.
     TemporaryApplianceLoadReduction = 1,
     // 2-255 reserved
     // * Full definition of how appliances react when receiving each parameter is document in the EPA document - ENERGY STAR® Program Requirements, Product Specification for Residential Refrigerators and Freezers, Eligibility Criteria 5, Draft 2 Version 5.0.
@@ -131,16 +131,16 @@ pub enum DataQualifierType {
 
 impl Validate for DataQualifierType {}
 
-// Interval of date and time.
+/// Interval of date and time.
 #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DateTimeInterval")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DateTimeInterval {
-    // Duration of the interval, in seconds.
+    /// Duration of the interval, in seconds.
     #[yaserde(rename = "duration")]
     pub duration: Uint32,
 
-    // Date and time of the start of the interval.
+    /// Date and time of the start of the interval.
     #[yaserde(rename = "start")]
     pub start: TimeType,
 }
@@ -213,65 +213,65 @@ impl DstRuleType {
         out
     }
 
-    // Get the seconds (bits 0 - 11)
+    /// Get the seconds (bits 0 - 11)
     pub fn seconds(&self) -> u32 {
         self.0 & Self::SECONDS_MASK
     }
 
-    // Set the seconds (bits 0 - 11)
+    /// Set the seconds (bits 0 - 11)
     pub fn set_seconds(&mut self, seconds: u32) {
         self.0 = (self.0 & !Self::SECONDS_MASK) | (seconds & Self::SECONDS_MASK);
     }
 
-    // Get the hours (bits 12 - 16)
+    /// Get the hours (bits 12 - 16)
     pub fn hours(&self) -> u32 {
         (self.0 & Self::HOURS_MASK) >> Self::HOURS_SHIFT
     }
 
-    // Set the hours (bits 12 - 16)
+    /// Set the hours (bits 12 - 16)
     pub fn set_hours(&mut self, hours: u32) {
         self.0 = (self.0 & !Self::HOURS_MASK) | ((hours << Self::HOURS_SHIFT) & Self::HOURS_MASK);
     }
 
-    // Get the day of the week (bits 17 - 19)
+    /// Get the day of the week (bits 17 - 19)
     pub fn day_of_week(&self) -> u32 {
         (self.0 & Self::DAY_OF_WEEK_MASK) >> Self::DAY_OF_WEEK_SHIFT
     }
 
-    // Set the day of the week (bits 17 - 19)
+    /// Set the day of the week (bits 17 - 19)
     pub fn set_day_of_week(&mut self, day_of_week: u32) {
         self.0 = (self.0 & !Self::DAY_OF_WEEK_MASK)
             | ((day_of_week << Self::DAY_OF_WEEK_SHIFT) & Self::DAY_OF_WEEK_MASK);
     }
 
-    // Get the day of the month (bits 20 - 24)
+    /// Get the day of the month (bits 20 - 24)
     pub fn day_of_month(&self) -> u32 {
         (self.0 & Self::DAY_OF_MONTH_MASK) >> Self::DAY_OF_MONTH_SHIFT
     }
 
-    // Set the day of the month (bits 20 - 24)
+    /// Set the day of the month (bits 20 - 24)
     pub fn set_day_of_month(&mut self, day_of_month: u32) {
         self.0 = (self.0 & !Self::DAY_OF_MONTH_MASK)
             | ((day_of_month << Self::DAY_OF_MONTH_SHIFT) & Self::DAY_OF_MONTH_MASK);
     }
 
-    // Get the operator (bits 25 - 27)
+    /// Get the operator (bits 25 - 27)
     pub fn operator(&self) -> u32 {
         (self.0 & Self::OPERATOR_MASK) >> Self::OPERATOR_SHIFT
     }
 
-    // Set the operator (bits 25 - 27)
+    /// Set the operator (bits 25 - 27)
     pub fn set_operator(&mut self, operator: u32) {
         self.0 = (self.0 & !Self::OPERATOR_MASK)
             | ((operator << Self::OPERATOR_SHIFT) & Self::OPERATOR_MASK);
     }
 
-    // Get the month (bits 28 - 31)
+    /// Get the month (bits 28 - 31)
     pub fn month(&self) -> u32 {
         (self.0 & Self::MONTH_MASK) >> Self::MONTH_SHIFT
     }
 
-    // Set the month (bits 28 - 31)
+    /// Set the month (bits 28 - 31)
     pub fn set_month(&mut self, month: u32) {
         self.0 = (self.0 & !Self::MONTH_MASK) | ((month << Self::MONTH_SHIFT) & Self::MONTH_MASK);
     }
@@ -284,26 +284,26 @@ impl DstRuleType {
 pub enum FlowDirectionType {
     #[default]
     NotApplicable = 0,
-    // Delivered to customer
+    /// Delivered to customer
     Forward = 1,
-    // Received from customer
+    /// Received from customer
     Reverse = 19,
 }
 
 impl Validate for FlowDirectionType {}
 
-// Specifies a GPS location, expressed in WGS 84 coordinates.
+/// Specifies a GPS location, expressed in WGS 84 coordinates.
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "GPSLocationType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct GpslocationType {
-    // Specifies the latitude from equator. -90 (south) to +90 (north) in
-    // decimal degrees.
+    /// Specifies the latitude from equator. -90 (south) to +90 (north) in
+    /// decimal degrees.
     #[yaserde(rename = "lat")]
     pub lat: String32,
 
-    // Specifies the longitude from Greenwich Meridian. -180 (west) to +180
-    // (east) in decimal degrees.
+    /// Specifies the longitude from Greenwich Meridian. -180 (west) to +180
+    /// (east) in decimal degrees.
     #[yaserde(rename = "lon")]
     pub lon: String32,
 }
@@ -369,7 +369,7 @@ impl Display for OneHourRangeType {
     }
 }
 
-// IANA Private Enterprise Number (PEN)
+/// IANA Private Enterprise Number (PEN)
 pub type PENType = Uint32;
 
 /// Used for percentages, specified in hundredths of a percent, 0 to 10 000. (10 000 = 100%)
@@ -508,16 +508,16 @@ pub enum PrimacyType {
 
 impl Validate for PrimacyType {}
 
-// Real electrical energy
+/// Real electrical energy
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "RealEnergy")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RealEnergy {
-    // Multiplier for 'unit'.
+    /// Multiplier for 'unit'.
     #[yaserde(rename = "multiplier")]
     pub multiplier: PowerOfTenMultiplierType,
 
-    // Value of the energy in Watt-hours. (uom 72)
+    /// Value of the energy in Watt-hours. (uom 72)
     #[yaserde(rename = "value")]
     pub value: Uint48,
 }
@@ -619,28 +619,28 @@ impl Display for SignedPercent {
     }
 }
 
-// Real electrical energy, signed.
+/// Real electrical energy, signed.
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "SignedRealEnergy")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct SignedRealEnergy {
-    // Multiplier for 'unit'.
+    /// Multiplier for 'unit'.
     #[yaserde(rename = "multiplier")]
     pub multiplier: PowerOfTenMultiplierType,
 
-    // Value of the energy in Watt-hours. (uom 72)
+    /// Value of the energy in Watt-hours. (uom 72)
     #[yaserde(rename = "value")]
     pub value: Int48,
 }
 
 impl Validate for SignedRealEnergy {}
 
-// The subscribable values.
-// 0 - Resource does not support subscriptions
-// 1 - Resource supports non-conditional subscriptions
-// 2 - Resource supports conditional subscriptions
-// 3 - Resource supports both conditional and non-conditional subscriptions
-// All other values reserved.
+/// The subscribable values.
+/// 0 - Resource does not support subscriptions
+/// 1 - Resource supports non-conditional subscriptions
+/// 2 - Resource supports conditional subscriptions
+/// 3 - Resource supports both conditional and non-conditional subscriptions
+/// All other values reserved.
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[repr(u8)]
 pub enum SubscribableType {
@@ -712,21 +712,21 @@ pub enum UnitType {
 
 impl Validate for UnitType {}
 
-// Type for specification of a specific value, with units and power of ten
-// multiplier.
+/// Type for specification of a specific value, with units and power of ten
+/// multiplier.
 #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "UnitValueType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct UnitValueType {
-    // Multiplier for 'unit'.
+    /// Multiplier for 'unit'.
     #[yaserde(rename = "multiplier")]
     pub multiplier: PowerOfTenMultiplierType,
 
-    // Unit in symbol
+    /// Unit in symbol
     #[yaserde(rename = "unit")]
     pub unit: UomType,
 
-    // Value in units specified
+    /// Value in units specified
     #[yaserde(rename = "value")]
     pub value: Int32,
 }

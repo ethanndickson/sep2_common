@@ -27,24 +27,24 @@ use yaserde::{YaDeserialize, YaSerialize};
 #[yaserde(rename = "BillingPeriod")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingPeriod {
-    // The amount of the bill for the previous billing period.
+    /// The amount of the bill for the previous billing period.
     #[yaserde(rename = "billLastPeriod")]
     pub bill_last_period: Option<Int48>,
 
-    // The bill amount related to the billing period as of the statusTimeStamp.
+    /// The bill amount related to the billing period as of the statusTimeStamp.
     #[yaserde(rename = "billToDate")]
     pub bill_to_date: Option<Int48>,
 
-    // The time interval for this billing period.
+    /// The time interval for this billing period.
     #[yaserde(rename = "interval")]
     pub interval: DateTimeInterval,
 
-    // The date / time of the last update of this resource.
+    /// The date / time of the last update of this resource.
     #[yaserde(rename = "statusTimeStamp")]
     pub status_time_stamp: Option<TimeType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -88,23 +88,23 @@ pub struct BillingPeriodList {
     #[yaserde(rename = "BillingPeriod")]
     pub billing_period: Vec<BillingPeriod>,
 
-    // The number specifying "all" of the items in the list. Required on GET,
-    // ignored otherwise.
+    /// The number specifying "all" of the items in the list. Required on GET,
+    /// ignored otherwise.
     #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
-    // Indicates the number of items in this page of results.
+    /// Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
+    /// Indicates whether or not subscriptions are supported for this resource,
+    /// and whether or not conditional (thresholds) are supported. If not
+    /// specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -133,21 +133,21 @@ pub struct BillingMeterReadingBase {
     #[yaserde(rename = "ReadingTypeLink")]
     pub reading_type_link: Option<ReadingTypeLink>,
 
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -163,46 +163,46 @@ pub struct BillingReading {
     #[yaserde(rename = "Charge")]
     pub charge: Vec<Charge>,
 
-    // Indicates the consumption block related to the reading. REQUIRED if
-    // ReadingType numberOfConsumptionBlocks is non-zero. If not specified, is
-    // assumed to be "0 - N/A".
+    /// Indicates the consumption block related to the reading. REQUIRED if
+    /// ReadingType numberOfConsumptionBlocks is non-zero. If not specified, is
+    /// assumed to be "0 - N/A".
     #[yaserde(rename = "consumptionBlock")]
     pub consumption_block: Option<ConsumptionBlockType>,
 
-    // List of codes indicating the quality of the reading, using specification:
-    // Bit 0 - valid: data that has gone through all required validation checks
-    // and either passed them all or has been verified
-    // Bit 1 - manually edited: Replaced or approved by a human
-    // Bit 2 - estimated using reference day: data value was replaced by a
-    // machine computed value based on analysis of historical data using the
-    // same type of measurement.
-    // Bit 3 - estimated using linear interpolation: data value was computed
-    // using linear interpolation based on the readings before and after it
-    // Bit 4 - questionable: data that has failed one or more checks
-    // Bit 5 - derived: data that has been calculated (using logic or
-    // mathematical operations), not necessarily measured directly
-    // Bit 6 - projected (forecast): data that has been calculated as a
-    // projection or forecast of future readings
+    /// List of codes indicating the quality of the reading, using specification:
+    /// Bit 0 - valid: data that has gone through all required validation checks
+    /// and either passed them all or has been verified
+    /// Bit 1 - manually edited: Replaced or approved by a human
+    /// Bit 2 - estimated using reference day: data value was replaced by a
+    /// machine computed value based on analysis of historical data using the
+    /// same type of measurement.
+    /// Bit 3 - estimated using linear interpolation: data value was computed
+    /// using linear interpolation based on the readings before and after it
+    /// Bit 4 - questionable: data that has failed one or more checks
+    /// Bit 5 - derived: data that has been calculated (using logic or
+    /// mathematical operations), not necessarily measured directly
+    /// Bit 6 - projected (forecast): data that has been calculated as a
+    // Projection or forecast of future readings
     #[yaserde(rename = "qualityFlags")]
     pub quality_flags: Option<HexBinary16>,
 
-    // The time interval associated with the reading. If not specified, then
-    // defaults to the intervalLength specified in the associated ReadingType.
+    /// The time interval associated with the reading. If not specified, then
+    /// defaults to the intervalLength specified in the associated ReadingType.
     #[yaserde(rename = "timePeriod")]
     pub time_period: Option<DateTimeInterval>,
 
-    // Indicates the time of use tier related to the reading. REQUIRED if
-    // ReadingType numberOfTouTiers is non-zero. If not specified, is assumed to
-    // be "0 - N/A".
+    /// Indicates the time of use tier related to the reading. REQUIRED if
+    /// ReadingType numberOfTouTiers is non-zero. If not specified, is assumed to
+    /// be "0 - N/A".
     #[yaserde(rename = "touTier")]
     pub tou_tier: Option<Toutype>,
 
-    // Value in units specified by ReadingType
+    /// Value in units specified by ReadingType
     #[yaserde(rename = "value")]
     pub value: Option<Int48>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -243,17 +243,17 @@ pub struct BillingReadingList {
     #[yaserde(rename = "BillingReading")]
     pub billing_reading: Vec<BillingReading>,
 
-    // The number specifying "all" of the items in the list. Required on a
-    // response to a GET, ignored otherwise.
+    /// The number specifying "all" of the items in the list. Required on a
+    /// response to a GET, ignored otherwise.
     #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
-    // Indicates the number of items in this page of results.
+    /// Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -278,25 +278,25 @@ pub struct BillingReadingSet {
     #[yaserde(rename = "BillingReadingListLink")]
     pub billing_reading_list_link: Option<BillingReadingListLink>,
 
-    // Specifies the time range during which the contained readings were taken.
+    /// Specifies the time range during which the contained readings were taken.
     #[yaserde(rename = "timePeriod")]
     pub time_period: DateTimeInterval,
 
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -345,51 +345,51 @@ pub struct BillingReadingSetList {
     #[yaserde(rename = "BillingReadingSet")]
     pub billing_reading_set: Vec<BillingReadingSet>,
 
-    // The number specifying "all" of the items in the list. Required on GET,
-    // ignored otherwise.
+    /// The number specifying "all" of the items in the list. Required on GET,
+    /// ignored otherwise.
     #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
-    // Indicates the number of items in this page of results.
+    /// Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
+    /// Indicates whether or not subscriptions are supported for this resource,
+    /// and whether or not conditional (thresholds) are supported. If not
+    /// specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
 
 impl Validate for BillingReadingSetList {}
 
-// Charges contain charges on a customer bill. These could be items like taxes,
-// levies, surcharges, rebates, or others. This is meant to allow the HAN device
-// to retrieve enough information to be able to reconstruct an estimate of what
-// the total bill would look like.
+/// Charges contain charges on a customer bill. These could be items like taxes,
+/// levies, surcharges, rebates, or others. This is meant to allow the HAN device
+/// to retrieve enough information to be able to reconstruct an estimate of what
+/// the total bill would look like.
 // Providers can provide line item billing, including multiple charge kinds
-// (e.g. taxes, surcharges) at whatever granularity desired, using as many
-// Charges as desired during a billing period. There can also be any number of
-// Charges associated with different ReadingTypes to distinguish between TOU
-// tiers, consumption blocks, or demand charges.
+/// (e.g. taxes, surcharges) at whatever granularity desired, using as many
+/// Charges as desired during a billing period. There can also be any number of
+/// Charges associated with different ReadingTypes to distinguish between TOU
+/// tiers, consumption blocks, or demand charges.
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "Charge")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Charge {
-    // A description of the charge.
+    /// A description of the charge.
     #[yaserde(rename = "description")]
     pub description: Option<String20>,
 
-    // The type (kind) of charge.
+    /// The type (kind) of charge.
     #[yaserde(rename = "kind")]
     pub kind: Option<ChargeKind>,
 
-    // A monetary charge.
+    /// A monetary charge.
     #[yaserde(rename = "value")]
     pub value: Int32,
 }
@@ -418,46 +418,46 @@ impl Validate for ChargeKind {}
 #[yaserde(rename = "CustomerAccount")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CustomerAccount {
-    // The ISO 4217 code indicating the currency applicable to the bill amounts
-    // in the summary. See list at
-    // http://www.unece.org/cefact/recommendations/rec09/rec09_ecetrd203.pdf
+    /// The ISO 4217 code indicating the currency applicable to the bill amounts
+    /// in the summary. See list at
+    /// http://www.unece.org/cefact/recommendations/rec09/rec09_ecetrd203.pdf
     #[yaserde(rename = "currency")]
     pub currency: Uint16,
 
-    // The account number for the customer (if applicable).
+    /// The account number for the customer (if applicable).
     #[yaserde(rename = "customerAccount")]
     pub customer_account: Option<String42>,
 
     #[yaserde(rename = "CustomerAgreementListLink")]
     pub customer_agreement_list_link: Option<CustomerAgreementListLink>,
 
-    // The name of the customer.
+    /// The name of the customer.
     #[yaserde(rename = "customerName")]
     pub customer_name: Option<String42>,
 
-    // Indicates the power of ten multiplier for the prices in this function
-    // set.
+    /// Indicates the power of ten multiplier for the prices in this function
+    /// set.
     #[yaserde(rename = "pricePowerOfTenMultiplier")]
     pub price_power_of_ten_multiplier: PowerOfTenMultiplierType,
 
     #[yaserde(rename = "ServiceSupplierLink")]
     pub service_supplier_link: Option<ServiceSupplierLink>,
 
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -501,30 +501,30 @@ pub struct CustomerAccountList {
     #[yaserde(rename = "CustomerAccount")]
     pub customer_account: Vec<CustomerAccount>,
 
-    // The default polling rate for this function set (this resource and all
-    // resources below), in seconds. If not specified, a default of 900 seconds
-    // (15 minutes) is used. It is RECOMMENDED a client poll the resources of
-    // this function set every pollRate seconds.
+    /// The default polling rate for this function set (this resource and all
+    /// resources below), in seconds. If not specified, a default of 900 seconds
+    /// (15 minutes) is used. It is RECOMMENDED a client poll the resources of
+    /// this function set every pollRate seconds.
     #[yaserde(attribute, rename = "pollRate")]
     pub poll_rate: Option<Uint32>,
 
-    // The number specifying "all" of the items in the list. Required on GET,
-    // ignored otherwise.
+    /// The number specifying "all" of the items in the list. Required on GET,
+    /// ignored otherwise.
     #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
-    // Indicates the number of items in this page of results.
+    /// Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
+    /// Indicates whether or not subscriptions are supported for this resource,
+    /// and whether or not conditional (thresholds) are supported. If not
+    /// specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -558,11 +558,11 @@ pub struct CustomerAgreement {
     #[yaserde(rename = "ProjectionReadingListLink")]
     pub projection_reading_list_link: Option<ProjectionReadingListLink>,
 
-    // The account number of the service account (if applicable).
+    /// The account number of the service account (if applicable).
     #[yaserde(rename = "serviceAccount")]
     pub service_account: Option<String42>,
 
-    // The address or textual description of the service location.
+    /// The address or textual description of the service location.
     #[yaserde(rename = "serviceLocation")]
     pub service_location: Option<String42>,
 
@@ -575,21 +575,21 @@ pub struct CustomerAgreement {
     #[yaserde(rename = "UsagePointLink")]
     pub usage_point_link: Option<UsagePointLink>,
 
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -633,23 +633,23 @@ pub struct CustomerAgreementList {
     #[yaserde(rename = "CustomerAgreement")]
     pub customer_agreement: Vec<CustomerAgreement>,
 
-    // The number specifying "all" of the items in the list. Required on GET,
-    // ignored otherwise.
+    /// The number specifying "all" of the items in the list. Required on GET,
+    /// ignored otherwise.
     #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
-    // Indicates the number of items in this page of results.
+    /// Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
+    /// Indicates whether or not subscriptions are supported for this resource,
+    /// and whether or not conditional (thresholds) are supported. If not
+    /// specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -678,21 +678,21 @@ pub struct HistoricalReading {
     #[yaserde(rename = "ReadingTypeLink")]
     pub reading_type_link: Option<ReadingTypeLink>,
 
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -724,17 +724,17 @@ pub struct HistoricalReadingList {
     #[yaserde(rename = "HistoricalReading")]
     pub historical_reading: Vec<HistoricalReading>,
 
-    // The number specifying "all" of the items in the list. Required on a
-    // response to a GET, ignored otherwise.
+    /// The number specifying "all" of the items in the list. Required on a
+    /// response to a GET, ignored otherwise.
     #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
-    // Indicates the number of items in this page of results.
+    /// Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -763,21 +763,21 @@ pub struct ProjectionReading {
     #[yaserde(rename = "ReadingTypeLink")]
     pub reading_type_link: Option<ReadingTypeLink>,
 
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -809,17 +809,17 @@ pub struct ProjectionReadingList {
     #[yaserde(rename = "ProjectionReading")]
     pub projection_reading: Vec<ProjectionReading>,
 
-    // The number specifying "all" of the items in the list. Required on a
-    // response to a GET, ignored otherwise.
+    /// The number specifying "all" of the items in the list. Required on a
+    /// response to a GET, ignored otherwise.
     #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
-    // Indicates the number of items in this page of results.
+    /// Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -848,21 +848,21 @@ pub struct TargetReading {
     #[yaserde(rename = "ReadingTypeLink")]
     pub reading_type_link: Option<ReadingTypeLink>,
 
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -894,17 +894,17 @@ pub struct TargetReadingList {
     #[yaserde(rename = "TargetReading")]
     pub target_reading: Vec<TargetReading>,
 
-    // The number specifying "all" of the items in the list. Required on a
-    // response to a GET, ignored otherwise.
+    /// The number specifying "all" of the items in the list. Required on a
+    /// response to a GET, ignored otherwise.
     #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
-    // Indicates the number of items in this page of results.
+    /// Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -927,37 +927,37 @@ impl Validate for TargetReadingList {}
 #[yaserde(rename = "ServiceSupplier")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ServiceSupplier {
-    // E-mail address for this service supplier.
+    /// E-mail address for this service supplier.
     #[yaserde(rename = "email")]
     pub email: Option<String32>,
 
-    // Human-readable phone number for this service supplier.
+    /// Human-readable phone number for this service supplier.
     #[yaserde(rename = "phone")]
     pub phone: Option<String20>,
 
-    // Contains the IANA PEN for the commodity provider.
+    /// Contains the IANA PEN for the commodity provider.
     #[yaserde(rename = "providerID")]
     pub provider_id: Option<Uint32>,
 
-    // Website URI address for this service supplier.
+    /// Website URI address for this service supplier.
     #[yaserde(rename = "web")]
     pub web: Option<String42>,
 
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -971,17 +971,17 @@ pub struct ServiceSupplierList {
     #[yaserde(rename = "ServiceSupplier")]
     pub service_supplier: Vec<ServiceSupplier>,
 
-    // The number specifying "all" of the items in the list. Required on a
-    // response to a GET, ignored otherwise.
+    /// The number specifying "all" of the items in the list. Required on a
+    /// response to a GET, ignored otherwise.
     #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
-    // Indicates the number of items in this page of results.
+    /// Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }

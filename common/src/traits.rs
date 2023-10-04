@@ -1,3 +1,8 @@
+//! Module of traits representing IEEE 2030.5 types used as base types.
+//!
+//! All IEEE 2030.5 top-level types are either a Resource.
+//! Since the spec does not use multiple-inheritance, there is redundancy in the inheritance tree. We have this removed this redundancy for clarity & usability.
+//! Each of these traits can be derived provided an attribute with the expected type (as per the specification, not these traits) exists.
 use std::panic::RefUnwindSafe;
 
 use yaserde::{YaDeserialize, YaSerialize};
@@ -35,10 +40,6 @@ use crate::packages::{
     },
     types::{DeviceCategoryType, SFDIType},
 };
-
-// All IEEE 2030.5 top-level types are either a Resource, or a Link to a Resource
-// Since the spec does not use multiple-inheritance, there is redundancy in the inheritance tree. We have this removed this redundancy for clarity & usability.
-// Each of these traits can be derived provided an attribute with the expected type (as per the specification, not these traits) exists.
 
 /// A top-level IEEE 2030.5 Resource.
 /// An IEEE 2030.5 Server exposes resources.
@@ -150,7 +151,7 @@ pub trait SEList: SEResource {
         self.list_mut().sort();
         *self.all_mut() = Uint32(self.all().get() + 1);
     }
-    // Remove an item from the contained list, maintaining invariants
+    ///Remove an item from the contained list, maintaining invariants
     fn remove(&mut self, idx: usize) -> Self::Inner {
         *self.all_mut() = Uint32(self.all().get() - 1);
         self.list_mut().remove(idx)

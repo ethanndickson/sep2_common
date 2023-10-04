@@ -62,8 +62,8 @@ pub struct FunctionSetAssignmentsBase {
     #[yaserde(rename = "UsagePointListLink")]
     pub usage_point_list_link: Option<UsagePointListLink>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -84,22 +84,22 @@ impl Validate for FunctionSetAssignmentsBase {}
 #[yaserde(rename = "FunctionSetAssignments")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FunctionSetAssignments {
-    // The global identifier of the object.
+    /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
 
-    // The description is a human readable text describing or naming the object.
+    /// The description is a human readable text describing or naming the object.
     #[yaserde(rename = "description")]
     pub description: Option<String32>,
 
-    // Contains the version number of the object. See the type definition for
-    // details.
+    /// Contains the version number of the object. See the type definition for
+    /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
 
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
+    /// Indicates whether or not subscriptions are supported for this resource,
+    /// and whether or not conditional (thresholds) are supported. If not
+    /// specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
 
@@ -133,8 +133,8 @@ pub struct FunctionSetAssignments {
     #[yaserde(rename = "UsagePointListLink")]
     pub usage_point_list_link: Option<UsagePointListLink>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
@@ -173,30 +173,30 @@ pub struct FunctionSetAssignmentsList {
     #[yaserde(rename = "FunctionSetAssignments")]
     pub function_set_assignments: Vec<FunctionSetAssignments>,
 
-    // The default polling rate for this function set (this resource and all
-    // resources below), in seconds. If not specified, a default of 900 seconds
-    // (15 minutes) is used. It is RECOMMENDED a client poll the resources of
-    // this function set every pollRate seconds.
+    /// The default polling rate for this function set (this resource and all
+    /// resources below), in seconds. If not specified, a default of 900 seconds
+    /// (15 minutes) is used. It is RECOMMENDED a client poll the resources of
+    /// this function set every pollRate seconds.
     #[yaserde(attribute, rename = "pollRate")]
     pub poll_rate: Option<Uint32>,
 
-    // The number specifying "all" of the items in the list. Required on GET,
-    // ignored otherwise.
+    /// The number specifying "all" of the items in the list. Required on GET,
+    /// ignored otherwise.
     #[yaserde(attribute, rename = "all")]
     pub all: Uint32,
 
-    // Indicates the number of items in this page of results.
+    /// Indicates the number of items in this page of results.
     #[yaserde(attribute, rename = "results")]
     pub results: Uint32,
 
-    // Indicates whether or not subscriptions are supported for this resource,
-    // and whether or not conditional (thresholds) are supported. If not
-    // specified, is "not subscribable" (0).
+    /// Indicates whether or not subscriptions are supported for this resource,
+    /// and whether or not conditional (thresholds) are supported. If not
+    /// specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
 
-    // A reference to the resource address (URI). Required in a response to a
-    // GET, ignored otherwise.
+    /// A reference to the resource address (URI). Required in a response to a
+    /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
 }
