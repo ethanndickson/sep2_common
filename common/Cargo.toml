@@ -15,8 +15,9 @@ bitflags = "2.4.0"
 rand = "0.8.5"
 
 [features]
-default = []
+default = ["common"]
 examples = []
+common = []
 dcap = ["fsa"]
 edev = []
 fsa = []
@@ -40,6 +41,7 @@ flow_reservation = ["der"]
 der = []
 all = [
     "examples",
+    "common",
     "dcap",
     "edev",
     "fsa",

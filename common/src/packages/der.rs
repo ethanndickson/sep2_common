@@ -10,7 +10,12 @@ use sep2_common_derive::{
 };
 
 use super::{
-    identification::{Link, ListLink, ResponseRequired},
+    identification::ResponseRequired,
+    links::{
+        ActiveDERControlListLink, AssociatedDERProgramListLink, AssociatedUsagePointLink,
+        DERAvailabilityLink, DERCapabilityLink, DERControlListLink, DERCurveLink, DERCurveListLink,
+        DERProgramLink, DERSettingsLink, DERStatusLink, DefaultDERControlLink,
+    },
     objects::EventStatus,
     primitives::{Int16, Int32, String32, String6, Uint16, Uint32, Uint8},
     types::{
@@ -183,25 +188,25 @@ impl Validate for FreqDroopType {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DER {
     #[yaserde(rename = "AssociatedDERProgramListLink")]
-    pub associated_der_program_list_link: Option<ListLink>,
+    pub associated_der_program_list_link: Option<AssociatedDERProgramListLink>,
 
     #[yaserde(rename = "AssociatedUsagePointLink")]
-    pub associated_usage_point_link: Option<Link>,
+    pub associated_usage_point_link: Option<AssociatedUsagePointLink>,
 
     #[yaserde(rename = "CurrentDERProgramLink")]
-    pub current_der_program_link: Option<Link>,
+    pub current_der_program_link: Option<DERProgramLink>,
 
     #[yaserde(rename = "DERAvailabilityLink")]
-    pub der_availability_link: Option<Link>,
+    pub der_availability_link: Option<DERAvailabilityLink>,
 
     #[yaserde(rename = "DERCapabilityLink")]
-    pub der_capability_link: Option<Link>,
+    pub der_capability_link: Option<DERCapabilityLink>,
 
     #[yaserde(rename = "DERSettingsLink")]
-    pub der_settings_link: Option<Link>,
+    pub der_settings_link: Option<DERSettingsLink>,
 
     #[yaserde(rename = "DERStatusLink")]
-    pub der_status_link: Option<Link>,
+    pub der_status_link: Option<DERStatusLink>,
 
     // Indicates whether or not subscriptions are supported for this resource,
     // and whether or not conditional (thresholds) are supported. If not
@@ -747,7 +752,7 @@ pub struct DERControlBase {
     // specifies a frequency in Hz. The y value specifies a corresponding active
     // power output in %setMaxW.
     #[yaserde(rename = "opModFreqWatt")]
-    pub op_mod_freq_watt: Option<Link>,
+    pub op_mod_freq_watt: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 1. The High Frequency Ride-Through
     // (HFRT) function is specified by one or two duration-frequency curves that
@@ -758,7 +763,7 @@ pub struct DERControlBase {
     // frequency in seconds). The y value of each pair specifies a frequency, in
     // Hz. This control specifies the "may trip" region.
     #[yaserde(rename = "opModHFRTMayTrip")]
-    pub op_mod_hfrt_may_trip: Option<Link>,
+    pub op_mod_hfrt_may_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 2. The High Frequency Ride-Through
     // (HFRT) function is specified by a duration-frequency curve that defines
@@ -769,7 +774,7 @@ pub struct DERControlBase {
     // frequency in seconds). The y value of each pair specifies a frequency, in
     // Hz. This control specifies the "must trip" region.
     #[yaserde(rename = "opModHFRTMustTrip")]
-    pub op_mod_hfrt_must_trip: Option<Link>,
+    pub op_mod_hfrt_must_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 3. The High Voltage Ride-Through
     // (HVRT) function is specified by one, two, or three duration-volt curves
@@ -781,7 +786,7 @@ pub struct DERControlBase {
     // percentage voltage, defined as ((locally measured voltage - setVRefOfs /
     // setVRef). This control specifies the "may trip" region.
     #[yaserde(rename = "opModHVRTMayTrip")]
-    pub op_mod_hvrt_may_trip: Option<Link>,
+    pub op_mod_hvrt_may_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 4. The High Voltage Ride-Through
     // (HVRT) function is specified by duration-volt curves that define the
@@ -793,7 +798,7 @@ pub struct DERControlBase {
     // voltage, defined as ((locally measured voltage - setVRefOfs) / setVRef).
     // This control specifies the "momentary cessation" region.
     #[yaserde(rename = "opModHVRTMomentaryCessation")]
-    pub op_mod_hvrt_momentary_cessation: Option<Link>,
+    pub op_mod_hvrt_momentary_cessation: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 5. The High Voltage Ride-Through
     // (HVRT) function is specified by duration-volt curves that define the
@@ -805,7 +810,7 @@ pub struct DERControlBase {
     // voltage, defined as ((locally measured voltage - setVRefOfs) / setVRef).
     // This control specifies the "must trip" region.
     #[yaserde(rename = "opModHVRTMustTrip")]
-    pub op_mod_hvrt_must_trip: Option<Link>,
+    pub op_mod_hvrt_must_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 6. The Low Frequency Ride-Through
     // (LFRT) function is specified by one or two duration-frequency curves that
@@ -816,7 +821,7 @@ pub struct DERControlBase {
     // frequency in seconds). The y value of each pair specifies a frequency, in
     // Hz. This control specifies the "may trip" region.
     #[yaserde(rename = "opModLFRTMayTrip")]
-    pub op_mod_lfrt_may_trip: Option<Link>,
+    pub op_mod_lfrt_may_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 7. The Low Frequency Ride-Through
     // (LFRT) function is specified by a duration-frequency curve that defines
@@ -827,7 +832,7 @@ pub struct DERControlBase {
     // frequency in seconds). The y value of each pair specifies a frequency, in
     // Hz. This control specifies the "must trip" region.
     #[yaserde(rename = "opModLFRTMustTrip")]
-    pub op_mod_lfrt_must_trip: Option<Link>,
+    pub op_mod_lfrt_must_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 8. The Low Voltage Ride-Through
     // (LVRT) function is specified by one, two, or three duration-volt curves
@@ -839,7 +844,7 @@ pub struct DERControlBase {
     // percent voltage, defined as ((locally measured voltage - setVRefOfs) /
     // setVRef). This control specifies the "may trip" region.
     #[yaserde(rename = "opModLVRTMayTrip")]
-    pub op_mod_lvrt_may_trip: Option<Link>,
+    pub op_mod_lvrt_may_trip: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 9. The Low Voltage Ride-Through
     // (LVRT) function is specified by duration-volt curves that define the
@@ -851,7 +856,7 @@ pub struct DERControlBase {
     // voltage, defined as ((locally measured voltage - setVRefOfs) / setVRef).
     // This control specifies the "momentary cessation" region.
     #[yaserde(rename = "opModLVRTMomentaryCessation")]
-    pub op_mod_lvrt_momentary_cessation: Option<Link>,
+    pub op_mod_lvrt_momentary_cessation: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 10. The Low Voltage Ride-Through
     // (LVRT) function is specified by duration-volt curves that define the
@@ -863,7 +868,7 @@ pub struct DERControlBase {
     // voltage, defined as ((locally measured voltage - setVRefOfs) / setVRef).
     // This control specifies the "must trip" region.
     #[yaserde(rename = "opModLVRTMustTrip")]
-    pub op_mod_lvrt_must_trip: Option<Link>,
+    pub op_mod_lvrt_must_trip: Option<DERCurveLink>,
 
     // The opModMaxLimW function sets the maximum active power generation level
     // at the electrical coupling point as a percentage of set capacity
@@ -897,7 +902,7 @@ pub struct DERControlBase {
     // determined by yRefType and must be one of %setMaxW, %setMaxVar, or
     // %statVarAvail.
     #[yaserde(rename = "opModVoltVar")]
-    pub op_mod_volt_var: Option<Link>,
+    pub op_mod_volt_var: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 12. The Volt-Watt reduces active
     // power output as a function of measured voltage. The Volt-Watt curve is
@@ -909,7 +914,7 @@ pub struct DERControlBase {
     // percentage (0 - 100). The meaning of the y value is determined by
     // yRefType and must be one of %setMaxW or %statWAvail.
     #[yaserde(rename = "opModVoltWatt")]
-    pub op_mod_volt_watt: Option<Link>,
+    pub op_mod_volt_watt: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 13. The Watt-PF function varies
     // Power Factor (PF) as a function of delivered active power. The Watt-PF
@@ -924,7 +929,7 @@ pub struct DERControlBase {
     // (e.g. opModFixedPFInjectW) the control resulting in least var magnitude
     // SHOULD take precedence.
     #[yaserde(rename = "opModWattPF")]
-    pub op_mod_watt_pf: Option<Link>,
+    pub op_mod_watt_pf: Option<DERCurveLink>,
 
     // Specify DERCurveLink for curveType == 14. The Watt-Var function varies
     // vars as a function of delivered active power. The Watt-Var curve is
@@ -935,7 +940,7 @@ pub struct DERControlBase {
     // meaning of the y value is determined by yRefType and must be one of
     // %setMaxW, %setMaxVar, or %statVarAvail.
     #[yaserde(rename = "opModWattVar")]
-    pub op_mod_watt_var: Option<Link>,
+    pub op_mod_watt_var: Option<DERCurveLink>,
 
     // Requested ramp time, in hundredths of a second, for the device to
     // transition from the current DERControl mode setting(s) to the new mode
@@ -1460,16 +1465,16 @@ impl Validate for DERCurveType {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DERProgram {
     #[yaserde(rename = "ActiveDERControlListLink")]
-    pub active_der_control_list_link: Option<ListLink>,
+    pub active_der_control_list_link: Option<ActiveDERControlListLink>,
 
     #[yaserde(rename = "DefaultDERControlLink")]
-    pub default_der_control_link: Option<Link>,
+    pub default_der_control_link: Option<DefaultDERControlLink>,
 
     #[yaserde(rename = "DERControlListLink")]
-    pub der_control_list_link: Option<ListLink>,
+    pub der_control_list_link: Option<DERControlListLink>,
 
     #[yaserde(rename = "DERCurveListLink")]
-    pub der_curve_list_link: Option<ListLink>,
+    pub der_curve_list_link: Option<DERCurveListLink>,
 
     // Indicates the relative primacy of the provider of this Program.
     #[yaserde(rename = "primacy")]

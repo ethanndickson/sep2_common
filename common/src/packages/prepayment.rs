@@ -8,7 +8,11 @@ use sep2_common_derive::{
 use yaserde::{YaDeserialize, YaSerialize};
 
 use super::{
-    identification::{Link, ListLink},
+    links::{
+        AccountBalanceLink, ActiveCreditRegisterListLink, ActiveSupplyInterruptionOverrideListLink,
+        CreditRegisterListLink, PrepayOperationStatusLink, SupplyInterruptionOverrideListLink,
+        UsagePointLink,
+    },
     metering::UsagePoint,
     primitives::{Int32, String32, Uint32},
     types::{
@@ -183,13 +187,14 @@ impl Validate for CreditRegisterList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Prepayment {
     #[yaserde(rename = "AccountBalanceLink")]
-    pub account_balance_link: Link,
+    pub account_balance_link: AccountBalanceLink,
 
     #[yaserde(rename = "ActiveCreditRegisterListLink")]
-    pub active_credit_register_list_link: Option<ListLink>,
+    pub active_credit_register_list_link: Option<ActiveCreditRegisterListLink>,
 
     #[yaserde(rename = "ActiveSupplyInterruptionOverrideListLink")]
-    pub active_supply_interruption_override_list_link: Option<ListLink>,
+    pub active_supply_interruption_override_list_link:
+        Option<ActiveSupplyInterruptionOverrideListLink>,
 
     // CreditExpiryLevel is the set point for availableCredit at which the
     // service level may be changed. The typical value for this attribute is 0,
@@ -200,7 +205,7 @@ pub struct Prepayment {
     pub credit_expiry_level: Option<AccountingUnit>,
 
     #[yaserde(rename = "CreditRegisterListLink")]
-    pub credit_register_list_link: ListLink,
+    pub credit_register_list_link: CreditRegisterListLink,
 
     // LowCreditWarningLevel is the set point for availableCredit at which the
     // creditStatus attribute in the AccountBalance resource SHALL indicate that
@@ -226,16 +231,16 @@ pub struct Prepayment {
     pub prepay_mode: PrepayModeType,
 
     #[yaserde(rename = "PrepayOperationStatusLink")]
-    pub prepay_operation_status_link: Link,
+    pub prepay_operation_status_link: PrepayOperationStatusLink,
 
     #[yaserde(rename = "SupplyInterruptionOverrideListLink")]
-    pub supply_interruption_override_list_link: ListLink,
+    pub supply_interruption_override_list_link: SupplyInterruptionOverrideListLink,
 
     #[yaserde(rename = "UsagePoint")]
     pub usage_point: Vec<UsagePoint>,
 
     #[yaserde(rename = "UsagePointLink")]
-    pub usage_point_link: Option<Link>,
+    pub usage_point_link: Option<UsagePointLink>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]

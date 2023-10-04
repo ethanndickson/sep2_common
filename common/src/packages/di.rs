@@ -3,7 +3,7 @@ use sep2_common_derive::{SEList, SEResource};
 
 use super::{
     der::ActivePower,
-    identification::ListLink,
+    links::SupportedLocaleListLink,
     power_status::PowerSourceType,
     primitives::{HexBinary160, String32, Uint32},
     types::{GpslocationType, LocaleType, PENType, RealEnergy, TimeType},
@@ -85,7 +85,7 @@ pub struct DeviceInformation {
     pub secondary_power: PowerSourceType,
 
     #[yaserde(rename = "SupportedLocaleListLink")]
-    pub supported_locale_list_link: Option<ListLink>,
+    pub supported_locale_list_link: Option<SupportedLocaleListLink>,
 
     // Activation date/time of currently running software
     #[yaserde(rename = "swActTime")]

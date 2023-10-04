@@ -10,7 +10,8 @@ use sep2_common_derive::{
 
 use super::{
     der::ActivePower,
-    identification::{Link, ListLink, ResponseRequired},
+    identification::ResponseRequired,
+    links::{ActiveEndDeviceControlListLink, DemandResponseProgramLink, EndDeviceControlListLink},
     objects::EventStatus,
     primitives::{Int16, String32, Uint16, Uint32, Uint8},
     types::{
@@ -72,7 +73,7 @@ impl Validate for ApplianceLoadReduction {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DemandResponseProgram {
     #[yaserde(rename = "ActiveEndDeviceControlListLink")]
-    pub active_end_device_control_list_link: Option<ListLink>,
+    pub active_end_device_control_list_link: Option<ActiveEndDeviceControlListLink>,
 
     // This attribute allows program providers to specify the requested
     // granularity of updates to LoadShedAvailability sheddablePercent. If not
@@ -97,7 +98,7 @@ pub struct DemandResponseProgram {
     pub availability_update_power_change_threshold: Option<ActivePower>,
 
     #[yaserde(rename = "EndDeviceControlListLink")]
-    pub end_device_control_list_link: Option<ListLink>,
+    pub end_device_control_list_link: Option<EndDeviceControlListLink>,
 
     // Indicates the relative primacy of the provider of this program.
     #[yaserde(rename = "primacy")]
@@ -428,7 +429,7 @@ pub struct LoadShedAvailability {
     pub availability_duration: Option<Uint32>,
 
     #[yaserde(rename = "DemandResponseProgramLink")]
-    pub demand_response_program_link: Option<Link>,
+    pub demand_response_program_link: Option<DemandResponseProgramLink>,
 
     // Maximum percent of current operating load that is estimated to be
     // sheddable.

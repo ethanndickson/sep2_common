@@ -9,7 +9,10 @@ use sep2_common_derive::{
 use yaserde::{YaDeserialize, YaSerialize};
 
 use super::{
-    identification::{Link, ListLink},
+    links::{
+        MeterReadingListLink, RateComponentListLink, ReadingLink, ReadingListLink,
+        ReadingSetListLink, ReadingTypeLink,
+    },
     primitives::{HexBinary16, HexBinary160, Int48, String32, Uint32, Uint48, Uint8},
     types::{
         AccumulationBehaviourType, CommodityType, ConsumptionBlockType, DataQualifierType,
@@ -35,16 +38,16 @@ use super::{
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MeterReading {
     #[yaserde(rename = "RateComponentListLink")]
-    pub rate_component_list_link: Option<ListLink>,
+    pub rate_component_list_link: Option<RateComponentListLink>,
 
     #[yaserde(rename = "ReadingLink")]
-    pub reading_link: Option<Link>,
+    pub reading_link: Option<ReadingLink>,
 
     #[yaserde(rename = "ReadingSetListLink")]
-    pub reading_set_list_link: Option<ListLink>,
+    pub reading_set_list_link: Option<ReadingSetListLink>,
 
     #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: Link,
+    pub reading_type_link: ReadingTypeLink,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]
@@ -268,7 +271,7 @@ impl Validate for ReadingList {}
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReadingSet {
     #[yaserde(rename = "ReadingListLink")]
-    pub reading_list_link: Option<ListLink>,
+    pub reading_list_link: Option<ReadingListLink>,
 
     // Specifies the time range during which the contained readings were taken.
     #[yaserde(rename = "timePeriod")]
@@ -499,7 +502,7 @@ pub struct UsagePoint {
     pub device_lfdi: Option<HexBinary160>,
 
     #[yaserde(rename = "MeterReadingListLink")]
-    pub meter_reading_list_link: Option<ListLink>,
+    pub meter_reading_list_link: Option<MeterReadingListLink>,
 
     // Specifies the roles that apply to the usage point.
     #[yaserde(rename = "roleFlags")]

@@ -10,7 +10,8 @@ use sep2_common_derive::{
 };
 
 use super::{
-    identification::{ListLink, ResponseRequired},
+    identification::ResponseRequired,
+    links::{ActiveTextMessageListLink, TextMessageListLink},
     objects::EventStatus,
     primitives::{String20, String32, Uint32},
     types::{
@@ -38,7 +39,7 @@ use yaserde::{YaDeserialize, YaSerialize};
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MessagingProgram {
     #[yaserde(rename = "ActiveTextMessageListLink")]
-    pub active_text_message_list_link: Option<ListLink>,
+    pub active_text_message_list_link: Option<ActiveTextMessageListLink>,
 
     // Indicates the language and region of the messages in this collection.
     #[yaserde(rename = "locale")]
@@ -49,7 +50,7 @@ pub struct MessagingProgram {
     pub primacy: PrimacyType,
 
     #[yaserde(rename = "TextMessageListLink")]
-    pub text_message_list_link: Option<ListLink>,
+    pub text_message_list_link: Option<TextMessageListLink>,
 
     // The global identifier of the object.
     #[yaserde(rename = "mRID")]

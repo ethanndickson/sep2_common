@@ -17,11 +17,24 @@ use crate::packages::{
     types::{ConsumptionBlockType, RoleFlagsType, ServiceKind, Toutype},
 };
 
-#[cfg(feature = "edev")]
-use crate::packages::types::{DeviceCategoryType, SFDIType};
+#[cfg(feature = "billing")]
+use crate::packages::links::{BillingReadingSetListLink, ReadingTypeLink};
 
-#[cfg(any(feature = "fsa", feature = "edev", feature = "billing"))]
-use crate::packages::identification::{Link, ListLink};
+#[cfg(feature = "fsa")]
+use crate::packages::links::{
+    CustomerAccountListLink, DERProgramListLink, DemandResponseProgramListLink, FileListLink,
+    MessagingProgramListLink, PrepaymentListLink, ResponseSetListLink, TariffProfileListLink,
+    TimeLink, UsagePointListLink,
+};
+
+#[cfg(feature = "edev")]
+use crate::packages::{
+    links::{
+        ConfigurationLink, DERListLink, DeviceInformationLink, DeviceStatusLink, FileStatusLink,
+        IPInterfaceListLink, LoadShedAvailabilityListLink, LogEventListLink, PowerStatusLink,
+    },
+    types::{DeviceCategoryType, SFDIType},
+};
 
 // All IEEE 2030.5 top-level types are either a Resource, or a Link to a Resource
 // Since the spec does not use multiple-inheritance, there is redundancy in the inheritance tree. We have this removed this redundancy for clarity & usability.
@@ -152,32 +165,32 @@ pub trait SESubscribableList: SESubscribableResource + SEList {}
 /// Implemented by all types whose base type is [`FunctionSetAssignmentsBase`]
 #[cfg(feature = "fsa")]
 pub trait SEFunctionSetAssignmentsBase: SEResource {
-    fn customer_account_list_link(&self) -> Option<&ListLink>;
-    fn demand_response_program_list_link(&self) -> Option<&ListLink>;
-    fn der_program_list_link(&self) -> Option<&ListLink>;
-    fn file_list_link(&self) -> Option<&ListLink>;
-    fn messaging_program_list_link(&self) -> Option<&ListLink>;
-    fn prepayment_list_link(&self) -> Option<&ListLink>;
-    fn response_set_list_link(&self) -> Option<&ListLink>;
-    fn tariff_profile_list_link(&self) -> Option<&ListLink>;
-    fn time_link(&self) -> Option<&Link>;
-    fn usage_point_list_link(&self) -> Option<&ListLink>;
+    fn customer_account_list_link(&self) -> Option<&CustomerAccountListLink>;
+    fn demand_response_program_list_link(&self) -> Option<&DemandResponseProgramListLink>;
+    fn der_program_list_link(&self) -> Option<&DERProgramListLink>;
+    fn file_list_link(&self) -> Option<&FileListLink>;
+    fn messaging_program_list_link(&self) -> Option<&MessagingProgramListLink>;
+    fn prepayment_list_link(&self) -> Option<&PrepaymentListLink>;
+    fn response_set_list_link(&self) -> Option<&ResponseSetListLink>;
+    fn tariff_profile_list_link(&self) -> Option<&TariffProfileListLink>;
+    fn time_link(&self) -> Option<&TimeLink>;
+    fn usage_point_list_link(&self) -> Option<&UsagePointListLink>;
 }
 
 /// Implemented by all types whose base type is [`AbstractDevice`]
 #[cfg(feature = "edev")]
 pub trait SEAbstractDevice: SESubscribableResource {
-    fn configuration_link(&self) -> Option<&Link>;
-    fn der_list_link(&self) -> Option<&ListLink>;
+    fn configuration_link(&self) -> Option<&ConfigurationLink>;
+    fn der_list_link(&self) -> Option<&DERListLink>;
     fn device_category(&self) -> Option<DeviceCategoryType>;
-    fn device_information_link(&self) -> Option<&Link>;
-    fn device_status_link(&self) -> Option<&Link>;
-    fn file_status_link(&self) -> Option<&Link>;
-    fn ip_interface_list_link(&self) -> Option<&ListLink>;
+    fn device_information_link(&self) -> Option<&DeviceInformationLink>;
+    fn device_status_link(&self) -> Option<&DeviceStatusLink>;
+    fn file_status_link(&self) -> Option<&FileStatusLink>;
+    fn ip_interface_list_link(&self) -> Option<&IPInterfaceListLink>;
     fn lfdi(&self) -> Option<&HexBinary160>;
-    fn load_shed_availability_list_link(&self) -> Option<&ListLink>;
-    fn log_event_list_link(&self) -> Option<&ListLink>;
-    fn power_status_link(&self) -> Option<&Link>;
+    fn load_shed_availability_list_link(&self) -> Option<&LoadShedAvailabilityListLink>;
+    fn log_event_list_link(&self) -> Option<&LogEventListLink>;
+    fn power_status_link(&self) -> Option<&PowerStatusLink>;
     fn sfdi(&self) -> SFDIType;
 }
 
@@ -213,8 +226,8 @@ pub trait SEUsagePointBase: SEIdentifiedObject {
 /// Implemented by all types whose base type is [`SEBillingMeterReadingBase`]
 #[cfg(feature = "billing")]
 pub trait SEBillingMeterReadingBase: SEMeterReadingBase {
-    fn billing_reading_set_list_link(&self) -> Option<&ListLink>;
-    fn reading_type_link(&self) -> Option<&Link>;
+    fn billing_reading_set_list_link(&self) -> Option<&BillingReadingSetListLink>;
+    fn reading_type_link(&self) -> Option<&ReadingTypeLink>;
 }
 
 /// A trait that may be used in future to check invariants on IEEE 2030.5 data types

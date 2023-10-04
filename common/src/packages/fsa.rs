@@ -9,7 +9,11 @@ use sep2_common_derive::{
 use yaserde::{YaDeserialize, YaSerialize};
 
 use super::{
-    identification::{Link, ListLink},
+    links::{
+        CustomerAccountListLink, DERProgramListLink, DemandResponseProgramListLink, FileListLink,
+        MessagingProgramListLink, PrepaymentListLink, ResponseSetListLink, TariffProfileListLink,
+        TimeLink, UsagePointListLink,
+    },
     primitives::{String32, Uint32},
     types::{MRIDType, SubscribableType, VersionType},
 };
@@ -29,34 +33,34 @@ use super::{
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FunctionSetAssignmentsBase {
     #[yaserde(rename = "CustomerAccountListLink")]
-    pub customer_account_list_link: Option<ListLink>,
+    pub customer_account_list_link: Option<CustomerAccountListLink>,
 
     #[yaserde(rename = "DemandResponseProgramListLink")]
-    pub demand_response_program_list_link: Option<ListLink>,
+    pub demand_response_program_list_link: Option<DemandResponseProgramListLink>,
 
     #[yaserde(rename = "DERProgramListLink")]
-    pub der_program_list_link: Option<ListLink>,
+    pub der_program_list_link: Option<DERProgramListLink>,
 
     #[yaserde(rename = "FileListLink")]
-    pub file_list_link: Option<ListLink>,
+    pub file_list_link: Option<FileListLink>,
 
     #[yaserde(rename = "MessagingProgramListLink")]
-    pub messaging_program_list_link: Option<ListLink>,
+    pub messaging_program_list_link: Option<MessagingProgramListLink>,
 
     #[yaserde(rename = "PrepaymentListLink")]
-    pub prepayment_list_link: Option<ListLink>,
+    pub prepayment_list_link: Option<PrepaymentListLink>,
 
     #[yaserde(rename = "ResponseSetListLink")]
-    pub response_set_list_link: Option<ListLink>,
+    pub response_set_list_link: Option<ResponseSetListLink>,
 
     #[yaserde(rename = "TariffProfileListLink")]
-    pub tariff_profile_list_link: Option<ListLink>,
+    pub tariff_profile_list_link: Option<TariffProfileListLink>,
 
     #[yaserde(rename = "TimeLink")]
-    pub time_link: Option<Link>,
+    pub time_link: Option<TimeLink>,
 
     #[yaserde(rename = "UsagePointListLink")]
-    pub usage_point_list_link: Option<ListLink>,
+    pub usage_point_list_link: Option<UsagePointListLink>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.
@@ -100,34 +104,34 @@ pub struct FunctionSetAssignments {
     pub subscribable: Option<SubscribableType>,
 
     #[yaserde(rename = "CustomerAccountListLink")]
-    pub customer_account_list_link: Option<ListLink>,
+    pub customer_account_list_link: Option<CustomerAccountListLink>,
 
     #[yaserde(rename = "DemandResponseProgramListLink")]
-    pub demand_response_program_list_link: Option<ListLink>,
+    pub demand_response_program_list_link: Option<DemandResponseProgramListLink>,
 
     #[yaserde(rename = "DERProgramListLink")]
-    pub der_program_list_link: Option<ListLink>,
+    pub der_program_list_link: Option<DERProgramListLink>,
 
     #[yaserde(rename = "FileListLink")]
-    pub file_list_link: Option<ListLink>,
+    pub file_list_link: Option<FileListLink>,
 
     #[yaserde(rename = "MessagingProgramListLink")]
-    pub messaging_program_list_link: Option<ListLink>,
+    pub messaging_program_list_link: Option<MessagingProgramListLink>,
 
     #[yaserde(rename = "PrepaymentListLink")]
-    pub prepayment_list_link: Option<ListLink>,
+    pub prepayment_list_link: Option<PrepaymentListLink>,
 
     #[yaserde(rename = "ResponseSetListLink")]
-    pub response_set_list_link: Option<ListLink>,
+    pub response_set_list_link: Option<ResponseSetListLink>,
 
     #[yaserde(rename = "TariffProfileListLink")]
-    pub tariff_profile_list_link: Option<ListLink>,
+    pub tariff_profile_list_link: Option<TariffProfileListLink>,
 
     #[yaserde(rename = "TimeLink")]
-    pub time_link: Option<Link>,
+    pub time_link: Option<TimeLink>,
 
     #[yaserde(rename = "UsagePointListLink")]
-    pub usage_point_list_link: Option<ListLink>,
+    pub usage_point_list_link: Option<UsagePointListLink>,
 
     // A reference to the resource address (URI). Required in a response to a
     // GET, ignored otherwise.

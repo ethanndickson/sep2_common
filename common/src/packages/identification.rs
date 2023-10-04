@@ -165,7 +165,7 @@ pub struct Link {
 impl Validate for Link {}
 
 // ListLinks provide a reference, via URI, to a List.
-#[derive(Default, PartialEq, Eq, PartialOrd, Ord, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ListLink")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ListLink {
@@ -180,7 +180,6 @@ pub struct ListLink {
     #[yaserde(attribute, rename = "href")]
     pub href: String,
 }
-
 impl Validate for ListLink {}
 
 // This is a root class to provide common naming attributes for all classes needing naming attributes
