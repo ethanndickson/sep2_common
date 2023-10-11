@@ -13,7 +13,7 @@ use crate::traits::{
 use yaserde::{YaDeserialize, YaSerialize};
 
 use super::{
-    identification::ResponseRequired,
+    identification::{ResponseRequired, ResponseStatus},
     primitives::{String192, String32, Uint16},
     types::{
         DateTimeInterval, MRIDType, OneHourRangeType, SubscribableType, TimeType, VersionType,
@@ -110,6 +110,19 @@ pub enum EventStatusType {
     Cancelled,
     CancelledRandom,
     Superseded,
+}
+
+impl EventStatusType {
+    /// Given the status of an Event, convert it to a ResponseStatus, as per the DER FS
+    pub fn into_der_response(self) -> ResponseStatus {
+        match self {
+            EventStatusType::Scheduled => ResponseStatus::EventReceived,
+            EventStatusType::Active => ResponseStatus::EventStarted,
+            EventStatusType::Cancelled => ResponseStatus::EventCancelled,
+            EventStatusType::CancelledRandom => ResponseStatus::EventCancelled,
+            EventStatusType::Superseded => ResponseStatus::EventSuperseded,
+        }
+    }
 }
 
 impl Validate for EventStatus {}
