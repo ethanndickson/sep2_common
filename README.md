@@ -8,7 +8,7 @@
 
 
 # Progress
-- [x] Rust Types for all IEEE 2030.5 Resources, Types & Primitives.
+- [x] Rust Types for practically all IEEE 2030.5 Resources, Types & Primitives.
 - [x] XML Serialising & Deserialising all resources using [SEPSerde](https://github.com/ethanndickson/yaserde)
 - [x] Rust enums for all applicable integer types.
 - [x] [Bitflags](https://github.dev/bitflags/bitflags) for all `HexBinary\d+` bitmaps
@@ -18,3 +18,6 @@
 - [x] [De]?serialising sanity tests (auto-generated)
 - [x] All Function Set List Ordering
 - [ ] Correctness / Spec Adherence Tests 
+
+# Unsupported/Broken
+- pubsub::NotificationList: Serializing + Deserializing

@@ -206,13 +206,13 @@ pub struct Notification<T: SEResource> {
     pub href: Option<String>,
 }
 
-impl<T: SEResource> PartialOrd for Notification<T> {
+impl<T: SEResource + Eq> PartialOrd for Notification<T> {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl<T: SEResource> Ord for Notification<T> {
+impl<T: SEResource + Eq> Ord for Notification<T> {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // Primary Key - href (ascending)
         self.href.cmp(&other.href)
@@ -245,7 +245,7 @@ impl<T: SEResource> Validate for Notification<T> {}
 #[yaserde(rename = "NotificationList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[yaserde(namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance")]
-pub struct NotificationList<T: SEResource> {
+pub struct NotificationList<T: SEResource + Eq> {
     #[yaserde(rename = "Notification")]
     pub notification: Vec<Notification<T>>,
 
@@ -264,4 +264,4 @@ pub struct NotificationList<T: SEResource> {
     pub href: Option<String>,
 }
 
-impl<T: SEResource> Validate for NotificationList<T> {}
+impl<T: SEResource + Eq> Validate for NotificationList<T> {}

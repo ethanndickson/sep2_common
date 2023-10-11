@@ -51,17 +51,7 @@ use crate::packages::{
 ///
 /// [`Resource`]: super::packages::identification::Resource
 pub trait SEResource:
-    YaSerialize
-    + YaDeserialize
-    + Default
-    + PartialEq
-    + Eq
-    + Clone
-    + Validate
-    + RefUnwindSafe
-    + Send
-    + Sync
-    + 'static
+    YaSerialize + YaDeserialize + Default + Clone + Validate + RefUnwindSafe + Send + Sync + 'static
 {
     fn href(&self) -> Option<&str>;
 }
