@@ -6,6 +6,9 @@ use std::{
 
 use yaserde::{DefaultYaSerde, PrimitiveYaSerde};
 
+#[cfg(test)]
+use yaserde::{de::from_str, ser::to_string};
+
 use crate::traits::Validate;
 
 /// We purposefully don't use type aliases, as our procedural macros cannot determine whether a type is a primitive using an alias to it
@@ -542,4 +545,75 @@ impl Validate for String192 {
         }
         Ok(())
     }
+}
+
+#[test]
+fn default_hexbinary8() {
+    let orig = HexBinary8::default();
+    let new: HexBinary8 = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_hexbinary16() {
+    let orig = HexBinary16::default();
+    let new: HexBinary16 = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_hexbinary32() {
+    let orig = HexBinary32::default();
+    let new: HexBinary32 = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_hexbinary48() {
+    let orig = HexBinary48::default();
+    let new: HexBinary48 = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_hexbinary64() {
+    let orig = HexBinary64::default();
+    let new: HexBinary64 = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_hexbinary128() {
+    let orig = HexBinary128::default();
+    let new: HexBinary128 = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_hexbinary160() {
+    let orig = HexBinary160::default();
+    let new: HexBinary160 = from_str(&to_string(&orig).unwrap()).unwrap();
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn default_lfdi() {
+    let orig = LFDI::default();
+    let new: LFDI = from_str(&to_string(&orig).unwrap()).unwrap();
+    println!("{new}");
+    assert_eq!(orig, new);
+}
+
+#[test]
+fn example_hexbinary160() {
+    let orig: HexBinary160 = HexBinary160::from_str("C0FFEE00").unwrap();
+    let new = orig.to_string();
+    assert_eq!(orig, HexBinary160::from_str(&new).unwrap());
+}
+
+#[test]
+fn example_lfdi() {
+    let orig: LFDI = LFDI::from_str("C0FFEE00").unwrap();
+    let new = orig.to_string();
+    assert_eq!(orig, LFDI::from_str(&new).unwrap());
 }
