@@ -60,6 +60,16 @@ pub trait SEResource:
 ///
 /// [`Response`]: super::packages::identification::Response
 pub trait SEResponse: SEResource {
+    /// Create a Response.
+    ///
+    /// DRLC Responses [`DrResponse`] contain additional fields,
+    /// which default to `None` when created via this function.
+    fn new(
+        creation_time: TimeType,
+        lfdi: HexBinary160,
+        mrid: MRIDType,
+        status: ResponseStatus,
+    ) -> Self;
     fn created_date_time(&self) -> Option<TimeType>;
     fn end_device_lfdi(&self) -> &HexBinary160;
     fn status(&self) -> Option<ResponseStatus>;

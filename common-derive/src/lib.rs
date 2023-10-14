@@ -26,6 +26,15 @@ pub fn derive_response(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
         impl SEResponse for #ident {
+            fn new(creation_time: TimeType, lfdi: HexBinary160, mrid: MRIDType, status: ResponseStatus) -> Self {
+                let mut out = Self::default();
+                out.created_date_time = Some(creation_time);
+                out.end_device_lfdi = lfdi;
+                out.subject = mrid;
+                out.status = Some(status);
+                out
+            }
+
             fn created_date_time(&self) -> Option<TimeType> {
                 self.created_date_time
             }
