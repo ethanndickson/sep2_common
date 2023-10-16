@@ -600,7 +600,6 @@ fn default_hexbinary160() {
 fn default_lfdi() {
     let orig = LFDI::default();
     let new: LFDI = from_str(&to_string(&orig).unwrap()).unwrap();
-    println!("{new}");
     assert_eq!(orig, new);
 }
 

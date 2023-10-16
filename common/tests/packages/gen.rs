@@ -1,5 +1,4 @@
 #![allow(non_snake_case)]
-// TODO Ethan: Temporary import all
 use sep2_common::packages::{
     billing::*, configuration::*, dcap::*, der::*, di::*, drlc::*, edev::*, flow_reservation::*,
     fsa::*, identification::*, log_events::*, messaging::*, metering::*, metering_mirror::*,
@@ -118,7 +117,6 @@ fn default_RandomizableEvent() {
 #[test]
 fn default_DERControl() {
     let orig = DERControl::default();
-    println!("{}", &to_string(&orig).unwrap());
     let new: DERControl = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
