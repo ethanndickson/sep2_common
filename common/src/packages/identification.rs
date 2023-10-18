@@ -7,6 +7,7 @@ use sep2_common_derive::{
 use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
 use super::{
+    objects::EventStatusType,
     primitives::{HexBinary160, String32, Uint32},
     types::{MRIDType, SubscribableType, TimeType, VersionType},
 };
@@ -121,6 +122,18 @@ pub enum ResponseStatus {
     EventNotApplicable = 252,
     EventInvalid = 253,
     EventExpired = 254,
+}
+
+impl From<EventStatusType> for ResponseStatus {
+    fn from(value: EventStatusType) -> Self {
+        match value {
+            EventStatusType::Scheduled => ResponseStatus::EventReceived,
+            EventStatusType::Active => ResponseStatus::EventStarted,
+            EventStatusType::Cancelled => ResponseStatus::EventCancelled,
+            EventStatusType::CancelledRandom => ResponseStatus::EventCancelled,
+            EventStatusType::Superseded => ResponseStatus::EventSuperseded,
+        }
+    }
 }
 
 impl Validate for Response {}
