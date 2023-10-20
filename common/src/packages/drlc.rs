@@ -55,7 +55,7 @@ impl Validate for LoadShedAvailabilityList {}
 /// The ApplianceLoadReduction object is used by a Demand Response service
 /// provider to provide signals for ENERGY STAR compliant appliances. See the
 /// definition of ApplianceLoadReductionType for more information.
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ApplianceLoadReduction")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ApplianceLoadReduction {
@@ -200,7 +200,7 @@ impl Validate for DemandResponseProgramList {}
 /// default time period over which a duty cycle is applied is 30 minutes, meaning
 /// a 10% duty cycle would cause a device to be ON for 3 minutes. The “off
 /// state” SHALL precede the “on state”.
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DutyCycle")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DutyCycle {

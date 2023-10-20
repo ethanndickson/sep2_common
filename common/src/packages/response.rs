@@ -106,7 +106,7 @@ impl Validate for FlowReservationResponseResponse {}
 
 #[cfg(feature = "drlc")]
 /// Specifies the value of the TargetReduction applied by the device.
-#[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "AppliedTargetReduction")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct AppliedTargetReduction {
