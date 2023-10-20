@@ -18,6 +18,8 @@
 - [x] [De]?serialising sanity tests (auto-generated)
 - [x] All Function Set List Ordering
 - [ ] Correctness / Spec Adherence Tests 
+# Stretch Goals
+- [ ] EXI Serialising & Deserialising all resources (Requires a Rust EXI Library)
 
 # Unsupported/Broken
 - pubsub::NotificationList: Serializing + Deserializing
