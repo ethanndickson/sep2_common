@@ -41,6 +41,17 @@ use crate::packages::{
     types::{DeviceCategoryType, SFDIType},
 };
 
+/// Automatically implemented supertrait for all base traits; implemented by all IEEE 2030.5 types
+pub trait SEType:
+    YaSerialize + YaDeserialize + Validate + RefUnwindSafe + Send + Sync + 'static
+{
+}
+
+impl<T> SEType for T where
+    T: YaSerialize + YaDeserialize + Validate + RefUnwindSafe + Send + Sync + 'static
+{
+}
+
 /// A top-level IEEE 2030.5 Resource.
 /// An IEEE 2030.5 Server exposes resources.
 /// IEEE 2030.5 Clients retrieve, update, create and delete resources on servers.
@@ -50,9 +61,7 @@ use crate::packages::{
 /// There is no reason for any Resource to use interior mutability, thus this bound is reasonable.
 ///
 /// [`Resource`]: super::packages::identification::Resource
-pub trait SEResource:
-    YaSerialize + YaDeserialize + Validate + RefUnwindSafe + Send + Sync + 'static
-{
+pub trait SEResource: SEType {
     fn href(&self) -> Option<&str>;
 }
 
