@@ -41,7 +41,7 @@ use crate::packages::{
     types::{DeviceCategoryType, SFDIType},
 };
 
-/// Automatically implemented supertrait for all base traits; implemented by all IEEE 2030.5 types
+/// Supertrait for all base traits; implemented by all IEEE 2030.5 types present in the XSD
 pub trait SEType:
     YaSerialize + YaDeserialize + Validate + RefUnwindSafe + Send + Sync + 'static
 {

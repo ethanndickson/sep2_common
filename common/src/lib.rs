@@ -10,7 +10,7 @@ pub mod object;
 pub mod packages;
 pub mod traits;
 
-/// Given a top-level resource, serialize it into an XML string
+/// Given an IEEE 2030.5 data type, serialize it into an XML string
 pub fn serialize<R: SEType>(resource: &R) -> Result<String> {
     log::debug!("Serialize: {}", R::name());
     let res = panic::catch_unwind(|| to_string(resource).map_err(|e| anyhow!(e)));
@@ -23,7 +23,7 @@ pub fn serialize<R: SEType>(resource: &R) -> Result<String> {
     }
 }
 
-/// Given a string representing a top-level resource, deserialize into it the inferred type
+/// Given a string representing an IEEE 2030.5 data type, deserialize into it the inferred type
 pub fn deserialize<R: SEType>(resource: &str) -> Result<R> {
     log::debug!("Deserialize: {}", R::name());
     let res = panic::catch_unwind(|| from_str::<R>(resource).map_err(|e| anyhow!(e)));
