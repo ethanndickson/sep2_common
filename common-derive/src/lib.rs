@@ -432,7 +432,7 @@ pub fn derive_reading_base(input: TokenStream) -> TokenStream {
             }
 
             #[inline(always)]
-            fn tou_tier(&self) -> Option<Toutype> {
+            fn tou_tier(&self) -> Option<TOUType> {
                 self.tou_tier
             }
 

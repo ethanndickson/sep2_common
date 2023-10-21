@@ -6,7 +6,7 @@ use super::{
     links::SupportedLocaleListLink,
     power_status::PowerSourceType,
     primitives::{HexBinary160, String32, Uint32},
-    types::{GpslocationType, LocaleType, PENType, RealEnergy, TimeType},
+    types::{GPSLocationType, LocaleType, PENType, RealEnergy, TimeType},
 };
 use bitflags::bitflags;
 use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
@@ -45,7 +45,7 @@ pub struct DeviceInformation {
 
     /// GPS location of this device.
     #[yaserde(rename = "gpsLocation")]
-    pub gps_location: Option<GpslocationType>,
+    pub gps_location: Option<GPSLocationType>,
 
     /// Long form device identifier. See the Security section for full details.
     #[yaserde(rename = "lFDI")]

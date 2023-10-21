@@ -20,7 +20,7 @@ use super::{
     types::{
         ConsumptionBlockType, CurrencyCode, DateTimeInterval, MRIDType, OneHourRangeType,
         PowerOfTenMultiplierType, PrimacyType, RoleFlagsType, ServiceKind, SubscribableType,
-        TimeType, Toutype, UnitValueType, VersionType,
+        TOUType, TimeType, UnitValueType, VersionType,
     },
 };
 
@@ -313,7 +313,7 @@ pub struct TimeTariffInterval {
     /// Indicates the time of use tier related to the reading. If not specified,
     /// is assumed to be "0 - N/A".
     #[yaserde(rename = "touTier")]
-    pub tou_tier: Toutype,
+    pub tou_tier: TOUType,
 
     /// Number of seconds boundary inside which a random value must be selected
     /// to be applied to the associated interval duration, to avoid sudden

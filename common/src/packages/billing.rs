@@ -18,7 +18,7 @@ use super::{
     primitives::{HexBinary16, Int32, Int48, String20, String32, String42, Uint16, Uint32},
     types::{
         ConsumptionBlockType, DateTimeInterval, MRIDType, PowerOfTenMultiplierType,
-        SubscribableType, TimeType, Toutype, VersionType,
+        SubscribableType, TOUType, TimeType, VersionType,
     },
 };
 use yaserde::{YaDeserialize, YaSerialize};
@@ -195,7 +195,7 @@ pub struct BillingReading {
     /// ReadingType numberOfTouTiers is non-zero. If not specified, is assumed to
     /// be "0 - N/A".
     #[yaserde(rename = "touTier")]
-    pub tou_tier: Option<Toutype>,
+    pub tou_tier: Option<TOUType>,
 
     /// Value in units specified by ReadingType
     #[yaserde(rename = "value")]

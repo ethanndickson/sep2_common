@@ -296,7 +296,7 @@ impl Validate for FlowDirectionType {}
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "GPSLocationType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct GpslocationType {
+pub struct GPSLocationType {
     /// Specifies the latitude from equator. -90 (south) to +90 (north) in
     /// decimal degrees.
     #[yaserde(rename = "lat")]
@@ -308,7 +308,7 @@ pub struct GpslocationType {
     pub lon: String32,
 }
 
-impl Validate for GpslocationType {}
+impl Validate for GPSLocationType {}
 
 #[derive(
     Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
@@ -666,7 +666,7 @@ pub type TimeType = Int64;
 #[yaserde(rename = "TOUType")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
-pub enum Toutype {
+pub enum TOUType {
     #[default]
     NotApplicable = 0,
     TouA = 1,
@@ -686,7 +686,7 @@ pub enum Toutype {
     TouO = 15,
 }
 
-impl Validate for Toutype {}
+impl Validate for TOUType {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "UnitType")]

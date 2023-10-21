@@ -11,8 +11,8 @@ use super::{
     metering::{Reading, ReadingType},
     primitives::{HexBinary16, HexBinary160, Int48, String32, Uint32},
     types::{
-        ConsumptionBlockType, DateTimeInterval, MRIDType, RoleFlagsType, ServiceKind, TimeType,
-        Toutype, UsagePointStatus, VersionType,
+        ConsumptionBlockType, DateTimeInterval, MRIDType, RoleFlagsType, ServiceKind, TOUType,
+        TimeType, UsagePointStatus, VersionType,
     },
 };
 
@@ -326,7 +326,7 @@ pub struct ReadingBase {
     /// ReadingType numberOfTouTiers is non-zero. If not specified, is assumed to
     /// be "0 - N/A".
     #[yaserde(rename = "touTier")]
-    pub tou_tier: Option<Toutype>,
+    pub tou_tier: Option<TOUType>,
 
     /// Value in units specified by ReadingType
     #[yaserde(rename = "value")]

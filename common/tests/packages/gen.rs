@@ -431,8 +431,8 @@ fn default_IPInterfaceList() {
 
 #[test]
 fn default_LLInterface() {
-    let orig = Llinterface::default();
-    let new: Llinterface = from_str(&to_string(&orig).unwrap()).unwrap();
+    let orig = LLInterface::default();
+    let new: LLInterface = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
@@ -466,29 +466,29 @@ fn default_NeighborList() {
 
 #[test]
 fn default_RPLInstance() {
-    let orig = Rplinstance::default();
-    let new: Rplinstance = from_str(&to_string(&orig).unwrap()).unwrap();
+    let orig = RPLInstance::default();
+    let new: RPLInstance = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_RPLInstanceList() {
-    let orig = RplinstanceList::default();
-    let new: RplinstanceList = from_str(&to_string(&orig).unwrap()).unwrap();
+    let orig = RPLInstanceList::default();
+    let new: RPLInstanceList = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_RPLSourceRoutes() {
-    let orig = RplsourceRoutes::default();
-    let new: RplsourceRoutes = from_str(&to_string(&orig).unwrap()).unwrap();
+    let orig = RPLSourceRoutes::default();
+    let new: RPLSourceRoutes = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_RPLSourceRoutesList() {
-    let orig = RplsourceRoutesList::default();
-    let new: RplsourceRoutesList = from_str(&to_string(&orig).unwrap()).unwrap();
+    let orig = RPLSourceRoutesList::default();
+    let new: RPLSourceRoutesList = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
@@ -1404,8 +1404,8 @@ fn default_FlowDirectionType() {
 
 #[test]
 fn default_GPSLocationType() {
-    let orig = GpslocationType::default();
-    let new: GpslocationType = from_str(&to_string(&orig).unwrap()).unwrap();
+    let orig = GPSLocationType::default();
+    let new: GPSLocationType = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
@@ -1530,8 +1530,8 @@ fn default_TimeType() {
 
 #[test]
 fn default_TOUType() {
-    let orig = Toutype::default();
-    let new: Toutype = from_str(&to_string(&orig).unwrap()).unwrap();
+    let orig = TOUType::default();
+    let new: TOUType = from_str(&to_string(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 

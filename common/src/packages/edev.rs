@@ -116,7 +116,7 @@ pub struct DeviceStatus {
     /// 6 - kW ramping
     /// 7 - kVar ramping
     #[yaserde(rename = "opState")]
-    pub op_state: Option<OpStatus>,
+    pub op_state: Option<OpState>,
 
     /// Total time device has operated: re-settable: Accumulated time in seconds
     /// since the last time the counter was reset.
@@ -150,7 +150,7 @@ impl Validate for DeviceStatus {}
 )]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(u8)]
-pub enum OpStatus {
+pub enum OpState {
     #[default]
     /// Or Unknown
     NotApplicable = 0,

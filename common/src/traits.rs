@@ -19,7 +19,7 @@ use crate::packages::{
 #[cfg(feature = "metering_mirror")]
 use crate::packages::{
     primitives::{HexBinary16, Int48},
-    types::{ConsumptionBlockType, RoleFlagsType, ServiceKind, Toutype},
+    types::{ConsumptionBlockType, RoleFlagsType, ServiceKind, TOUType},
 };
 
 #[cfg(feature = "billing")]
@@ -226,7 +226,7 @@ pub trait SEReadingBase: SEResource {
     fn consumption_block(&self) -> Option<ConsumptionBlockType>;
     fn quality_flags(&self) -> Option<HexBinary16>;
     fn time_period(&self) -> Option<&DateTimeInterval>;
-    fn tou_tier(&self) -> Option<Toutype>;
+    fn tou_tier(&self) -> Option<TOUType>;
     fn value(&self) -> Option<Int48>;
 }
 

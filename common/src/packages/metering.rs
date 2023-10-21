@@ -17,7 +17,7 @@ use super::{
     types::{
         AccumulationBehaviourType, CommodityType, ConsumptionBlockType, DataQualifierType,
         DateTimeInterval, FlowDirectionType, KindType, MRIDType, PhaseCode,
-        PowerOfTenMultiplierType, RoleFlagsType, ServiceKind, SubscribableType, Toutype,
+        PowerOfTenMultiplierType, RoleFlagsType, ServiceKind, SubscribableType, TOUType,
         UnitValueType, UomType, UsagePointStatus, VersionType,
     },
 };
@@ -176,7 +176,7 @@ pub struct Reading {
     /// ReadingType numberOfTouTiers is non-zero. If not specified, is assumed to
     /// be "0 - N/A".
     #[yaserde(rename = "touTier")]
-    pub tou_tier: Option<Toutype>,
+    pub tou_tier: Option<TOUType>,
 
     /// Value in units specified by ReadingType
     #[yaserde(rename = "value")]

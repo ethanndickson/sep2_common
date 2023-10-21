@@ -16,7 +16,7 @@ use yaserde::{YaDeserialize, YaSerialize};
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "IEEE_802_15_4")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Ieee802154 {
+pub struct IEEE802154 {
     /// As defined by IEEE 802.15.4
     #[yaserde(rename = "capabilityInfo")]
     pub capability_info: HexBinary8,
@@ -29,7 +29,7 @@ pub struct Ieee802154 {
     pub short_address: Uint16,
 }
 
-impl Validate for Ieee802154 {}
+impl Validate for IEEE802154 {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "IPAddr")]
@@ -252,7 +252,7 @@ impl Validate for IPInterfaceList {}
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "LLInterface")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Llinterface {
+pub struct LLInterface {
     /// Contains the number of CRC errors since reset.
     #[yaserde(rename = "CRCerrors")]
     pub cr_cerrors: Uint32,
@@ -265,7 +265,7 @@ pub struct Llinterface {
     pub eui64: HexBinary64,
 
     #[yaserde(rename = "IEEE_802_15_4")]
-    pub ieee_802_15_4: Option<Ieee802154>,
+    pub ieee_802_15_4: Option<IEEE802154>,
 
     /// Specifies the type of link layer interface associated with the
     /// IPInterface. Values are below.
@@ -332,27 +332,27 @@ pub struct Llinterface {
     pub href: Option<String>,
 }
 
-impl PartialOrd for Llinterface {
+impl PartialOrd for LLInterface {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl Ord for Llinterface {
+impl Ord for LLInterface {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // Primary Key - EUI64 (ascending)
         self.eui64.cmp(&other.eui64)
     }
 }
 
-impl Validate for Llinterface {}
+impl Validate for LLInterface {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "LLInterfaceList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct LlinterfaceList {
     #[yaserde(rename = "LLInterface")]
-    pub ll_interface: Vec<Llinterface>,
+    pub ll_interface: Vec<LLInterface>,
 
     /// The number specifying "all" of the items in the list. Required on a
     /// response to a GET, ignored otherwise.
@@ -452,7 +452,7 @@ impl Validate for NeighborList {}
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "RPLInstance")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct Rplinstance {
+pub struct RPLInstance {
     /// See [RFC 6550].
     #[yaserde(rename = "DODAGid")]
     pub doda_gid: Uint8,
@@ -498,13 +498,13 @@ pub struct Rplinstance {
     pub href: Option<String>,
 }
 
-impl PartialOrd for Rplinstance {
+impl PartialOrd for RPLInstance {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl Ord for Rplinstance {
+impl Ord for RPLInstance {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // Primary Key - DODAGid (ascending)
         match self.doda_gid.cmp(&other.doda_gid) {
@@ -516,14 +516,14 @@ impl Ord for Rplinstance {
     }
 }
 
-impl Validate for Rplinstance {}
+impl Validate for RPLInstance {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "RPLInstanceList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct RplinstanceList {
+pub struct RPLInstanceList {
     #[yaserde(rename = "RPLInstance")]
-    pub rpl_instance: Vec<Rplinstance>,
+    pub rpl_instance: Vec<RPLInstance>,
 
     /// The number specifying "all" of the items in the list. Required on a
     /// response to a GET, ignored otherwise.
@@ -540,12 +540,12 @@ pub struct RplinstanceList {
     pub href: Option<String>,
 }
 
-impl Validate for RplinstanceList {}
+impl Validate for RPLInstanceList {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "RPLSourceRoutes")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct RplsourceRoutes {
+pub struct RPLSourceRoutes {
     /// See [RFC 6554].
     #[yaserde(rename = "DestAddress")]
     pub dest_address: HexBinary128,
@@ -560,13 +560,13 @@ pub struct RplsourceRoutes {
     pub href: Option<String>,
 }
 
-impl PartialOrd for RplsourceRoutes {
+impl PartialOrd for RPLSourceRoutes {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl Ord for RplsourceRoutes {
+impl Ord for RPLSourceRoutes {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // Primary Key - SourceRoute (ascending)
         match self.source_route.cmp(&other.source_route) {
@@ -578,14 +578,14 @@ impl Ord for RplsourceRoutes {
     }
 }
 
-impl Validate for RplsourceRoutes {}
+impl Validate for RPLSourceRoutes {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "RPLSourceRoutesList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-pub struct RplsourceRoutesList {
+pub struct RPLSourceRoutesList {
     #[yaserde(rename = "RPLSourceRoutes")]
-    pub rpl_source_routes: Vec<RplsourceRoutes>,
+    pub rpl_source_routes: Vec<RPLSourceRoutes>,
 
     /// The number specifying "all" of the items in the list. Required on a
     /// response to a GET, ignored otherwise.
@@ -602,4 +602,4 @@ pub struct RplsourceRoutesList {
     pub href: Option<String>,
 }
 
-impl Validate for RplsourceRoutesList {}
+impl Validate for RPLSourceRoutesList {}
