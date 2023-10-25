@@ -60,25 +60,15 @@ impl<T> SEType for T where
 /// The `RefUnwindSafe` auto-trait bound is to gracefully handle our XML library (xml-rs) unavoidably panicking and performing a stack unwind.
 /// There is no reason for any Resource to use interior mutability, thus this bound is reasonable.
 ///
-/// [`Resource`]: super::packages::identification::Resource
+/// [`Resource`]: crate::packages::identification::Resource
 pub trait SEResource: SEType {
     fn href(&self) -> Option<&str>;
 }
 
 /// Implemented by all types whose base type is [`Response`]
 ///
-/// [`Response`]: super::packages::identification::Response
+/// [`Response`]: crate::packages::identification::Response
 pub trait SEResponse: SEResource {
-    /// Create a Response.
-    ///
-    /// DRLC Responses [`DrResponse`] contain additional fields,
-    /// which default to `None` when created via this function.
-    fn new(
-        creation_time: TimeType,
-        lfdi: HexBinary160,
-        mrid: MRIDType,
-        status: ResponseStatus,
-    ) -> Self;
     fn created_date_time(&self) -> Option<TimeType>;
     fn end_device_lfdi(&self) -> &HexBinary160;
     fn status(&self) -> Option<ResponseStatus>;
@@ -87,7 +77,7 @@ pub trait SEResponse: SEResource {
 
 /// Implemented by all types whose base type is [`IdentifiedObject`]
 ///
-/// [`IdentifiedObject`]: super::packages::identification::IdentifiedObject
+/// [`IdentifiedObject`]: crate::packages::identification::IdentifiedObject
 pub trait SEIdentifiedObject: SEResource {
     fn mrid(&self) -> &MRIDType;
     fn description(&self) -> Option<&String32>;
@@ -96,7 +86,7 @@ pub trait SEIdentifiedObject: SEResource {
 
 /// Implemented by all types whose base type is [`RespondableResource`]
 ///
-/// [`RespondableResource`]: super::packages::identification::RespondableResource
+/// [`RespondableResource`]: crate::packages::identification::RespondableResource
 pub trait SERespondableResource: SEResource {
     fn reply_to(&self) -> Option<&str>;
     fn response_required(&self) -> Option<ResponseRequired>;
@@ -104,7 +94,7 @@ pub trait SERespondableResource: SEResource {
 
 /// Implemented by all types whose base type is [`SubscriptionBase`]
 ///
-/// [`SubscriptionBase`]: super::packages::pubsub::SubscriptionBase
+/// [`SubscriptionBase`]: crate::packages::pubsub::SubscriptionBase
 #[cfg(feature = "pubsub")]
 pub trait SESubscriptionBase: SEResource {
     fn subscribed_resource(&self) -> &str;
@@ -112,19 +102,19 @@ pub trait SESubscriptionBase: SEResource {
 
 /// Implemented by all types whose base type is [`SubscribableResource`]
 ///
-/// [`SubscribableResource`]: super::packages::identification::SubscribableResource
+/// [`SubscribableResource`]: crate::packages::identification::SubscribableResource
 pub trait SESubscribableResource: SEResource {
     fn subscribable(&self) -> Option<SubscribableType>;
 }
 
 /// Implemented by all types whose base type is [`RespondableIdentifiedObject`]
 ///
-/// [`RespondableIdentifiedObject`]: super::packages::identification::RespondableIdentifiedObject
+/// [`RespondableIdentifiedObject`]: crate::packages::identification::RespondableIdentifiedObject
 pub trait SERespondableIdentifiedObject: SERespondableResource + SEIdentifiedObject {}
 
 /// Implemented by all types whose base type is [`RespondableSubscribableIdentifiedObject`]
 ///
-/// [`RespondableSubscribableIdentifiedObject`]: super::packages::identification::RespondableSubscribableIdentifiedObject
+/// [`RespondableSubscribableIdentifiedObject`]: crate::packages::identification::RespondableSubscribableIdentifiedObject
 pub trait SERespondableSubscribableIdentifiedObject:
     SERespondableResource + SESubscribableResource + SEIdentifiedObject
 {
@@ -132,12 +122,12 @@ pub trait SERespondableSubscribableIdentifiedObject:
 
 /// Implemented by all types whose base type is [`SubscribableIdentifiedObject`]
 ///
-/// [`SubscribableIdentifiedObject`]: super::packages::identification::SubscribableIdentifiedObject
+/// [`SubscribableIdentifiedObject`]: crate::packages::identification::SubscribableIdentifiedObject
 pub trait SESubscribableIdentifiedObject: SESubscribableResource + SEIdentifiedObject {}
 
 /// Implemented by all types whose base type is [`Event`]
 ///
-/// [`Event`]: super::packages::objects::Event
+/// [`Event`]: crate::packages::objects::Event
 pub trait SEEvent: SERespondableSubscribableIdentifiedObject {
     fn creation_time(&self) -> TimeType;
     fn event_status(&self) -> &EventStatus;
@@ -146,7 +136,7 @@ pub trait SEEvent: SERespondableSubscribableIdentifiedObject {
 
 /// Implemented by all types whose base type is [`RandomizableEvent`]
 ///
-/// [`RandomizableEvent`]: super::packages::objects::RandomizableEvent
+/// [`RandomizableEvent`]: crate::packages::objects::RandomizableEvent
 pub trait SERandomizableEvent: SEEvent {
     fn randomize_duration(&self) -> Option<OneHourRangeType>;
     fn randomize_start(&self) -> Option<OneHourRangeType>;
@@ -154,7 +144,7 @@ pub trait SERandomizableEvent: SEEvent {
 
 /// Implemented by all types whose base type is [`List`]
 ///
-/// [`List`]: super::packages::identification::List
+/// [`List`]: crate::packages::identification::List
 pub trait SEList: SEResource {
     type Inner: Ord;
     fn all(&self) -> Uint32;
@@ -179,10 +169,12 @@ pub trait SEList: SEResource {
 
 /// Implemented by all types whose base type is [`SubscribableList`]
 ///
-/// [`SubscribableList`]: super::packages::identification::SubscribableList
+/// [`SubscribableList`]: crate::packages::identification::SubscribableList
 pub trait SESubscribableList: SESubscribableResource + SEList {}
 
 /// Implemented by all types whose base type is [`FunctionSetAssignmentsBase`]
+///
+/// [`FunctionSetAssignmentsBase`]: crate::packages::fsa::FunctionSetAssignmentsBase
 #[cfg(feature = "fsa")]
 pub trait SEFunctionSetAssignmentsBase: SEResource {
     fn customer_account_list_link(&self) -> Option<&CustomerAccountListLink>;
@@ -198,6 +190,8 @@ pub trait SEFunctionSetAssignmentsBase: SEResource {
 }
 
 /// Implemented by all types whose base type is [`AbstractDevice`]
+///
+/// [`AbstractDevice`]: crate::packages::edev::AbstractDevice
 #[cfg(feature = "edev")]
 pub trait SEAbstractDevice: SESubscribableResource {
     fn configuration_link(&self) -> Option<&ConfigurationLink>;
@@ -215,12 +209,16 @@ pub trait SEAbstractDevice: SESubscribableResource {
 }
 
 /// Implemented by all types whose base type is [`MeterReadingBase`]
+///
+/// [`MeterReadingBase`]: crate::packages::metering_mirror::MeterReadingBase
 #[cfg(feature = "metering_mirror")]
 pub trait SEMeterReadingBase: SEIdentifiedObject {
     // Does not extend IdentifiedObject further
 }
 
 /// Implemented by all types whose base type is [`ReadingBase`]
+///
+/// [`ReadingBase`]: crate::packages::metering_mirror::ReadingBase
 #[cfg(feature = "metering_mirror")]
 pub trait SEReadingBase: SEResource {
     fn consumption_block(&self) -> Option<ConsumptionBlockType>;
@@ -231,12 +229,16 @@ pub trait SEReadingBase: SEResource {
 }
 
 /// Implemented by all types whose base type is [`ReadingSetBase`]
+///
+/// [`ReadingSetBase`]: crate::packages::metering_mirror::ReadingSetBase
 #[cfg(feature = "metering_mirror")]
 pub trait SEReadingSetBase: SEIdentifiedObject {
     fn time_period(&self) -> &DateTimeInterval;
 }
 
 /// Implemented by all types whose base type is [`UsagePointBase`]
+///
+/// [`UsagePointBase`]: crate::packages::metering_mirror::UsagePointBase
 #[cfg(feature = "metering_mirror")]
 pub trait SEUsagePointBase: SEIdentifiedObject {
     fn role_flags(&self) -> RoleFlagsType;

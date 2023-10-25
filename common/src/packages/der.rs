@@ -951,6 +951,7 @@ pub struct DERControlBase {
 }
 
 impl DERControlBase {
+    /// Determine if two DERControlBase instances target the same set of controls by whether they contain the same optional fields.
     pub fn same_target(&self, other: &Self) -> bool {
         self.op_mod_connect.is_some() == other.op_mod_connect.is_some()
             && self.op_mod_energize.is_some() == other.op_mod_energize.is_some()

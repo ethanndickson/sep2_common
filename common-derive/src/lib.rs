@@ -1,9 +1,8 @@
-use list::extract_list;
 use proc_macro::{self, TokenStream};
 use quote::quote;
-use syn::{parse_macro_input, DeriveInput};
-
-mod list;
+use syn::{
+    parse_macro_input, Data, DeriveInput, Fields, GenericArgument, Ident, PathArguments, Type,
+};
 
 #[proc_macro_derive(SEResource)]
 pub fn derive_resource(input: TokenStream) -> TokenStream {
@@ -26,15 +25,6 @@ pub fn derive_response(input: TokenStream) -> TokenStream {
     let DeriveInput { ident, .. } = parse_macro_input!(input);
     quote! {
         impl SEResponse for #ident {
-            fn new(creation_time: TimeType, lfdi: HexBinary160, mrid: MRIDType, status: ResponseStatus) -> Self {
-                let mut out = Self::default();
-                out.created_date_time = Some(creation_time);
-                out.end_device_lfdi = lfdi;
-                out.subject = mrid;
-                out.status = Some(status);
-                out
-            }
-
             #[inline(always)]
             fn created_date_time(&self) -> Option<TimeType> {
                 self.created_date_time
@@ -207,6 +197,26 @@ pub fn derive_randomizable_event(input: TokenStream) -> TokenStream {
         }
     }
     .into()
+}
+
+fn extract_list(data: &Data) -> Option<(Ident, Type)> {
+    if let Data::Struct(data) = data {
+        if let Fields::Named(fields) = &data.fields {
+            if let Some(field) = &fields.named.first() {
+                let ident = field.ident.clone()?;
+                if let Type::Path(vec_typepath) = &field.ty {
+                    if let Some(segment) = vec_typepath.path.segments.first() {
+                        if let PathArguments::AngleBracketed(args) = &segment.arguments {
+                            if let Some(GenericArgument::Type(out_type)) = args.args.first() {
+                                return Some((ident, out_type.clone()));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    None
 }
 
 #[proc_macro_derive(SEList)]

@@ -420,7 +420,7 @@ impl Validate for ChargeKind {}
 pub struct CustomerAccount {
     /// The ISO 4217 code indicating the currency applicable to the bill amounts
     /// in the summary. See list at
-    /// http://www.unece.org/cefact/recommendations/rec09/rec09_ecetrd203.pdf
+    /// <http://www.unece.org/cefact/recommendations/rec09/rec09_ecetrd203.pdf>
     #[yaserde(rename = "currency")]
     pub currency: Uint16,
 

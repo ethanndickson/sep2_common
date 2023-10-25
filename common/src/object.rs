@@ -7,7 +7,7 @@ use std::{
 
 static MRID_COUNT: AtomicU32 = AtomicU32::new(0);
 
-/// Given the IANA Private Enterprise Number (PEN) ID, produce a MRID
+/// Given the IANA Private Enterprise Number (PEN) ID, produce a (unique) MRID
 pub fn mrid_gen(pen_id: u32) -> MRIDType {
     let mut rng = rand::thread_rng();
     let id: u128 = rng.gen();
@@ -28,7 +28,7 @@ fn mrid_contains_pen() {
 
 #[test]
 fn mrid_unique() {
-    let num_ids = 100_000;
+    let num_ids = 1_000_000;
     let mut id_set = std::collections::HashSet::new();
     for _ in 0..num_ids {
         let mrid = mrid_gen(0).0;

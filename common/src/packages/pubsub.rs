@@ -219,6 +219,7 @@ impl<T: SEResource + Eq> Ord for Notification<T> {
     }
 }
 
+/// Utility function for woring with raw Notification strings, attempts to extract the 'xsi:type' field from the resource element of the Notification
 pub fn get_notif_type(notif_xml: &str) -> Result<String> {
     let parser = EventReader::new(notif_xml.as_bytes());
     for event in parser {
