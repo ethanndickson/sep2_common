@@ -2,7 +2,7 @@
 
 `sep2_common` is a (WIP) Rust library for developing IEEE 2030.5 compliant servers & clients.
 
-It can be used with [`sep2_client`](https://github.com/ethanndickson/IEEE-2030.5-Client), which provides an interface for developing IEEE 2030.5 clients.
+It can be used with [`sep2_client`](https://github.com/ethanndickson/IEEE-2030.5-Client), which provides a framework for developing IEEE 2030.5 clients.
 
 # Contents
 

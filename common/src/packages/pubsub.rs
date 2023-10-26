@@ -15,7 +15,7 @@ pub struct Condition {
     /// 0 = Reading value
     /// 1-255 = Reserved
     #[yaserde(rename = "attributeIdentifier")]
-    pub attribute_identifier: Uint8,
+    pub attribute_identifier: AttributeIdentifier,
 
     /// The value of the lower threshold
     #[yaserde(rename = "lowerThreshold")]
@@ -24,6 +24,15 @@ pub struct Condition {
     /// The value of the upper threshold
     #[yaserde(rename = "upperThreshold")]
     pub upper_threshold: Int48,
+}
+
+#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
+#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[repr(u8)]
+pub enum AttributeIdentifier {
+    #[default]
+    ReadingValue = 0,
+    // 1-255 = Reserved
 }
 
 impl Validate for Condition {}
@@ -219,7 +228,6 @@ impl<T: SEResource + Eq> Ord for Notification<T> {
     }
 }
 
-/// Utility function for woring with raw Notification strings, attempts to extract the 'xsi:type' field from the resource element of the Notification
 pub fn get_notif_type(notif_xml: &str) -> Result<String> {
     let parser = EventReader::new(notif_xml.as_bytes());
     for event in parser {
