@@ -27,6 +27,9 @@ use super::{
 use bitflags::bitflags;
 use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
+#[cfg(test)]
+use crate::serialize;
+
 #[derive(
     Default,
     PartialEq,
@@ -535,11 +538,21 @@ impl Validate for DERAvailability {}
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "DERCapability")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[cfg_attr(
+    feature = "doe",
+    yaserde(namespace = "csipaus: https://csipaus.org/ns")
+)]
 pub struct DERCapability {
     /// Bitmap indicating the DER Controls implemented by the device. See
     /// DERControlType for values.
     #[yaserde(rename = "modesSupported")]
     pub modes_supported: DERControlType,
+
+    /// Bitmap indicating the CSIP-AUS controls implemented
+    #[cfg(feature = "doe")]
+    #[yaserde(rename = "doeModesSupported")]
+    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
+    pub doe_modes_supported: DOEControlType,
 
     /// Abnormal operating performance category as defined by IEEE 1547-2018. One
     /// of:
@@ -694,6 +707,10 @@ impl Validate for DERCapability {}
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "DERControlBase")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[cfg_attr(
+    feature = "conn_point",
+    yaserde(namespace = "csipaus: https://csipaus.org/ns")
+)]
 pub struct DERControlBase {
     /// Set DER as connected (true) or disconnected (false). Used in conjunction
     /// with ramp rate when re-connecting. Implies galvanic isolation.
@@ -942,6 +959,34 @@ pub struct DERControlBase {
     #[yaserde(rename = "opModWattVar")]
     pub op_mod_watt_var: Option<DERCurveLink>,
 
+    /// This is the constraint on the imported active power at the connection point.
+    #[cfg(feature = "doe")]
+    #[yaserde(rename = "opModImpLimW")]
+    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
+    pub op_mod_imp_lim_w: Option<ActivePower>,
+
+    /// This is the constraint on the exported active power at the connection point.
+    #[cfg(feature = "doe")]
+    #[yaserde(rename = "opModExpLimW")]
+    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
+    pub op_mod_exp_lim_w: Option<ActivePower>,
+
+    /// This is a constraint on the maxium allowable discharge rate, in Watts,
+    /// specifically for a single physical device (or aggregation of devices,
+    /// excluding uncontrolled devices) such as an EV charge station.
+    #[cfg(feature = "doe")]
+    #[yaserde(rename = "opModGenLimW")]
+    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
+    pub op_mod_gen_lim_w: Option<ActivePower>,
+
+    /// This is a constraint on the maximum allowable charge rate, in Watts,
+    /// specifically for a single physical device (or aggregation of devices,
+    /// excluding uncontrolled devices) such as an EV charge station.
+    #[cfg(feature = "doe")]
+    #[yaserde(rename = "opModLoadLimW")]
+    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
+    pub op_mod_load_lim_w: Option<ActivePower>,
+
     /// Requested ramp time, in hundredths of a second, for the device to
     /// transition from the current DERControl mode setting(s) to the new mode
     /// setting(s). If absent, use default ramp rate (setGradW). Resolution is
@@ -953,6 +998,15 @@ pub struct DERControlBase {
 impl DERControlBase {
     /// Determine if two DERControlBase instances target the same set of controls by whether they contain the same optional fields.
     pub fn same_target(&self, other: &Self) -> bool {
+        #[cfg(feature = "doe")]
+        let extensions = {
+            self.op_mod_imp_lim_w.is_some() == other.op_mod_imp_lim_w.is_some()
+                && self.op_mod_exp_lim_w.is_some() == other.op_mod_exp_lim_w.is_some()
+                && self.op_mod_gen_lim_w.is_some() == other.op_mod_gen_lim_w.is_some()
+                && self.op_mod_load_lim_w.is_some() == other.op_mod_load_lim_w.is_some()
+        };
+        #[cfg(not(feature = "doe"))]
+        let extensions = true;
         self.op_mod_connect.is_some() == other.op_mod_connect.is_some()
             && self.op_mod_energize.is_some() == other.op_mod_energize.is_some()
             && self.op_mod_fixed_pf_absorb_w.is_some() == other.op_mod_fixed_pf_absorb_w.is_some()
@@ -981,6 +1035,7 @@ impl DERControlBase {
             && self.op_mod_watt_pf.is_some() == other.op_mod_watt_pf.is_some()
             && self.op_mod_watt_var.is_some() == other.op_mod_watt_var.is_some()
             && self.ramp_tms.is_some() == other.ramp_tms.is_some()
+            && extensions
     }
 }
 
@@ -1247,6 +1302,17 @@ bitflags! {
         const OpModVoltWatt = 16777216;
         const OpModWattPF = 33554432;
         const OpModWattVar = 67108864;
+    }
+}
+
+#[cfg(feature = "doe")]
+bitflags! {
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
+    pub struct DOEControlType: u16 { // HexBinary 16
+        const OpModExpLimW = 1;
+        const OpModImpLimW = 2;
+        const OpModGenLimW = 4;
+        const OpModLoadLimW = 8;
     }
 }
 
@@ -2120,3 +2186,75 @@ pub enum StorageModeStatusValue {
 }
 
 impl Validate for StorageModeStatusType {}
+
+#[cfg(not(feature = "doe"))]
+#[test]
+fn dercap_no_csip_aus() {
+    let expected = r#"<DERCapability xmlns="urn:ieee:std:2030.5:ns">
+  <modesSupported>0</modesSupported>
+  <rtgMaxW>
+    <multiplier>0</multiplier>
+    <value>0</value>
+  </rtgMaxW>
+  <type>0</type>
+</DERCapability>"#;
+    let dcap = DERCapability::default();
+    let out = serialize(&dcap).unwrap();
+    assert_eq!(expected, out);
+}
+
+#[cfg(feature = "doe")]
+#[test]
+fn csip_aus_dercap() {
+    let expected = r#"<DERCapability xmlns="urn:ieee:std:2030.5:ns" xmlns:csipaus="https://csipaus.org/ns">
+  <modesSupported>0</modesSupported>
+  <csipaus:doeModesSupported>0</csipaus:doeModesSupported>
+  <rtgMaxW>
+    <multiplier>0</multiplier>
+    <value>0</value>
+  </rtgMaxW>
+  <type>0</type>
+</DERCapability>"#;
+    let dcap = DERCapability::default();
+    let out = serialize(&dcap).unwrap();
+    assert_eq!(expected, out);
+}
+
+#[cfg(not(feature = "doe"))]
+#[test]
+fn dercontrolbase_no_csip_aus() {
+    let expected = r#"<DERControlBase xmlns="urn:ieee:std:2030.5:ns" />"#;
+    let dercb = DERControlBase::default();
+    let out = serialize(&dercb).unwrap();
+    assert_eq!(expected, out);
+}
+
+#[cfg(feature = "doe")]
+#[test]
+fn csip_aus_dercontrolbase() {
+    let expected = r#"<DERControlBase xmlns="urn:ieee:std:2030.5:ns" xmlns:csipaus="https://csipaus.org/ns">
+  <csipaus:opModImpLimW>
+    <multiplier>0</multiplier>
+    <value>0</value>
+  </csipaus:opModImpLimW>
+  <csipaus:opModExpLimW>
+    <multiplier>0</multiplier>
+    <value>0</value>
+  </csipaus:opModExpLimW>
+  <csipaus:opModGenLimW>
+    <multiplier>0</multiplier>
+    <value>0</value>
+  </csipaus:opModGenLimW>
+  <csipaus:opModLoadLimW>
+    <multiplier>0</multiplier>
+    <value>0</value>
+  </csipaus:opModLoadLimW>
+</DERControlBase>"#;
+    let mut dercb = DERControlBase::default();
+    dercb.op_mod_imp_lim_w = Some(Default::default());
+    dercb.op_mod_exp_lim_w = Some(Default::default());
+    dercb.op_mod_gen_lim_w = Some(Default::default());
+    dercb.op_mod_load_lim_w = Some(Default::default());
+    let out = serialize(&dercb).unwrap();
+    assert_eq!(expected, out);
+}

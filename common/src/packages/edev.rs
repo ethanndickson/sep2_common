@@ -7,6 +7,9 @@ use sep2_common_derive::{
 
 use yaserde::{YaDeserialize, YaSerialize};
 
+#[cfg(test)]
+use crate::serialize;
+
 #[cfg(feature = "conn_point")]
 use super::conn_point::ConnectionPointLink;
 
@@ -180,6 +183,10 @@ pub enum OpState {
 )]
 #[yaserde(rename = "EndDevice")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[cfg_attr(
+    feature = "conn_point",
+    yaserde(namespace = "csipaus: https://csipaus.org/ns")
+)]
 pub struct EndDevice {
     /// The time at which this resource was last modified or created.
     #[yaserde(rename = "changedTime")]
@@ -254,9 +261,9 @@ pub struct EndDevice {
     #[yaserde(rename = "PowerStatusLink")]
     pub power_status_link: Option<PowerStatusLink>,
 
+    #[cfg(feature = "conn_point")]
     #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
     #[yaserde(rename = "ConnectionPointLink ")]
-    #[cfg(feature = "conn_point")]
     pub connection_point_link: Option<ConnectionPointLink>,
 
     /// Short form of device identifier, WITH the checksum digit. See the
@@ -316,6 +323,10 @@ impl Validate for EndDevice {}
 )]
 #[yaserde(rename = "EndDeviceList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[cfg_attr(
+    feature = "conn_point",
+    yaserde(namespace = "csipaus: https://csipaus.org/ns")
+)]
 pub struct EndDeviceList {
     #[yaserde(rename = "EndDevice")]
     pub end_device: Vec<EndDevice>,
@@ -483,3 +494,27 @@ pub struct Temperature {
 }
 
 impl Validate for Temperature {}
+
+#[cfg(not(feature = "conn_point"))]
+#[test]
+fn csip_aus_edev_no_namespace() {
+    let expected = r#"<EndDevice xmlns="urn:ieee:std:2030.5:ns">
+  <changedTime>0</changedTime>
+  <sFDI>0</sFDI>
+</EndDevice>"#;
+    let edev = EndDevice::default();
+    let out = serialize(&edev).unwrap();
+    assert_eq!(expected, out);
+}
+
+#[cfg(feature = "conn_point")]
+#[test]
+fn csip_aus_edev_namespace() {
+    let expected = r#"<EndDevice xmlns="urn:ieee:std:2030.5:ns" xmlns:csipaus="https://csipaus.org/ns">
+  <changedTime>0</changedTime>
+  <sFDI>0</sFDI>
+</EndDevice>"#;
+    let edev = EndDevice::default();
+    let out = serialize(&edev).unwrap();
+    assert_eq!(expected, out);
+}
