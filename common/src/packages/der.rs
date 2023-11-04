@@ -539,7 +539,7 @@ impl Validate for DERAvailability {}
 #[yaserde(rename = "DERCapability")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[cfg_attr(
-    feature = "doe",
+    feature = "csip_aus",
     yaserde(namespace = "csipaus: https://csipaus.org/ns")
 )]
 pub struct DERCapability {
@@ -549,7 +549,7 @@ pub struct DERCapability {
     pub modes_supported: DERControlType,
 
     /// Bitmap indicating the CSIP-AUS controls implemented
-    #[cfg(feature = "doe")]
+    #[cfg(feature = "csip_aus")]
     #[yaserde(rename = "doeModesSupported")]
     #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
     pub doe_modes_supported: DOEControlType,
@@ -708,7 +708,7 @@ impl Validate for DERCapability {}
 #[yaserde(rename = "DERControlBase")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[cfg_attr(
-    feature = "conn_point",
+    feature = "csip_aus",
     yaserde(namespace = "csipaus: https://csipaus.org/ns")
 )]
 pub struct DERControlBase {
@@ -960,13 +960,13 @@ pub struct DERControlBase {
     pub op_mod_watt_var: Option<DERCurveLink>,
 
     /// This is the constraint on the imported active power at the connection point.
-    #[cfg(feature = "doe")]
+    #[cfg(feature = "csip_aus")]
     #[yaserde(rename = "opModImpLimW")]
     #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
     pub op_mod_imp_lim_w: Option<ActivePower>,
 
     /// This is the constraint on the exported active power at the connection point.
-    #[cfg(feature = "doe")]
+    #[cfg(feature = "csip_aus")]
     #[yaserde(rename = "opModExpLimW")]
     #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
     pub op_mod_exp_lim_w: Option<ActivePower>,
@@ -974,7 +974,7 @@ pub struct DERControlBase {
     /// This is a constraint on the maxium allowable discharge rate, in Watts,
     /// specifically for a single physical device (or aggregation of devices,
     /// excluding uncontrolled devices) such as an EV charge station.
-    #[cfg(feature = "doe")]
+    #[cfg(feature = "csip_aus")]
     #[yaserde(rename = "opModGenLimW")]
     #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
     pub op_mod_gen_lim_w: Option<ActivePower>,
@@ -982,7 +982,7 @@ pub struct DERControlBase {
     /// This is a constraint on the maximum allowable charge rate, in Watts,
     /// specifically for a single physical device (or aggregation of devices,
     /// excluding uncontrolled devices) such as an EV charge station.
-    #[cfg(feature = "doe")]
+    #[cfg(feature = "csip_aus")]
     #[yaserde(rename = "opModLoadLimW")]
     #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
     pub op_mod_load_lim_w: Option<ActivePower>,
@@ -998,14 +998,14 @@ pub struct DERControlBase {
 impl DERControlBase {
     /// Determine if two DERControlBase instances target the same set of controls by whether they contain the same optional fields.
     pub fn same_target(&self, other: &Self) -> bool {
-        #[cfg(feature = "doe")]
+        #[cfg(feature = "csip_aus")]
         let extensions = {
             self.op_mod_imp_lim_w.is_some() == other.op_mod_imp_lim_w.is_some()
                 && self.op_mod_exp_lim_w.is_some() == other.op_mod_exp_lim_w.is_some()
                 && self.op_mod_gen_lim_w.is_some() == other.op_mod_gen_lim_w.is_some()
                 && self.op_mod_load_lim_w.is_some() == other.op_mod_load_lim_w.is_some()
         };
-        #[cfg(not(feature = "doe"))]
+        #[cfg(not(feature = "csip_aus"))]
         let extensions = true;
         self.op_mod_connect.is_some() == other.op_mod_connect.is_some()
             && self.op_mod_energize.is_some() == other.op_mod_energize.is_some()
@@ -1216,63 +1216,63 @@ impl Validate for DERControlList {}
 
 bitflags! {
     /// Control modes supported by the DER.  Bit positions SHALL be defined as follows:
-    //
+    ///
     /// 0 - Charge mode
-    //
+    ///
     /// 1 - Discharge mode
-    //
+    ///
     /// 2 - opModConnect (Connect / Disconnect - implies galvanic isolation)
-    //
+    ///
     /// 3 - opModEnergize (Energize / De-Energize)
-    //
+    ///
     /// 4 - opModFixedPFAbsorbW (Fixed Power Factor Setpoint when absorbing active power)
-    //
+    ///
     /// 5 - opModFixedPFInjectW (Fixed Power Factor Setpoint when injecting active power)
-    //
+    ///
     /// 6 - opModFixedVar (Reactive Power Setpoint)
-    //
+    ///
     /// 7 - opModFixedW (Charge / Discharge Setpoint)
-    //
+    ///
     /// 8 - opModFreqDroop (Frequency-Watt Parameterized Mode)
-    //
+    ///
     /// 9 - opModFreqWatt (Frequency-Watt Curve Mode)
-    //
+    ///
     /// 10 - opModHFRTMayTrip (High Frequency Ride Through, May Trip Mode)
-    //
+    ///
     /// 11 - opModHFRTMustTrip (High Frequency Ride Through, Must Trip Mode)
-    //
+    ///
     /// 12 - opModHVRTMayTrip (High Voltage Ride Through, May Trip Mode)
-    //
+    ///
     /// 13 - opModHVRTMomentaryCessation (High Voltage Ride Through, Momentary Cessation Mode)
-    //
+    ///
     /// 14 - opModHVRTMustTrip (High Voltage Ride Through, Must Trip Mode)
-    //
+    ///
     /// 15 - opModLFRTMayTrip (Low Frequency Ride Through, May Trip Mode)
-    //
+    ///
     /// 16 - opModLFRTMustTrip (Low Frequency Ride Through, Must Trip Mode)
-    //
+    ///
     /// 17 - opModLVRTMayTrip (Low Voltage Ride Through, May Trip Mode)
-    //
+    ///
     /// 18 - opModLVRTMomentaryCessation (Low Voltage Ride Through, Momentary Cessation Mode)
-    //
+    ///
     /// 19 - opModLVRTMustTrip (Low Voltage Ride Through, Must Trip Mode)
-    //
+    ///
     /// 20 - opModMaxLimW (Maximum Active Power)
-    //
+    ///
     /// 21 - opModTargetVar (Target Reactive Power)
-    //
+    ///
     /// 22 - opModTargetW (Target Active Power)
-    //
+    ///
     /// 23 - opModVoltVar (Volt-Var Mode)
-    //
+    ///
     /// 24 - opModVoltWatt (Volt-Watt Mode)
-    //
+    ///
     /// 25 - opModWattPF (Watt-PowerFactor Mode)
-    //
+    ///
     /// 26 - opModWattVar (Watt-Var Mode)
-    //
+    ///
     /// All other values reserved.
-    //
+    ///
     #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
     pub struct DERControlType: u32 { // HexBinary32
         const ChargeMode = 1;
@@ -1305,7 +1305,7 @@ bitflags! {
     }
 }
 
-#[cfg(feature = "doe")]
+#[cfg(feature = "csip_aus")]
 bitflags! {
     #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
     pub struct DOEControlType: u16 { // HexBinary 16
@@ -1996,11 +1996,17 @@ pub struct VoltageRMS {
 impl Validate for VoltageRMS {}
 
 /// DER ConnectStatus value (bitmap):
+///
 /// 0 - Connected
+///
 /// 1 - Available
+///
 /// 2 - Operating
+///
 /// 3 - Test
+///
 /// 4 - Fault / Error
+///
 /// All other values reserved.
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ConnectStatusType")]
@@ -2187,7 +2193,7 @@ pub enum StorageModeStatusValue {
 
 impl Validate for StorageModeStatusType {}
 
-#[cfg(not(feature = "doe"))]
+#[cfg(not(feature = "csip_aus"))]
 #[test]
 fn dercap_no_csip_aus() {
     let expected = r#"<DERCapability xmlns="urn:ieee:std:2030.5:ns">
@@ -2203,7 +2209,7 @@ fn dercap_no_csip_aus() {
     assert_eq!(expected, out);
 }
 
-#[cfg(feature = "doe")]
+#[cfg(feature = "csip_aus")]
 #[test]
 fn csip_aus_dercap() {
     let expected = r#"<DERCapability xmlns="urn:ieee:std:2030.5:ns" xmlns:csipaus="https://csipaus.org/ns">
@@ -2220,7 +2226,7 @@ fn csip_aus_dercap() {
     assert_eq!(expected, out);
 }
 
-#[cfg(not(feature = "doe"))]
+#[cfg(not(feature = "csip_aus"))]
 #[test]
 fn dercontrolbase_no_csip_aus() {
     let expected = r#"<DERControlBase xmlns="urn:ieee:std:2030.5:ns" />"#;
@@ -2229,7 +2235,7 @@ fn dercontrolbase_no_csip_aus() {
     assert_eq!(expected, out);
 }
 
-#[cfg(feature = "doe")]
+#[cfg(feature = "csip_aus")]
 #[test]
 fn csip_aus_dercontrolbase() {
     let expected = r#"<DERControlBase xmlns="urn:ieee:std:2030.5:ns" xmlns:csipaus="https://csipaus.org/ns">

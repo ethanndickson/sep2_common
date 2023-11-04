@@ -2,7 +2,7 @@
 pub mod billing;
 #[cfg(feature = "configuration")]
 pub mod configuration;
-#[cfg(feature = "conn_point")]
+#[cfg(feature = "csip_aus")]
 pub mod conn_point;
 #[cfg(feature = "dcap")]
 pub mod dcap;

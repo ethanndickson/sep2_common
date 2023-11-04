@@ -10,7 +10,7 @@ use yaserde::{YaDeserialize, YaSerialize};
 #[cfg(test)]
 use crate::serialize;
 
-#[cfg(feature = "conn_point")]
+#[cfg(feature = "csip_aus")]
 use super::conn_point::ConnectionPointLink;
 
 use super::{
@@ -184,7 +184,7 @@ pub enum OpState {
 #[yaserde(rename = "EndDevice")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[cfg_attr(
-    feature = "conn_point",
+    feature = "csip_aus",
     yaserde(namespace = "csipaus: https://csipaus.org/ns")
 )]
 pub struct EndDevice {
@@ -261,7 +261,7 @@ pub struct EndDevice {
     #[yaserde(rename = "PowerStatusLink")]
     pub power_status_link: Option<PowerStatusLink>,
 
-    #[cfg(feature = "conn_point")]
+    #[cfg(feature = "csip_aus")]
     #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
     #[yaserde(rename = "ConnectionPointLink ")]
     pub connection_point_link: Option<ConnectionPointLink>,
@@ -324,7 +324,7 @@ impl Validate for EndDevice {}
 #[yaserde(rename = "EndDeviceList")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[cfg_attr(
-    feature = "conn_point",
+    feature = "csip_aus",
     yaserde(namespace = "csipaus: https://csipaus.org/ns")
 )]
 pub struct EndDeviceList {
@@ -495,7 +495,7 @@ pub struct Temperature {
 
 impl Validate for Temperature {}
 
-#[cfg(not(feature = "conn_point"))]
+#[cfg(not(feature = "csip_aus"))]
 #[test]
 fn csip_aus_edev_no_namespace() {
     let expected = r#"<EndDevice xmlns="urn:ieee:std:2030.5:ns">
@@ -507,7 +507,7 @@ fn csip_aus_edev_no_namespace() {
     assert_eq!(expected, out);
 }
 
-#[cfg(feature = "conn_point")]
+#[cfg(feature = "csip_aus")]
 #[test]
 fn csip_aus_edev_namespace() {
     let expected = r#"<EndDevice xmlns="urn:ieee:std:2030.5:ns" xmlns:csipaus="https://csipaus.org/ns">

@@ -1,6 +1,6 @@
-//! ConnectionPoint Package
+//! AUS-CSIP Connection Point Package
 //!
-//! Extension forming part of the Australian Common Smart Inverter Profile
+//!
 //!
 //! NOT used outside of Australian CSIP
 
