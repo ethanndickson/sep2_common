@@ -7,6 +7,9 @@ use sep2_common_derive::{
 
 use yaserde::{YaDeserialize, YaSerialize};
 
+#[cfg(feature = "conn_point")]
+use super::conn_point::ConnectionPointLink;
+
 use super::{
     links::{
         ConfigurationLink, DERListLink, DeviceInformationLink, DeviceStatusLink, FileStatusLink,
@@ -250,6 +253,11 @@ pub struct EndDevice {
 
     #[yaserde(rename = "PowerStatusLink")]
     pub power_status_link: Option<PowerStatusLink>,
+
+    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
+    #[yaserde(rename = "ConnectionPointLink ")]
+    #[cfg(feature = "conn_point")]
+    pub connection_point_link: Option<ConnectionPointLink>,
 
     /// Short form of device identifier, WITH the checksum digit. See the
     /// Security section for additional details.

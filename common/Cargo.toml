@@ -38,6 +38,8 @@ billing = ["metering_mirror"]
 prepayment = ["metering"]
 flow_reservation = ["der"]
 der = ["response"]
+aus_csip = ["der","conn_point","edev"]
+conn_point = ["edev"]
 all = [
     "examples",
     "dcap",
@@ -61,4 +63,6 @@ all = [
     "prepayment",
     "flow_reservation",
     "der",
+    "conn_point",
+    "aus_csip"
 ]
