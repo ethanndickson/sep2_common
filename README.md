@@ -23,6 +23,7 @@ It can be used with [`sep2_client`](https://github.com/ethanndickson/IEEE-2030.5
 - [x] Rust Procedural Macros to derive these traits on the appropriate types. 
 - [x] [De]?serialising sanity tests (auto-generated)
 - [x] Function Set List Ordering
+- [x] CSIP-AUS Extension Resources & Attributes
 - [ ] Correctness / Spec Adherence Tests 
 ### Future
 - [ ] EXI Serialising & Deserialising all resources (Requires a Rust EXI Library)
