@@ -176,6 +176,33 @@ bitflags! {
     }
 }
 
+bitflags! {
+    /// List of codes indicating the quality of the reading, using specification:
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
+    pub struct QualityFlags: u16 { // HexBinary16
+        /// Bit 0 - valid: data that has gone through all required validation checks
+        /// and either passed them all or has been verified
+        const Valid = 1;
+        /// Bit 1 - manually edited: Replaced or approved by a human
+        const ManuallyEdited = 2;
+        /// Bit 2 - estimated using reference day: data value was replaced by a
+        /// machine computed value based on analysis of historical data using the
+        /// same type of measurement.
+        const EstimatedRef = 8;
+        /// Bit 3 - estimated using linear interpolation: data value was computed
+        /// using linear interpolation based on the readings before and after it
+        const EstimatedLinear = 16;
+        /// Bit 4 - questionable: data that has failed one or more checks
+        const Questionable = 32;
+        /// Bit 5 - derived: data that has been calculated (using logic or
+        /// mathematical operations), not necessarily measured directly
+        const Derived = 64;
+        /// Bit 6 - projected (forecast): data that has been calculated as a
+        /// Projection or forecast of future readings
+        const Projected = 128;
+    }
+}
+
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, PrimitiveYaSerde)]
 pub struct DstRuleType(u32);
 

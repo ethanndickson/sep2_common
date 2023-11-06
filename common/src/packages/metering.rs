@@ -17,8 +17,8 @@ use super::{
     types::{
         AccumulationBehaviourType, CommodityType, ConsumptionBlockType, DataQualifierType,
         DateTimeInterval, FlowDirectionType, KindType, MRIDType, PhaseCode,
-        PowerOfTenMultiplierType, RoleFlagsType, ServiceKind, SubscribableType, TOUType,
-        UnitValueType, UomType, UsagePointStatus, VersionType,
+        PowerOfTenMultiplierType, QualityFlags, RoleFlagsType, ServiceKind, SubscribableType,
+        TOUType, UnitValueType, UomType, UsagePointStatus, VersionType,
     },
 };
 
@@ -165,7 +165,7 @@ pub struct Reading {
     /// Bit 6 - projected (forecast): data that has been calculated as a
     /// projection or forecast of future readings
     #[yaserde(rename = "qualityFlags")]
-    pub quality_flags: Option<HexBinary16>,
+    pub quality_flags: Option<QualityFlags>,
 
     /// The time interval associated with the reading. If not specified, then
     /// defaults to the intervalLength specified in the associated ReadingType.

@@ -12,13 +12,14 @@ use crate::packages::{
     objects::EventStatus,
     primitives::{HexBinary160, String32, Uint32},
     types::{
-        DateTimeInterval, MRIDType, OneHourRangeType, SubscribableType, TimeType, VersionType,
+        DateTimeInterval, MRIDType, OneHourRangeType, QualityFlags, SubscribableType, TimeType,
+        VersionType,
     },
 };
 
 #[cfg(feature = "metering_mirror")]
 use crate::packages::{
-    primitives::{HexBinary16, Int48},
+    primitives::Int48,
     types::{ConsumptionBlockType, RoleFlagsType, ServiceKind, TOUType},
 };
 
@@ -222,7 +223,7 @@ pub trait SEMeterReadingBase: SEIdentifiedObject {
 #[cfg(feature = "metering_mirror")]
 pub trait SEReadingBase: SEResource {
     fn consumption_block(&self) -> Option<ConsumptionBlockType>;
-    fn quality_flags(&self) -> Option<HexBinary16>;
+    fn quality_flags(&self) -> Option<QualityFlags>;
     fn time_period(&self) -> Option<&DateTimeInterval>;
     fn tou_tier(&self) -> Option<TOUType>;
     fn value(&self) -> Option<Int48>;
