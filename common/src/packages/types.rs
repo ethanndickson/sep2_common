@@ -1,6 +1,6 @@
 /// File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 /// Types should eventually be put in a module corresponding to their package
-use anyhow::anyhow;
+use anyhow::Context;
 use bitflags::bitflags;
 use std::fmt::Display;
 use std::str::FromStr;
@@ -384,9 +384,7 @@ impl FromStr for OneHourRangeType {
         s.parse()
             .ok()
             .and_then(OneHourRangeType::new)
-            .ok_or(anyhow!(
-                "OneHourRangeType value must be between -3600 and 3600"
-            ))
+            .context("OneHourRangeType value must be between -3600 and 3600")
     }
 }
 
@@ -423,7 +421,7 @@ impl FromStr for Percent {
         s.parse()
             .ok()
             .and_then(Percent::new)
-            .ok_or(anyhow!("Percent value must be between 0 and 10000"))
+            .context("Percent value must be between 0 and 10000")
     }
 }
 
@@ -480,7 +478,7 @@ impl FromStr for PINType {
         s.parse()
             .ok()
             .and_then(PINType::new)
-            .ok_or(anyhow!("PINType value must be between 0 and 999,999"))
+            .context("PINType value must be between 0 and 999,999")
     }
 }
 
@@ -604,7 +602,7 @@ impl FromStr for SFDIType {
         s.parse()
             .ok()
             .and_then(SFDIType::new)
-            .ok_or(anyhow!("SFDIType value must be between -10,000 and 10,000"))
+            .context("SFDIType value must be between -10,000 and 10,000")
     }
 }
 
@@ -634,9 +632,10 @@ impl FromStr for SignedPercent {
     type Err = anyhow::Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        s.parse().ok().and_then(SignedPercent::new).ok_or(anyhow!(
-            "SignedPercent value must be between -10,000 and 10,000"
-        ))
+        s.parse()
+            .ok()
+            .and_then(SignedPercent::new)
+            .context("SignedPercent value must be between -10,000 and 10,000")
     }
 }
 
