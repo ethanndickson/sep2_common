@@ -15,9 +15,9 @@ use super::{
         ProjectionReadingListLink, ReadingTypeLink, ServiceSupplierLink, TargetReadingListLink,
         TariffProfileLink, UsagePointLink,
     },
-    primitives::{HexBinary16, Int32, Int48, String20, String32, String42, Uint16, Uint32},
+    primitives::{Int32, Int48, String20, String32, String42, Uint16, Uint32},
     types::{
-        ConsumptionBlockType, DateTimeInterval, MRIDType, PowerOfTenMultiplierType,
+        ConsumptionBlockType, DateTimeInterval, MRIDType, PowerOfTenMultiplierType, QualityFlags,
         SubscribableType, TOUType, TimeType, VersionType,
     },
 };
@@ -184,7 +184,7 @@ pub struct BillingReading {
     /// Bit 6 - projected (forecast): data that has been calculated as a
     // Projection or forecast of future readings
     #[yaserde(rename = "qualityFlags")]
-    pub quality_flags: Option<HexBinary16>,
+    pub quality_flags: Option<QualityFlags>,
 
     /// The time interval associated with the reading. If not specified, then
     /// defaults to the intervalLength specified in the associated ReadingType.

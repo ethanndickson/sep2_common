@@ -1,6 +1,6 @@
 /// File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 /// Types should eventually be put in a module corresponding to their package
-use anyhow::anyhow;
+use anyhow::Context;
 use bitflags::bitflags;
 use std::fmt::Display;
 use std::str::FromStr;
@@ -173,6 +173,33 @@ bitflags! {
         const CombinedPvAndStorage = 8388608;
         const OtherGenerationSystem = 16777216;
         const OtherStorageSystem = 33554432;
+    }
+}
+
+bitflags! {
+    /// List of codes indicating the quality of the reading, using specification:
+    #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
+    pub struct QualityFlags: u16 { // HexBinary16
+        /// Bit 0 - valid: data that has gone through all required validation checks
+        /// and either passed them all or has been verified
+        const Valid = 1;
+        /// Bit 1 - manually edited: Replaced or approved by a human
+        const ManuallyEdited = 2;
+        /// Bit 2 - estimated using reference day: data value was replaced by a
+        /// machine computed value based on analysis of historical data using the
+        /// same type of measurement.
+        const EstimatedRef = 8;
+        /// Bit 3 - estimated using linear interpolation: data value was computed
+        /// using linear interpolation based on the readings before and after it
+        const EstimatedLinear = 16;
+        /// Bit 4 - questionable: data that has failed one or more checks
+        const Questionable = 32;
+        /// Bit 5 - derived: data that has been calculated (using logic or
+        /// mathematical operations), not necessarily measured directly
+        const Derived = 64;
+        /// Bit 6 - projected (forecast): data that has been calculated as a
+        /// Projection or forecast of future readings
+        const Projected = 128;
     }
 }
 
@@ -357,9 +384,7 @@ impl FromStr for OneHourRangeType {
         s.parse()
             .ok()
             .and_then(OneHourRangeType::new)
-            .ok_or(anyhow!(
-                "OneHourRangeType value must be between -3600 and 3600"
-            ))
+            .context("OneHourRangeType value must be between -3600 and 3600")
     }
 }
 
@@ -396,7 +421,7 @@ impl FromStr for Percent {
         s.parse()
             .ok()
             .and_then(Percent::new)
-            .ok_or(anyhow!("Percent value must be between 0 and 10000"))
+            .context("Percent value must be between 0 and 10000")
     }
 }
 
@@ -453,7 +478,7 @@ impl FromStr for PINType {
         s.parse()
             .ok()
             .and_then(PINType::new)
-            .ok_or(anyhow!("PINType value must be between 0 and 999,999"))
+            .context("PINType value must be between 0 and 999,999")
     }
 }
 
@@ -577,7 +602,7 @@ impl FromStr for SFDIType {
         s.parse()
             .ok()
             .and_then(SFDIType::new)
-            .ok_or(anyhow!("SFDIType value must be between -10,000 and 10,000"))
+            .context("SFDIType value must be between -10,000 and 10,000")
     }
 }
 
@@ -607,9 +632,10 @@ impl FromStr for SignedPercent {
     type Err = anyhow::Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        s.parse().ok().and_then(SignedPercent::new).ok_or(anyhow!(
-            "SignedPercent value must be between -10,000 and 10,000"
-        ))
+        s.parse()
+            .ok()
+            .and_then(SignedPercent::new)
+            .context("SignedPercent value must be between -10,000 and 10,000")
     }
 }
 

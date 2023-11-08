@@ -1,5 +1,5 @@
 use crate::traits::{SEList, SEResource, SESubscriptionBase, Validate};
-use anyhow::{anyhow, bail, Result};
+use anyhow::{bail, Context, Result};
 use sep2_common_derive::{SEList, SEResource, SESubscriptionBase};
 use xml::EventReader;
 use yaserde::{YaDeserialize, YaSerialize};
@@ -175,8 +175,10 @@ impl Validate for SubscriptionList {}
     Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SESubscriptionBase, SEResource,
 )]
 #[yaserde(rename = "Notification")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[yaserde(namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance")]
+#[yaserde(
+    namespace = "urn:ieee:std:2030.5:ns",
+    namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance"
+)]
 pub struct Notification<T: SEResource> {
     /// The new location of the resource, if moved. This attribute SHALL be a
     /// fully-qualified absolute URI, not a relative reference.
@@ -238,7 +240,7 @@ pub fn get_notif_type(notif_xml: &str) -> Result<String> {
                 return Ok(attributes
                     .iter()
                     .find(|a| a.name.local_name == "type")
-                    .ok_or(anyhow!("Notification did not include a type annotation"))?
+                    .context("Notification did not include a type annotation")?
                     .value
                     .clone())
             }
@@ -252,8 +254,10 @@ impl<T: SEResource> Validate for Notification<T> {}
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "NotificationList")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
-#[yaserde(namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance")]
+#[yaserde(
+    namespace = "urn:ieee:std:2030.5:ns",
+    namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance"
+)]
 pub struct NotificationList<T: SEResource + Eq> {
     #[yaserde(rename = "Notification")]
     pub notification: Vec<Notification<T>>,

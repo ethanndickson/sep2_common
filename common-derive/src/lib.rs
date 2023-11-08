@@ -432,7 +432,7 @@ pub fn derive_reading_base(input: TokenStream) -> TokenStream {
             }
 
             #[inline(always)]
-            fn quality_flags(&self) -> Option<HexBinary16> {
+            fn quality_flags(&self) -> Option<QualityFlags> {
                 self.quality_flags
             }
 

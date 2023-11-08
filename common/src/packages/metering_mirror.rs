@@ -9,10 +9,10 @@ use yaserde::{YaDeserialize, YaSerialize};
 
 use super::{
     metering::{Reading, ReadingType},
-    primitives::{HexBinary16, HexBinary160, Int48, String32, Uint32},
+    primitives::{HexBinary160, Int48, String32, Uint32},
     types::{
-        ConsumptionBlockType, DateTimeInterval, MRIDType, RoleFlagsType, ServiceKind, TOUType,
-        TimeType, UsagePointStatus, VersionType,
+        ConsumptionBlockType, DateTimeInterval, MRIDType, QualityFlags, RoleFlagsType, ServiceKind,
+        TOUType, TimeType, UsagePointStatus, VersionType,
     },
 };
 
@@ -315,7 +315,7 @@ pub struct ReadingBase {
     /// Bit 6 - projected (forecast): data that has been calculated as a
     /// projection or forecast of future readings
     #[yaserde(rename = "qualityFlags")]
-    pub quality_flags: Option<HexBinary16>,
+    pub quality_flags: Option<QualityFlags>,
 
     /// The time interval associated with the reading. If not specified, then
     /// defaults to the intervalLength specified in the associated ReadingType.
