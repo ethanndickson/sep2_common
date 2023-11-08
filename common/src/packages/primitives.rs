@@ -16,7 +16,7 @@ use crate::traits::Validate;
 /// We require newtypes for non-standard integer types regardless.
 
 /// Unsigned integer, max inclusive 255 (2^8-1)
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
 pub struct Uint8(pub u8);
 
 impl Deref for Uint8 {
@@ -29,7 +29,7 @@ impl Deref for Uint8 {
 
 impl Validate for Uint8 {}
 /// Unsigned integer, max inclusive 65535 (2^16-1)
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
 pub struct Uint16(pub u16);
 
 impl Deref for Uint16 {
@@ -42,7 +42,7 @@ impl Deref for Uint16 {
 
 impl Validate for Uint16 {}
 /// Unsigned integer, max inclusive 4294967295 (2^32-1)
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
 pub struct Uint32(pub u32);
 
 impl Uint32 {
@@ -53,7 +53,7 @@ impl Uint32 {
 
 impl Validate for Uint32 {}
 /// Unsigned integer, max inclusive 1099511627775 (2^40-1)
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
 pub struct Uint40(pub u64);
 
 impl Deref for Uint40 {
@@ -74,7 +74,7 @@ impl Validate for Uint40 {
 }
 
 /// Unsigned integer, max inclusive 281474976710655 (2^48-1)
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
 pub struct Uint48(pub u64);
 
 impl Deref for Uint48 {
@@ -95,7 +95,7 @@ impl Validate for Uint48 {
 }
 
 /// Unsigned integer, max inclusive 18446744073709551615 (2^64-1)
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
 pub struct Uint64(pub u64);
 
 impl Deref for Uint64 {
@@ -108,7 +108,7 @@ impl Deref for Uint64 {
 
 impl Validate for Uint64 {}
 /// Signed integer, min -128 max +127
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
 pub struct Int8(pub i8);
 
 impl Deref for Int8 {
@@ -121,7 +121,7 @@ impl Deref for Int8 {
 
 impl Validate for Int8 {}
 /// Signed integer, min -32768 max +32767
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
 pub struct Int16(pub i16);
 
 impl Deref for Int16 {
@@ -135,7 +135,7 @@ impl Deref for Int16 {
 impl Validate for Int16 {}
 /// Signed integer, max inclusive 2147483647 (2^31), min inclusive -2147483647
 /// (same as xs:int)
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
 pub struct Int32(pub i32);
 
 impl Deref for Int32 {
@@ -149,7 +149,7 @@ impl Deref for Int32 {
 impl Validate for Int32 {}
 /// Signed integer, max inclusive 140737488355328 (2^47), min inclusive
 /// -140737488355328
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
 pub struct Int48(pub i64);
 
 impl Deref for Int48 {
@@ -174,7 +174,7 @@ impl Validate for Int48 {
 
 /// Signed integer, max inclusive 9223372036854775807 (2^63), min inclusive
 /// -9223372036854775808 (same as xs:long)
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
 pub struct Int64(pub i64);
 
 impl Int64 {
@@ -189,7 +189,7 @@ impl Validate for Int64 {}
 /// bit 0, or the least significant bit, goes on the right. Note that hexBinary
 /// requires pairs of hex characters, so an odd number of characters requires a
 /// leading "0".
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
+#[derive(Default, Hash, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct HexBinary8(pub u8);
 
 impl Validate for HexBinary8 {}
@@ -214,7 +214,7 @@ impl FromStr for HexBinary8 {
 /// applicable, bit 0, or the least significant bit, goes on the right. Note that
 /// hexBinary requires pairs of hex characters, so an odd number of characters
 /// requires a leading "0".
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct HexBinary16(pub u16);
 
 impl Validate for HexBinary16 {}
@@ -239,7 +239,7 @@ impl FromStr for HexBinary16 {
 /// applicable, bit 0, or the least significant bit, goes on the right. Note that
 /// hexBinary requires pairs of hex characters, so an odd number of characters
 /// requires a leading "0".
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
+#[derive(Default, Hash, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct HexBinary32(pub u32);
 
 impl Validate for HexBinary32 {}
@@ -264,7 +264,7 @@ impl FromStr for HexBinary32 {
 /// applicable, bit 0, or the least significant bit, goes on the right. Note that
 /// hexBinary requires pairs of hex characters, so an odd number of characters
 /// requires a leading "0".
-#[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
+#[derive(Default, Hash, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct HexBinary48(pub u64);
 
 impl Validate for HexBinary48 {
@@ -299,7 +299,7 @@ impl FromStr for HexBinary48 {
 /// applicable, bit 0, or the least significant bit, goes on the right. Note that
 /// hexBinary requires pairs of hex characters, so an odd number of characters
 /// requires a leading "0".
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct HexBinary64(pub u64);
 
 impl Validate for HexBinary64 {}
@@ -347,7 +347,7 @@ impl FromStr for HexBinary128 {
     }
 }
 
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct HexBinary160(pub [u8; 20]); // TODO: Can this use a Cow?
 
 impl Validate for HexBinary160 {}
@@ -400,7 +400,7 @@ impl FromStr for HexBinary160 {
     }
 }
 
-#[derive(Default, PartialEq, Eq, Debug, Clone, DefaultYaSerde)]
+#[derive(Default, Hash, PartialEq, Eq, Debug, Clone, DefaultYaSerde)]
 pub struct LFDI(pub HexBinary160);
 
 impl Validate for LFDI {}
@@ -437,7 +437,7 @@ impl FromStr for LFDI {
 /// implementations SHALL reduce the length of strings using multi-byte
 /// characters so that the string may be stored using "maxLength" octets in the
 /// given encoding.
-#[derive(Default, PartialEq, Eq, PartialOrd, Ord, Debug, Clone, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, Eq, PartialOrd, Ord, Debug, Clone, PrimitiveYaSerde)]
 pub struct String6(pub String);
 
 impl Validate for String6 {
@@ -456,7 +456,7 @@ impl Validate for String6 {
 /// implementations SHALL reduce the length of strings using multi-byte
 /// characters so that the string may be stored using "maxLength" octets in the
 /// given encoding.
-#[derive(Default, PartialEq, Eq, PartialOrd, Ord, Debug, Clone, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, Eq, PartialOrd, Ord, Debug, Clone, PrimitiveYaSerde)]
 pub struct String16(pub String);
 
 impl Validate for String16 {
@@ -475,7 +475,7 @@ impl Validate for String16 {
 /// implementations SHALL reduce the length of strings using multi-byte
 /// characters so that the string may be stored using "maxLength" octets in the
 /// given encoding.
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, PrimitiveYaSerde)]
 pub struct String20(pub String);
 
 impl Validate for String20 {
@@ -494,7 +494,7 @@ impl Validate for String20 {
 /// implementations SHALL reduce the length of strings using multi-byte
 /// characters so that the string may be stored using "maxLength" octets in the
 /// given encoding.
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, PrimitiveYaSerde)]
 pub struct String32(pub String);
 
 impl Validate for String32 {
@@ -513,7 +513,7 @@ impl Validate for String32 {
 /// implementations SHALL reduce the length of strings using multi-byte
 /// characters so that the string may be stored using "maxLength" octets in the
 /// given encoding.
-#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, PrimitiveYaSerde)]
 pub struct String42(pub String);
 
 impl Validate for String42 {
@@ -532,7 +532,7 @@ impl Validate for String42 {
 /// internal storage, implementations SHALL reduce the length of strings using
 /// multi-byte characters so that the string may be stored using "maxLength"
 /// octets in the given encoding.
-#[derive(Default, PartialEq, Eq, Debug, Clone, PrimitiveYaSerde)]
+#[derive(Default, Hash, PartialEq, Eq, Debug, Clone, PrimitiveYaSerde)]
 pub struct String192(pub String);
 
 impl Validate for String192 {
