@@ -6,11 +6,11 @@ It can be used with [`sep2_client`](https://github.com/ethanndickson/IEEE-2030.5
 
 # Contents
 
-`common` - Implementation of IEEE 2030.5 data types
+[`common`](common) - Implementation of IEEE 2030.5 data types
 
-`common-derive` - Rust Procedural Macros providing common interfaces on IEEE 2030.5 data types 
+[`common-derive`](common-derive) - Rust Procedural Macros providing common interfaces on IEEE 2030.5 data types 
 
-`resources` - IEEE 2030.5 associated resources & documentation published `2018-03-01`
+[`resources`](resources) - IEEE 2030.5 associated resources & documentation published `2018-03-01`
 
 
 ### Core Features
