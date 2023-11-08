@@ -54,6 +54,7 @@ impl<T> SEType for T where
 }
 
 /// A top-level IEEE 2030.5 Resource.
+///
 /// An IEEE 2030.5 Server exposes resources.
 /// IEEE 2030.5 Clients retrieve, update, create and delete resources on servers.
 /// Implemented by all types whose base type is [`Resource`]

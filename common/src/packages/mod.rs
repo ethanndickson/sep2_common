@@ -1,3 +1,5 @@
+//! Packages of IEEE 2030.5 Resources
+
 #[cfg(feature = "billing")]
 pub mod billing;
 #[cfg(feature = "configuration")]

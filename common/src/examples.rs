@@ -1,4 +1,4 @@
-//! Example serialisations of IEEE 2030.5 Resources, copied from the specification - locked behind the
+//! Example IEEE 2030.5 Resources as XML. Copied from the specifications with some indices renamed.
 
 pub const ED_16_01_08: &str = r#"<EndDevice href="/edev/3" subscribable="0" xmlns="urn:ieee:std:2030.5:ns"><ConfigurationLink href="/edev/3/cfg"/><DeviceInformationLink href="/edev/3/di"/><DeviceStatusLink href="/edev/3/ds"/><FileStatusLink href="/edev/3/fs"/><PowerStatusLink href="/edev/3/ps"/><sFDI>987654321005</sFDI><changedTime>1379905200</changedTime><FunctionSetAssignmentsListLink all="3" href="/edev/3/fsal"/><RegistrationLink href="/edev/3/reg"/><SubscriptionListLink all="0" href="/edev/3/subl"/></EndDevice>"#;
 pub const REG_16_01_10: &str = r#"<Registration href="/edev/3/reg" xmlns="urn:ieee:std:2030.5:ns"><dateTimeRegistered>1364774400</dateTimeRegistered><pIN>123455</pIN></Registration>"#;
