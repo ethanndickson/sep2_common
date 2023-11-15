@@ -156,8 +156,9 @@ pub trait SEList: SEResource {
     fn list_mut(&mut self) -> &mut Vec<Self::Inner>;
 
     /// Add an item to the contained list, maintaining invariants
-    fn push(&mut self, item: Self::Inner) {
+    fn add(&mut self, item: Self::Inner) {
         self.list_mut().push(item);
+        // 'very fast in cases where the slice is nearly sorted'
         self.list_mut().sort();
         *self.all_mut() = Uint32(self.all().get() + 1);
     }

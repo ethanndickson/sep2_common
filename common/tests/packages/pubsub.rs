@@ -89,8 +89,8 @@ fn notification_list_default() {
 </NotificationList>"#;
     let res: Notification<Reading> = create_notif_example();
     let mut list: NotificationList<Reading> = Default::default();
-    list.push(res.clone());
-    list.push(res);
+    list.add(res.clone());
+    list.add(res);
     let out = serialize(&list).unwrap();
     assert_eq!(expected, out);
 }
