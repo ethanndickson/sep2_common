@@ -12,15 +12,14 @@ use crate::packages::{
     objects::EventStatus,
     primitives::{HexBinary160, String32, Uint32},
     types::{
-        DateTimeInterval, MRIDType, OneHourRangeType, QualityFlags, SubscribableType, TimeType,
-        VersionType,
+        DateTimeInterval, MRIDType, OneHourRangeType, SubscribableType, TimeType, VersionType,
     },
 };
 
 #[cfg(feature = "metering_mirror")]
 use crate::packages::{
     primitives::Int48,
-    types::{ConsumptionBlockType, RoleFlagsType, ServiceKind, TOUType},
+    types::{ConsumptionBlockType, QualityFlags, RoleFlagsType, ServiceKind, TOUType},
 };
 
 #[cfg(feature = "billing")]

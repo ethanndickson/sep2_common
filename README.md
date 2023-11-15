@@ -27,5 +27,3 @@ It can be used with [`sep2_client`](https://github.com/ethanndickson/IEEE-2030.5
 - [ ] Correctness / Spec Adherence Tests 
 ### Future
 - [ ] EXI Serialising & Deserialising all resources (Requires a Rust EXI Library)
-### Broken
-- pubsub::NotificationList: Serializing + Deserializing
