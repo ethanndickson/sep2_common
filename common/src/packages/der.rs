@@ -1305,6 +1305,8 @@ bitflags! {
     }
 }
 
+impl Validate for DERControlType {}
+
 #[cfg(feature = "csip_aus")]
 bitflags! {
     #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]

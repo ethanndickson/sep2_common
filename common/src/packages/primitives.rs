@@ -7,7 +7,7 @@ use std::{
 use yaserde::{DefaultYaSerde, PrimitiveYaSerde};
 
 #[cfg(test)]
-use yaserde::{de::from_str, ser::to_string};
+use crate::{deserialize, serialize};
 
 use crate::traits::Validate;
 
@@ -550,56 +550,56 @@ impl Validate for String192 {
 #[test]
 fn default_hexbinary8() {
     let orig = HexBinary8::default();
-    let new: HexBinary8 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: HexBinary8 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_hexbinary16() {
     let orig = HexBinary16::default();
-    let new: HexBinary16 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: HexBinary16 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_hexbinary32() {
     let orig = HexBinary32::default();
-    let new: HexBinary32 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: HexBinary32 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_hexbinary48() {
     let orig = HexBinary48::default();
-    let new: HexBinary48 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: HexBinary48 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_hexbinary64() {
     let orig = HexBinary64::default();
-    let new: HexBinary64 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: HexBinary64 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_hexbinary128() {
     let orig = HexBinary128::default();
-    let new: HexBinary128 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: HexBinary128 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_hexbinary160() {
     let orig = HexBinary160::default();
-    let new: HexBinary160 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: HexBinary160 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_lfdi() {
     let orig = LFDI::default();
-    let new: LFDI = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: LFDI = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
@@ -620,118 +620,118 @@ fn example_lfdi() {
 #[test]
 fn default_uint8() {
     let orig = Uint8::default();
-    let new: Uint8 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: Uint8 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_uint16() {
     let orig = Uint16::default();
-    let new: Uint16 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: Uint16 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_uint32() {
     let orig = Uint32::default();
-    let new: Uint32 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: Uint32 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_uint40() {
     let orig = Uint40::default();
-    let new: Uint40 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: Uint40 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_uint48() {
     let orig = Uint48::default();
-    let new: Uint48 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: Uint48 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_uint64() {
     let orig = Uint64::default();
-    let new: Uint64 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: Uint64 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_int8() {
     let orig = Int8::default();
-    let new: Int8 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: Int8 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_int16() {
     let orig = Int16::default();
-    let new: Int16 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: Int16 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_int32() {
     let orig = Int32::default();
-    let new: Int32 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: Int32 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_int48() {
     let orig = Int48::default();
-    let new: Int48 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: Int48 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_int64() {
     let orig = Int64::default();
-    let new: Int64 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: Int64 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_string6() {
     let orig = String6::default();
-    let new: String6 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: String6 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_string16() {
     let orig = String16::default();
-    let new: String16 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: String16 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_string20() {
     let orig = String20::default();
-    let new: String20 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: String20 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_string32() {
     let orig = String32::default();
-    let new: String32 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: String32 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_string42() {
     let orig = String42::default();
-    let new: String42 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: String42 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }
 
 #[test]
 fn default_string192() {
     let orig = String192::default();
-    let new: String192 = from_str(&to_string(&orig).unwrap()).unwrap();
+    let new: String192 = deserialize(&serialize(&orig).unwrap()).unwrap();
     assert_eq!(orig, new);
 }

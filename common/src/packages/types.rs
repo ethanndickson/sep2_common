@@ -176,6 +176,8 @@ bitflags! {
     }
 }
 
+impl Validate for DeviceCategoryType {}
+
 bitflags! {
     /// List of codes indicating the quality of the reading, using specification:
     #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
@@ -205,6 +207,8 @@ bitflags! {
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, PrimitiveYaSerde)]
 pub struct DstRuleType(u32);
+
+impl Validate for DstRuleType {}
 
 impl DstRuleType {
     const SECONDS_SHIFT: u32 = 0;
@@ -365,6 +369,8 @@ pub type MRIDType = HexBinary128;
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct OneHourRangeType(i16);
 
+impl Validate for OneHourRangeType {}
+
 impl OneHourRangeType {
     pub fn new(val: i16) -> Option<OneHourRangeType> {
         if !(-3600..=3600).contains(&val) {
@@ -400,6 +406,8 @@ pub type PENType = Uint32;
 /// Used for percentages, specified in hundredths of a percent, 0 to 10 000. (10 000 = 100%)
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct Percent(u16);
+
+impl Validate for Percent {}
 
 impl Percent {
     pub fn new(val: u16) -> Option<Percent> {
@@ -458,6 +466,8 @@ impl Validate for PhaseCode {}
 /// Six digit unsigned decimal integer (0 to 999999).
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct PINType(u32);
+
+impl Validate for PINType {}
 
 impl PINType {
     pub fn new(val: u32) -> Option<PINType> {
@@ -518,6 +528,8 @@ pub enum PowerOfTenMultiplierType {
     Giga = 9,
 }
 
+impl Validate for PowerOfTenMultiplierType {}
+
 #[derive(
     Default, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Debug, YaSerialize, YaDeserialize,
 )]
@@ -562,6 +574,8 @@ bitflags! {
     }
 }
 
+impl Validate for RoleFlagsType {}
+
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
 #[yaserde(rename = "ServiceKind")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
@@ -582,6 +596,8 @@ impl Validate for ServiceKind {}
 /// Unsigned integer, maximum inclusive 687194767359, which is 2^36 - 1 (68,719,476,735), with added check digit.
 #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct SFDIType(u64);
+
+impl Validate for SFDIType {}
 
 impl SFDIType {
     pub fn new(val: u64) -> Option<SFDIType> {
@@ -615,6 +631,8 @@ impl Display for SFDIType {
 /// Used for signed percentages, specified in hundredths of a percent, −10 000 to 10 000. (10 000 = 100%)
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct SignedPercent(i16);
+
+impl Validate for SignedPercent {}
 
 impl SignedPercent {
     pub fn new(val: i16) -> Option<SignedPercent> {
