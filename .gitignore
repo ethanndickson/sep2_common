@@ -16,3 +16,6 @@ Cargo.lock
 # System files
 .DS_Store
 **/*Zone.Identifier
+
+# LLVM profraw
+*.profraw
