@@ -996,8 +996,11 @@ pub struct DERControlBase {
 }
 
 impl DERControlBase {
-    /// Determine if two DERControlBase instances target the same set of controls by whether they contain the same optional fields.
+    /// Determine if two DERControlBase instances target the same set of controls
+    /// by whether they contain the same optional fields.
     pub fn same_target(&self, other: &Self) -> bool {
+        // TODO: Could replace this by having a bitflag of the
+        // options in the struct but would require manual serde impl
         #[cfg(feature = "csip_aus")]
         let extensions = {
             self.op_mod_imp_lim_w.is_some() == other.op_mod_imp_lim_w.is_some()
