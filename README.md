@@ -4,6 +4,8 @@
 
 It can be used with [`sep2_client`](https://github.com/ethanndickson/IEEE-2030.5-Client), which provides a framework for developing IEEE 2030.5 clients.
 
+[Documentation](https://ethanndickson.github.io/sep2_client_docs/sep2_common/)
+
 # Contents
 
 [`sep2_common`](sep2_common) - Implementation of IEEE 2030.5 data types
