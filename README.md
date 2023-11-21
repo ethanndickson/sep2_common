@@ -1,4 +1,4 @@
-# IEEE 2030.5 Common (Smart Energy Profile 2.0) (SEP2)
+# SEP2 Common Library
 
 `sep2_common` is a (WIP) Rust library for developing IEEE 2030.5 compliant servers & clients.
 
@@ -6,11 +6,9 @@ It can be used with [`sep2_client`](https://github.com/ethanndickson/IEEE-2030.5
 
 # Contents
 
-[`common`](common) - Implementation of IEEE 2030.5 data types
+[`sep2_common`](sep2_common) - Implementation of IEEE 2030.5 data types
 
-[`common-derive`](common-derive) - Rust Procedural Macros providing common interfaces on IEEE 2030.5 data types 
-
-[`resources`](resources) - IEEE 2030.5 associated resources & documentation published `2018-03-01`
+[`sep2_common_derive`](sep2_common_derive) - Rust Procedural Macros providing inheritance-based interfaces on IEEE 2030.5 data types 
 
 
 ### Core Features
