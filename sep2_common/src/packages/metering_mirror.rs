@@ -5,7 +5,7 @@ use crate::traits::{
 use sep2_common_derive::{
     SEIdentifiedObject, SEList, SEMeterReadingBase, SEReadingSetBase, SEResource, SEUsagePointBase,
 };
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 use super::{
     metering::{Reading, ReadingType},

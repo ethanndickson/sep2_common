@@ -9,7 +9,7 @@ use super::{
     types::{GPSLocationType, LocaleType, PENType, RealEnergy, TimeType},
 };
 use bitflags::bitflags;
-use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
+use sepserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "DeviceInformation")]

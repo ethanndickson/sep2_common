@@ -4,7 +4,7 @@ use sep2_common_derive::{
     SERespondableSubscribableIdentifiedObject, SEResponse, SESubscribableIdentifiedObject,
     SESubscribableList, SESubscribableResource,
 };
-use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
+use sepserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
 use super::{
     objects::EventStatusType,

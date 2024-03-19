@@ -4,7 +4,7 @@ use std::{
     str::FromStr,
 };
 
-use yaserde::{DefaultYaSerde, PrimitiveYaSerde};
+use sepserde::{DefaultYaSerde, PrimitiveYaSerde};
 
 #[cfg(test)]
 use crate::{deserialize, serialize};

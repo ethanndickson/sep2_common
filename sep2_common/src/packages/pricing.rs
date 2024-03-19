@@ -7,7 +7,7 @@ use sep2_common_derive::{
     SEEvent, SEIdentifiedObject, SEList, SERandomizableEvent, SEResource, SERespondableResource,
     SERespondableSubscribableIdentifiedObject, SESubscribableList, SESubscribableResource,
 };
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 use super::{
     identification::ResponseRequired,

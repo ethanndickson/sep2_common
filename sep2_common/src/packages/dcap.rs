@@ -1,7 +1,7 @@
 use crate::traits::{SEFunctionSetAssignmentsBase, SEResource, Validate};
 use sep2_common_derive::{SEFunctionSetAssignmentsBase, SEResource};
 
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 use super::{
     links::{

@@ -6,7 +6,7 @@ use sep2_common_derive::{
     SEFunctionSetAssignmentsBase, SEList, SEResource, SESubscribableList, SESubscribableResource,
 };
 
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 use super::{
     links::{

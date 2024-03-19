@@ -19,7 +19,7 @@ use super::{
         OneHourRangeType, Percent, PrimacyType, SubscribableType, TimeType, UnitType, VersionType,
     },
 };
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEList, SEResource)]
 #[yaserde(rename = "LoadShedAvailabilityList")]

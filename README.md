@@ -4,7 +4,7 @@
 
 It can be used with [`sep2_client`](https://github.com/ethanndickson/sep2_client), which provides a framework for developing IEEE 2030.5 clients.
 
-[Documentation](https://ethanndickson.github.io/sep2_client_docs/sep2_common/)
+[Documentation](https://docs.rs/sep2_common/)
 
 # Contents
 

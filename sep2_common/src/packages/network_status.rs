@@ -10,7 +10,7 @@ use super::{
         HexBinary128, HexBinary64, HexBinary8, Int64, String16, String192, Uint16, Uint32, Uint8,
     },
 };
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 /// Contains 802.15.4 link layer specific attributes.
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize)]

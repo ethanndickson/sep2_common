@@ -5,7 +5,7 @@
 //! Each of these traits can be derived provided an attribute with the expected type (as per the specification, not these traits) exists.
 use std::panic::RefUnwindSafe;
 
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 use crate::packages::{
     identification::{ResponseRequired, ResponseStatus},

@@ -6,7 +6,7 @@ use super::{
     primitives::{Int32, String32, Uint32},
     types::{DstRuleType, LocaleType, SubscribableType, TimeOffsetType, TimeType},
 };
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 #[derive(
     Default,

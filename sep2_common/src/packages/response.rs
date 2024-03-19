@@ -1,5 +1,5 @@
 use sep2_common_derive::{SEIdentifiedObject, SEList, SEResource, SEResponse};
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 use super::identification::ResponseStatus;
 use super::links::ResponseListLink;

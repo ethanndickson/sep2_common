@@ -19,7 +19,7 @@ use super::{
         VersionType,
     },
 };
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 /// Provides a container for collections of text messages.
 #[derive(

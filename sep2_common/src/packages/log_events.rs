@@ -5,7 +5,7 @@ use super::{
     primitives::{String32, Uint16, Uint32, Uint8},
     types::{PENType, SubscribableType, TimeType},
 };
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "LogEvent")]

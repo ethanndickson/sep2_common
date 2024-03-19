@@ -2,9 +2,9 @@
 /// Types should eventually be put in a module corresponding to their package
 use anyhow::Context;
 use bitflags::bitflags;
+use sepserde::{DefaultYaSerde, HexBinaryYaSerde, PrimitiveYaSerde, YaDeserialize, YaSerialize};
 use std::fmt::Display;
 use std::str::FromStr;
-use yaserde::{DefaultYaSerde, HexBinaryYaSerde, PrimitiveYaSerde, YaDeserialize, YaSerialize};
 
 use crate::traits::Validate;
 

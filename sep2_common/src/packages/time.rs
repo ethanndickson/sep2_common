@@ -1,7 +1,7 @@
 use crate::traits::{SEResource, Validate};
 use sep2_common_derive::SEResource;
 
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 use super::{
     primitives::Uint32,

@@ -1,8 +1,12 @@
 [package]
 name = "sep2_common_derive"
 authors = ["Ethan Dickson <ethanndickson@gmail.com>"]
+description = "Proc Macro implementations for sep2_common"
 version = "0.1.0"
 edition = "2021"
+license = "MIT OR Apache-2.0"
+readme = "../README.md"
+repository = "https://github.com/ethanndickson/sep2_common"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

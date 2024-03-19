@@ -15,20 +15,19 @@ pub mod traits;
 /// Given an IEEE 2030.5 data type, serialize it into an XML string
 pub fn serialize<R: SEType>(resource: &R) -> Result<String> {
     log::debug!("Serializing: {}", R::name());
-    std::panic::catch_unwind(|| yaserde::ser::to_string(resource).map_err(|e| anyhow!(e))).map_err(
-        |_| {
+    std::panic::catch_unwind(|| sepserde::ser::to_string(resource).map_err(|e| anyhow!(e)))
+        .map_err(|_| {
             anyhow!(
                 "Fatal Serializer Error: Unable to Serialize {} due to a panic",
                 R::name()
             )
-        },
-    )?
+        })?
 }
 
 /// Given a string representing an IEEE 2030.5 data type, deserialize into it the inferred type
 pub fn deserialize<R: SEType>(resource: &str) -> Result<R> {
     log::debug!("Deserializing: {}", R::name());
-    std::panic::catch_unwind(|| yaserde::de::from_str::<R>(resource).map_err(|e| anyhow!(e)))
+    std::panic::catch_unwind(|| sepserde::de::from_str::<R>(resource).map_err(|e| anyhow!(e)))
         .map_err(|_| {
             anyhow!(
                 "Fatal XML Parser Error: Unable to Deserialize {} due to a panic",

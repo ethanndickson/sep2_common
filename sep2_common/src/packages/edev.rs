@@ -5,7 +5,7 @@ use sep2_common_derive::{
     SEAbstractDevice, SEList, SEResource, SESubscribableList, SESubscribableResource,
 };
 
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 #[cfg(test)]
 use crate::serialize;

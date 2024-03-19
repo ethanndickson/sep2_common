@@ -17,7 +17,7 @@ use super::{
         DateTimeInterval, MRIDType, SignedRealEnergy, SubscribableType, TimeType, VersionType,
     },
 };
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 /// The RequestStatus object is used to indicate the current status of a Flow
 /// Reservation Request.

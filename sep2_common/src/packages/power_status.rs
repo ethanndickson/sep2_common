@@ -6,7 +6,7 @@ use super::{
     primitives::Uint32,
     types::{Percent, RealEnergy, TimeType},
 };
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, YaSerialize, YaDeserialize, SEResource)]
 #[yaserde(rename = "PowerStatus")]

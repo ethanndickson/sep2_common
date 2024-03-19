@@ -1,15 +1,18 @@
 [package]
 name = "sep2_common"
+description = "A Rust library for building IEEE 2030.5 Clients & Servers"
 version = "0.1.0"
 authors = ["Ethan Dickson <ethanndickson@gmail.com>"]
 edition = "2021"
 license = "MIT OR Apache-2.0"
+repository = "https://github.com/ethanndickson/sep2_common"
+keywords = ["energy","DER","20305","SEP2","IEEE2030"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-sep2_common_derive = {path = "../sep2_common_derive"}
-yaserde = { git = "https://github.com/ethanndickson/yaserde", features = ["yaserde_derive"]}
+sep2_common_derive = { version = "0.1.0" }
+sepserde = { version = "0.8.2" }
 xml-rs = "0.8.4"
 log = "0.4.19"
 anyhow = "1.0.72"

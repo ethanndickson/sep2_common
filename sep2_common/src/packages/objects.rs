@@ -10,7 +10,7 @@ use crate::traits::{
     SERespondableSubscribableIdentifiedObject, SESubscribableResource, Validate,
 };
 
-use yaserde::{YaDeserialize, YaSerialize};
+use sepserde::{YaDeserialize, YaSerialize};
 
 use super::{
     identification::ResponseRequired,

@@ -25,7 +25,7 @@ use super::{
     },
 };
 use bitflags::bitflags;
-use yaserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
+use sepserde::{HexBinaryYaSerde, YaDeserialize, YaSerialize};
 
 #[cfg(test)]
 use crate::serialize;

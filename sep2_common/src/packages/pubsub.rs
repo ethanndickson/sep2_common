@@ -1,8 +1,8 @@
 use crate::traits::{SEList, SEResource, SESubscriptionBase, Validate};
 use anyhow::{bail, Context, Result};
 use sep2_common_derive::{SEList, SEResource, SESubscriptionBase};
+use sepserde::{YaDeserialize, YaSerialize};
 use xml::EventReader;
-use yaserde::{YaDeserialize, YaSerialize};
 
 use super::primitives::{Int48, String16, Uint32, Uint8};
 
