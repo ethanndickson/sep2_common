@@ -548,12 +548,6 @@ pub struct DERCapability {
     #[yaserde(rename = "modesSupported")]
     pub modes_supported: DERControlType,
 
-    /// Bitmap indicating the CSIP-AUS controls implemented
-    #[cfg(feature = "csip_aus")]
-    #[yaserde(rename = "doeModesSupported")]
-    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
-    pub doe_modes_supported: DOEControlType,
-
     /// Abnormal operating performance category as defined by IEEE 1547-2018. One
     /// of:
     /// 0 - not specified
@@ -678,6 +672,12 @@ pub struct DERCapability {
     /// GET, ignored otherwise.
     #[yaserde(attribute, rename = "href")]
     pub href: Option<String>,
+
+    /// Bitmap indicating the CSIP-AUS controls implemented
+    #[cfg(feature = "csip_aus")]
+    #[yaserde(rename = "doeModesSupported")]
+    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
+    pub doe_modes_supported: DOEControlType,
 }
 
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, YaSerialize, YaDeserialize)]
