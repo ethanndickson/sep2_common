@@ -188,18 +188,6 @@ pub enum OpState {
     yaserde(namespace = "csipaus: https://csipaus.org/ns")
 )]
 pub struct EndDevice {
-    /// The time at which this resource was last modified or created.
-    #[yaserde(rename = "changedTime")]
-    pub changed_time: TimeType,
-
-    /// This attribute indicates whether or not an EndDevice is enabled, or
-    /// registered, on the server. If a server sets this attribute to false, the
-    /// device is no longer registered. It should be noted that servers can
-    /// delete EndDevice instances, but using this attribute for some time is
-    /// more convenient for clients.
-    #[yaserde(rename = "enabled")]
-    pub enabled: Option<bool>,
-
     #[yaserde(rename = "FlowReservationRequestListLink")]
     pub flow_reservation_request_list_link: Option<FlowReservationRequestListLink>,
 
@@ -270,6 +258,18 @@ pub struct EndDevice {
     /// Security section for additional details.
     #[yaserde(rename = "sFDI")]
     pub sfdi: SFDIType,
+
+    /// The time at which this resource was last modified or created.
+    #[yaserde(rename = "changedTime")]
+    pub changed_time: TimeType,
+
+    /// This attribute indicates whether or not an EndDevice is enabled, or
+    /// registered, on the server. If a server sets this attribute to false, the
+    /// device is no longer registered. It should be noted that servers can
+    /// delete EndDevice instances, but using this attribute for some time is
+    /// more convenient for clients.
+    #[yaserde(rename = "enabled")]
+    pub enabled: Option<bool>,
 
     /// Indicates whether or not subscriptions are supported for this resource,
     /// and whether or not conditional (thresholds) are supported. If not

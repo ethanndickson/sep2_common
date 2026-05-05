@@ -1313,7 +1313,7 @@ impl Validate for DERControlType {}
 #[cfg(feature = "csip_aus")]
 bitflags! {
     #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
-    pub struct DOEControlType: u16 { // HexBinary 16
+    pub struct DOEControlType: u8 { // HexBinary 8
         const OpModExpLimW = 1;
         const OpModImpLimW = 2;
         const OpModGenLimW = 4;
@@ -2268,4 +2268,16 @@ fn csip_aus_dercontrolbase() {
     dercb.op_mod_load_lim_w = Some(Default::default());
     let out = serialize(&dercb).unwrap();
     assert_eq!(expected, out);
+}
+
+#[test]
+fn der_status_alarm_status_uses_fixed_width_hexbinary32() {
+    let mut status = DERStatus::default();
+    status.alarm_status = Some(DERAlarmStatus::DER_FAULT_OVER_CURRENT);
+
+    let out = serialize(&status).unwrap();
+    assert!(out.contains("<alarmStatus>00000001</alarmStatus>"), "{out}");
+
+    let round_trip: DERStatus = crate::deserialize(&out).unwrap();
+    assert_eq!(round_trip.alarm_status, status.alarm_status);
 }
