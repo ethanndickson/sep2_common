@@ -251,7 +251,7 @@ pub struct EndDevice {
 
     #[cfg(feature = "csip_aus")]
     #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
-    #[yaserde(rename = "ConnectionPointLink ")]
+    #[yaserde(rename = "ConnectionPointLink")]
     pub connection_point_link: Option<ConnectionPointLink>,
 
     /// Short form of device identifier, WITH the checksum digit. See the
