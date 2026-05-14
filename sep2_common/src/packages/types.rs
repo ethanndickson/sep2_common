@@ -500,10 +500,8 @@ impl Display for PINType {
 
 /// For many variants there is no Internal System of Units designated prefix, and as such the number is used as a name instead.
 #[derive(
-    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
+    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde,
 )]
-#[yaserde(rename = "PowerOfTenMultiplierType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 #[repr(i8)]
 pub enum PowerOfTenMultiplierType {
     Nano = -9,
@@ -529,6 +527,64 @@ pub enum PowerOfTenMultiplierType {
 }
 
 impl Validate for PowerOfTenMultiplierType {}
+
+impl Display for PowerOfTenMultiplierType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let value = match self {
+            Self::Nano => -9,
+            Self::NegativeEight => -8,
+            Self::NegativeSeven => -7,
+            Self::Micro => -6,
+            Self::NegativeFive => -5,
+            Self::NegativeFour => -4,
+            Self::Milli => -3,
+            Self::Centi => -2,
+            Self::Deci => -1,
+            Self::None => 0,
+            Self::Deca => 1,
+            Self::Hecto => 2,
+            Self::Kilo => 3,
+            Self::Four => 4,
+            Self::Five => 5,
+            Self::Mega => 6,
+            Self::Seven => 7,
+            Self::Eight => 8,
+            Self::Giga => 9,
+        };
+
+        write!(f, "{value}")
+    }
+}
+
+impl FromStr for PowerOfTenMultiplierType {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s.parse::<i8>() {
+            Ok(-9) => Ok(Self::Nano),
+            Ok(-8) => Ok(Self::NegativeEight),
+            Ok(-7) => Ok(Self::NegativeSeven),
+            Ok(-6) => Ok(Self::Micro),
+            Ok(-5) => Ok(Self::NegativeFive),
+            Ok(-4) => Ok(Self::NegativeFour),
+            Ok(-3) => Ok(Self::Milli),
+            Ok(-2) => Ok(Self::Centi),
+            Ok(-1) => Ok(Self::Deci),
+            Ok(0) => Ok(Self::None),
+            Ok(1) => Ok(Self::Deca),
+            Ok(2) => Ok(Self::Hecto),
+            Ok(3) => Ok(Self::Kilo),
+            Ok(4) => Ok(Self::Four),
+            Ok(5) => Ok(Self::Five),
+            Ok(6) => Ok(Self::Mega),
+            Ok(7) => Ok(Self::Seven),
+            Ok(8) => Ok(Self::Eight),
+            Ok(9) => Ok(Self::Giga),
+            Ok(other) => Err(format!("invalid PowerOfTenMultiplierType value: {other}")),
+            Err(_) => Err(format!("could not parse PowerOfTenMultiplierType: {s}")),
+        }
+    }
+}
 
 #[derive(
     Default, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Debug, YaSerialize, YaDeserialize,
