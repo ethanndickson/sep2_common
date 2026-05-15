@@ -9,7 +9,7 @@ use sepserde::{YaDeserialize, YaSerialize};
 
 use super::{
     metering::{Reading, ReadingType},
-    primitives::{HexBinary160, Int48, String32, Uint32},
+    primitives::{HexBinary160, HexBinary32, Int48, String32, Uint32},
     types::{
         ConsumptionBlockType, DateTimeInterval, MRIDType, QualityFlags, RoleFlagsType, ServiceKind,
         TOUType, TimeType, UsagePointStatus, VersionType,
@@ -47,9 +47,6 @@ pub struct MirrorMeterReading {
     #[yaserde(rename = "Reading")]
     pub reading: Option<Reading>,
 
-    #[yaserde(rename = "ReadingType")]
-    pub reading_type: Option<ReadingType>,
-
     /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
@@ -62,6 +59,9 @@ pub struct MirrorMeterReading {
     /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
+
+    #[yaserde(rename = "ReadingType")]
+    pub reading_type: Option<ReadingType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -191,18 +191,18 @@ impl Validate for MirrorReadingSet {}
 #[yaserde(rename = "MirrorUsagePoint")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MirrorUsagePoint {
-    /// The LFDI of the device being mirrored.
-    #[yaserde(rename = "deviceLFDI")]
-    pub device_lfdi: HexBinary160,
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
 
-    #[yaserde(rename = "MirrorMeterReading")]
-    pub mirror_meter_reading: Vec<MirrorMeterReading>,
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
 
-    /// POST rate, or how often mirrored data should be POSTed, in seconds. A
-    /// client MAY indicate a preferred postRate when POSTing MirrorUsagePoint. A
-    /// server MAY add or modify postRate to indicate its preferred posting rate.
-    #[yaserde(rename = "postRate")]
-    pub post_rate: Option<Uint32>,
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
 
     /// Specifies the roles that apply to the usage point.
     #[yaserde(rename = "roleFlags")]
@@ -218,18 +218,18 @@ pub struct MirrorUsagePoint {
     #[yaserde(rename = "status")]
     pub status: UsagePointStatus,
 
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
+    /// The LFDI of the device being mirrored.
+    #[yaserde(rename = "deviceLFDI")]
+    pub device_lfdi: HexBinary160,
 
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
+    #[yaserde(rename = "MirrorMeterReading")]
+    pub mirror_meter_reading: Vec<MirrorMeterReading>,
 
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
+    /// POST rate, or how often mirrored data should be POSTed, in seconds. A
+    /// client MAY indicate a preferred postRate when POSTing MirrorUsagePoint. A
+    /// server MAY add or modify postRate to indicate its preferred posting rate.
+    #[yaserde(rename = "postRate")]
+    pub post_rate: Option<Uint32>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
