@@ -91,6 +91,19 @@ impl Validate for AccountingUnit {}
 #[yaserde(rename = "CreditRegister")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CreditRegister {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     /// CreditAmount is the amount of credit being added by a particular
     /// CreditRegister transaction. Negative values indicate that credit is being
     /// subtracted.
@@ -116,19 +129,6 @@ pub struct CreditRegister {
     /// implementation or will be defined by one or more other standards.
     #[yaserde(rename = "token")]
     pub token: String32,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -186,6 +186,19 @@ impl Validate for CreditRegisterList {}
 #[yaserde(rename = "Prepayment")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Prepayment {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     #[yaserde(rename = "AccountBalanceLink")]
     pub account_balance_link: AccountBalanceLink,
 
@@ -241,19 +254,6 @@ pub struct Prepayment {
 
     #[yaserde(rename = "UsagePointLink")]
     pub usage_point_link: Option<UsagePointLink>,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.

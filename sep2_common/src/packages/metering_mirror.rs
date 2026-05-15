@@ -33,6 +33,19 @@ use super::{
 #[yaserde(rename = "MirrorMeterReading")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MirrorMeterReading {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     /// The date and time of the last update.
     #[yaserde(rename = "lastUpdateTime")]
     pub last_update_time: Option<TimeType>,
@@ -49,19 +62,6 @@ pub struct MirrorMeterReading {
 
     #[yaserde(rename = "ReadingType")]
     pub reading_type: Option<ReadingType>,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -148,13 +148,6 @@ impl Validate for MeterReadingBase {}
 #[yaserde(rename = "MirrorReadingSet")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MirrorReadingSet {
-    #[yaserde(rename = "Reading")]
-    pub reading: Vec<Reading>,
-
-    /// Specifies the time range during which the contained readings were taken.
-    #[yaserde(rename = "timePeriod")]
-    pub time_period: DateTimeInterval,
-
     /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
@@ -167,6 +160,13 @@ pub struct MirrorReadingSet {
     /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
+
+    /// Specifies the time range during which the contained readings were taken.
+    #[yaserde(rename = "timePeriod")]
+    pub time_period: DateTimeInterval,
+
+    #[yaserde(rename = "Reading")]
+    pub reading: Vec<Reading>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -191,18 +191,18 @@ impl Validate for MirrorReadingSet {}
 #[yaserde(rename = "MirrorUsagePoint")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MirrorUsagePoint {
-    /// The LFDI of the device being mirrored.
-    #[yaserde(rename = "deviceLFDI")]
-    pub device_lfdi: HexBinary160,
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
 
-    #[yaserde(rename = "MirrorMeterReading")]
-    pub mirror_meter_reading: Vec<MirrorMeterReading>,
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
 
-    /// POST rate, or how often mirrored data should be POSTed, in seconds. A
-    /// client MAY indicate a preferred postRate when POSTing MirrorUsagePoint. A
-    /// server MAY add or modify postRate to indicate its preferred posting rate.
-    #[yaserde(rename = "postRate")]
-    pub post_rate: Option<Uint32>,
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
 
     /// Specifies the roles that apply to the usage point.
     #[yaserde(rename = "roleFlags")]
@@ -218,18 +218,18 @@ pub struct MirrorUsagePoint {
     #[yaserde(rename = "status")]
     pub status: UsagePointStatus,
 
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
+    /// The LFDI of the device being mirrored.
+    #[yaserde(rename = "deviceLFDI")]
+    pub device_lfdi: HexBinary160,
 
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
+    #[yaserde(rename = "MirrorMeterReading")]
+    pub mirror_meter_reading: Vec<MirrorMeterReading>,
 
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
+    /// POST rate, or how often mirrored data should be POSTed, in seconds. A
+    /// client MAY indicate a preferred postRate when POSTing MirrorUsagePoint. A
+    /// server MAY add or modify postRate to indicate its preferred posting rate.
+    #[yaserde(rename = "postRate")]
+    pub post_rate: Option<Uint32>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -346,10 +346,6 @@ impl Validate for ReadingBase {}
 #[yaserde(rename = "ReadingSetBase")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReadingSetBase {
-    /// Specifies the time range during which the contained readings were taken.
-    #[yaserde(rename = "timePeriod")]
-    pub time_period: DateTimeInterval,
-
     /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
@@ -362,6 +358,10 @@ pub struct ReadingSetBase {
     /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
+
+    /// Specifies the time range during which the contained readings were taken.
+    #[yaserde(rename = "timePeriod")]
+    pub time_period: DateTimeInterval,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -386,6 +386,19 @@ impl Validate for ReadingSetBase {}
 #[yaserde(rename = "UsagePointBase")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct UsagePointBase {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     /// Specifies the roles that apply to the usage point.
     #[yaserde(rename = "roleFlags")]
     pub role_flags: RoleFlagsType,
@@ -399,19 +412,6 @@ pub struct UsagePointBase {
     /// 1 = on
     #[yaserde(rename = "status")]
     pub status: UsagePointStatus,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.

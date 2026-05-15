@@ -62,13 +62,15 @@ fn example_connectionpoint() {
 #[test]
 fn connectionpoint_edev() {
     let expected = r#"<EndDevice xmlns="urn:ieee:std:2030.5:ns" xmlns:csipaus="https://csipaus.org/ns">
-  <changedTime>0</changedTime>
-  <csipaus:ConnectionPointLink  href="/edev/1/cp" />
   <sFDI>0</sFDI>
+  <changedTime>0</changedTime>
+  <csipaus:ConnectionPointLink href="/edev/1/cp" />
 </EndDevice>"#;
-    let mut edev = EndDevice::default();
-    edev.connection_point_link = Some(ConnectionPointLink {
-        href: "/edev/1/cp".to_owned(),
-    });
+    let edev = EndDevice {
+        connection_point_link: Some(ConnectionPointLink {
+            href: "/edev/1/cp".to_owned(),
+        }),
+        ..Default::default()
+    };
     assert_eq!(expected, serialize(&edev).unwrap())
 }

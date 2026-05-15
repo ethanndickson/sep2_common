@@ -38,6 +38,19 @@ use sepserde::{YaDeserialize, YaSerialize};
 #[yaserde(rename = "MessagingProgram")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MessagingProgram {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     #[yaserde(rename = "ActiveTextMessageListLink")]
     pub active_text_message_list_link: Option<ActiveTextMessageListLink>,
 
@@ -51,19 +64,6 @@ pub struct MessagingProgram {
 
     #[yaserde(rename = "TextMessageListLink")]
     pub text_message_list_link: Option<TextMessageListLink>,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// Indicates whether or not subscriptions are supported for this resource,
     /// and whether or not conditional (thresholds) are supported. If not
@@ -175,6 +175,30 @@ impl Validate for PriorityType {}
 #[yaserde(rename = "TextMessage")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TextMessage {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
+    /// The time at which the Event was created.
+    #[yaserde(rename = "creationTime")]
+    pub creation_time: TimeType,
+
+    #[yaserde(rename = "EventStatus")]
+    pub event_status: EventStatus,
+
+    /// The period during which the Event applies.
+    #[yaserde(rename = "interval")]
+    pub interval: DateTimeInterval,
+
     /// Indicates the human-readable name of the publisher of the message
     #[yaserde(rename = "originator")]
     pub originator: Option<String20>,
@@ -197,30 +221,6 @@ pub struct TextMessage {
     /// what method to handle the message (truncation, scrolling, etc.).
     #[yaserde(rename = "textMessage")]
     pub text_message: String,
-
-    /// The time at which the Event was created.
-    #[yaserde(rename = "creationTime")]
-    pub creation_time: TimeType,
-
-    #[yaserde(rename = "EventStatus")]
-    pub event_status: EventStatus,
-
-    /// The period during which the Event applies.
-    #[yaserde(rename = "interval")]
-    pub interval: DateTimeInterval,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// Indicates whether or not subscriptions are supported for this resource,
     /// and whether or not conditional (thresholds) are supported. If not

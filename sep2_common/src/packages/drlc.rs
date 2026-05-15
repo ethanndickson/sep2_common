@@ -72,6 +72,19 @@ impl Validate for ApplianceLoadReduction {}
 #[yaserde(rename = "DemandResponseProgram")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DemandResponseProgram {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     #[yaserde(rename = "ActiveEndDeviceControlListLink")]
     pub active_end_device_control_list_link: Option<ActiveEndDeviceControlListLink>,
 
@@ -103,19 +116,6 @@ pub struct DemandResponseProgram {
     /// Indicates the relative primacy of the provider of this program.
     #[yaserde(rename = "primacy")]
     pub primacy: PrimacyType,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -233,6 +233,46 @@ impl Validate for DutyCycle {}
 #[yaserde(rename = "EndDeviceControl")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct EndDeviceControl {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
+    /// The time at which the Event was created.
+    #[yaserde(rename = "creationTime")]
+    pub creation_time: TimeType,
+
+    #[yaserde(rename = "EventStatus")]
+    pub event_status: EventStatus,
+
+    /// The period during which the Event applies.
+    #[yaserde(rename = "interval")]
+    pub interval: DateTimeInterval,
+
+    /// Number of seconds boundary inside which a random value must be selected
+    /// to be applied to the associated interval duration, to avoid sudden
+    /// synchronized demand changes. If related to price level changes, sign may
+    /// be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
+    /// default.
+    #[yaserde(rename = "randomizeDuration")]
+    pub randomize_duration: Option<OneHourRangeType>,
+
+    /// Number of seconds boundary inside which a random value must be selected
+    /// to be applied to the associated interval start time, to avoid sudden
+    /// synchronized demand changes. If related to price level changes, sign may
+    /// be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
+    /// default.
+    #[yaserde(rename = "randomizeStart")]
+    pub randomize_start: Option<OneHourRangeType>,
+
     #[yaserde(rename = "ApplianceLoadReduction")]
     pub appliance_load_reduction: Option<ApplianceLoadReduction>,
 
@@ -274,46 +314,6 @@ pub struct EndDeviceControl {
 
     #[yaserde(rename = "TargetReduction")]
     pub target_reduction: Option<TargetReduction>,
-
-    /// Number of seconds boundary inside which a random value must be selected
-    /// to be applied to the associated interval duration, to avoid sudden
-    /// synchronized demand changes. If related to price level changes, sign may
-    /// be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
-    /// default.
-    #[yaserde(rename = "randomizeDuration")]
-    pub randomize_duration: Option<OneHourRangeType>,
-
-    /// Number of seconds boundary inside which a random value must be selected
-    /// to be applied to the associated interval start time, to avoid sudden
-    /// synchronized demand changes. If related to price level changes, sign may
-    /// be ignored. Valid range is -3600 to 3600. If not specified, 0 is the
-    /// default.
-    #[yaserde(rename = "randomizeStart")]
-    pub randomize_start: Option<OneHourRangeType>,
-
-    /// The time at which the Event was created.
-    #[yaserde(rename = "creationTime")]
-    pub creation_time: TimeType,
-
-    #[yaserde(rename = "EventStatus")]
-    pub event_status: EventStatus,
-
-    /// The period during which the Event applies.
-    #[yaserde(rename = "interval")]
-    pub interval: DateTimeInterval,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// Indicates whether or not subscriptions are supported for this resource,
     /// and whether or not conditional (thresholds) are supported. If not

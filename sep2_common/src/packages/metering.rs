@@ -37,18 +37,6 @@ use super::{
 #[yaserde(rename = "MeterReading")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct MeterReading {
-    #[yaserde(rename = "RateComponentListLink")]
-    pub rate_component_list_link: Option<RateComponentListLink>,
-
-    #[yaserde(rename = "ReadingLink")]
-    pub reading_link: Option<ReadingLink>,
-
-    #[yaserde(rename = "ReadingSetListLink")]
-    pub reading_set_list_link: Option<ReadingSetListLink>,
-
-    #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: ReadingTypeLink,
-
     /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
@@ -61,6 +49,18 @@ pub struct MeterReading {
     /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
+
+    #[yaserde(rename = "RateComponentListLink")]
+    pub rate_component_list_link: Option<RateComponentListLink>,
+
+    #[yaserde(rename = "ReadingLink")]
+    pub reading_link: Option<ReadingLink>,
+
+    #[yaserde(rename = "ReadingSetListLink")]
+    pub reading_set_list_link: Option<ReadingSetListLink>,
+
+    #[yaserde(rename = "ReadingTypeLink")]
+    pub reading_type_link: ReadingTypeLink,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -131,24 +131,17 @@ impl Validate for MeterReadingList {}
 #[yaserde(rename = "Reading")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Reading {
-    /// The local identifier for this reading within the reading set. localIDs
-    /// are assigned in order of creation time. For interval data, this value
-    /// SHALL increase with each interval time, and for block/tier readings,
-    /// localID SHALL not be specified.
-    #[yaserde(rename = "localID")]
-    pub local_id: Option<HexBinary16>,
+    /// Indicates the consumption block related to the reading. REQUIRED if
+    /// ReadingType numberOfConsumptionBlocks is non-zero. If not specified, is
+    /// assumed to be "0 - N/A".
+    #[yaserde(rename = "consumptionBlock")]
+    pub consumption_block: Option<ConsumptionBlockType>,
 
     /// Indicates whether or not subscriptions are supported for this resource,
     /// and whether or not conditional (thresholds) are supported. If not
     /// specified, is "not subscribable" (0).
     #[yaserde(attribute, rename = "subscribable")]
     pub subscribable: Option<SubscribableType>,
-
-    /// Indicates the consumption block related to the reading. REQUIRED if
-    /// ReadingType numberOfConsumptionBlocks is non-zero. If not specified, is
-    /// assumed to be "0 - N/A".
-    #[yaserde(rename = "consumptionBlock")]
-    pub consumption_block: Option<ConsumptionBlockType>,
 
     /// List of codes indicating the quality of the reading, using specification:
     /// Bit 0 - valid: data that has gone through all required validation checks
@@ -181,6 +174,13 @@ pub struct Reading {
     /// Value in units specified by ReadingType
     #[yaserde(rename = "value")]
     pub value: Option<Int48>,
+
+    /// The local identifier for this reading within the reading set. localIDs
+    /// are assigned in order of creation time. For interval data, this value
+    /// SHALL increase with each interval time, and for block/tier readings,
+    /// localID SHALL not be specified.
+    #[yaserde(rename = "localID")]
+    pub local_id: Option<HexBinary16>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -270,13 +270,6 @@ impl Validate for ReadingList {}
 #[yaserde(rename = "ReadingSet")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ReadingSet {
-    #[yaserde(rename = "ReadingListLink")]
-    pub reading_list_link: Option<ReadingListLink>,
-
-    /// Specifies the time range during which the contained readings were taken.
-    #[yaserde(rename = "timePeriod")]
-    pub time_period: DateTimeInterval,
-
     /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
@@ -289,6 +282,13 @@ pub struct ReadingSet {
     /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
+
+    /// Specifies the time range during which the contained readings were taken.
+    #[yaserde(rename = "timePeriod")]
+    pub time_period: DateTimeInterval,
+
+    #[yaserde(rename = "ReadingListLink")]
+    pub reading_list_link: Option<ReadingListLink>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -496,13 +496,18 @@ impl Validate for ReadingType {}
 #[yaserde(rename = "UsagePoint")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct UsagePoint {
-    /// The LFDI of the source device. This attribute SHALL be present when
-    /// mirroring.
-    #[yaserde(rename = "deviceLFDI")]
-    pub device_lfdi: Option<HexBinary160>,
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
 
-    #[yaserde(rename = "MeterReadingListLink")]
-    pub meter_reading_list_link: Option<MeterReadingListLink>,
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
 
     /// Specifies the roles that apply to the usage point.
     #[yaserde(rename = "roleFlags")]
@@ -518,18 +523,13 @@ pub struct UsagePoint {
     #[yaserde(rename = "status")]
     pub status: UsagePointStatus,
 
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
+    /// The LFDI of the source device. This attribute SHALL be present when
+    /// mirroring.
+    #[yaserde(rename = "deviceLFDI")]
+    pub device_lfdi: Option<HexBinary160>,
 
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
+    #[yaserde(rename = "MeterReadingListLink")]
+    pub meter_reading_list_link: Option<MeterReadingListLink>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.

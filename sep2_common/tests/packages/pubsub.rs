@@ -41,6 +41,7 @@ fn notification_example() {
     let orig = create_notif_example();
     let out = serialize(&orig).unwrap();
     let expected = r#"<Notification xmlns="urn:ieee:std:2030.5:ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <subscribedResource>/upt/0/mr/4/r</subscribedResource>
   <Resource xsi:type="Reading">
     <timePeriod>
       <duration>0</duration>
@@ -50,10 +51,9 @@ fn notification_example() {
   </Resource>
   <status>0</status>
   <subscriptionURI>/edev/8/sub/5</subscriptionURI>
-  <subscribedResource>/upt/0/mr/4/r</subscribedResource>
 </Notification>"#;
     assert_eq!(expected, out);
-    let new: Notification<Reading> = deserialize(&expected).unwrap();
+    let new: Notification<Reading> = deserialize(expected).unwrap();
     assert_eq!(orig, new);
     let example: Notification<Reading> = deserialize(NTF_16_06_04).unwrap();
     assert_eq!(example, new);
@@ -63,6 +63,7 @@ fn notification_example() {
 fn notification_list_default() {
     let expected = r#"<NotificationList xmlns="urn:ieee:std:2030.5:ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" all="2" results="0">
   <Notification>
+    <subscribedResource>/upt/0/mr/4/r</subscribedResource>
     <Resource xsi:type="Reading">
       <timePeriod>
         <duration>0</duration>
@@ -72,9 +73,9 @@ fn notification_list_default() {
     </Resource>
     <status>0</status>
     <subscriptionURI>/edev/8/sub/5</subscriptionURI>
-    <subscribedResource>/upt/0/mr/4/r</subscribedResource>
   </Notification>
   <Notification>
+    <subscribedResource>/upt/0/mr/4/r</subscribedResource>
     <Resource xsi:type="Reading">
       <timePeriod>
         <duration>0</duration>
@@ -84,7 +85,6 @@ fn notification_list_default() {
     </Resource>
     <status>0</status>
     <subscriptionURI>/edev/8/sub/5</subscriptionURI>
-    <subscribedResource>/upt/0/mr/4/r</subscribedResource>
   </Notification>
 </NotificationList>"#;
     let res: Notification<Reading> = create_notif_example();

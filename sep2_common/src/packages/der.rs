@@ -46,6 +46,19 @@ use crate::serialize;
 #[yaserde(rename = "DefaultDERControl")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DefaultDERControl {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     #[yaserde(rename = "DERControlBase")]
     pub der_control_base: DERControlBase,
 
@@ -111,19 +124,6 @@ pub struct DefaultDERControl {
     /// (DERSettings::setSoftGradW).
     #[yaserde(rename = "setSoftGradW")]
     pub set_soft_grad_w: Option<Uint16>,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// Indicates whether or not subscriptions are supported for this resource,
     /// and whether or not conditional (thresholds) are supported. If not
@@ -282,6 +282,10 @@ impl Validate for DERList {}
 )]
 #[yaserde(rename = "DERSettings")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[cfg_attr(
+    feature = "csip_aus",
+    yaserde(namespace = "csipaus: https://csipaus.org/ns")
+)]
 pub struct DERSettings {
     /// Bitmap indicating the DER Controls enabled on the device. See
     /// DERControlType for values. If a control is supported (see
@@ -435,6 +439,13 @@ pub struct DERSettings {
     #[yaserde(rename = "updatedTime")]
     pub updated_time: TimeType,
 
+    /// Bitmap indicating the DOE controls enabled on the device. See
+    /// DOEControlType for values.
+    #[cfg(feature = "csip_aus")]
+    #[yaserde(rename = "doeModesEnabled")]
+    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
+    pub doe_modes_enabled: Option<DOEControlType>,
+
     /// Indicates whether or not subscriptions are supported for this resource,
     /// and whether or not conditional (thresholds) are supported. If not
     /// specified, is "not subscribable" (0).
@@ -547,12 +558,6 @@ pub struct DERCapability {
     /// DERControlType for values.
     #[yaserde(rename = "modesSupported")]
     pub modes_supported: DERControlType,
-
-    /// Bitmap indicating the CSIP-AUS controls implemented
-    #[cfg(feature = "csip_aus")]
-    #[yaserde(rename = "doeModesSupported")]
-    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
-    pub doe_modes_supported: DOEControlType,
 
     /// Abnormal operating performance category as defined by IEEE 1547-2018. One
     /// of:
@@ -673,6 +678,12 @@ pub struct DERCapability {
     /// Type of DER; see DERType object
     #[yaserde(rename = "type")]
     pub _type: DERType,
+
+    /// Bitmap indicating the CSIP-AUS controls implemented
+    #[cfg(feature = "csip_aus")]
+    #[yaserde(rename = "doeModesSupported")]
+    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
+    pub doe_modes_supported: DOEControlType,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -959,6 +970,13 @@ pub struct DERControlBase {
     #[yaserde(rename = "opModWattVar")]
     pub op_mod_watt_var: Option<DERCurveLink>,
 
+    /// Requested ramp time, in hundredths of a second, for the device to
+    /// transition from the current DERControl mode setting(s) to the new mode
+    /// setting(s). If absent, use default ramp rate (setGradW). Resolution is
+    /// 1/100 sec.
+    #[yaserde(rename = "rampTms")]
+    pub ramp_tms: Option<Uint16>,
+
     /// This is the constraint on the imported active power at the connection point.
     #[cfg(feature = "csip_aus")]
     #[yaserde(rename = "opModImpLimW")]
@@ -986,13 +1004,6 @@ pub struct DERControlBase {
     #[yaserde(rename = "opModLoadLimW")]
     #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
     pub op_mod_load_lim_w: Option<ActivePower>,
-
-    /// Requested ramp time, in hundredths of a second, for the device to
-    /// transition from the current DERControl mode setting(s) to the new mode
-    /// setting(s). If absent, use default ramp rate (setGradW). Resolution is
-    /// 1/100 sec.
-    #[yaserde(rename = "rampTms")]
-    pub ramp_tms: Option<Uint16>,
 }
 
 impl DERControlBase {
@@ -1064,14 +1075,29 @@ impl Validate for DERControlBase {}
 #[yaserde(rename = "DERControl")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DERControl {
-    #[yaserde(rename = "DERControlBase")]
-    pub der_control_base: DERControlBase,
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
 
-    /// Specifies the bitmap indicating the categories of devices that SHOULD
-    /// respond. Devices SHOULD ignore events that do not indicate their device
-    /// category. If not present, all devices SHOULD respond.
-    #[yaserde(rename = "deviceCategory")]
-    pub device_category: Option<DeviceCategoryType>,
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
+    /// The time at which the Event was created.
+    #[yaserde(rename = "creationTime")]
+    pub creation_time: TimeType,
+
+    #[yaserde(rename = "EventStatus")]
+    pub event_status: EventStatus,
+
+    /// The period during which the Event applies.
+    #[yaserde(rename = "interval")]
+    pub interval: DateTimeInterval,
 
     /// Number of seconds boundary inside which a random value must be selected
     /// to be applied to the associated interval duration, to avoid sudden
@@ -1089,29 +1115,14 @@ pub struct DERControl {
     #[yaserde(rename = "randomizeStart")]
     pub randomize_start: Option<OneHourRangeType>,
 
-    /// The time at which the Event was created.
-    #[yaserde(rename = "creationTime")]
-    pub creation_time: TimeType,
+    #[yaserde(rename = "DERControlBase")]
+    pub der_control_base: DERControlBase,
 
-    #[yaserde(rename = "EventStatus")]
-    pub event_status: EventStatus,
-
-    /// The period during which the Event applies.
-    #[yaserde(rename = "interval")]
-    pub interval: DateTimeInterval,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
+    /// Specifies the bitmap indicating the categories of devices that SHOULD
+    /// respond. Devices SHOULD ignore events that do not indicate their device
+    /// category. If not present, all devices SHOULD respond.
+    #[yaserde(rename = "deviceCategory")]
+    pub device_category: Option<DeviceCategoryType>,
 
     /// Indicates whether or not subscriptions are supported for this resource,
     /// and whether or not conditional (thresholds) are supported. If not
@@ -1313,7 +1324,7 @@ impl Validate for DERControlType {}
 #[cfg(feature = "csip_aus")]
 bitflags! {
     #[derive(Default, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, HexBinaryYaSerde)]
-    pub struct DOEControlType: u16 { // HexBinary 16
+    pub struct DOEControlType: u8 { // HexBinary 8
         const OpModExpLimW = 1;
         const OpModImpLimW = 2;
         const OpModGenLimW = 4;
@@ -1327,6 +1338,19 @@ bitflags! {
 #[yaserde(rename = "DERCurve")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DERCurve {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     /// If the curveType is opModVoltVar, then this field MAY be present. If the
     /// curveType is not opModVoltVar, then this field SHALL NOT be present.
     /// Enable/disable autonomous vRef adjustment. When enabled, the Volt-Var
@@ -1403,19 +1427,6 @@ pub struct DERCurve {
     /// The Y-axis units context.
     #[yaserde(rename = "yRefType")]
     pub y_ref_type: DERUnitRefType,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -1536,6 +1547,19 @@ impl Validate for DERCurveType {}
 #[yaserde(rename = "DERProgram")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DERProgram {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     #[yaserde(rename = "ActiveDERControlListLink")]
     pub active_der_control_list_link: Option<ActiveDERControlListLink>,
 
@@ -1551,19 +1575,6 @@ pub struct DERProgram {
     /// Indicates the relative primacy of the provider of this Program.
     #[yaserde(rename = "primacy")]
     pub primacy: PrimacyType,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// Indicates whether or not subscriptions are supported for this resource,
     /// and whether or not conditional (thresholds) are supported. If not
@@ -2202,7 +2213,7 @@ impl Validate for StorageModeStatusType {}
 #[test]
 fn dercap_no_csip_aus() {
     let expected = r#"<DERCapability xmlns="urn:ieee:std:2030.5:ns">
-  <modesSupported>0</modesSupported>
+  <modesSupported>00000000</modesSupported>
   <rtgMaxW>
     <multiplier>0</multiplier>
     <value>0</value>
@@ -2218,13 +2229,13 @@ fn dercap_no_csip_aus() {
 #[test]
 fn csip_aus_dercap() {
     let expected = r#"<DERCapability xmlns="urn:ieee:std:2030.5:ns" xmlns:csipaus="https://csipaus.org/ns">
-  <modesSupported>0</modesSupported>
-  <csipaus:doeModesSupported>0</csipaus:doeModesSupported>
+  <modesSupported>00000000</modesSupported>
   <rtgMaxW>
     <multiplier>0</multiplier>
     <value>0</value>
   </rtgMaxW>
   <type>0</type>
+  <csipaus:doeModesSupported>00</csipaus:doeModesSupported>
 </DERCapability>"#;
     let dcap = DERCapability::default();
     let out = serialize(&dcap).unwrap();
@@ -2261,11 +2272,65 @@ fn csip_aus_dercontrolbase() {
     <value>0</value>
   </csipaus:opModLoadLimW>
 </DERControlBase>"#;
-    let mut dercb = DERControlBase::default();
-    dercb.op_mod_imp_lim_w = Some(Default::default());
-    dercb.op_mod_exp_lim_w = Some(Default::default());
-    dercb.op_mod_gen_lim_w = Some(Default::default());
-    dercb.op_mod_load_lim_w = Some(Default::default());
+    let dercb = DERControlBase {
+        op_mod_imp_lim_w: Some(Default::default()),
+        op_mod_exp_lim_w: Some(Default::default()),
+        op_mod_gen_lim_w: Some(Default::default()),
+        op_mod_load_lim_w: Some(Default::default()),
+        ..Default::default()
+    };
     let out = serialize(&dercb).unwrap();
+    assert_eq!(expected, out);
+}
+
+#[test]
+fn derstatus() {
+    let expected = r#"<DERStatus xmlns="urn:ieee:std:2030.5:ns">
+  <alarmStatus>00000001</alarmStatus>
+  <readingTime>0</readingTime>
+</DERStatus>"#;
+    let status = DERStatus {
+        alarm_status: Some(DERAlarmStatus::DER_FAULT_OVER_CURRENT),
+        ..Default::default()
+    };
+    let out = serialize(&status).unwrap();
+    assert_eq!(expected, out);
+    let round_trip: DERStatus = crate::deserialize(&out).unwrap();
+    assert_eq!(round_trip, status);
+}
+
+#[cfg(not(feature = "csip_aus"))]
+#[test]
+fn dersettings_no_csip_aus() {
+    let expected = r#"<DERSettings xmlns="urn:ieee:std:2030.5:ns">
+  <setGradW>0</setGradW>
+  <setMaxW>
+    <multiplier>0</multiplier>
+    <value>0</value>
+  </setMaxW>
+  <updatedTime>0</updatedTime>
+</DERSettings>"#;
+    let dset = DERSettings::default();
+    let out = serialize(&dset).unwrap();
+    assert_eq!(expected, out);
+}
+
+#[cfg(feature = "csip_aus")]
+#[test]
+fn csip_aus_dersettings() {
+    let expected = r#"<DERSettings xmlns="urn:ieee:std:2030.5:ns" xmlns:csipaus="https://csipaus.org/ns">
+  <setGradW>0</setGradW>
+  <setMaxW>
+    <multiplier>0</multiplier>
+    <value>0</value>
+  </setMaxW>
+  <updatedTime>0</updatedTime>
+  <csipaus:doeModesEnabled>00</csipaus:doeModesEnabled>
+</DERSettings>"#;
+    let dset = DERSettings {
+        doe_modes_enabled: Some(Default::default()),
+        ..Default::default()
+    };
+    let out = serialize(&dset).unwrap();
     assert_eq!(expected, out);
 }

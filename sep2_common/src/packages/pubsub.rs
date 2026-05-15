@@ -61,6 +61,12 @@ impl Validate for SubscriptionBase {}
 #[yaserde(rename = "Subscription")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct Subscription {
+    /// The resource for which the subscription applies. Query string parameters
+    /// SHALL NOT be specified when subscribing to list resources. Should a query
+    /// string parameter be specified, servers SHALL ignore them.
+    #[yaserde(rename = "subscribedResource")]
+    pub subscribed_resource: String,
+
     #[yaserde(rename = "Condition")]
     pub condition: Option<Condition>,
 
@@ -101,12 +107,6 @@ pub struct Subscription {
     /// absolute URI, not a relative reference.
     #[yaserde(rename = "notificationURI")]
     pub notification_uri: String,
-
-    /// The resource for which the subscription applies. Query string parameters
-    /// SHALL NOT be specified when subscribing to list resources. Should a query
-    /// string parameter be specified, servers SHALL ignore them.
-    #[yaserde(rename = "subscribedResource")]
-    pub subscribed_resource: String,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -180,6 +180,12 @@ impl Validate for SubscriptionList {}
     namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance"
 )]
 pub struct Notification<T: SEResource> {
+    /// The resource for which the subscription applies. Query string parameters
+    /// SHALL NOT be specified when subscribing to list resources. Should a query
+    /// string parameter be specified, servers SHALL ignore them.
+    #[yaserde(rename = "subscribedResource")]
+    pub subscribed_resource: String,
+
     /// The new location of the resource, if moved. This attribute SHALL be a
     /// fully-qualified absolute URI, not a relative reference.
     #[yaserde(rename = "newResourceURI")]
@@ -204,12 +210,6 @@ pub struct Notification<T: SEResource> {
     /// reference.
     #[yaserde(rename = "subscriptionURI")]
     pub subscription_uri: String,
-
-    /// The resource for which the subscription applies. Query string parameters
-    /// SHALL NOT be specified when subscribing to list resources. Should a query
-    /// string parameter be specified, servers SHALL ignore them.
-    #[yaserde(rename = "subscribedResource")]
-    pub subscribed_resource: String,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.

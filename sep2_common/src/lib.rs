@@ -1,4 +1,4 @@
-use crate::packages::{primitives::HexBinary128, types::MRIDType};
+use crate::packages::types::MRIDType;
 use anyhow::{anyhow, Result};
 use rand::Rng;
 use std::{
@@ -47,7 +47,7 @@ pub fn mrid_gen(pen_id: u32) -> MRIDType {
         .expect("Time went backwards.")
         .as_secs() as u128;
     let count = MRID_COUNT.fetch_add(1, std::sync::atomic::Ordering::Relaxed) as u128;
-    HexBinary128((time << 32) | (id << 32) | (count << 32) | pen_id as u128)
+    MRIDType((time << 32) | (id << 32) | (count << 32) | pen_id as u128)
 }
 
 #[test]

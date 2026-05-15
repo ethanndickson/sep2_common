@@ -56,6 +56,19 @@ impl Validate for RequestStatus {}
 #[yaserde(rename = "FlowReservationRequest")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FlowReservationRequest {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     /// The time at which the request was created.
     #[yaserde(rename = "creationTime")]
     pub creation_time: TimeType,
@@ -95,19 +108,6 @@ pub struct FlowReservationRequest {
 
     #[yaserde(rename = "RequestStatus")]
     pub request_status: RequestStatus,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -193,6 +193,30 @@ impl Validate for FlowReservationRequestList {}
 #[yaserde(rename = "FlowReservationResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FlowReservationResponse {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
+    /// The time at which the Event was created.
+    #[yaserde(rename = "creationTime")]
+    pub creation_time: TimeType,
+
+    #[yaserde(rename = "EventStatus")]
+    pub event_status: EventStatus,
+
+    /// The period during which the Event applies.
+    #[yaserde(rename = "interval")]
+    pub interval: DateTimeInterval,
+
     /// Indicates the amount of energy available.
     #[yaserde(rename = "energyAvailable")]
     pub energy_available: SignedRealEnergy,
@@ -206,30 +230,6 @@ pub struct FlowReservationResponse {
     /// FlowReservationRequest object.
     #[yaserde(rename = "subject")]
     pub subject: MRIDType,
-
-    /// The time at which the Event was created.
-    #[yaserde(rename = "creationTime")]
-    pub creation_time: TimeType,
-
-    #[yaserde(rename = "EventStatus")]
-    pub event_status: EventStatus,
-
-    /// The period during which the Event applies.
-    #[yaserde(rename = "interval")]
-    pub interval: DateTimeInterval,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// Indicates whether or not subscriptions are supported for this resource,
     /// and whether or not conditional (thresholds) are supported. If not
