@@ -47,13 +47,15 @@ pub fn mrid_gen(pen_id: u32) -> MRIDType {
         .expect("Time went backwards.")
         .as_secs() as u128;
     let count = MRID_COUNT.fetch_add(1, std::sync::atomic::Ordering::Relaxed) as u128;
-    HexBinary128((time << 32) | (id << 32) | (count << 32) | pen_id as u128)
+    MRIDType(HexBinary128(
+        (time << 32) | (id << 32) | (count << 32) | pen_id as u128,
+    ))
 }
 
 #[test]
 fn mrid_contains_pen() {
     let pen: u32 = 1337;
-    let out = mrid_gen(pen).0;
+    let out = mrid_gen(pen).0.0;
     assert_eq!(u128::from(pen), out & (pen as u128));
 }
 

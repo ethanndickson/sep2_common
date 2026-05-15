@@ -3,8 +3,7 @@
 use anyhow::Context;
 use bitflags::bitflags;
 use sepserde::{DefaultYaSerde, HexBinaryYaSerde, PrimitiveYaSerde, YaDeserialize, YaSerialize};
-use std::fmt::Display;
-use std::str::FromStr;
+use std::{fmt, fmt::Display, ops::Deref, str::FromStr};
 
 use crate::traits::Validate;
 
@@ -363,7 +362,55 @@ impl Validate for KindType {}
 pub type LocaleType = String42;
 
 /// A Master Resource Identifier
-pub type MRIDType = HexBinary128;
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
+pub struct MRIDType(pub HexBinary128);
+
+impl Validate for MRIDType {}
+
+impl fmt::Display for MRIDType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:X}", self.0.0)
+    }
+}
+
+impl FromStr for MRIDType {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let raw = s
+            .strip_prefix("0x")
+            .or_else(|| s.strip_prefix("0X"))
+            .unwrap_or(s);
+
+        if raw.is_empty() {
+            return Err("could not parse mRID".to_string());
+        }
+
+        u128::from_str_radix(raw, 16)
+            .map(|mrid| Self(HexBinary128(mrid)))
+            .map_err(|_| "could not parse mRID".to_string())
+    }
+}
+
+impl Deref for MRIDType {
+    type Target = HexBinary128;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl From<HexBinary128> for MRIDType {
+    fn from(value: HexBinary128) -> Self {
+        Self(value)
+    }
+}
+
+impl From<MRIDType> for HexBinary128 {
+    fn from(value: MRIDType) -> Self {
+        value.0
+    }
+}
 
 /// A signed time offset, typically applied to a Time value, expressed in seconds, with range −3600 to 3600
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
