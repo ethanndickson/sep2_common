@@ -8,9 +8,7 @@ use std::str::FromStr;
 
 use crate::traits::Validate;
 
-use super::primitives::{
-    HexBinary128, Int32, Int48, Int64, String32, String42, Uint16, Uint32, Uint48,
-};
+use super::primitives::{Int32, Int48, Int64, String32, String42, Uint16, Uint32, Uint48};
 
 #[derive(
     Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
@@ -234,7 +232,7 @@ impl DstRuleType {
         operator: u32,
         month: u32,
     ) -> Self {
-        let mut out = DstRuleType(0);
+        let mut out = Self(0);
         out.set_seconds(seconds);
         out.set_hours(hours);
         out.set_day_of_week(day_of_week);
@@ -363,7 +361,30 @@ impl Validate for KindType {}
 pub type LocaleType = String42;
 
 /// A Master Resource Identifier
-pub type MRIDType = HexBinary128;
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
+pub struct MRIDType(pub u128);
+
+impl Validate for MRIDType {}
+
+impl Display for MRIDType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:X}", self.0)
+    }
+}
+
+impl FromStr for MRIDType {
+    type Err = anyhow::Error;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let raw = s
+            .strip_prefix("0x")
+            .or_else(|| s.strip_prefix("0X"))
+            .unwrap_or(s);
+        u128::from_str_radix(raw, 16)
+            .map(MRIDType)
+            .context("MRIDType must be a hexadecimal value")
+    }
+}
 
 /// A signed time offset, typically applied to a Time value, expressed in seconds, with range −3600 to 3600
 #[derive(Default, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
@@ -372,11 +393,11 @@ pub struct OneHourRangeType(i16);
 impl Validate for OneHourRangeType {}
 
 impl OneHourRangeType {
-    pub fn new(val: i16) -> Option<OneHourRangeType> {
+    pub fn new(val: i16) -> Option<Self> {
         if !(-3600..=3600).contains(&val) {
             None
         } else {
-            Some(OneHourRangeType(val))
+            Some(Self(val))
         }
     }
     pub fn get(&self) -> i16 {
@@ -389,7 +410,7 @@ impl FromStr for OneHourRangeType {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         s.parse()
             .ok()
-            .and_then(OneHourRangeType::new)
+            .and_then(Self::new)
             .context("OneHourRangeType value must be between -3600 and 3600")
     }
 }
@@ -410,11 +431,11 @@ pub struct Percent(u16);
 impl Validate for Percent {}
 
 impl Percent {
-    pub fn new(val: u16) -> Option<Percent> {
+    pub fn new(val: u16) -> Option<Self> {
         if val > 10_000 {
             None
         } else {
-            Some(Percent(val))
+            Some(Self(val))
         }
     }
     pub fn get(&self) -> u16 {
@@ -428,7 +449,7 @@ impl FromStr for Percent {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         s.parse()
             .ok()
-            .and_then(Percent::new)
+            .and_then(Self::new)
             .context("Percent value must be between 0 and 10000")
     }
 }
@@ -470,11 +491,11 @@ pub struct PINType(u32);
 impl Validate for PINType {}
 
 impl PINType {
-    pub fn new(val: u32) -> Option<PINType> {
+    pub fn new(val: u32) -> Option<Self> {
         if val > 999_999 {
             None
         } else {
-            Some(PINType(val))
+            Some(Self(val))
         }
     }
     pub fn get(&self) -> u32 {
@@ -487,7 +508,7 @@ impl FromStr for PINType {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         s.parse()
             .ok()
-            .and_then(PINType::new)
+            .and_then(Self::new)
             .context("PINType value must be between 0 and 999,999")
     }
 }
@@ -499,11 +520,7 @@ impl Display for PINType {
 }
 
 /// For many variants there is no Internal System of Units designated prefix, and as such the number is used as a name instead.
-#[derive(
-    Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
-)]
-#[yaserde(rename = "PowerOfTenMultiplierType")]
-#[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
+#[derive(Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 #[repr(i8)]
 pub enum PowerOfTenMultiplierType {
     Nano = -9,
@@ -529,6 +546,50 @@ pub enum PowerOfTenMultiplierType {
 }
 
 impl Validate for PowerOfTenMultiplierType {}
+
+impl PowerOfTenMultiplierType {
+    pub fn new(val: i8) -> Option<Self> {
+        match val {
+            -9 => Some(Self::Nano),
+            -8 => Some(Self::NegativeEight),
+            -7 => Some(Self::NegativeSeven),
+            -6 => Some(Self::Micro),
+            -5 => Some(Self::NegativeFive),
+            -4 => Some(Self::NegativeFour),
+            -3 => Some(Self::Milli),
+            -2 => Some(Self::Centi),
+            -1 => Some(Self::Deci),
+            0 => Some(Self::None),
+            1 => Some(Self::Deca),
+            2 => Some(Self::Hecto),
+            3 => Some(Self::Kilo),
+            4 => Some(Self::Four),
+            5 => Some(Self::Five),
+            6 => Some(Self::Mega),
+            7 => Some(Self::Seven),
+            8 => Some(Self::Eight),
+            9 => Some(Self::Giga),
+            _ => None,
+        }
+    }
+}
+
+impl FromStr for PowerOfTenMultiplierType {
+    type Err = anyhow::Error;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        s.parse::<i8>()
+            .ok()
+            .and_then(Self::new)
+            .context("PowerOfTenMultiplierType value must be an integer between -9 and 9")
+    }
+}
+
+impl Display for PowerOfTenMultiplierType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", *self as i8)
+    }
+}
 
 #[derive(
     Default, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Debug, YaSerialize, YaDeserialize,
@@ -600,11 +661,11 @@ pub struct SFDIType(u64);
 impl Validate for SFDIType {}
 
 impl SFDIType {
-    pub fn new(val: u64) -> Option<SFDIType> {
+    pub fn new(val: u64) -> Option<Self> {
         if val > 1_099_511_627_775 {
             None
         } else {
-            Some(SFDIType(val))
+            Some(Self(val))
         }
     }
     pub fn get(&self) -> u64 {
@@ -617,7 +678,7 @@ impl FromStr for SFDIType {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         s.parse()
             .ok()
-            .and_then(SFDIType::new)
+            .and_then(Self::new)
             .context("SFDIType value must be between -10,000 and 10,000")
     }
 }
@@ -635,11 +696,11 @@ pub struct SignedPercent(i16);
 impl Validate for SignedPercent {}
 
 impl SignedPercent {
-    pub fn new(val: i16) -> Option<SignedPercent> {
+    pub fn new(val: i16) -> Option<Self> {
         if !(-10_000..=10_000).contains(&val) {
             None
         } else {
-            Some(SignedPercent(val))
+            Some(Self(val))
         }
     }
     pub fn get(&self) -> i16 {
@@ -652,7 +713,7 @@ impl FromStr for SignedPercent {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         s.parse()
             .ok()
-            .and_then(SignedPercent::new)
+            .and_then(Self::new)
             .context("SignedPercent value must be between -10,000 and 10,000")
     }
 }
@@ -833,6 +894,28 @@ pub enum UsagePointStatus {
     #[default]
     Off,
     On,
+}
+
+#[cfg(test)]
+use crate::{deserialize, serialize};
+
+#[test]
+fn real_energy_negative_multiplier() {
+    // Regression: PowerOfTenMultiplierType's Display previously sign-extended
+    // the i8 discriminant through u32, emitting "4294967293" for Milli (-3)
+    // instead of "-3".
+    let expected = r#"<RealEnergy xmlns="urn:ieee:std:2030.5:ns">
+  <multiplier>-3</multiplier>
+  <value>42</value>
+</RealEnergy>"#;
+    let energy = RealEnergy {
+        multiplier: PowerOfTenMultiplierType::Milli,
+        value: super::primitives::Uint48(42),
+    };
+    let out = serialize(&energy).unwrap();
+    assert_eq!(expected, out);
+    let round_trip: RealEnergy = deserialize(&out).unwrap();
+    assert_eq!(round_trip, energy);
 }
 
 #[test]

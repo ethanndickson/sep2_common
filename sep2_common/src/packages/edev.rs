@@ -188,40 +188,6 @@ pub enum OpState {
     yaserde(namespace = "csipaus: https://csipaus.org/ns")
 )]
 pub struct EndDevice {
-    /// The time at which this resource was last modified or created.
-    #[yaserde(rename = "changedTime")]
-    pub changed_time: TimeType,
-
-    /// This attribute indicates whether or not an EndDevice is enabled, or
-    /// registered, on the server. If a server sets this attribute to false, the
-    /// device is no longer registered. It should be noted that servers can
-    /// delete EndDevice instances, but using this attribute for some time is
-    /// more convenient for clients.
-    #[yaserde(rename = "enabled")]
-    pub enabled: Option<bool>,
-
-    #[yaserde(rename = "FlowReservationRequestListLink")]
-    pub flow_reservation_request_list_link: Option<FlowReservationRequestListLink>,
-
-    #[yaserde(rename = "FlowReservationResponseListLink")]
-    pub flow_reservation_response_list_link: Option<FlowReservationResponseListLink>,
-
-    #[yaserde(rename = "FunctionSetAssignmentsListLink")]
-    pub function_set_assignments_list_link: Option<FunctionSetAssignmentsListLink>,
-
-    /// POST rate, or how often EndDevice and subordinate resources should be
-    /// POSTed, in seconds. A client MAY indicate a preferred postRate when
-    /// POSTing EndDevice. A server MAY add or modify postRate to indicate its
-    /// preferred posting rate.
-    #[yaserde(rename = "postRate")]
-    pub post_rate: Option<Uint32>,
-
-    #[yaserde(rename = "RegistrationLink")]
-    pub registration_link: Option<RegistrationLink>,
-
-    #[yaserde(rename = "SubscriptionListLink")]
-    pub subscription_list_link: Option<SubscriptionListLink>,
-
     #[yaserde(rename = "ConfigurationLink")]
     pub configuration_link: Option<ConfigurationLink>,
 
@@ -261,15 +227,49 @@ pub struct EndDevice {
     #[yaserde(rename = "PowerStatusLink")]
     pub power_status_link: Option<PowerStatusLink>,
 
-    #[cfg(feature = "csip_aus")]
-    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
-    #[yaserde(rename = "ConnectionPointLink ")]
-    pub connection_point_link: Option<ConnectionPointLink>,
-
     /// Short form of device identifier, WITH the checksum digit. See the
     /// Security section for additional details.
     #[yaserde(rename = "sFDI")]
     pub sfdi: SFDIType,
+
+    /// The time at which this resource was last modified or created.
+    #[yaserde(rename = "changedTime")]
+    pub changed_time: TimeType,
+
+    /// This attribute indicates whether or not an EndDevice is enabled, or
+    /// registered, on the server. If a server sets this attribute to false, the
+    /// device is no longer registered. It should be noted that servers can
+    /// delete EndDevice instances, but using this attribute for some time is
+    /// more convenient for clients.
+    #[yaserde(rename = "enabled")]
+    pub enabled: Option<bool>,
+
+    #[yaserde(rename = "FlowReservationRequestListLink")]
+    pub flow_reservation_request_list_link: Option<FlowReservationRequestListLink>,
+
+    #[yaserde(rename = "FlowReservationResponseListLink")]
+    pub flow_reservation_response_list_link: Option<FlowReservationResponseListLink>,
+
+    #[yaserde(rename = "FunctionSetAssignmentsListLink")]
+    pub function_set_assignments_list_link: Option<FunctionSetAssignmentsListLink>,
+
+    /// POST rate, or how often EndDevice and subordinate resources should be
+    /// POSTed, in seconds. A client MAY indicate a preferred postRate when
+    /// POSTing EndDevice. A server MAY add or modify postRate to indicate its
+    /// preferred posting rate.
+    #[yaserde(rename = "postRate")]
+    pub post_rate: Option<Uint32>,
+
+    #[yaserde(rename = "RegistrationLink")]
+    pub registration_link: Option<RegistrationLink>,
+
+    #[yaserde(rename = "SubscriptionListLink")]
+    pub subscription_list_link: Option<SubscriptionListLink>,
+
+    #[cfg(feature = "csip_aus")]
+    #[yaserde(prefix = "csipaus", namespace = "csipaus: https://csipaus.org/ns")]
+    #[yaserde(rename = "ConnectionPointLink")]
+    pub connection_point_link: Option<ConnectionPointLink>,
 
     /// Indicates whether or not subscriptions are supported for this resource,
     /// and whether or not conditional (thresholds) are supported. If not
@@ -499,8 +499,8 @@ impl Validate for Temperature {}
 #[test]
 fn csip_aus_edev_no_namespace() {
     let expected = r#"<EndDevice xmlns="urn:ieee:std:2030.5:ns">
-  <changedTime>0</changedTime>
   <sFDI>0</sFDI>
+  <changedTime>0</changedTime>
 </EndDevice>"#;
     let edev = EndDevice::default();
     let out = serialize(&edev).unwrap();
@@ -511,8 +511,8 @@ fn csip_aus_edev_no_namespace() {
 #[test]
 fn csip_aus_edev_namespace() {
     let expected = r#"<EndDevice xmlns="urn:ieee:std:2030.5:ns" xmlns:csipaus="https://csipaus.org/ns">
-  <changedTime>0</changedTime>
   <sFDI>0</sFDI>
+  <changedTime>0</changedTime>
 </EndDevice>"#;
     let edev = EndDevice::default();
     let out = serialize(&edev).unwrap();

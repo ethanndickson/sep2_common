@@ -27,22 +27,6 @@ use super::{
 #[yaserde(rename = "DeviceCapability")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DeviceCapability {
-    #[yaserde(rename = "EndDeviceListLink")]
-    pub end_device_list_link: Option<EndDeviceListLink>,
-
-    #[yaserde(rename = "MirrorUsagePointListLink")]
-    pub mirror_usage_point_list_link: Option<MirrorUsagePointListLink>,
-
-    #[yaserde(rename = "SelfDeviceLink")]
-    pub self_device_link: Option<SelfDeviceLink>,
-
-    /// The default polling rate for this function set (this resource and all
-    /// resources below), in seconds. If not specified, a default of 900 seconds
-    /// (15 minutes) is used. It is RECOMMENDED a client poll the resources of
-    /// this function set every pollRate seconds.
-    #[yaserde(attribute, rename = "pollRate")]
-    pub poll_rate: Option<Uint32>,
-
     #[yaserde(rename = "CustomerAccountListLink")]
     pub customer_account_list_link: Option<CustomerAccountListLink>,
 
@@ -51,6 +35,13 @@ pub struct DeviceCapability {
 
     #[yaserde(rename = "DERProgramListLink")]
     pub der_program_list_link: Option<DERProgramListLink>,
+
+    /// The default polling rate for this function set (this resource and all
+    /// resources below), in seconds. If not specified, a default of 900 seconds
+    /// (15 minutes) is used. It is RECOMMENDED a client poll the resources of
+    /// this function set every pollRate seconds.
+    #[yaserde(attribute, rename = "pollRate")]
+    pub poll_rate: Option<Uint32>,
 
     #[yaserde(rename = "FileListLink")]
     pub file_list_link: Option<FileListLink>,
@@ -72,6 +63,15 @@ pub struct DeviceCapability {
 
     #[yaserde(rename = "UsagePointListLink")]
     pub usage_point_list_link: Option<UsagePointListLink>,
+
+    #[yaserde(rename = "EndDeviceListLink")]
+    pub end_device_list_link: Option<EndDeviceListLink>,
+
+    #[yaserde(rename = "MirrorUsagePointListLink")]
+    pub mirror_usage_point_list_link: Option<MirrorUsagePointListLink>,
+
+    #[yaserde(rename = "SelfDeviceLink")]
+    pub self_device_link: Option<SelfDeviceLink>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.

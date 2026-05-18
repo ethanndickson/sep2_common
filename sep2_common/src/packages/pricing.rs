@@ -179,6 +179,19 @@ impl Validate for EnvironmentalCost {}
 #[yaserde(rename = "RateComponent")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct RateComponent {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     #[yaserde(rename = "ActiveTimeTariffIntervalListLink")]
     pub active_time_tariff_interval_list_link: Option<ActiveTimeTariffIntervalListLink>,
 
@@ -226,19 +239,6 @@ pub struct RateComponent {
 
     #[yaserde(rename = "TimeTariffIntervalListLink")]
     pub time_tariff_interval_list_link: TimeTariffIntervalListLink,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -307,13 +307,29 @@ impl Validate for RateComponentList {}
 #[yaserde(rename = "TimeTariffInterval")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TimeTariffInterval {
-    #[yaserde(rename = "ConsumptionTariffIntervalListLink")]
-    pub consumption_tariff_interval_list_link: Option<ConsumptionTariffIntervalListLink>,
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
 
-    /// Indicates the time of use tier related to the reading. If not specified,
-    /// is assumed to be "0 - N/A".
-    #[yaserde(rename = "touTier")]
-    pub tou_tier: TOUType,
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
+    /// The time at which the Event was created.
+    #[yaserde(rename = "creationTime")]
+    pub creation_time: TimeType,
+
+    #[yaserde(rename = "EventStatus")]
+    pub event_status: EventStatus,
+
+    /// The period during which the Event applies.
+    #[yaserde(rename = "interval")]
+    pub interval: DateTimeInterval,
 
     /// Number of seconds boundary inside which a random value must be selected
     /// to be applied to the associated interval duration, to avoid sudden
@@ -331,29 +347,13 @@ pub struct TimeTariffInterval {
     #[yaserde(rename = "randomizeStart")]
     pub randomize_start: Option<OneHourRangeType>,
 
-    /// The time at which the Event was created.
-    #[yaserde(rename = "creationTime")]
-    pub creation_time: TimeType,
+    #[yaserde(rename = "ConsumptionTariffIntervalListLink")]
+    pub consumption_tariff_interval_list_link: Option<ConsumptionTariffIntervalListLink>,
 
-    #[yaserde(rename = "EventStatus")]
-    pub event_status: EventStatus,
-
-    /// The period during which the Event applies.
-    #[yaserde(rename = "interval")]
-    pub interval: DateTimeInterval,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
+    /// Indicates the time of use tier related to the reading. If not specified,
+    /// is assumed to be "0 - N/A".
+    #[yaserde(rename = "touTier")]
+    pub tou_tier: TOUType,
 
     /// Indicates whether or not subscriptions are supported for this resource,
     /// and whether or not conditional (thresholds) are supported. If not
@@ -517,6 +517,19 @@ impl Validate for TimeTariffIntervalList {}
 #[yaserde(rename = "TariffProfile")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TariffProfile {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     /// The currency code indicating the currency for this TariffProfile.
     #[yaserde(rename = "currency")]
     pub currency: Option<CurrencyCode>,
@@ -543,19 +556,6 @@ pub struct TariffProfile {
     /// The kind of service provided by this usage point.
     #[yaserde(rename = "serviceCategoryKind")]
     pub service_category_kind: ServiceKind,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.

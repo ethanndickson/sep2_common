@@ -127,12 +127,6 @@ impl Validate for BillingPeriodList {}
 #[yaserde(rename = "BillingMeterReadingBase")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingMeterReadingBase {
-    #[yaserde(rename = "BillingReadingSetListLink")]
-    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
-
-    #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: Option<ReadingTypeLink>,
-
     /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
@@ -145,6 +139,12 @@ pub struct BillingMeterReadingBase {
     /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
+
+    #[yaserde(rename = "BillingReadingSetListLink")]
+    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
+
+    #[yaserde(rename = "ReadingTypeLink")]
+    pub reading_type_link: Option<ReadingTypeLink>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -160,9 +160,6 @@ impl Validate for BillingMeterReadingBase {}
 #[yaserde(rename = "BillingReading")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingReading {
-    #[yaserde(rename = "Charge")]
-    pub charge: Vec<Charge>,
-
     /// Indicates the consumption block related to the reading. REQUIRED if
     /// ReadingType numberOfConsumptionBlocks is non-zero. If not specified, is
     /// assumed to be "0 - N/A".
@@ -200,6 +197,9 @@ pub struct BillingReading {
     /// Value in units specified by ReadingType
     #[yaserde(rename = "value")]
     pub value: Option<Int48>,
+
+    #[yaserde(rename = "Charge")]
+    pub charge: Vec<Charge>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -275,13 +275,6 @@ impl Validate for BillingReadingList {}
 #[yaserde(rename = "BillingReadingSet")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct BillingReadingSet {
-    #[yaserde(rename = "BillingReadingListLink")]
-    pub billing_reading_list_link: Option<BillingReadingListLink>,
-
-    /// Specifies the time range during which the contained readings were taken.
-    #[yaserde(rename = "timePeriod")]
-    pub time_period: DateTimeInterval,
-
     /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
@@ -294,6 +287,13 @@ pub struct BillingReadingSet {
     /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
+
+    /// Specifies the time range during which the contained readings were taken.
+    #[yaserde(rename = "timePeriod")]
+    pub time_period: DateTimeInterval,
+
+    #[yaserde(rename = "BillingReadingListLink")]
+    pub billing_reading_list_link: Option<BillingReadingListLink>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -418,6 +418,19 @@ impl Validate for ChargeKind {}
 #[yaserde(rename = "CustomerAccount")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CustomerAccount {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     /// The ISO 4217 code indicating the currency applicable to the bill amounts
     /// in the summary. See list at
     /// <http://www.unece.org/cefact/recommendations/rec09/rec09_ecetrd203.pdf>
@@ -442,19 +455,6 @@ pub struct CustomerAccount {
 
     #[yaserde(rename = "ServiceSupplierLink")]
     pub service_supplier_link: Option<ServiceSupplierLink>,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -537,6 +537,19 @@ impl Validate for CustomerAccountList {}
 #[yaserde(rename = "CustomerAgreement")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct CustomerAgreement {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     #[yaserde(rename = "ActiveBillingPeriodListLink")]
     pub active_billing_period_list_link: Option<ActiveBillingPeriodListLink>,
 
@@ -574,19 +587,6 @@ pub struct CustomerAgreement {
 
     #[yaserde(rename = "UsagePointLink")]
     pub usage_point_link: Option<UsagePointLink>,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -672,12 +672,6 @@ impl Validate for CustomerAgreementList {}
 #[yaserde(rename = "HistoricalReading")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct HistoricalReading {
-    #[yaserde(rename = "BillingReadingSetListLink")]
-    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
-
-    #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: Option<ReadingTypeLink>,
-
     /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
@@ -690,6 +684,12 @@ pub struct HistoricalReading {
     /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
+
+    #[yaserde(rename = "BillingReadingSetListLink")]
+    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
+
+    #[yaserde(rename = "ReadingTypeLink")]
+    pub reading_type_link: Option<ReadingTypeLink>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -757,12 +757,6 @@ impl Validate for HistoricalReadingList {}
 #[yaserde(rename = "ProjectionReading")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ProjectionReading {
-    #[yaserde(rename = "BillingReadingSetListLink")]
-    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
-
-    #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: Option<ReadingTypeLink>,
-
     /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
@@ -775,6 +769,12 @@ pub struct ProjectionReading {
     /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
+
+    #[yaserde(rename = "BillingReadingSetListLink")]
+    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
+
+    #[yaserde(rename = "ReadingTypeLink")]
+    pub reading_type_link: Option<ReadingTypeLink>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -842,12 +842,6 @@ impl Validate for ProjectionReadingList {}
 #[yaserde(rename = "TargetReading")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct TargetReading {
-    #[yaserde(rename = "BillingReadingSetListLink")]
-    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
-
-    #[yaserde(rename = "ReadingTypeLink")]
-    pub reading_type_link: Option<ReadingTypeLink>,
-
     /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
@@ -860,6 +854,12 @@ pub struct TargetReading {
     /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
+
+    #[yaserde(rename = "BillingReadingSetListLink")]
+    pub billing_reading_set_list_link: Option<BillingReadingSetListLink>,
+
+    #[yaserde(rename = "ReadingTypeLink")]
+    pub reading_type_link: Option<ReadingTypeLink>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -927,6 +927,19 @@ impl Validate for TargetReadingList {}
 #[yaserde(rename = "ServiceSupplier")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ServiceSupplier {
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
     /// E-mail address for this service supplier.
     #[yaserde(rename = "email")]
     pub email: Option<String32>,
@@ -942,19 +955,6 @@ pub struct ServiceSupplier {
     /// Website URI address for this service supplier.
     #[yaserde(rename = "web")]
     pub web: Option<String42>,
-
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.

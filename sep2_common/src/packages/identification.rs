@@ -529,3 +529,23 @@ pub struct SubscribableIdentifiedObject {
 }
 
 impl Validate for SubscribableIdentifiedObject {}
+
+#[cfg(test)]
+use crate::{deserialize, serialize};
+
+#[test]
+fn identified_object_mrid_hex_format() {
+    // MRIDType serializes as uppercase hex with no `0x` prefix and no leading
+    // zeros, matching the spec's representation of HexBinary128 mRIDs.
+    let expected = r#"<IdentifiedObject xmlns="urn:ieee:std:2030.5:ns">
+  <mRID>DEADBEEF</mRID>
+</IdentifiedObject>"#;
+    let obj = IdentifiedObject {
+        mrid: MRIDType(0xDEADBEEF),
+        ..Default::default()
+    };
+    let out = serialize(&obj).unwrap();
+    assert_eq!(expected, out);
+    let round_trip: IdentifiedObject = deserialize(&out).unwrap();
+    assert_eq!(round_trip, obj);
+}

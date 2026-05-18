@@ -129,32 +129,6 @@ impl Validate for AppliedTargetReduction {}
 #[yaserde(rename = "DrResponse")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct DrResponse {
-    #[yaserde(rename = "ApplianceLoadReduction")]
-    pub appliance_load_reduction: Option<ApplianceLoadReduction>,
-
-    #[yaserde(rename = "AppliedTargetReduction")]
-    pub applied_target_reduction: Option<AppliedTargetReduction>,
-
-    #[yaserde(rename = "DutyCycle")]
-    pub duty_cycle: Option<DutyCycle>,
-
-    #[yaserde(rename = "Offset")]
-    pub offset: Option<Offset>,
-
-    /// Indicates the amount of time, in seconds, that the client partially
-    /// opts-out during the demand response event. When overriding within the
-    /// allowed override duration, the client SHALL send a partial opt-out
-    /// (Response status code 8) for partial opt-out upon completion, with the
-    /// total time the event was overridden (this attribute) populated. The
-    /// client SHALL send a no participation status response (status type 10) if
-    /// the user partially opts-out for longer than
-    /// EndDeviceControl.overrideDuration.
-    #[yaserde(rename = "overrideDuration")]
-    pub override_duration: Option<Uint16>,
-
-    #[yaserde(rename = "SetPoint")]
-    pub set_point: Option<SetPoint>,
-
     /// The createdDateTime field contains the date and time when the
     /// acknowledgement/status occurred in the client. The client will provide
     /// the timestamp to ensure the proper time is captured in case the response
@@ -184,6 +158,32 @@ pub struct DrResponse {
     /// originating event. It is populated with the mRID of the original object.
     #[yaserde(rename = "subject")]
     pub subject: MRIDType,
+
+    #[yaserde(rename = "ApplianceLoadReduction")]
+    pub appliance_load_reduction: Option<ApplianceLoadReduction>,
+
+    #[yaserde(rename = "AppliedTargetReduction")]
+    pub applied_target_reduction: Option<AppliedTargetReduction>,
+
+    #[yaserde(rename = "DutyCycle")]
+    pub duty_cycle: Option<DutyCycle>,
+
+    #[yaserde(rename = "Offset")]
+    pub offset: Option<Offset>,
+
+    /// Indicates the amount of time, in seconds, that the client partially
+    /// opts-out during the demand response event. When overriding within the
+    /// allowed override duration, the client SHALL send a partial opt-out
+    /// (Response status code 8) for partial opt-out upon completion, with the
+    /// total time the event was overridden (this attribute) populated. The
+    /// client SHALL send a no participation status response (status type 10) if
+    /// the user partially opts-out for longer than
+    /// EndDeviceControl.overrideDuration.
+    #[yaserde(rename = "overrideDuration")]
+    pub override_duration: Option<Uint16>,
+
+    #[yaserde(rename = "SetPoint")]
+    pub set_point: Option<SetPoint>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.
@@ -268,9 +268,6 @@ impl<T: SEResponse + Ord> Validate for ResponseList<T> {}
 #[yaserde(rename = "ResponseSet")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct ResponseSet {
-    #[yaserde(rename = "ResponseListLink")]
-    pub response_list_link: Option<ResponseListLink>,
-
     /// The global identifier of the object.
     #[yaserde(rename = "mRID")]
     pub mrid: MRIDType,
@@ -283,6 +280,9 @@ pub struct ResponseSet {
     /// details.
     #[yaserde(rename = "version")]
     pub version: Option<VersionType>,
+
+    #[yaserde(rename = "ResponseListLink")]
+    pub response_list_link: Option<ResponseListLink>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.

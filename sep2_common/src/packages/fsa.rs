@@ -84,25 +84,6 @@ impl Validate for FunctionSetAssignmentsBase {}
 #[yaserde(rename = "FunctionSetAssignments")]
 #[yaserde(namespace = "urn:ieee:std:2030.5:ns")]
 pub struct FunctionSetAssignments {
-    /// The global identifier of the object.
-    #[yaserde(rename = "mRID")]
-    pub mrid: MRIDType,
-
-    /// The description is a human readable text describing or naming the object.
-    #[yaserde(rename = "description")]
-    pub description: Option<String32>,
-
-    /// Contains the version number of the object. See the type definition for
-    /// details.
-    #[yaserde(rename = "version")]
-    pub version: Option<VersionType>,
-
-    /// Indicates whether or not subscriptions are supported for this resource,
-    /// and whether or not conditional (thresholds) are supported. If not
-    /// specified, is "not subscribable" (0).
-    #[yaserde(attribute, rename = "subscribable")]
-    pub subscribable: Option<SubscribableType>,
-
     #[yaserde(rename = "CustomerAccountListLink")]
     pub customer_account_list_link: Option<CustomerAccountListLink>,
 
@@ -132,6 +113,25 @@ pub struct FunctionSetAssignments {
 
     #[yaserde(rename = "UsagePointListLink")]
     pub usage_point_list_link: Option<UsagePointListLink>,
+
+    /// The global identifier of the object.
+    #[yaserde(rename = "mRID")]
+    pub mrid: MRIDType,
+
+    /// The description is a human readable text describing or naming the object.
+    #[yaserde(rename = "description")]
+    pub description: Option<String32>,
+
+    /// Contains the version number of the object. See the type definition for
+    /// details.
+    #[yaserde(rename = "version")]
+    pub version: Option<VersionType>,
+
+    /// Indicates whether or not subscriptions are supported for this resource,
+    /// and whether or not conditional (thresholds) are supported. If not
+    /// specified, is "not subscribable" (0).
+    #[yaserde(attribute, rename = "subscribable")]
+    pub subscribable: Option<SubscribableType>,
 
     /// A reference to the resource address (URI). Required in a response to a
     /// GET, ignored otherwise.

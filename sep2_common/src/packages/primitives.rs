@@ -14,7 +14,6 @@ use crate::traits::Validate;
 /// We purposefully don't use type aliases, as our procedural macros cannot determine whether a type is a primitive using an alias to it
 /// This means types that are just primitive aliases cannot be used without these primitive newtypes.
 /// We require newtypes for non-standard integer types regardless.
-
 /// Unsigned integer, max inclusive 255 (2^8-1)
 #[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug, PrimitiveYaSerde)]
 pub struct Uint8(pub u8);
