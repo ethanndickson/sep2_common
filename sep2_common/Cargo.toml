@@ -1,7 +1,7 @@
 [package]
 name = "sep2_common"
 description = "A Rust library for building IEEE 2030.5 Clients & Servers"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Ethan Dickson <ethanndickson@gmail.com>"]
 edition = "2021"
 license = "MIT OR Apache-2.0"
