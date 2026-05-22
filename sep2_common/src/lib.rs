@@ -69,14 +69,9 @@ impl Pen {
             return None;
         }
 
-        let mut remaining = pen_id;
-        let mut encoded = 0;
-        let mut shift = 0;
-        while remaining > 0 {
-            encoded |= (remaining % 10) << shift;
-            remaining /= 10;
-            shift += 4;
-        }
+        let encoded = (0..8u32)
+            .map(|i| ((pen_id / 10u32.pow(i)) % 10) << (i * 4))
+            .sum::<u32>();
 
         Some(Self(encoded))
     }
