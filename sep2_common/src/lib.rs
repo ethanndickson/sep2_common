@@ -38,23 +38,101 @@ pub fn deserialize<R: SEType>(resource: &str) -> Result<R> {
 
 static MRID_COUNT: AtomicU32 = AtomicU32::new(0);
 
-/// Given the IANA Private Enterprise Number (PEN) ID, produce a (unique) MRID
-pub fn mrid_gen(pen_id: u32) -> MRIDType {
+#[cfg(feature = "csip_aus")]
+const CSIPAUS_MAX_DECIMAL_PEN: u32 = 99_999_999;
+
+/// An IANA Private Enterprise Number (PEN) pre-encoded for the least-significant
+/// 32 bits of an mRID.
+///
+/// Use [`Pen::ieee2030_5`] for the base IEEE 2030.5 binary `UInt32` encoding.
+#[cfg_attr(
+    feature = "csip_aus",
+    doc = " When the `csip_aus` feature is enabled, use [`Pen::csipaus`] for the CSIP-AUS / TS 5573 decimal-digits-as-hex encoding required by some client-generated identifiers."
+)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy)]
+pub struct Pen(u32);
+
+impl Pen {
+    /// Encode a PEN according to base IEEE 2030.5: the raw `u32` value is placed
+    /// in bits 0-31 of the mRID.
+    pub const fn ieee2030_5(pen_id: u32) -> Self {
+        Self(pen_id)
+    }
+
+    /// Encode a PEN according to CSIP-AUS / TS 5573: each decimal digit of the
+    /// IANA PEN is placed into one hex nibble of the trailing 8 mRID characters.
+    ///
+    /// Returns `None` when the PEN cannot fit in 8 decimal digits.
+    #[cfg(feature = "csip_aus")]
+    pub fn csipaus(pen_id: u32) -> Option<Self> {
+        if pen_id > CSIPAUS_MAX_DECIMAL_PEN {
+            return None;
+        }
+
+        let encoded = (0..8u32)
+            .map(|i| ((pen_id / 10u32.pow(i)) % 10) << (i * 4))
+            .sum::<u32>();
+
+        Some(Self(encoded))
+    }
+
+    /// Returns the PEN value encoded for bits 0-31 of the mRID.
+    pub fn get(&self) -> u32 {
+        self.0
+    }
+}
+
+/// Given an IANA Private Enterprise Number (PEN), produce a unique mRID.
+///
+/// The supplied [`Pen`] is already encoded for bits 0-31. Choose
+/// [`Pen::ieee2030_5`] to preserve base IEEE 2030.5 behavior.
+#[cfg_attr(
+    feature = "csip_aus",
+    doc = " With the `csip_aus` feature enabled, choose [`Pen::csipaus`] for CSIP-AUS / TS 5573 client-generated mRIDs that require decimal PEN digits in the trailing 8 hex characters."
+)]
+pub fn mrid_gen(pen: Pen) -> MRIDType {
     let mut rng = rand::thread_rng();
-    let id: u128 = rng.gen();
-    let time = SystemTime::now()
+    let random: u64 = rng.gen();
+    let now_secs = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .expect("Time went backwards.")
-        .as_secs() as u128;
-    let count = MRID_COUNT.fetch_add(1, std::sync::atomic::Ordering::Relaxed) as u128;
-    MRIDType((time << 32) | (id << 32) | (count << 32) | pen_id as u128)
+        .as_secs() as u32;
+    let count = MRID_COUNT.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+    let middle = now_secs ^ count;
+
+    MRIDType(((random as u128) << 64) | ((middle as u128) << 32) | u128::from(pen.get()))
 }
 
 #[test]
 fn mrid_contains_pen() {
-    let pen: u32 = 1337;
+    let pen = Pen::ieee2030_5(1337);
     let out = mrid_gen(pen).0;
-    assert_eq!(u128::from(pen), out & (pen as u128));
+    assert_eq!(pen.get(), out as u32);
+}
+
+#[test]
+fn mrid_contains_ieee_pen_bits() {
+    let pen = Pen::ieee2030_5(0xDEAD_BEEF);
+    let out = mrid_gen(pen).0;
+    assert_eq!(0xDEAD_BEEF, out as u32);
+}
+
+#[cfg(feature = "csip_aus")]
+#[test]
+fn mrid_contains_csipaus_pen_digits() {
+    let pen = Pen::csipaus(54321).unwrap();
+    assert_eq!(0x0005_4321, pen.get());
+
+    let mrid = mrid_gen(pen);
+    assert!(format!("{:032X}", mrid.0).ends_with("00054321"));
+}
+
+#[cfg(feature = "csip_aus")]
+#[test]
+fn csipaus_pen_bounds() {
+    assert_eq!(Some(Pen::ieee2030_5(0x9999_9999)), Pen::csipaus(99_999_999));
+    assert_eq!(None, Pen::csipaus(100_000_000));
+    assert_eq!(None, Pen::csipaus(u32::MAX));
 }
 
 #[test]
@@ -62,7 +140,7 @@ fn mrid_unique() {
     let num_ids = 1_000_000;
     let mut id_set = std::collections::HashSet::new();
     for _ in 0..num_ids {
-        let mrid = mrid_gen(0).0;
+        let mrid = mrid_gen(Pen::ieee2030_5(0)).0;
         assert!(!id_set.contains(&mrid), "Duplicate MRID generated");
         id_set.insert(mrid);
     }
