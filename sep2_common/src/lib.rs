@@ -103,6 +103,22 @@ pub fn mrid_gen(pen: Pen) -> MRIDType {
     MRIDType(((random as u128) << 64) | ((middle as u128) << 32) | u128::from(pen.get()))
 }
 
+/// Given an IANA Private Enterprise Number (PEN) and a 96-bit resource id,
+/// produce a deterministic mRID.
+///
+/// The supplied [`Pen`] occupies bits 0-31, and `id` occupies bits 32-127.
+/// Two calls with the same `pen` and `id` always produce the same mRID,
+/// allowing callers to recompute the mRID for an existing resource (e.g. to
+/// avoid recreating it on the server).
+///
+/// Returns `None` if `id` does not fit in 96 bits.
+pub fn mrid_with_id(pen: Pen, id: u128) -> Option<MRIDType> {
+    if id >> 96 != 0 {
+        return None;
+    }
+    Some(MRIDType((id << 32) | u128::from(pen.get())))
+}
+
 #[test]
 fn mrid_contains_pen() {
     let pen = Pen::ieee2030_5(1337);
@@ -133,6 +149,30 @@ fn csipaus_pen_bounds() {
     assert_eq!(Some(Pen::ieee2030_5(0x9999_9999)), Pen::csipaus(99_999_999));
     assert_eq!(None, Pen::csipaus(100_000_000));
     assert_eq!(None, Pen::csipaus(u32::MAX));
+}
+
+#[test]
+fn mrid_with_id_is_deterministic() {
+    let pen = Pen::ieee2030_5(1337);
+    let id = 0x0000_0000_DEAD_BEEF_CAFE_BABE_1234_5678;
+    assert_eq!(mrid_with_id(pen, id), mrid_with_id(pen, id));
+}
+
+#[test]
+fn mrid_with_id_places_pen_and_id() {
+    let pen = Pen::ieee2030_5(0xDEAD_BEEF);
+    let id: u128 = 0x1234_5678_9ABC_DEF0_1122_3344;
+    let mrid = mrid_with_id(pen, id).unwrap();
+    assert_eq!(mrid.0 as u32, 0xDEAD_BEEF);
+    assert_eq!(mrid.0 >> 32, id);
+}
+
+#[test]
+fn mrid_with_id_rejects_oversized_id() {
+    let pen = Pen::ieee2030_5(0);
+    assert!(mrid_with_id(pen, (1u128 << 96) - 1).is_some());
+    assert!(mrid_with_id(pen, 1u128 << 96).is_none());
+    assert!(mrid_with_id(pen, u128::MAX).is_none());
 }
 
 #[test]
