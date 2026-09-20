@@ -368,7 +368,7 @@ impl Validate for MRIDType {}
 
 impl Display for MRIDType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:X}", self.0)
+        write!(f, "{:032X}", self.0)
     }
 }
 
