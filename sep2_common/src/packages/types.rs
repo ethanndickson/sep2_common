@@ -365,8 +365,9 @@ pub type LocaleType = String42;
 
 /// A Master Resource Identifier
 ///
-/// A `HexBinary128`, so its 32 hex characters are a maximum, not a fixed
-/// width. The IANA PEN provider ID occupies bits 0-31.
+/// A `HexBinary128`, rendered as the fewest whole octets like every other
+/// hexBinary type, which is how the spec's own examples write mRIDs
+/// (`0ED30F5A0000`, 16.03.11). The IANA PEN provider ID occupies bits 0-31.
 #[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct MRIDType(pub u128);
 

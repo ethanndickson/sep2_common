@@ -184,14 +184,13 @@ impl Int64 {
 
 impl Validate for Int64 {}
 
-/// Writes `value` as a hex string, compactly, with pairs of hex characters as
-/// hexBinary requires, so an odd number of characters gets a leading "0".
+/// Writes `value` as the fewest whole octets of uppercase hex, the form the
+/// spec's own examples use (`0ED30F5A0000`, 16.03.11). XSD hexBinary fixes only
+/// that digits come in pairs, so a leading zero is added to an odd digit count
+/// and nothing more.
 pub(crate) fn write_hex_binary(f: &mut fmt::Formatter<'_>, value: u128) -> fmt::Result {
-    let digits = format!("{value:X}");
-    if !digits.len().is_multiple_of(2) {
-        f.write_str("0")?;
-    }
-    f.write_str(&digits)
+    let octets = (u128::BITS - value.leading_zeros()).div_ceil(8).max(1) as usize;
+    write!(f, "{:0width$X}", value, width = octets * 2)
 }
 
 /// Reads a hex string of at most `max_octets` octets. Lowercase, leading
@@ -199,7 +198,9 @@ pub(crate) fn write_hex_binary(f: &mut fmt::Formatter<'_>, value: u128) -> fmt::
 /// because this crate emitted it through 0.2.0.
 pub(crate) fn parse_hex_binary(s: &str, max_octets: usize) -> Result<u128, String> {
     let digits = hex_digits(s, max_octets)?;
-    u128::from_str_radix(digits, 16).map_err(|_| too_wide(max_octets))
+    Ok(digits
+        .bytes()
+        .fold(0, |acc, b| (acc << 4) | u128::from(nibble(b))))
 }
 
 /// Reads a hex string into exactly `N` octets, left-padded with zero octets.
@@ -208,23 +209,19 @@ pub(crate) fn parse_hex_binary_bytes<const N: usize>(s: &str) -> Result<[u8; N],
     // zeros before indexing; what remains is at most `N` octets wide.
     let digits = hex_digits(s, N)?.trim_start_matches('0');
     let mut out = [0u8; N];
-    let mut octet = N;
-    let mut end = digits.len();
-    while end > 0 {
-        let start = end.saturating_sub(2);
-        octet -= 1;
-        out[octet] = u8::from_str_radix(&digits[start..end], 16).map_err(|_| not_hex())?;
-        end = start;
+    for (i, b) in digits.bytes().rev().enumerate() {
+        out[N - 1 - i / 2] |= nibble(b) << (4 * (i % 2));
     }
     Ok(out)
 }
 
-fn too_wide(max_octets: usize) -> String {
-    format!("hexBinary value does not fit in {max_octets} octets")
-}
-
-fn not_hex() -> String {
-    "hexBinary value contains a non-hexadecimal character".to_owned()
+/// The value of one hex digit already validated by `hex_digits`.
+fn nibble(b: u8) -> u8 {
+    match b {
+        b'0'..=b'9' => b - b'0',
+        b'a'..=b'f' => b - b'a' + 10,
+        _ => b - b'A' + 10,
+    }
 }
 
 /// Strips the legacy `0x` prefix and rejects anything that is not at most
@@ -239,16 +236,20 @@ fn hex_digits(s: &str, max_octets: usize) -> Result<&str, String> {
     }
     // `from_str_radix` would otherwise accept a leading `+`.
     if !digits.bytes().all(|b| b.is_ascii_hexdigit()) {
-        return Err(not_hex());
+        return Err("hexBinary value contains a non-hexadecimal character".to_owned());
     }
     if digits.trim_start_matches('0').len() > max_octets * 2 {
-        return Err(too_wide(max_octets));
+        return Err(format!(
+            "hexBinary value does not fit in {max_octets} octets"
+        ));
     }
     Ok(digits)
 }
 
 /// Generates the hexBinary `Display`/`FromStr` pair for a newtype over an
 /// unsigned integer, where `$octets` is the XSD `maxLength` for the type.
+/// Rendering is compact, see [`write_hex_binary`]; the bitflag types
+/// `sepserde` derives and `MRIDType` follow the same rule.
 macro_rules! hex_binary_serde {
     ($name:ident, $inner:ty, $octets:literal) => {
         impl fmt::Display for $name {
@@ -261,10 +262,9 @@ macro_rules! hex_binary_serde {
             type Err = String;
 
             fn from_str(s: &str) -> Result<Self, Self::Err> {
-                let value = parse_hex_binary(s, $octets)?;
-                <$inner>::try_from(value)
-                    .map($name)
-                    .map_err(|_| too_wide($octets))
+                // `parse_hex_binary` bounds the value to `$octets`, so the
+                // cast cannot truncate.
+                parse_hex_binary(s, $octets).map(|value| $name(value as $inner))
             }
         }
     };
@@ -313,8 +313,8 @@ pub struct HexBinary48(pub u64);
 impl Validate for HexBinary48 {
     fn validate(&self) -> Result<(), String> {
         let a = &self.0;
-        if a > &281474976710656 {
-            Err(format!("Validation error: invalid value! \nExpected: 0 <= 281474976710656.\nActual: 0 == {}", a))
+        if a > &281474976710655 {
+            Err(format!("Validation error: invalid value! \nExpected: 0 <= 281474976710655.\nActual: 0 == {}", a))
         } else {
             Ok(())
         }
@@ -346,9 +346,6 @@ impl Validate for HexBinary128 {}
 hex_binary_serde!(HexBinary128, u128, 16);
 
 /// A 160-bit field encoded as a hex string (40 hex characters).
-///
-/// Unlike the types above this is an identifier rather than a number, so it
-/// renders as all 40 digits even when the leading octets are zero.
 #[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct HexBinary160(pub [u8; 20]); // TODO: Can this use a Cow?
 
@@ -575,10 +572,20 @@ macro_rules! hex_binary_tests {
                     stringify!($name),
                     $octets
                 );
+                assert!(
+                    rendered.len() == 2 || !rendered.starts_with("00"),
+                    "{} rendered a redundant leading octet: {rendered:?}",
+                    stringify!($name)
+                );
                 assert_eq!(Ok(orig), $name::from_str(&rendered));
-                // Peers may pad to the type's full width.
-                let padded = format!("{:0>width$}", rendered, width = $octets * 2);
+                // Peers may pad to the full width, or drop leading zeros down
+                // to an odd digit count.
+                let padded = format!("{rendered:0>width$}", width = $octets * 2);
                 assert_eq!(Ok(orig), $name::from_str(&padded));
+                let trimmed = rendered.trim_start_matches('0');
+                if !trimmed.is_empty() {
+                    assert_eq!(Ok(orig), $name::from_str(trimmed));
+                }
                 let round_trip: $name = deserialize(&serialize(&orig).unwrap()).unwrap();
                 assert_eq!(orig, round_trip);
             }
@@ -603,7 +610,12 @@ fn hexbinary_is_minimal_and_unprefixed() {
     assert_eq!("0100", HexBinary16(0x100).to_string());
     assert_eq!("0F4240", HexBinary32(1_000_000).to_string());
     assert_eq!("0ED30F5A0000", HexBinary48(0x0ED3_0F5A_0000).to_string());
+    assert_eq!("00", HexBinary64(0).to_string());
     assert_eq!("00", HexBinary128(0).to_string());
+    assert_eq!(
+        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        HexBinary128(u128::MAX).to_string()
+    );
 }
 
 #[test]

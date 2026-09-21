@@ -2213,7 +2213,7 @@ impl Validate for StorageModeStatusType {}
 #[test]
 fn dercap_no_csip_aus() {
     let expected = r#"<DERCapability xmlns="urn:ieee:std:2030.5:ns">
-  <modesSupported>00000000</modesSupported>
+  <modesSupported>00</modesSupported>
   <rtgMaxW>
     <multiplier>0</multiplier>
     <value>0</value>
@@ -2229,7 +2229,7 @@ fn dercap_no_csip_aus() {
 #[test]
 fn csip_aus_dercap() {
     let expected = r#"<DERCapability xmlns="urn:ieee:std:2030.5:ns" xmlns:csipaus="https://csipaus.org/ns">
-  <modesSupported>00000000</modesSupported>
+  <modesSupported>00</modesSupported>
   <rtgMaxW>
     <multiplier>0</multiplier>
     <value>0</value>
@@ -2286,7 +2286,7 @@ fn csip_aus_dercontrolbase() {
 #[test]
 fn derstatus() {
     let expected = r#"<DERStatus xmlns="urn:ieee:std:2030.5:ns">
-  <alarmStatus>00000001</alarmStatus>
+  <alarmStatus>01</alarmStatus>
   <readingTime>0</readingTime>
 </DERStatus>"#;
     let status = DERStatus {
