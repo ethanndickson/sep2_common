@@ -184,30 +184,102 @@ impl Int64 {
 
 impl Validate for Int64 {}
 
+/// Writes `value` as a hex string, compactly, with pairs of hex characters as
+/// hexBinary requires, so an odd number of characters gets a leading "0".
+pub(crate) fn write_hex_binary(f: &mut fmt::Formatter<'_>, value: u128) -> fmt::Result {
+    let digits = format!("{value:X}");
+    if !digits.len().is_multiple_of(2) {
+        f.write_str("0")?;
+    }
+    f.write_str(&digits)
+}
+
+/// Reads a hex string of at most `max_octets` octets. Lowercase, leading
+/// zeros, an odd digit count and a `0x` prefix are all tolerated, the last
+/// because this crate emitted it through 0.2.0.
+pub(crate) fn parse_hex_binary(s: &str, max_octets: usize) -> Result<u128, String> {
+    let digits = hex_digits(s, max_octets)?;
+    u128::from_str_radix(digits, 16).map_err(|_| too_wide(max_octets))
+}
+
+/// Reads a hex string into exactly `N` octets, left-padded with zero octets.
+pub(crate) fn parse_hex_binary_bytes<const N: usize>(s: &str) -> Result<[u8; N], String> {
+    // `hex_digits` bounds only the significant digits, so drop the leading
+    // zeros before indexing; what remains is at most `N` octets wide.
+    let digits = hex_digits(s, N)?.trim_start_matches('0');
+    let mut out = [0u8; N];
+    let mut octet = N;
+    let mut end = digits.len();
+    while end > 0 {
+        let start = end.saturating_sub(2);
+        octet -= 1;
+        out[octet] = u8::from_str_radix(&digits[start..end], 16).map_err(|_| not_hex())?;
+        end = start;
+    }
+    Ok(out)
+}
+
+fn too_wide(max_octets: usize) -> String {
+    format!("hexBinary value does not fit in {max_octets} octets")
+}
+
+fn not_hex() -> String {
+    "hexBinary value contains a non-hexadecimal character".to_owned()
+}
+
+/// Strips the legacy `0x` prefix and rejects anything that is not at most
+/// `max_octets` octets of hexadecimal.
+fn hex_digits(s: &str, max_octets: usize) -> Result<&str, String> {
+    let digits = s
+        .strip_prefix("0x")
+        .or_else(|| s.strip_prefix("0X"))
+        .unwrap_or(s);
+    if digits.is_empty() {
+        return Err("hexBinary value is empty".to_owned());
+    }
+    // `from_str_radix` would otherwise accept a leading `+`.
+    if !digits.bytes().all(|b| b.is_ascii_hexdigit()) {
+        return Err(not_hex());
+    }
+    if digits.trim_start_matches('0').len() > max_octets * 2 {
+        return Err(too_wide(max_octets));
+    }
+    Ok(digits)
+}
+
+/// Generates the hexBinary `Display`/`FromStr` pair for a newtype over an
+/// unsigned integer, where `$octets` is the XSD `maxLength` for the type.
+macro_rules! hex_binary_serde {
+    ($name:ident, $inner:ty, $octets:literal) => {
+        impl fmt::Display for $name {
+            fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+                write_hex_binary(f, u128::from(self.0))
+            }
+        }
+
+        impl FromStr for $name {
+            type Err = String;
+
+            fn from_str(s: &str) -> Result<Self, Self::Err> {
+                let value = parse_hex_binary(s, $octets)?;
+                <$inner>::try_from(value)
+                    .map($name)
+                    .map_err(|_| too_wide($octets))
+            }
+        }
+    };
+}
+
 /// An 8-bit field encoded as a hex string (2 hex characters). Where applicable,
 /// bit 0, or the least significant bit, goes on the right. Note that hexBinary
 /// requires pairs of hex characters, so an odd number of characters requires a
 /// leading "0".
-#[derive(Default, Hash, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct HexBinary8(pub u8);
 
 impl Validate for HexBinary8 {}
 
-impl fmt::Display for HexBinary8 {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:#04x?}", self.0)
-    }
-}
-
-impl FromStr for HexBinary8 {
-    type Err = String;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(HexBinary8(
-            u8::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary8")?,
-        ))
-    }
-}
+hex_binary_serde!(HexBinary8, u8, 1);
 
 /// A 16-bit field encoded as a hex string (4 hex characters max). Where
 /// applicable, bit 0, or the least significant bit, goes on the right. Note that
@@ -218,52 +290,24 @@ pub struct HexBinary16(pub u16);
 
 impl Validate for HexBinary16 {}
 
-impl fmt::Display for HexBinary16 {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:#06x?}", self.0)
-    }
-}
-
-impl FromStr for HexBinary16 {
-    type Err = String;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(HexBinary16(
-            u16::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary16")?,
-        ))
-    }
-}
+hex_binary_serde!(HexBinary16, u16, 2);
 
 /// A 32-bit field encoded as a hex string (8 hex characters max). Where
 /// applicable, bit 0, or the least significant bit, goes on the right. Note that
 /// hexBinary requires pairs of hex characters, so an odd number of characters
 /// requires a leading "0".
-#[derive(Default, Hash, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct HexBinary32(pub u32);
 
 impl Validate for HexBinary32 {}
 
-impl fmt::Display for HexBinary32 {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:#010x?}", self.0)
-    }
-}
-
-impl FromStr for HexBinary32 {
-    type Err = String;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(HexBinary32(
-            u32::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary32")?,
-        ))
-    }
-}
+hex_binary_serde!(HexBinary32, u32, 4);
 
 /// A 48-bit field encoded as a hex string (12 hex characters max). Where
 /// applicable, bit 0, or the least significant bit, goes on the right. Note that
 /// hexBinary requires pairs of hex characters, so an odd number of characters
 /// requires a leading "0".
-#[derive(Default, Hash, PartialEq, Eq, Debug, Clone, Copy, DefaultYaSerde)]
+#[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct HexBinary48(pub u64);
 
 impl Validate for HexBinary48 {
@@ -277,22 +321,7 @@ impl Validate for HexBinary48 {
     }
 }
 
-impl fmt::Display for HexBinary48 {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let a = &self.0;
-        write!(f, "{:#014x?}", a)
-    }
-}
-
-impl FromStr for HexBinary48 {
-    type Err = String;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(HexBinary48(
-            u64::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary48")?,
-        ))
-    }
-}
+hex_binary_serde!(HexBinary48, u64, 6);
 
 /// A 64-bit field encoded as a hex string (16 hex characters max). Where
 /// applicable, bit 0, or the least significant bit, goes on the right. Note that
@@ -303,49 +332,23 @@ pub struct HexBinary64(pub u64);
 
 impl Validate for HexBinary64 {}
 
-impl fmt::Display for HexBinary64 {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let a = &self.0;
-        write!(f, "{:#018x?}", a)
-    }
-}
-
-impl FromStr for HexBinary64 {
-    type Err = String;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(HexBinary64(
-            u64::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary48")?,
-        ))
-    }
-}
+hex_binary_serde!(HexBinary64, u64, 8);
 
 /// A 128-bit field encoded as a hex string (32 hex characters max). Where
 /// applicable, bit 0, or the least significant bit, goes on the right. Note that
 /// hexBinary requires pairs of hex characters, so an odd number of characters
 /// requires a leading "0".
 #[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
-
 pub struct HexBinary128(pub u128);
 
 impl Validate for HexBinary128 {}
 
-impl fmt::Display for HexBinary128 {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:#034x?}", self.0)
-    }
-}
+hex_binary_serde!(HexBinary128, u128, 16);
 
-impl FromStr for HexBinary128 {
-    type Err = String;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(HexBinary128(
-            u128::from_str_radix(&s[2..], 16).map_err(|_| "could not parse hexbinary128")?,
-        ))
-    }
-}
-
+/// A 160-bit field encoded as a hex string (40 hex characters).
+///
+/// Unlike the types above this is an identifier rather than a number, so it
+/// renders as all 40 digits even when the leading octets are zero.
 #[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct HexBinary160(pub [u8; 20]); // TODO: Can this use a Cow?
 
@@ -367,13 +370,10 @@ impl AsRef<[u8]> for HexBinary160 {
 
 impl fmt::Display for HexBinary160 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let a = self
-            .0
-            .iter()
-            .map(|byte| format!("{:02X}", byte))
-            .collect::<Vec<String>>()
-            .join("");
-        write!(f, "{a}")
+        for byte in self.0 {
+            write!(f, "{byte:02X}")?;
+        }
+        Ok(())
     }
 }
 
@@ -381,21 +381,7 @@ impl FromStr for HexBinary160 {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        if s.len() % 2 != 0 {
-            return Err("Hex string must be even".to_owned());
-        }
-        let mut out: [u8; 20] = [0; 20];
-        let s = format!("{:0>40}", s);
-        for i in (0..s.len()).step_by(2) {
-            let hex_pair = &s[i..(i + 2)];
-            if let Ok(byte) = u8::from_str_radix(hex_pair, 16) {
-                out[i / 2] = byte;
-            } else {
-                return Err("Invalid Hex String".to_owned());
-            }
-        }
-
-        Ok(HexBinary160(out))
+        parse_hex_binary_bytes(s).map(HexBinary160)
     }
 }
 
@@ -544,6 +530,143 @@ impl Validate for String192 {
         }
         Ok(())
     }
+}
+
+/// Asserts `rendered` is in the lexical space of `xs:hexBinary`,
+/// `([0-9a-fA-F]{2})*`, and uppercase as the XSD canonical form.
+#[cfg(test)]
+pub(crate) fn assert_conformant(rendered: &str) {
+    assert!(
+        !rendered.is_empty(),
+        "hexBinary value must not be empty, got {rendered:?}"
+    );
+    assert!(
+        rendered.len().is_multiple_of(2),
+        "hexBinary values SHALL have an even number of digits, got {rendered:?}"
+    );
+    assert!(
+        rendered
+            .bytes()
+            .all(|b| b.is_ascii_hexdigit() && !b.is_ascii_lowercase()),
+        "hexBinary values are uppercase hex digits with no prefix, got {rendered:?}"
+    );
+}
+
+/// Generates the hexBinary lexical-space tests for a type.
+macro_rules! hex_binary_tests {
+    ($shape:ident, $name:ident, $inner:ty, $octets:literal) => {
+        #[test]
+        fn $shape() {
+            let mut values = vec![0 as $inner];
+            for shift in 0..($octets * 8) {
+                // A lone set bit, and every bit below it set, at each position.
+                let bit = (1 as $inner) << shift;
+                values.push(bit);
+                values.push(bit | (bit - 1));
+            }
+
+            for value in values {
+                let orig = $name(value);
+                let rendered = orig.to_string();
+                assert_conformant(&rendered);
+                assert!(
+                    rendered.len() <= $octets * 2,
+                    "{} rendered wider than {} octets: {rendered:?}",
+                    stringify!($name),
+                    $octets
+                );
+                assert_eq!(Ok(orig), $name::from_str(&rendered));
+                // Peers may pad to the type's full width.
+                let padded = format!("{:0>width$}", rendered, width = $octets * 2);
+                assert_eq!(Ok(orig), $name::from_str(&padded));
+                let round_trip: $name = deserialize(&serialize(&orig).unwrap()).unwrap();
+                assert_eq!(orig, round_trip);
+            }
+        }
+    };
+}
+
+hex_binary_tests!(hexbinary8_conformance, HexBinary8, u8, 1);
+hex_binary_tests!(hexbinary16_conformance, HexBinary16, u16, 2);
+hex_binary_tests!(hexbinary32_conformance, HexBinary32, u32, 4);
+hex_binary_tests!(hexbinary48_conformance, HexBinary48, u64, 6);
+hex_binary_tests!(hexbinary64_conformance, HexBinary64, u64, 8);
+hex_binary_tests!(hexbinary128_conformance, HexBinary128, u128, 16);
+
+#[test]
+fn hexbinary_is_minimal_and_unprefixed() {
+    // Regression: these rendered via `{:#0Nx?}`, emitting a lowercase,
+    // `0x`-prefixed string that is not hexBinary at all.
+    assert_eq!("3F", HexBinary8(0x3F).to_string());
+    assert_eq!("00", HexBinary16(0).to_string());
+    assert_eq!("3F", HexBinary16(0x3F).to_string());
+    assert_eq!("0100", HexBinary16(0x100).to_string());
+    assert_eq!("0F4240", HexBinary32(1_000_000).to_string());
+    assert_eq!("0ED30F5A0000", HexBinary48(0x0ED3_0F5A_0000).to_string());
+    assert_eq!("00", HexBinary128(0).to_string());
+}
+
+#[test]
+fn hexbinary_accepts_conformant_input() {
+    // Regression: `FromStr` sliced `&s[2..]` to strip the `0x` its own
+    // `Display` emitted, rejecting `3F` and panicking on `0`.
+    assert_eq!(Ok(HexBinary8(0x3F)), HexBinary8::from_str("3F"));
+    assert_eq!(Ok(HexBinary8(0x3F)), HexBinary8::from_str("3f"));
+    assert_eq!(Ok(HexBinary8(0)), HexBinary8::from_str("0"));
+    assert_eq!(Ok(HexBinary128(1)), HexBinary128::from_str("01"));
+    assert_eq!(
+        Ok(HexBinary48(0x0ED3_0F5A_0000)),
+        HexBinary48::from_str("0ED30F5A0000")
+    );
+}
+
+#[test]
+fn hexbinary_accepts_legacy_prefixed_input() {
+    // sep2_common <= 0.2.0 emitted a `0x` prefix.
+    assert_eq!(Ok(HexBinary8(0x3F)), HexBinary8::from_str("0x3f"));
+    assert_eq!(
+        Ok(HexBinary64(0)),
+        HexBinary64::from_str("0x0000000000000000")
+    );
+    assert_eq!(
+        Ok(HexBinary64(0x0DEA_DBEE)),
+        HexBinary64::from_str("DEADBEE")
+    );
+}
+
+#[test]
+fn hexbinary_rejects_uninterpretable_input() {
+    assert!(HexBinary8::from_str("").is_err());
+    assert!(HexBinary8::from_str("GG").is_err());
+    // `from_str_radix` accepts a leading sign; hexBinary does not.
+    assert!(HexBinary8::from_str("+1").is_err());
+    assert!(HexBinary8::from_str("100").is_err());
+    assert!(HexBinary16::from_str("10000").is_err());
+    assert_eq!(Ok(HexBinary8(1)), HexBinary8::from_str("0001"));
+}
+
+#[test]
+fn hexbinary160_is_fixed_width() {
+    assert_eq!(
+        "0000000000000000000000000000000000000000",
+        HexBinary160::default().to_string()
+    );
+    assert_eq!(
+        "00000000000000000000000000000000C0FFEE00",
+        HexBinary160::from_str("C0FFEE00").unwrap().to_string()
+    );
+}
+
+#[test]
+fn hexbinary160_rejects_oversized_input() {
+    // Regression: `from_str` left-padded to 40 characters without checking the
+    // input was not already longer, then indexed past the end of its `[u8; 20]`.
+    assert!(HexBinary160::from_str(&"A".repeat(41)).is_err());
+    assert!(HexBinary160::from_str(&"F".repeat(40)).is_ok());
+    assert_eq!(
+        Ok(HexBinary160::default()),
+        HexBinary160::from_str(&"0".repeat(64))
+    );
 }
 
 #[test]

@@ -1,6 +1,6 @@
 /// File auto-generated using xsd-parser-rs & IEEE 2030.5 sep-ordered-dep.xsd
 /// Types should eventually be put in a module corresponding to their package
-use anyhow::Context;
+use anyhow::{anyhow, Context};
 use bitflags::bitflags;
 use sepserde::{DefaultYaSerde, HexBinaryYaSerde, PrimitiveYaSerde, YaDeserialize, YaSerialize};
 use std::fmt::Display;
@@ -8,7 +8,10 @@ use std::str::FromStr;
 
 use crate::traits::Validate;
 
-use super::primitives::{Int32, Int48, Int64, String32, String42, Uint16, Uint32, Uint48};
+use super::primitives::{
+    parse_hex_binary, write_hex_binary, Int32, Int48, Int64, String32, String42, Uint16, Uint32,
+    Uint48,
+};
 
 #[derive(
     Default, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, YaSerialize, YaDeserialize,
@@ -361,6 +364,9 @@ impl Validate for KindType {}
 pub type LocaleType = String42;
 
 /// A Master Resource Identifier
+///
+/// A `HexBinary128`, so its 32 hex characters are a maximum, not a fixed
+/// width. The IANA PEN provider ID occupies bits 0-31.
 #[derive(Default, Hash, PartialEq, PartialOrd, Eq, Ord, Debug, Clone, Copy, DefaultYaSerde)]
 pub struct MRIDType(pub u128);
 
@@ -368,7 +374,7 @@ impl Validate for MRIDType {}
 
 impl Display for MRIDType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:X}", self.0)
+        write_hex_binary(f, self.0)
     }
 }
 
@@ -376,11 +382,8 @@ impl FromStr for MRIDType {
     type Err = anyhow::Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let raw = s
-            .strip_prefix("0x")
-            .or_else(|| s.strip_prefix("0X"))
-            .unwrap_or(s);
-        u128::from_str_radix(raw, 16)
+        parse_hex_binary(s, 16)
+            .map_err(|e| anyhow!(e))
             .map(MRIDType)
             .context("MRIDType must be a hexadecimal value")
     }
@@ -898,6 +901,46 @@ pub enum UsagePointStatus {
 
 #[cfg(test)]
 use crate::{deserialize, serialize};
+
+#[test]
+fn mrid_renders_as_whole_octets() {
+    // Regression: `{:X}` drops leading zeros, so roughly one mRID in sixteen
+    // came out an odd number of digits and failed XSD validation.
+    for shift in 0..128 {
+        let rendered = MRIDType(1u128 << shift).to_string();
+        super::primitives::assert_conformant(&rendered);
+        assert!(rendered.len() <= 32, "mRID too wide: {rendered:?}");
+        assert_eq!(MRIDType(1u128 << shift), rendered.parse().unwrap());
+    }
+    assert_eq!("00", MRIDType(0).to_string());
+    assert_eq!("01", MRIDType(1).to_string());
+    // 16_03_11_FunctionSetAssignmentsList, verbatim from the spec.
+    assert_eq!("0ED30F5A0000", MRIDType(0x0ED3_0F5A_0000).to_string());
+}
+
+#[test]
+fn mrid_from_str_rejects_non_hexadecimal() {
+    // Regression: `u128::from_str_radix` accepts a leading sign, so `+1`
+    // parsed as an mRID of 1.
+    assert!(MRIDType::from_str("+1").is_err());
+    assert!(MRIDType::from_str("-1").is_err());
+    assert!(MRIDType::from_str("").is_err());
+    assert!(MRIDType::from_str("nonsense").is_err());
+    assert!(MRIDType::from_str(&"F".repeat(33)).is_err());
+    assert!(MRIDType::from_str(&"F".repeat(32)).is_ok());
+}
+
+#[test]
+fn mrid_from_str_tolerates_peer_variation() {
+    let mrid = MRIDType(0x0ED3_0F5A_0000);
+    assert_eq!(Some(mrid), MRIDType::from_str("0ED30F5A0000").ok());
+    assert_eq!(Some(mrid), MRIDType::from_str("0ed30f5a0000").ok());
+    assert_eq!(
+        Some(mrid),
+        MRIDType::from_str("000000000000000000000ED30F5A0000").ok()
+    );
+    assert_eq!(Some(mrid), MRIDType::from_str("0x0ED30F5A0000").ok());
+}
 
 #[test]
 fn real_energy_negative_multiplier() {
