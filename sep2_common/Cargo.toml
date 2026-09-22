@@ -17,7 +17,7 @@ non_local_definitions = "allow"
 
 [dependencies]
 sep2_common_derive = { version = "0.1.0" }
-sepserde = { version = "0.8.3" }
+sepserde = { version = "0.9.0" }
 xml-rs = "0.8.4"
 log = "0.4.19"
 anyhow = "1.0.72"

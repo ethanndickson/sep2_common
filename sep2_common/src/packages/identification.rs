@@ -535,8 +535,6 @@ use crate::{deserialize, serialize};
 
 #[test]
 fn identified_object_mrid_hex_format() {
-    // MRIDType serializes as uppercase hex with no `0x` prefix and no leading
-    // zeros, matching the spec's representation of HexBinary128 mRIDs.
     let expected = r#"<IdentifiedObject xmlns="urn:ieee:std:2030.5:ns">
   <mRID>DEADBEEF</mRID>
 </IdentifiedObject>"#;
@@ -548,4 +546,24 @@ fn identified_object_mrid_hex_format() {
     assert_eq!(expected, out);
     let round_trip: IdentifiedObject = deserialize(&out).unwrap();
     assert_eq!(round_trip, obj);
+}
+
+#[test]
+fn identified_object_mrid_is_never_odd_length() {
+    // Regression: an mRID whose leading hex digit was zero serialized one
+    // digit short of a whole octet, which hexBinary does not permit.
+    let obj = IdentifiedObject {
+        mrid: MRIDType(0x0469_5A77_EFEB_A5AC_6AB0_6D60_0000_0001),
+        ..Default::default()
+    };
+    let expected = r#"<IdentifiedObject xmlns="urn:ieee:std:2030.5:ns">
+  <mRID>04695A77EFEBA5AC6AB06D6000000001</mRID>
+</IdentifiedObject>"#;
+    assert_eq!(expected, serialize(&obj).unwrap());
+
+    let zero = IdentifiedObject::default();
+    let expected = r#"<IdentifiedObject xmlns="urn:ieee:std:2030.5:ns">
+  <mRID>00</mRID>
+</IdentifiedObject>"#;
+    assert_eq!(expected, serialize(&zero).unwrap());
 }
